@@ -182,14 +182,18 @@
 
     var cw   = document.getElementById('snake-root').clientWidth || window.innerWidth;
     var rowW = cw - PAD * 2;
-    if (rowW < 160) rowW = 160;
+    // Reserve space for bends: outer radius = (2*TH + ROW_GAP) / 2
+    var bendExt = (2 * TH + ROW_GAP) / 2;
+    var maxRowW = cw - 2 * PAD - 2 * bendExt;  // ensure bends fit within SVG
+    if (maxRowW > 0 && rowW > maxRowW) rowW = maxRowW;
+    if (rowW < 80) rowW = 80;
 
     var perRow  = Math.max(1, Math.floor(rowW / SEG));
     var segW    = rowW / perRow;
     var nRows   = Math.ceil(N / perRow);
     var rowPitch = TH + ROW_GAP;  // total height per row
     var topPad  = 30;             // top padding in SVG
-    var svgW    = cw;
+    var svgW    = cw + 0;  // bends drawn within PAD space, which includes bend width
     var svgH    = topPad + nRows * rowPitch + 40;
 
     var svg = mk('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH });
@@ -210,30 +214,32 @@
 
       // Bend connects bottom of upper ribbon to top of lower ribbon
       // It's a thick U-shape on the appropriate side
-      var yTop = ryTop;                  // top of upper ribbon
-      var yBot = ryBot + TH;            // bottom of lower ribbon
-      var totalH = yBot - yTop;         // total bend height
-      var outerR = totalH / 2;          // outer radius
-      var innerR = outerR - TH;         // inner radius
-      var midY = yTop + outerR;         // centre Y of the semicircle
+      // (bend geometry computed inline below)
 
       if (ltrB) {
-        // Right-side bend: D-shape opening to the right
-        var cx = PAD + rowW;  // left edge of the bend (right edge of ribbon)
-        // Path: outer arc clockwise on right, inner arc counter-clockwise
-        var d = 'M ' + cx + ' ' + yTop +
-                ' A ' + outerR + ' ' + outerR + ' 0 0 1 ' + cx + ' ' + yBot +
-                ' L ' + cx + ' ' + (midY + innerR) +
-                ' A ' + innerR + ' ' + innerR + ' 0 0 0 ' + cx + ' ' + (midY - innerR) +
+        // Right-side bend: thick D-shape opening to the right
+        // Connects right end of upper ribbon to right end of lower ribbon
+        var cx = PAD + rowW;
+        var oR = (2 * TH + ROW_GAP) / 2;   // outer radius
+        var iR = ROW_GAP / 2;               // inner radius
+        // Outer arc: (cx, ryTop) → (cx, ryBot+TH), sweeping right (large-arc=0, sweep=1)
+        // Inner arc: (cx, ryBot) → (cx, ryTop+TH), sweeping right back (large-arc=0, sweep=0)
+        var d = 'M ' + cx + ',' + ryTop +
+                ' A ' + oR + ',' + oR + ' 0 0,1 ' + cx + ',' + (ryBot + TH) +
+                ' L ' + cx + ',' + ryBot +
+                ' A ' + iR + ',' + iR + ' 0 0,0 ' + cx + ',' + (ryTop + TH) +
                 ' Z';
         svg.appendChild(mk('path', { d: d, fill: bendColor, 'class': 'bend-fill' }));
       } else {
-        // Left-side bend: D-shape opening to the left
-        var cx2 = PAD;  // right edge of the bend (left edge of ribbon)
-        var d2 = 'M ' + cx2 + ' ' + yTop +
-                 ' A ' + outerR + ' ' + outerR + ' 0 0 0 ' + cx2 + ' ' + yBot +
-                 ' L ' + cx2 + ' ' + (midY + innerR) +
-                 ' A ' + innerR + ' ' + innerR + ' 0 0 1 ' + cx2 + ' ' + (midY - innerR) +
+        // Left-side bend: thick D-shape opening to the left
+        var cx2 = PAD;
+        var oR2 = (2 * TH + ROW_GAP) / 2;
+        var iR2 = ROW_GAP / 2;
+        // Mirror of right bend: sweep directions inverted
+        var d2 = 'M ' + cx2 + ',' + ryTop +
+                 ' A ' + oR2 + ',' + oR2 + ' 0 0,0 ' + cx2 + ',' + (ryBot + TH) +
+                 ' L ' + cx2 + ',' + ryBot +
+                 ' A ' + iR2 + ',' + iR2 + ' 0 0,1 ' + cx2 + ',' + (ryTop + TH) +
                  ' Z';
         svg.appendChild(mk('path', { d: d2, fill: bendColor, 'class': 'bend-fill' }));
       }
