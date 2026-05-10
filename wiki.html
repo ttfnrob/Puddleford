@@ -553,42 +553,37 @@ function buildNetwork(data) {
 }
 </script>
 <script src="assets/js/badges.js">
-  // Fullscreen toggle
+  // Fullscreen toggle — CSS-based for universal compatibility (incl. iOS Safari)
   const fsBtn = document.getElementById('network-fullscreen-btn');
   const netContainer = document.getElementById('network-container');
+
+  function resizeGraph() {
+    const graphEl = document.getElementById('network-graph');
+    const svgEl = graphEl ? graphEl.querySelector('svg') : null;
+    if (svgEl) {
+      // Short delay allows CSS layout to settle first
+      setTimeout(() => {
+        svgEl.setAttribute('width', graphEl.offsetWidth);
+        svgEl.setAttribute('height', graphEl.offsetHeight);
+      }, 50);
+    }
+  }
 
   function setFullscreen(on) {
     netContainer.classList.toggle('network-fullscreen', on);
     document.body.classList.toggle('network-fullscreen-active', on);
     fsBtn.classList.toggle('is-fullscreen', on);
-    // Resize the SVG to fill new dimensions
-    const graphEl = document.getElementById('network-graph');
-    const svgEl = graphEl.querySelector('svg');
-    if (svgEl) {
-      svgEl.setAttribute('width', graphEl.offsetWidth);
-      svgEl.setAttribute('height', graphEl.offsetHeight);
-    }
+    resizeGraph();
+    // Scroll to top of container on exit so user isn't left staring at blank space
+    if (!on) netContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   fsBtn.addEventListener('click', () => {
     const isFs = netContainer.classList.contains('network-fullscreen');
-    if (!isFs && document.fullscreenEnabled && netContainer.requestFullscreen) {
-      netContainer.requestFullscreen().then(() => setFullscreen(true)).catch(() => {
-        // Fallback: CSS fullscreen
-        setFullscreen(true);
-      });
-    } else if (isFs && document.fullscreenElement) {
-      document.exitFullscreen().then(() => setFullscreen(false));
-    } else {
-      setFullscreen(!isFs);
-    }
+    setFullscreen(!isFs);
   });
 
-  document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) setFullscreen(false);
-  });
-
-  // Keyboard: Escape exits CSS fullscreen too
+  // Escape key exits
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && netContainer.classList.contains('network-fullscreen')) {
       setFullscreen(false);

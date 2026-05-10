@@ -580,8 +580,10 @@ ul{list-style:none}
   border-radius: var(--radius);
   color: var(--gold);
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -589,6 +591,9 @@ ul{list-style:none}
   z-index: 10;
   transition: background .2s, border-color .2s;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .network-fullscreen-btn:hover { background: rgba(212,152,42,.15); border-color: var(--gold); }
 .network-fullscreen-btn svg { width: 18px; height: 18px; }
@@ -596,21 +601,31 @@ ul{list-style:none}
 .network-fullscreen-btn.is-fullscreen .fs-expand { display: none; }
 .network-fullscreen-btn.is-fullscreen .fs-collapse { display: inline; }
 
-/* CSS fullscreen fallback */
-body.network-fullscreen-active { overflow: hidden; }
+/* CSS fullscreen — works on iOS Safari, Android Chrome, desktop */
+body.network-fullscreen-active {
+  overflow: hidden;
+  position: fixed; /* prevents scroll-bounce on iOS */
+  width: 100%;
+}
 .network-container.network-fullscreen {
   position: fixed !important;
-  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   z-index: 9999 !important;
   border-radius: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
+  width: 100% !important;
+  /* dvh falls back to 100vh on older browsers, works correctly on iOS */
+  height: 100dvh !important;
+  height: 100vh !important; /* fallback */
 }
 .network-container.network-fullscreen #network-graph {
-  height: 100vh !important;
+  height: 100dvh !important;
+  height: 100vh !important; /* fallback */
 }
 
-/* Native fullscreen */
+/* Native fullscreen (desktop browsers that support it) */
 .network-container:fullscreen,
 .network-container:-webkit-full-screen {
   background: var(--bg);
