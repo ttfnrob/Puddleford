@@ -1,0 +1,28 @@
+{
+  "guid": "c1066b88-9eb5-4db4-a9c2-23268f06a094",
+  "title": "Puddlefordia: The Fellowship of the Dog and Duck",
+  "pub_date": "Fri, 27 Mar 2026 18:41:20 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Brawlish",
+      "words": 150
+    },
+    {
+      "name": "Crystallania",
+      "words": 130
+    },
+    {
+      "name": "Lord Chickenmilk",
+      "words": 120
+    },
+    {
+      "name": "Bob Jones",
+      "words": 40
+    },
+    {
+      "name": "Ari",
+      "words": 90
+    }
+  ]
+}

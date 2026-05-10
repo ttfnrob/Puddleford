@@ -1,0 +1,28 @@
+{
+  "guid": "c788f179-57d7-402e-bbaf-c8abee15b14c",
+  "title": "Irrational Health Service",
+  "pub_date": "Fri, 13 Mar 2026 07:13:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Dr Eustace Chickenmilk",
+      "words": 292
+    },
+    {
+      "name": "Hospital Administrator",
+      "words": 221
+    },
+    {
+      "name": "Dr Jacques Coquelet",
+      "words": 203
+    },
+    {
+      "name": "Valerie",
+      "words": 56
+    },
+    {
+      "name": "Lenny",
+      "words": 45
+    }
+  ]
+}

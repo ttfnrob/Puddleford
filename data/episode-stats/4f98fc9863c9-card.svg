@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#1a120a"/>
+  <rect x="12" y="12" width="1176" height="606" fill="none" stroke="#6a4a1a" stroke-width="2" rx="4"/>
+  <text x="30" y="52" font-family="Georgia, serif" font-size="28" font-weight="600" fill="#d4982a" letter-spacing="4">PUDDLEFORD</text>
+  
+    <text x="600" y="220" text-anchor="middle" font-family="Georgia, serif" font-size="56" font-weight="700" fill="#f2e8d5">A Wager of Wits (1550s)</text>
+
+  <text x="600" y="300" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#9a8870">Fri, 14 Mar 2025</text>
+    <text x="60" y="430" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#9a8870" letter-spacing="2">CHARACTERS THIS EPISODE</text>
+    <text x="60" y="458" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">Henry</text>
+    <text x="60" y="484" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">Tobias</text>
+    <text x="60" y="510" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">The innkeeper's wife</text>
+    <text x="60" y="536" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">Reverend Cardinal Sin</text>
+    <text x="60" y="562" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">Mary</text>
+
+    <text x="700" y="430" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#9a8870" letter-spacing="2">LOCATIONS</text>
+    <text x="700" y="458" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">Puddleford</text>
+    <text x="700" y="484" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">The church</text>
+    <text x="700" y="510" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">The garden</text>
+
+  <text x="600" y="612" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#d4982a">puddleford.com</text>
+</svg>

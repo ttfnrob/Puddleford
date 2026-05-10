@@ -1,0 +1,28 @@
+{
+  "guid": "3bbf52da-70fd-4d94-854e-0aad62020554",
+  "title": "The Hunchback of Puddleford (1830s)",
+  "pub_date": "Fri, 29 Aug 2025 07:08:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Martin",
+      "words": 235
+    },
+    {
+      "name": "Lord Marmaduke",
+      "words": 215
+    },
+    {
+      "name": "Tim",
+      "words": 45
+    },
+    {
+      "name": "Martin's Wife",
+      "words": 40
+    },
+    {
+      "name": "Sebastian",
+      "words": 30
+    }
+  ]
+}

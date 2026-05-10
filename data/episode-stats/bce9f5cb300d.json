@@ -1,0 +1,28 @@
+{
+  "guid": "98a82f77-83b1-4782-88f8-c756113214fb",
+  "title": "Where No Duck Has Gone Before (2180s)",
+  "pub_date": "Sun, 09 Nov 2025 09:10:09 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Captain John Duck",
+      "words": 150
+    },
+    {
+      "name": "Brenda",
+      "words": 100
+    },
+    {
+      "name": "First Officer",
+      "words": 90
+    },
+    {
+      "name": "Alien Creature",
+      "words": 70
+    },
+    {
+      "name": "Starfleet Inspector",
+      "words": 60
+    }
+  ]
+}

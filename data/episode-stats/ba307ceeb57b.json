@@ -1,0 +1,28 @@
+{
+  "guid": "1fc7a065-7175-411a-ae24-01d3dcd301ed",
+  "title": "The Case of the Contaminated Cows",
+  "pub_date": "Fri, 03 Apr 2026 15:59:05 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Maeve",
+      "words": 450
+    },
+    {
+      "name": "Dennis",
+      "words": 380
+    },
+    {
+      "name": "Victor Fortescue",
+      "words": 150
+    },
+    {
+      "name": "Other Farmer",
+      "words": 60
+    },
+    {
+      "name": "Werther Farmer",
+      "words": 40
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "guid": "767c3624-ab34-467f-a698-e135744a3df8",
+  "title": "A Haunted Halloween Puddleford",
+  "pub_date": "Fri, 31 Oct 2025 21:48:24 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Legba Kinkade",
+      "words": 150
+    },
+    {
+      "name": "Beryl",
+      "words": 130
+    },
+    {
+      "name": "Jeeves",
+      "words": 120
+    },
+    {
+      "name": "Jeremy",
+      "words": 30
+    },
+    {
+      "name": "Ghost",
+      "words": 50
+    }
+  ]
+}

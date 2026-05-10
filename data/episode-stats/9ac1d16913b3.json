@@ -1,0 +1,24 @@
+{
+  "guid": "d968eef2-2487-41d8-9ad6-8c359b5615ca",
+  "title": "Captain Breadbeard (1695)",
+  "pub_date": "Mon, 08 Dec 2025 17:24:25 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Captain Breadbeard",
+      "words": 450
+    },
+    {
+      "name": "First Mate",
+      "words": 200
+    },
+    {
+      "name": "Commodore Chicken Milk",
+      "words": 300
+    },
+    {
+      "name": "Tavern Waitress",
+      "words": 150
+    }
+  ]
+}

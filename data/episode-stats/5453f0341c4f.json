@@ -1,0 +1,24 @@
+{
+  "guid": "15b7bf3e-57e1-45d0-97b0-01b8840c974a",
+  "title": "Battery Ball",
+  "pub_date": "Sat, 18 Oct 2025 08:04:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Granny",
+      "words": 150
+    },
+    {
+      "name": "Johnny",
+      "words": 130
+    },
+    {
+      "name": "Committee Member",
+      "words": 120
+    },
+    {
+      "name": "Another Committee Member",
+      "words": 100
+    }
+  ]
+}

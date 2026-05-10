@@ -1,0 +1,44 @@
+{
+  "guid": "f8da9b31-7e05-4a7d-9e9b-0510d0baba17",
+  "title": "New Puddleford",
+  "pub_date": "Fri, 20 Mar 2026 06:52:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Clancy Littlehope",
+      "words": 450
+    },
+    {
+      "name": "Eleanor Goodnight",
+      "words": 200
+    },
+    {
+      "name": "Charlene Goodright",
+      "words": 150
+    },
+    {
+      "name": "Older May",
+      "words": 30
+    },
+    {
+      "name": "Norma Jean",
+      "words": 30
+    },
+    {
+      "name": "Heidi",
+      "words": 30
+    },
+    {
+      "name": "Arabella",
+      "words": 30
+    },
+    {
+      "name": "Jebediah Bovine Pettychild",
+      "words": 50
+    },
+    {
+      "name": "William Bovine Pettychild",
+      "words": 50
+    }
+  ]
+}

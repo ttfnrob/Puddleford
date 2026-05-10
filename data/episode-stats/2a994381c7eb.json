@@ -1,0 +1,32 @@
+{
+  "guid": "58d6c548-86eb-44b6-9545-8ec170fdb544",
+  "title": "The Puddling that Dropped (1790)",
+  "pub_date": "Fri, 04 Apr 2025 07:00:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Annie",
+      "words": 204
+    },
+    {
+      "name": "Reg",
+      "words": 158
+    },
+    {
+      "name": "Dottie",
+      "words": 178
+    },
+    {
+      "name": "William",
+      "words": 174
+    },
+    {
+      "name": "Francois",
+      "words": 22
+    },
+    {
+      "name": "Hobble",
+      "words": 15
+    }
+  ]
+}

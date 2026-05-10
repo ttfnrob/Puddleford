@@ -201,6 +201,13 @@
       "description": "Danny and Jim discuss their band and music influences at The Dog and Duck pub, while Danny's parents, Susie and David, worry about their daughter Beth's behavior in the garden.",
       "source": "transcript",
       "season": ""
+    },
+    {
+      "era": "50 AD",
+      "episode": "A Very Small Lion (50 AD)",
+      "description": "The Romans have settled in Puddleford, and the townsfolk discuss the arrival of a new visitor while dealing with the challenges of selling fish and the demand for small animals.",
+      "source": "transcript",
+      "season": ""
     }
   ],
   "locations": [
@@ -246,7 +253,8 @@
         "Pressed for Love (2000s)",
         "The Hunchback of Puddleford (1830s)",
         "The Lamentable Tale of the Turnip Knight (1215)",
-        "A Wager of Wits (1550s)"
+        "A Wager of Wits (1550s)",
+        "A Very Small Lion (50 AD)"
       ],
       "source": "transcript"
     },
@@ -637,6 +645,30 @@
       "description": "A place where Danny and Jim go to find books about monkeys.",
       "episodes": [
         "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "the forum",
+      "description": "The town market square where residents gather.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "the vomitorium",
+      "description": "A building where a character discusses the aftermath of a feast.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Calum Street",
+      "description": "The street where Melodramaticus resides.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
       ],
       "source": "transcript"
     }
@@ -1699,32 +1731,84 @@
         "A Hatful of Dreams (1960s)"
       ],
       "source": "transcript"
+    },
+    {
+      "name": "Ignorous",
+      "description": "A fish seller in the market square.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Melodramaticus",
+      "description": "A character trying to launch a new brand and involved in discussions about small animals.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Marcus opening-nitus",
+      "description": "A Roman character who is excited about presenting games and needs wild animals for the spectacle.",
+      "episodes": [
+        "A Very Small Lion (50 AD)"
+      ],
+      "source": "transcript"
     }
   ],
   "processed_episodes": [
-    "15b7bf3e-57e1-45d0-97b0-01b8840c974a",
-    "1fc7a065-7175-411a-ae24-01d3dcd301ed",
-    "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0",
-    "f8da9b31-7e05-4a7d-9e9b-0510d0baba17",
-    "31dbc131-b121-4170-a0dd-5cdefa6e7a44",
-    "58d6c548-86eb-44b6-9545-8ec170fdb544",
-    "b10de1cf-5b6b-4b47-972d-3b5c0728f9b7",
-    "afe6c528-cc62-42c3-b5af-5d395c407b95",
-    "767c3624-ab34-467f-a698-e135744a3df8",
-    "8c9f35bd-7c42-4ab1-b891-a568fec9f43f",
     "bcd0d99b-aa06-4d5e-ab05-16c4159e7904",
-    "b187585a-554f-496e-b900-7c038dc152be",
-    "4eb865e8-521f-4176-919e-29c2b3c06bc3",
-    "c1066b88-9eb5-4db4-a9c2-23268f06a094",
-    "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5",
-    "c788f179-57d7-402e-bbaf-c8abee15b14c",
-    "8884fb09-b5be-45d2-b163-cec26855e6a7",
-    "d0dc4007-4e46-45f9-b6cb-cf1423f8f197",
     "98a82f77-83b1-4782-88f8-c756113214fb",
-    "d968eef2-2487-41d8-9ad6-8c359b5615ca",
-    "d5754d92-1073-4e70-bfae-dc936788078a",
+    "4eb865e8-521f-4176-919e-29c2b3c06bc3",
+    "8884fb09-b5be-45d2-b163-cec26855e6a7",
+    "c1066b88-9eb5-4db4-a9c2-23268f06a094",
+    "8c9f35bd-7c42-4ab1-b891-a568fec9f43f",
+    "31dbc131-b121-4170-a0dd-5cdefa6e7a44",
+    "767c3624-ab34-467f-a698-e135744a3df8",
     "63e19a59-38c7-4957-a64c-5107a7ca90b0",
+    "b10de1cf-5b6b-4b47-972d-3b5c0728f9b7",
+    "58d6c548-86eb-44b6-9545-8ec170fdb544",
+    "15b7bf3e-57e1-45d0-97b0-01b8840c974a",
+    "d0dc4007-4e46-45f9-b6cb-cf1423f8f197",
+    "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0",
+    "afe6c528-cc62-42c3-b5af-5d395c407b95",
+    "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5",
     "3bbf52da-70fd-4d94-854e-0aad62020554",
-    "4abfaf73-d11d-47bf-9ab7-9c9b846677da"
-  ]
+    "4abfaf73-d11d-47bf-9ab7-9c9b846677da",
+    "f8da9b31-7e05-4a7d-9e9b-0510d0baba17",
+    "d5754d92-1073-4e70-bfae-dc936788078a",
+    "1fc7a065-7175-411a-ae24-01d3dcd301ed",
+    "d968eef2-2487-41d8-9ad6-8c359b5615ca",
+    "d54382e3-9b2a-46e5-9eb8-3e6f2987f2e1",
+    "b187585a-554f-496e-b900-7c038dc152be",
+    "c788f179-57d7-402e-bbaf-c8abee15b14c"
+  ],
+  "episode_stats": {
+    "d54382e3-9b2a-46e5-9eb8-3e6f2987f2e1": "data/episode-stats/056ff7c072b2.json",
+    "1fc7a065-7175-411a-ae24-01d3dcd301ed": "data/episode-stats/ba307ceeb57b.json",
+    "c1066b88-9eb5-4db4-a9c2-23268f06a094": "data/episode-stats/a9bfc8f8e5fc.json",
+    "f8da9b31-7e05-4a7d-9e9b-0510d0baba17": "data/episode-stats/911f5e1fc123.json",
+    "c788f179-57d7-402e-bbaf-c8abee15b14c": "data/episode-stats/83b044b6fcdb.json",
+    "afe6c528-cc62-42c3-b5af-5d395c407b95": "data/episode-stats/fb069ca17f29.json",
+    "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0": "data/episode-stats/3ff5bad621f3.json",
+    "63e19a59-38c7-4957-a64c-5107a7ca90b0": "data/episode-stats/0168388dbfc1.json",
+    "d968eef2-2487-41d8-9ad6-8c359b5615ca": "data/episode-stats/9ac1d16913b3.json",
+    "b187585a-554f-496e-b900-7c038dc152be": "data/episode-stats/ec87eaf44c74.json",
+    "98a82f77-83b1-4782-88f8-c756113214fb": "data/episode-stats/bce9f5cb300d.json",
+    "767c3624-ab34-467f-a698-e135744a3df8": "data/episode-stats/08f74fb328fb.json",
+    "15b7bf3e-57e1-45d0-97b0-01b8840c974a": "data/episode-stats/5453f0341c4f.json",
+    "8884fb09-b5be-45d2-b163-cec26855e6a7": "data/episode-stats/674bb747cfea.json",
+    "d0dc4007-4e46-45f9-b6cb-cf1423f8f197": "data/episode-stats/9fb9e414dff7.json",
+    "d5754d92-1073-4e70-bfae-dc936788078a": "data/episode-stats/70768bc2260a.json",
+    "3bbf52da-70fd-4d94-854e-0aad62020554": "data/episode-stats/d77ef1737b85.json",
+    "8c9f35bd-7c42-4ab1-b891-a568fec9f43f": "data/episode-stats/ebac6db18e2d.json",
+    "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5": "data/episode-stats/88c90be89fe5.json",
+    "58d6c548-86eb-44b6-9545-8ec170fdb544": "data/episode-stats/2a994381c7eb.json",
+    "bcd0d99b-aa06-4d5e-ab05-16c4159e7904": "data/episode-stats/9ce9e5748354.json",
+    "4eb865e8-521f-4176-919e-29c2b3c06bc3": "data/episode-stats/4f98fc9863c9.json",
+    "31dbc131-b121-4170-a0dd-5cdefa6e7a44": "data/episode-stats/d2d6c8b7e01d.json",
+    "4abfaf73-d11d-47bf-9ab7-9c9b846677da": "data/episode-stats/3125b96a09f1.json",
+    "b10de1cf-5b6b-4b47-972d-3b5c0728f9b7": "data/episode-stats/f4ddd42dd8b1.json"
+  }
 }

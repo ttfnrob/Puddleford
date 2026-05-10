@@ -1,0 +1,24 @@
+{
+  "guid": "4eb865e8-521f-4176-919e-29c2b3c06bc3",
+  "title": "A Wager of Wits (1550s)",
+  "pub_date": "Fri, 14 Mar 2025 08:00:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Henry",
+      "words": 120
+    },
+    {
+      "name": "Tobias",
+      "words": 150
+    },
+    {
+      "name": "Reverend",
+      "words": 80
+    },
+    {
+      "name": "Innkeeper's Wife",
+      "words": 100
+    }
+  ]
+}

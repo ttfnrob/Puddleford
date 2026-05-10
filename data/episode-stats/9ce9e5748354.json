@@ -1,0 +1,36 @@
+{
+  "guid": "bcd0d99b-aa06-4d5e-ab05-16c4159e7904",
+  "title": "That Escalated Quickly (2000s)",
+  "pub_date": "Fri, 21 Mar 2025 08:08:00 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Hannah",
+      "words": 113
+    },
+    {
+      "name": "Jack",
+      "words": 106
+    },
+    {
+      "name": "Mum",
+      "words": 85
+    },
+    {
+      "name": "Katie",
+      "words": 146
+    },
+    {
+      "name": "Vicar",
+      "words": 104
+    },
+    {
+      "name": "Mr Barrington",
+      "words": 36
+    },
+    {
+      "name": "Joshua Rogers",
+      "words": 66
+    }
+  ]
+}

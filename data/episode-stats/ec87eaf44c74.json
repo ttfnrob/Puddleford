@@ -1,0 +1,32 @@
+{
+  "guid": "b187585a-554f-496e-b900-7c038dc152be",
+  "title": "The Pandora Strain (1990s)",
+  "pub_date": "Sun, 09 Nov 2025 09:16:25 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Dr. Victor Klein",
+      "words": 290
+    },
+    {
+      "name": "Dr. Miriam Strauss",
+      "words": 150
+    },
+    {
+      "name": "Creature",
+      "words": 100
+    },
+    {
+      "name": "Henry",
+      "words": 50
+    },
+    {
+      "name": "Pensioner 1",
+      "words": 40
+    },
+    {
+      "name": "Pensioner 2",
+      "words": 40
+    }
+  ]
+}

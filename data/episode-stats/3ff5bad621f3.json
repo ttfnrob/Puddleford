@@ -1,0 +1,48 @@
+{
+  "guid": "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0",
+  "title": "A Visit to Puddleford by St. Nicholas",
+  "pub_date": "Fri, 19 Dec 2025 09:27:37 GMT",
+  "season": "1",
+  "speaking": [
+    {
+      "name": "Dasher",
+      "words": 90
+    },
+    {
+      "name": "Rudolph",
+      "words": 70
+    },
+    {
+      "name": "Donner",
+      "words": 60
+    },
+    {
+      "name": "Lady Puddleford",
+      "words": 50
+    },
+    {
+      "name": "Lord Puddleford",
+      "words": 50
+    },
+    {
+      "name": "Pippin",
+      "words": 150
+    },
+    {
+      "name": "Mippet",
+      "words": 120
+    },
+    {
+      "name": "Frostish",
+      "words": 100
+    },
+    {
+      "name": "Santa",
+      "words": 80
+    },
+    {
+      "name": "HR elf",
+      "words": 40
+    }
+  ]
+}

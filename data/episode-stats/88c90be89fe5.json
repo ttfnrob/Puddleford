@@ -1,0 +1,32 @@
+{
+  "guid": "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5",
+  "title": "The Lamentable Tale of the Turnip Knight (1215)",
+  "pub_date": "Wed, 28 May 2025 18:16:33 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Cecily",
+      "words": 119
+    },
+    {
+      "name": "Trevor",
+      "words": 174
+    },
+    {
+      "name": "Barbara",
+      "words": 55
+    },
+    {
+      "name": "Sir Trevor",
+      "words": 75
+    },
+    {
+      "name": "the local feudal lord",
+      "words": 62
+    },
+    {
+      "name": "the permit maker",
+      "words": 41
+    }
+  ]
+}

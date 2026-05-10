@@ -1,0 +1,36 @@
+{
+  "guid": "63e19a59-38c7-4957-a64c-5107a7ca90b0",
+  "title": "A Chicken Never Dies Twice",
+  "pub_date": "Sun, 14 Dec 2025 11:58:57 GMT",
+  "season": "",
+  "speaking": [
+    {
+      "name": "Nigel",
+      "words": 90
+    },
+    {
+      "name": "Muggsy",
+      "words": 85
+    },
+    {
+      "name": "Mike",
+      "words": 80
+    },
+    {
+      "name": "Sam",
+      "words": 75
+    },
+    {
+      "name": "Bungle",
+      "words": 70
+    },
+    {
+      "name": "Zippy",
+      "words": 65
+    },
+    {
+      "name": "Lady",
+      "words": 60
+    }
+  ]
+}

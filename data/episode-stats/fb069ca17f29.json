@@ -1,0 +1,56 @@
+{
+  "guid": "afe6c528-cc62-42c3-b5af-5d395c407b95",
+  "title": "A Most Inconvenient Pipe",
+  "pub_date": "Fri, 06 Mar 2026 07:04:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Mr. Butternose",
+      "words": 150
+    },
+    {
+      "name": "Mr. Coram",
+      "words": 130
+    },
+    {
+      "name": "Mr. Ledbetter",
+      "words": 120
+    },
+    {
+      "name": "Vicar",
+      "words": 110
+    },
+    {
+      "name": "Gertrude",
+      "words": 50
+    },
+    {
+      "name": "Violet",
+      "words": 50
+    },
+    {
+      "name": "Lily",
+      "words": 30
+    },
+    {
+      "name": "Elizabeth",
+      "words": 40
+    },
+    {
+      "name": "James McAvoy",
+      "words": 30
+    },
+    {
+      "name": "Betsy",
+      "words": 40
+    },
+    {
+      "name": "Unity",
+      "words": 20
+    },
+    {
+      "name": "Betty",
+      "words": 30
+    }
+  ]
+}
