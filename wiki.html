@@ -40,6 +40,7 @@
     <h3>Contents</h3>
     <ul>
       <li><a href="#network" class="wiki-sidebar__link wiki-sidebar__link--active">The Network</a></li>
+      <li><a href="#league" class="wiki-sidebar__link">The League Table</a></li>
       <li><a href="#timeline" class="wiki-sidebar__link">Through the Ages</a></li>
       <li><a href="#locations" class="wiki-sidebar__link">Recurring Locations</a></li>
       <li><a href="#characters" class="wiki-sidebar__link">Characters</a></li>
@@ -50,6 +51,7 @@
 
   <!-- Mobile wiki nav strip -->
   <nav class="wiki-mobile-nav" aria-label="Wiki sections">
+    <a href="#league" class="wiki-mobile-nav__link">League Table</a>
     <a href="#timeline" class="wiki-mobile-nav__link">Through the Ages</a>
     <a href="#locations" class="wiki-mobile-nav__link">Locations</a>
     <a href="#characters" class="wiki-mobile-nav__link">Characters</a>
@@ -90,6 +92,15 @@
         </button>
         <div id="network-graph"></div>
       </div>
+    </section>
+
+    <section class="wiki-section" id="league">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">The League Table</h2>
+        <span class="wiki-section__rule"></span>
+      </div>
+      <p class="wiki-section__intro">Characters ranked by episode appearances.</p>
+      <div id="wiki-league"></div>
     </section>
 
     <section class="wiki-section" id="timeline">
@@ -275,6 +286,35 @@ async function loadWiki() {
     `).join('');
   } else {
     charEl.innerHTML = '<div class="wiki-empty-state">No characters recorded yet.</div>';
+  }
+
+  // League Table
+  const leagueEl = document.getElementById('wiki-league');
+  if (data.characters?.length && leagueEl) {
+    const ranked = [...data.characters]
+      .filter(c => c.episodes?.length > 0)
+      .sort((a, b) => (b.episodes?.length || 0) - (a.episodes?.length || 0))
+      .slice(0, 20);
+    const maxEps = ranked.length ? ranked[0].episodes.length : 1;
+    leagueEl.innerHTML = ranked.map((c, i) => {
+      const count = c.episodes?.length || 0;
+      const pct = Math.round((count / maxEps) * 100);
+      const epList = (c.episodes || []).join(', ');
+      return `
+        <div class="wiki-league__row">
+          <span class="wiki-league__rank">${i + 1}</span>
+          <div class="wiki-league__info">
+            <span class="wiki-league__name">${c.name}</span>
+            <span class="wiki-league__count">${count} episode${count !== 1 ? 's' : ''}</span>
+            <div class="wiki-league__bar-track">
+              <div class="wiki-league__bar" style="width:${pct}%"></div>
+            </div>
+            <p class="wiki-league__episodes">${epList}</p>
+          </div>
+        </div>`;
+    }).join('');
+  } else if (leagueEl) {
+    leagueEl.innerHTML = '<div class="wiki-empty-state">No character data yet.</div>';
   }
 
   // Wire up search inputs

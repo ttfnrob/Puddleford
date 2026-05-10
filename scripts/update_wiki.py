@@ -26,12 +26,14 @@ from pathlib import Path
 
 # ── Config ───────────────────────────────────────────────────────────────────
 
-RSS_URL        = "https://anchor.fm/s/10ce1465c/podcast/rss"
-WIKI_JSON      = Path("data/wiki.json")
-TRANSCRIPTS_DIR = Path("data/transcripts")
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+RSS_URL          = "https://anchor.fm/s/10ce1465c/podcast/rss"
+WIKI_JSON        = Path("data/wiki.json")
+TRANSCRIPTS_DIR  = Path("data/transcripts")
+EPISODE_STATS_DIR = Path("data/episode-stats")
+OPENAI_API_KEY   = os.environ.get("OPENAI_API_KEY", "")
 
 TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
+EPISODE_STATS_DIR.mkdir(parents=True, exist_ok=True)
 TRANSCRIPT_INDEX = Path("data/transcripts/index.json")
 
 if not OPENAI_API_KEY:
@@ -248,6 +250,173 @@ Transcript:
         print(f"  GPT extraction error: {e}", file=sys.stderr)
         return None
 
+def extract_speaking_stats(episode_title, transcript):
+    """Ask GPT to estimate word count per character from the transcript."""
+    prompt = f"""From this transcript of "{episode_title}", identify each named character who speaks and estimate their approximate word count.
+
+Return JSON only:
+{{
+  "characters": [
+    {{"name": "Character Name", "words": 450}},
+    ...
+  ]
+}}
+
+Rules:
+- Only include characters who actually speak (have dialogue)
+- Names should match exactly as spoken/referred to in the transcript
+- Order by word count descending
+- Return only valid JSON, nothing else
+
+Transcript:
+{transcript[:6000]}
+"""
+    payload = json.dumps({
+        "model": "gpt-4o-mini",
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.2,
+        "max_tokens": 500,
+    }).encode()
+
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/chat/completions",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            resp = json.loads(r.read())
+        content = resp["choices"][0]["message"]["content"].strip()
+        content = re.sub(r"^```json\s*", "", content)
+        content = re.sub(r"^```\s*", "", content)
+        content = re.sub(r"```$", "", content).strip()
+        return json.loads(content)
+    except Exception as e:
+        print(f"  Speaking stats error: {e}", file=sys.stderr)
+        return None
+
+
+def generate_stats_card(slug, ep, wiki_data):
+    """Generate an SVG stats card for the episode."""
+    title = ep.get("title", "Untitled")
+    pub_date = ep.get("pub_date", "")
+    season = ep.get("season", "")
+
+    # Wrap title at ~30 chars per line
+    words = title.split()
+    lines = []
+    current = ""
+    for w in words:
+        if current and len(current) + 1 + len(w) > 30:
+            lines.append(current)
+            current = w
+        else:
+            current = (current + " " + w).strip()
+    if current:
+        lines.append(current)
+    lines = lines[:3]  # max 3 lines
+
+    # Find characters and locations for this episode from wiki data
+    ep_title = ep.get("title", "")
+    characters = []
+    locations = []
+    for c in wiki_data.get("characters", []):
+        if ep_title in (c.get("episodes") or []):
+            characters.append(c["name"])
+    for l in wiki_data.get("locations", []):
+        if ep_title in (l.get("episodes") or []):
+            locations.append(l["name"])
+    characters = characters[:6]
+    locations = locations[:4]
+
+    # Build title lines SVG
+    title_y_start = 220 if len(lines) == 1 else (200 if len(lines) == 2 else 180)
+    title_svg = ""
+    for i, line in enumerate(lines):
+        escaped = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+        y = title_y_start + i * 70
+        title_svg += f'    <text x="600" y="{y}" text-anchor="middle" font-family="Georgia, serif" font-size="56" font-weight="700" fill="#f2e8d5">{escaped}</text>\n'
+
+    # Date below title
+    date_y = title_y_start + len(lines) * 70 + 10
+    date_display = pub_date[:16] if pub_date else ""
+
+    # Season badge
+    season_badge = ""
+    if season:
+        season_badge = f'<text x="1170" y="52" text-anchor="end" font-family="Georgia, serif" font-size="22" font-weight="600" fill="#d4982a" letter-spacing="3">SEASON {season}</text>'
+
+    # Characters list
+    char_svg = ""
+    if characters:
+        char_svg += '    <text x="60" y="430" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#9a8870" letter-spacing="2">CHARACTERS THIS EPISODE</text>\n'
+        for i, name in enumerate(characters):
+            escaped = name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            char_svg += f'    <text x="60" y="{458 + i * 26}" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">{escaped}</text>\n'
+
+    # Locations list
+    loc_svg = ""
+    if locations:
+        loc_svg += '    <text x="700" y="430" font-family="Georgia, serif" font-size="16" font-weight="600" fill="#9a8870" letter-spacing="2">LOCATIONS</text>\n'
+        for i, name in enumerate(locations):
+            escaped = name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            loc_svg += f'    <text x="700" y="{458 + i * 26}" font-family="Georgia, serif" font-size="20" fill="#f2e8d5">{escaped}</text>\n'
+
+    svg = f"""<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#1a120a"/>
+  <rect x="12" y="12" width="1176" height="606" fill="none" stroke="#6a4a1a" stroke-width="2" rx="4"/>
+  <text x="30" y="52" font-family="Georgia, serif" font-size="28" font-weight="600" fill="#d4982a" letter-spacing="4">PUDDLEFORD</text>
+  {season_badge}
+{title_svg}
+  <text x="600" y="{date_y}" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#9a8870">{date_display}</text>
+{char_svg}
+{loc_svg}
+  <text x="600" y="612" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#d4982a">puddleford.com</text>
+</svg>"""
+
+    card_path = EPISODE_STATS_DIR / f"{slug}-card.svg"
+    card_path.write_text(svg, encoding="utf-8")
+    print(f"  SVG card saved: {card_path}")
+    return str(card_path)
+
+
+def save_episode_stats(slug, ep, speaking_data):
+    """Save episode speaking stats JSON."""
+    stats = {
+        "guid": ep.get("guid", ""),
+        "title": ep.get("title", ""),
+        "pub_date": ep.get("pub_date", ""),
+        "season": ep.get("season", ""),
+        "speaking": speaking_data.get("characters", []) if speaking_data else [],
+    }
+    stats_path = EPISODE_STATS_DIR / f"{slug}.json"
+    with open(stats_path, "w") as f:
+        json.dump(stats, f, indent=2, ensure_ascii=False)
+    print(f"  Stats saved: {stats_path}")
+    return str(stats_path)
+
+
+def process_episode_analytics(ep, slug, transcript, wiki):
+    """Run speaking stats extraction, SVG card generation for an episode."""
+    print(f"  Extracting speaking stats...")
+    speaking = extract_speaking_stats(ep["title"], transcript)
+
+    stats_path = save_episode_stats(slug, ep, speaking)
+    card_path = generate_stats_card(slug, ep, wiki)
+
+    # Update episode_stats index in wiki
+    if "episode_stats" not in wiki:
+        wiki["episode_stats"] = {}
+    wiki["episode_stats"][ep["guid"]] = f"data/episode-stats/{slug}.json"
+
+    return speaking, stats_path, card_path
+
+
 def merge_wiki(wiki, ep, extracted):
     """Merge extracted data into wiki, deduplicating by name/era."""
     title = ep["title"]
@@ -385,6 +554,12 @@ def main():
             if extracted:
                 merge_wiki(wiki, ep, extracted)
 
+            # Episode analytics (speaking stats + SVG card)
+            stats_path = EPISODE_STATS_DIR / f"{slug}.json"
+            if not stats_path.exists():
+                process_episode_analytics(ep, slug, transcript, wiki)
+                time.sleep(1)
+
             # Mark as processed
             processed.add(ep["guid"])
             wiki["processed_episodes"] = list(processed)
@@ -398,6 +573,31 @@ def main():
         finally:
             if mp3_path.exists():
                 mp3_path.unlink()
+
+    # Backfill: generate analytics for already-processed episodes missing stats
+    print(f"\nBackfill: checking for episodes missing analytics...")
+    backfill_count = 0
+    for guid, info in transcript_index.items():
+        slug_hash = hashlib.md5(guid.encode()).hexdigest()[:12]
+        stats_path = EPISODE_STATS_DIR / f"{slug_hash}.json"
+        transcript_path = Path(info["file"])
+        if not stats_path.exists() and transcript_path.exists():
+            transcript = transcript_path.read_text(encoding="utf-8")
+            ep_info = {
+                "guid": guid,
+                "title": info.get("title", ""),
+                "pub_date": info.get("pub_date", ""),
+                "season": info.get("season", ""),
+            }
+            print(f"  Backfilling: {ep_info['title']}")
+            process_episode_analytics(ep_info, slug_hash, transcript, wiki)
+            save_wiki(wiki)
+            backfill_count += 1
+            time.sleep(2)
+    if backfill_count:
+        print(f"  Backfilled {backfill_count} episodes.")
+    else:
+        print(f"  All episodes already have analytics.")
 
     print(f"\nDone. Wiki updated with {len(new_episodes)} new episodes.")
 
