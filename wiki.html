@@ -553,40 +553,59 @@ function buildNetwork(data) {
 }
 </script>
 <script src="assets/js/badges.js">
-  // Fullscreen toggle — CSS-based for universal compatibility (incl. iOS Safari)
-  const fsBtn = document.getElementById('network-fullscreen-btn');
+  // Fullscreen — move container to body to escape any overflow:hidden parents
+  const fsBtn     = document.getElementById('network-fullscreen-btn');
   const netContainer = document.getElementById('network-container');
+  let fsPlaceholder = null; // marks original DOM position
 
   function resizeGraph() {
     const graphEl = document.getElementById('network-graph');
     const svgEl = graphEl ? graphEl.querySelector('svg') : null;
-    if (svgEl) {
-      // Short delay allows CSS layout to settle first
-      setTimeout(() => {
-        svgEl.setAttribute('width', graphEl.offsetWidth);
-        svgEl.setAttribute('height', graphEl.offsetHeight);
-      }, 50);
-    }
+    if (!svgEl) return;
+    setTimeout(() => {
+      svgEl.setAttribute('width', graphEl.offsetWidth);
+      svgEl.setAttribute('height', graphEl.offsetHeight);
+    }, 60);
   }
 
-  function setFullscreen(on) {
-    netContainer.classList.toggle('network-fullscreen', on);
-    document.body.classList.toggle('network-fullscreen-active', on);
-    fsBtn.classList.toggle('is-fullscreen', on);
+  function enterFullscreen() {
+    // Insert a placeholder so we know where to put it back
+    fsPlaceholder = document.createElement('div');
+    fsPlaceholder.id = 'network-fs-placeholder';
+    fsPlaceholder.style.cssText = 'display:none';
+    netContainer.parentNode.insertBefore(fsPlaceholder, netContainer);
+    // Move to body
+    document.body.appendChild(netContainer);
+    netContainer.classList.add('network-fullscreen');
+    document.body.classList.add('network-fullscreen-active');
+    fsBtn.classList.add('is-fullscreen');
     resizeGraph();
-    // Scroll to top of container on exit so user isn't left staring at blank space
-    if (!on) netContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function exitFullscreen() {
+    netContainer.classList.remove('network-fullscreen');
+    document.body.classList.remove('network-fullscreen-active');
+    fsBtn.classList.remove('is-fullscreen');
+    // Move back to original position
+    if (fsPlaceholder && fsPlaceholder.parentNode) {
+      fsPlaceholder.parentNode.insertBefore(netContainer, fsPlaceholder);
+      fsPlaceholder.remove();
+      fsPlaceholder = null;
+    }
+    resizeGraph();
   }
 
   fsBtn.addEventListener('click', () => {
-    const isFs = netContainer.classList.contains('network-fullscreen');
-    setFullscreen(!isFs);
+    if (netContainer.classList.contains('network-fullscreen')) {
+      exitFullscreen();
+    } else {
+      enterFullscreen();
+    }
   });
 
-  // Escape key exits
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && netContainer.classList.contains('network-fullscreen')) {
-      setFullscreen(false);
+      exitFullscreen();
     }
   });
 
