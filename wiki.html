@@ -42,6 +42,7 @@
       <li><a href="#timeline" class="wiki-sidebar__link wiki-sidebar__link--active">Through the Ages</a></li>
       <li><a href="#locations" class="wiki-sidebar__link">Recurring Locations</a></li>
       <li><a href="#characters" class="wiki-sidebar__link">Characters</a></li>
+      <li><a href="#network" class="wiki-sidebar__link">The Network</a></li>
     </ul>
     <p id="wiki-updated" class="wiki-sidebar__updated"></p>
   </aside>
@@ -51,6 +52,7 @@
     <a href="#timeline" class="wiki-mobile-nav__link">Through the Ages</a>
     <a href="#locations" class="wiki-mobile-nav__link">Locations</a>
     <a href="#characters" class="wiki-mobile-nav__link">Characters</a>
+    <a href="#network" class="wiki-mobile-nav__link">Network</a>
   </nav>
 
   <main class="wiki-main">
@@ -119,6 +121,23 @@
         <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
         <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
         <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+      </div>
+    </section>
+
+    <!-- Network Graph -->
+    <section class="wiki-section" id="network">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">The Puddleford Network</h2>
+      </div>
+      <p class="wiki-section__intro">
+        Every character and location, connected by the episodes they share.
+      </p>
+      <div class="network-container" id="network-container">
+        <div class="network-legend">
+          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--character"></span> Character</span>
+          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--location"></span> Location</span>
+        </div>
+        <div id="network-graph"></div>
       </div>
     </section>
 
@@ -240,6 +259,9 @@ async function loadWiki() {
   // Wire up search inputs
   setupSearch('locations-search', 'wiki-locations');
   setupSearch('characters-search', 'wiki-characters');
+
+  // Build network graph
+  buildNetwork(data);
 }
 
 function setupSearch(inputId, gridId) {
@@ -297,6 +319,177 @@ function setupSidebarTracking() {
 
 loadWiki();
 setupSidebarTracking();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+function buildNetwork(data) {
+  const container = document.getElementById('network-graph');
+  if (!container) return;
+
+  const characters = data.characters || [];
+  const locations = data.locations || [];
+
+  // Build nodes — deduplicate Dog and Duck variants
+  const nodeMap = new Map();
+
+  function normaliseName(name) {
+    if (name.toLowerCase().includes('dog and duck')) return 'The Dog and Duck';
+    return name;
+  }
+
+  function addNode(item, type) {
+    const name = normaliseName(item.name);
+    const eps = (item.episodes || []).map(e => e.trim());
+    if (nodeMap.has(name)) {
+      const existing = nodeMap.get(name);
+      eps.forEach(ep => { if (!existing.episodes.includes(ep)) existing.episodes.push(ep); });
+    } else {
+      nodeMap.set(name, { id: name, type: type, episodes: [...eps] });
+    }
+  }
+
+  characters.forEach(c => addNode(c, 'character'));
+  locations.forEach(l => addNode(l, 'location'));
+
+  const nodes = Array.from(nodeMap.values()).map(n => {
+    const r = Math.min(32, Math.max(6, 6 + n.episodes.length * 4));
+    return { ...n, radius: r, episodeCount: n.episodes.length };
+  });
+
+  // Build edges
+  const links = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const shared = nodes[i].episodes.filter(e => nodes[j].episodes.includes(e));
+      if (shared.length > 0) {
+        links.push({ source: nodes[i].id, target: nodes[j].id, weight: shared.length });
+      }
+    }
+  }
+
+  // Dimensions
+  const rect = container.getBoundingClientRect();
+  const width = rect.width || 900;
+  const isMobile = window.innerWidth < 768;
+  const height = isMobile ? 400 : 600;
+
+  container.style.height = height + 'px';
+
+  // SVG
+  const svg = d3.select(container).append('svg')
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('viewBox', [0, 0, width, height]);
+
+  const g = svg.append('g');
+
+  // Zoom
+  const zoom = d3.zoom()
+    .scaleExtent([0.3, 4])
+    .on('zoom', (event) => g.attr('transform', event.transform));
+  svg.call(zoom);
+
+  // Tooltip
+  const tooltip = d3.select(container).append('div')
+    .attr('class', 'network-tooltip')
+    .style('opacity', 0);
+
+  // Simulation
+  const maxWeight = d3.max(links, d => d.weight) || 1;
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(80).strength(d => 0.3 + (d.weight / maxWeight) * 0.7))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => d.radius + 8));
+
+  // Edges
+  const link = g.append('g')
+    .selectAll('line')
+    .data(links)
+    .join('line')
+    .attr('stroke', 'rgba(106, 74, 26, 0.4)')
+    .attr('stroke-width', d => Math.max(1, d.weight * 1.5));
+
+  // Node groups
+  const node = g.append('g')
+    .selectAll('g')
+    .data(nodes)
+    .join('g')
+    .call(d3.drag()
+      .on('start', (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+      .on('end', (event, d) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  // Node circles
+  node.append('circle')
+    .attr('r', d => d.radius)
+    .attr('fill', d => d.type === 'character' ? '#d4982a' : '#6b9e6b')
+    .attr('stroke', d => d.type === 'character' ? '#f0b840' : '#8aba8a')
+    .attr('stroke-width', 1.5)
+    .attr('cursor', 'pointer');
+
+  // Node labels
+  const maxLabelLen = isMobile ? 20 : 30;
+  node.append('text')
+    .text(d => d.id.length > maxLabelLen ? d.id.slice(0, maxLabelLen - 1) + '\u2026' : d.id)
+    .attr('dy', d => d.radius + 14)
+    .attr('text-anchor', 'middle')
+    .attr('class', 'network-label');
+
+  // Hover
+  node.on('mouseover', (event, d) => {
+    tooltip.style('opacity', 1)
+      .html('<strong>' + d.id + '</strong><br>' + d.episodeCount + ' episode' + (d.episodeCount !== 1 ? 's' : ''))
+      .style('left', (event.offsetX + 12) + 'px')
+      .style('top', (event.offsetY - 28) + 'px');
+  })
+  .on('mousemove', (event) => {
+    tooltip.style('left', (event.offsetX + 12) + 'px')
+      .style('top', (event.offsetY - 28) + 'px');
+  })
+  .on('mouseout', () => tooltip.style('opacity', 0));
+
+  // Click highlight
+  const linkedById = new Set();
+  links.forEach(l => {
+    const sid = typeof l.source === 'object' ? l.source.id : l.source;
+    const tid = typeof l.target === 'object' ? l.target.id : l.target;
+    linkedById.add(sid + '|' + tid);
+    linkedById.add(tid + '|' + sid);
+  });
+  function isConnected(a, b) { return a === b || linkedById.has(a + '|' + b); }
+
+  let activeNode = null;
+  node.on('click', (event, d) => {
+    event.stopPropagation();
+    activeNode = d.id;
+    node.style('opacity', n => isConnected(d.id, n.id) ? 1 : 0.15);
+    link.style('opacity', l => {
+      const sid = typeof l.source === 'object' ? l.source.id : l.source;
+      const tid = typeof l.target === 'object' ? l.target.id : l.target;
+      return (sid === d.id || tid === d.id) ? 1 : 0.05;
+    });
+  });
+
+  svg.on('click', () => {
+    if (activeNode) {
+      activeNode = null;
+      node.style('opacity', 1);
+      link.style('opacity', 1);
+    }
+  });
+
+  // Tick
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+    node.attr('transform', d => 'translate(' + d.x + ',' + d.y + ')');
+  });
+}
 </script>
 <script src="assets/js/badges.js"></script>
 </body>
