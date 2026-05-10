@@ -10,12 +10,18 @@
   <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .snake-wrap { width:100%; overflow:hidden; padding:1.5rem 0 4rem; }
+    .snake-wrap { width:100%; overflow:hidden; padding:1.5rem 0 4rem; background:var(--bg,#1a120a); position:relative; }
     .snake-wrap svg { display:block; margin:0 auto; }
+    .snake-wrap::before,
+    .snake-wrap::after {
+      content:''; display:block; position:absolute; left:0; right:0; height:60px; z-index:2; pointer-events:none;
+    }
+    .snake-wrap::before { top:0; background:linear-gradient(to bottom, var(--bg,#1a120a), transparent); }
+    .snake-wrap::after  { bottom:0; background:linear-gradient(to top, var(--bg,#1a120a), transparent); }
     .seg { cursor:pointer; transition:filter .12s; }
     .seg:hover { filter:brightness(1.4); }
-    .lbl-era  { fill:#d4982a; font-weight:700; font-family:inherit; }
-    .lbl-title{ fill:#f0e6d3; font-style:italic; font-family:inherit; opacity:0.85; }
+    .lbl-era  { font-weight:700; font-family:'Playfair Display',serif; }
+    .lbl-title{ fill:#f0e6d3; font-style:italic; font-family:'Source Serif 4','Source Serif Pro',serif; opacity:0.85; }
     .sdot { fill:#f0e6d3; pointer-events:none; }
     @keyframes gp{ 0%,100%{r:6;opacity:1} 50%{r:14;opacity:.25} }
     .pulse{ fill:#d4982a; animation:gp 2s ease-in-out infinite; pointer-events:none; }
@@ -101,16 +107,17 @@
   'use strict';
 
   /* ═══════════════════════════════════════════════════
-     CONFIG
+     CONFIG — tighter proportions
      ═══════════════════════════════════════════════════ */
   var mob      = window.innerWidth < 768;
-  var SEG      = mob ? 110 : 200;   // target px per episode
-  var TH       = mob ? 30  : 40;    // ribbon thickness
-  var PAD      = mob ? 40  : 100;   // horizontal padding (must be >= TH)
-  var ROW_GAP  = mob ? 110 : 160;   // label space between rows
-  var FONT_ERA = mob ? 9   : 13;
-  var FONT_TIT = mob ? 8   : 11;
-  var MAX_CH   = mob ? 16  : 26;
+  var TH       = mob ? 36  : 50;    // ribbon thickness
+  var SEG      = mob ? 100 : 160;   // px per episode segment
+  var PAD      = mob ? 20  : 60;    // side padding
+  var ROW_GAP  = mob ? 70  : 90;    // gap between ribbon bands (labels sit here)
+  var FONT_ERA = mob ? 11  : 14;
+  var FONT_TIT = mob ? 9   : 12;
+  var MAX_CH   = mob ? 22  : 40;    // longer titles before truncating
+  var DOT_R    = 6;                 // dot marker radius
 
   /* ═══════════════════════════════════════════════════
      SVG helpers
@@ -165,20 +172,8 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     RENDER
-     ═══════════════════════════════════════════════════
-
-     Layout:
-       All ribbons span from x=PAD to x=PAD+rowW (the "straight" part).
-       Bends extend beyond this:
-         Right bend: x = PAD+rowW  to  PAD+rowW+TH
-         Left bend:  x = PAD-TH   to  PAD
-
-       The bend is a simple vertical rect with rounded ends (rx=TH/2),
-       visually connecting the end of one row to the start of the next.
-
-       Row pitch = TH + ROW_GAP (ribbon height + label gap).
-  */
+     RENDER — snake timeline with proper bends
+     ═══════════════════════════════════════════════════ */
   function render(raw) {
     var eps = dedup(raw).sort(function (a, b) { return eraYear(a.era) - eraYear(b.era); });
     document.getElementById('snake-loading').style.display = 'none';
@@ -192,46 +187,64 @@
     var perRow  = Math.max(1, Math.floor(rowW / SEG));
     var segW    = rowW / perRow;
     var nRows   = Math.ceil(N / perRow);
-    var rowPitch = TH + ROW_GAP;
+    var rowPitch = TH + ROW_GAP;  // total height per row
+    var topPad  = 30;             // top padding in SVG
     var svgW    = cw;
-    var svgH    = nRows * rowPitch + 60;
+    var svgH    = topPad + nRows * rowPitch + 40;
 
     var svg = mk('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH });
     var segs = [];
 
-    /* ── Draw bends first (behind ribbon) ── */
+    /* ── Helper: get ribbon Y for a row ── */
+    function ribY(row) { return topPad + row * rowPitch; }
+
+    /* ── Draw bends (behind ribbon) ── */
     for (var br = 0; br < nRows - 1; br++) {
       var ltrB  = (br % 2 === 0);
-      var ryB   = 50 + br * rowPitch;
-      var nxtRy = 50 + (br + 1) * rowPitch;
-      var si2   = br * perRow;
-      var nxtCol = (si2 + perRow < N) ? eraCol(eps[si2 + perRow].era) : eraCol(eps[N - 1].era);
+      var ryTop = ribY(br);        // top of upper ribbon
+      var ryBot = ribY(br + 1);    // top of lower ribbon
 
-      // The bend spans from top of current ribbon to bottom of next ribbon
-      var bendTop = ryB;
-      var bendBot = nxtRy + TH;
+      // Get the colour of the last segment flowing into this bend
+      var lastIdxInRow = Math.min((br + 1) * perRow, N) - 1;
+      var bendColor = eraCol(eps[lastIdxInRow].era);
+
+      // Bend connects bottom of upper ribbon to top of lower ribbon
+      // It's a thick U-shape on the appropriate side
+      var yTop = ryTop;                  // top of upper ribbon
+      var yBot = ryBot + TH;            // bottom of lower ribbon
+      var totalH = yBot - yTop;         // total bend height
+      var outerR = totalH / 2;          // outer radius
+      var innerR = outerR - TH;         // inner radius
+      var midY = yTop + outerR;         // centre Y of the semicircle
 
       if (ltrB) {
-        // right-side bend
-        svg.appendChild(mk('rect', {
-          x: PAD + rowW, y: bendTop, width: TH, height: bendBot - bendTop,
-          fill: nxtCol, rx: String(TH / 2), 'class': 'bend-fill'
-        }));
+        // Right-side bend: D-shape opening to the right
+        var cx = PAD + rowW;  // left edge of the bend (right edge of ribbon)
+        // Path: outer arc clockwise on right, inner arc counter-clockwise
+        var d = 'M ' + cx + ' ' + yTop +
+                ' A ' + outerR + ' ' + outerR + ' 0 0 1 ' + cx + ' ' + yBot +
+                ' L ' + cx + ' ' + (midY + innerR) +
+                ' A ' + innerR + ' ' + innerR + ' 0 0 0 ' + cx + ' ' + (midY - innerR) +
+                ' Z';
+        svg.appendChild(mk('path', { d: d, fill: bendColor, 'class': 'bend-fill' }));
       } else {
-        // left-side bend
-        svg.appendChild(mk('rect', {
-          x: PAD - TH, y: bendTop, width: TH, height: bendBot - bendTop,
-          fill: nxtCol, rx: String(TH / 2), 'class': 'bend-fill'
-        }));
+        // Left-side bend: D-shape opening to the left
+        var cx2 = PAD;  // right edge of the bend (left edge of ribbon)
+        var d2 = 'M ' + cx2 + ' ' + yTop +
+                 ' A ' + outerR + ' ' + outerR + ' 0 0 0 ' + cx2 + ' ' + yBot +
+                 ' L ' + cx2 + ' ' + (midY + innerR) +
+                 ' A ' + innerR + ' ' + innerR + ' 0 0 1 ' + cx2 + ' ' + (midY - innerR) +
+                 ' Z';
+        svg.appendChild(mk('path', { d: d2, fill: bendColor, 'class': 'bend-fill' }));
       }
     }
 
-    /* ── Draw ribbon segments ── */
+    /* ── Draw ribbon segments row by row ── */
     for (var row = 0; row < nRows; row++) {
       var ltr = (row % 2 === 0);
       var si  = row * perRow;
       var ei  = Math.min(si + perRow, N);
-      var ry  = 50 + row * rowPitch;
+      var ry  = ribY(row);
 
       for (var i = si; i < ei; i++) {
         var ep  = eps[i];
@@ -248,8 +261,18 @@
 
         var g = mk('g', { 'class': 'seg', 'data-i': String(i) });
 
-        // Main fill
+        // Main ribbon segment fill — no rounded corners
         var rc = mk('rect', { x: x, y: ry, width: segW + 0.5, height: TH, fill: col });
+
+        // Round only the very start of first segment and very end of last segment
+        if (i === 0) {
+          rc.setAttribute('rx', String(TH / 4));
+        }
+        if (i === N - 1) {
+          // Add a rounded cap on the last segment
+          rc.setAttribute('rx', String(TH / 4));
+        }
+
         if (isGap) rc.setAttribute('opacity', '0.3');
         g.appendChild(rc);
 
@@ -263,36 +286,63 @@
 
         // Thin divider between segments
         var divX = ltr ? x : x + segW;
-        if ((ltr && li > 0) || (!ltr && li > 0)) {
+        if (li > 0) {
           g.appendChild(mk('line', {
             x1: divX, y1: ry, x2: divX, y2: ry + TH,
-            stroke: 'rgba(255,255,255,0.2)', 'stroke-width': '1'
+            stroke: 'rgba(255,255,255,0.15)', 'stroke-width': '1'
           }));
         }
 
-        // Dot marker at segment start
+        // Dot marker at segment start (white filled circle, 6px radius)
         var dotCx = ltr ? x + 8 : x + segW - 8;
-        g.appendChild(mk('circle', { cx: dotCx, cy: ry + TH / 2, r: '4', 'class': 'sdot' }));
+        g.appendChild(mk('circle', { cx: dotCx, cy: ry + TH / 2, r: String(DOT_R), 'class': 'sdot' }));
 
-        // Labels: above ribbon for LTR rows, below for RTL rows
+        /* ── Labels ──
+           LTR rows: labels ABOVE ribbon  → [episode title] then [era] then [RIBBON]
+           RTL rows: labels BELOW ribbon  → [RIBBON] then [era] then [episode title]
+        */
         var lx = x + segW / 2;
         var above = ltr;
 
-        var eraEl = mk('text', {
-          x: lx,
-          y: above ? ry - 8 : ry + TH + FONT_ERA + 6,
-          'text-anchor': 'middle', 'font-size': FONT_ERA, 'class': 'lbl-era'
-        });
-        eraEl.textContent = ep.era || 'Unknown';
-        g.appendChild(eraEl);
+        if (above) {
+          // Above ribbon: era closer to ribbon, title above era
+          var eraY  = ry - 8;
+          var titY  = eraY - FONT_ERA - 4;
 
-        var titEl = mk('text', {
-          x: lx,
-          y: above ? ry - 8 - FONT_ERA - 4 : ry + TH + FONT_ERA + 6 + FONT_TIT + 6,
-          'text-anchor': 'middle', 'font-size': FONT_TIT, 'class': 'lbl-title'
-        });
-        titEl.textContent = shortT(ep);
-        g.appendChild(titEl);
+          var eraEl = mk('text', {
+            x: lx, y: eraY,
+            'text-anchor': 'middle', 'font-size': FONT_ERA, 'class': 'lbl-era',
+            fill: col
+          });
+          eraEl.textContent = ep.era || 'Unknown';
+          g.appendChild(eraEl);
+
+          var titEl = mk('text', {
+            x: lx, y: titY,
+            'text-anchor': 'middle', 'font-size': FONT_TIT, 'class': 'lbl-title'
+          });
+          titEl.textContent = shortT(ep);
+          g.appendChild(titEl);
+        } else {
+          // Below ribbon: era closer to ribbon, title below era
+          var eraY2  = ry + TH + FONT_ERA + 6;
+          var titY2  = eraY2 + FONT_TIT + 6;
+
+          var eraEl2 = mk('text', {
+            x: lx, y: eraY2,
+            'text-anchor': 'middle', 'font-size': FONT_ERA, 'class': 'lbl-era',
+            fill: col
+          });
+          eraEl2.textContent = ep.era || 'Unknown';
+          g.appendChild(eraEl2);
+
+          var titEl2 = mk('text', {
+            x: lx, y: titY2,
+            'text-anchor': 'middle', 'font-size': FONT_TIT, 'class': 'lbl-title'
+          });
+          titEl2.textContent = shortT(ep);
+          g.appendChild(titEl2);
+        }
 
         svg.appendChild(g);
         segs.push({ g: g, ep: ep, x: x, y: ry, w: segW });
@@ -336,7 +386,7 @@
       s.g.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
       s.g.addEventListener('click', function () { window.location.href = 'episodes.html'; });
 
-      /* Touch support for tooltip on mobile */
+      /* Touch support */
       s.g.addEventListener('touchstart', function (e) {
         tE.textContent = s.ep.era || 'Unknown';
         tT.textContent = (s.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
