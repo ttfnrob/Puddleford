@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Puddleford Timeline</title>
+  <meta name="description" content="A history of Puddleford, from the ancient past to the far future. The Puddleford Timeline." />
+  <meta property="og:title"       content="The Puddleford Timeline" />
+  <meta property="og:description" content="A scrollable timeline of Puddleford history in chronological order." />
+  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Puddleford</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="episodes.html">Episodes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="timeline.html" class="active">Timeline</a></li>
+      <li><a href="players.html">The Players</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>The Puddleford Timeline</h1>
+  <p>A history of Puddleford, from the ancient past to the far future.</p>
+  <span class="page-header__rule" aria-hidden="true"></span>
+</div>
+
+<!-- Loading skeleton — desktop: horizontal row, mobile: vertical -->
+<div id="timeline-loading">
+  <div class="tl-skeleton-desktop">
+    <div class="tl-skeleton-row">
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+    </div>
+  </div>
+  <div class="tl-skeleton-mobile">
+    <div class="tl-skeleton-vert">
+      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- The timeline itself -->
+<div id="timeline-root"></div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Puddleford</a>
+      <p>A Town with a Tale</p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="players.html">The Players</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+      </ul>
+    </div>
+    </div>
+    <div class="footer-platforms">
+      <p>Listen on</p>
+      <div data-badges></div>
+    </div>
+  <div class="footer-copy">
+    2026 MKTOC, Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+  </div>
+</footer>
+
+<script>
+(function() {
+  /* ---- Chronological sort ---- */
+  function eraSort(era) {
+    if (!era) return 9999;
+    var s = era.toString().toLowerCase().trim();
+    var m = s.match(/^(\d{4})/);
+    if (m) return parseInt(m[1]);
+    if (s.includes('wild west'))   return 1880;
+    if (s.includes('present'))     return 2020;
+    if (s.includes('puddlefordia') || s.includes('fantasy') || s.includes('ancient')) return -1;
+    if (s.includes('napoleonic'))  return 1805;
+    var m2 = s.match(/(\d{3,4})s?/);
+    if (m2) return parseInt(m2[1]);
+    return 9998;
+  }
+
+  function isSpecialEra(era) {
+    if (!era) return false;
+    var s = era.toString().toLowerCase();
+    return s.includes('puddlefordia') || s.includes('fantasy') || s.includes('ancient') || s.includes('wild west');
+  }
+
+  /* ---- Deduplicate: prefer transcript source, merge by era+episode ---- */
+  function dedup(entries) {
+    var map = {};
+    entries.forEach(function(e) {
+      var key = (e.era || '') + '||' + (e.episode || '');
+      if (!map[key] || e.source === 'transcript') {
+        map[key] = e;
+      }
+    });
+    return Object.values(map);
+  }
+
+  /* ---- Render ---- */
+  function render(entries) {
+    var sorted = dedup(entries).sort(function(a, b) {
+      return eraSort(a.era) - eraSort(b.era);
+    });
+
+    document.getElementById('timeline-loading').style.display = 'none';
+    var root = document.getElementById('timeline-root');
+
+    var isDesktop = window.matchMedia('(min-width: 900px)').matches;
+
+    if (isDesktop) {
+      renderDesktop(root, sorted);
+    } else {
+      renderMobile(root, sorted);
+    }
+  }
+
+  /* ---- Desktop: horizontal scrolling timeline ---- */
+  function renderDesktop(root, sorted) {
+    var viewport = document.createElement('div');
+    viewport.className = 'tl-viewport';
+
+    var track = document.createElement('div');
+    track.className = 'tl-track';
+
+    /* Axis line */
+    var axis = document.createElement('div');
+    axis.className = 'tl-axis';
+    track.appendChild(axis);
+
+    var prevYear = null;
+
+    sorted.forEach(function(entry, i) {
+      var year = eraSort(entry.era);
+      var above = (i % 2 === 0);
+
+      /* Gap marker */
+      if (prevYear !== null && year - prevYear > 50) {
+        var gap = document.createElement('div');
+        gap.className = 'tl-gap';
+        gap.textContent = '\u00B7\u00B7\u00B7';
+        track.appendChild(gap);
+      }
+      prevYear = year;
+
+      var col = document.createElement('div');
+      col.className = 'tl-col';
+
+      /* Dot on axis */
+      var dot = document.createElement('div');
+      dot.className = 'tl-dot';
+
+      /* Connector line */
+      var connector = document.createElement('div');
+      connector.className = 'tl-connector ' + (above ? 'tl-connector--above' : 'tl-connector--below');
+
+      /* Card */
+      /* TODO: link to episode.html?id= once timeline entries have GUIDs */
+      var card = document.createElement('a');
+      card.href = 'episodes.html';
+      card.className = 'tl-card ' + (above ? 'tl-card--above' : 'tl-card--below');
+      if (isSpecialEra(entry.era)) card.classList.add('tl-card--special');
+
+      var eraLabel = document.createElement('div');
+      eraLabel.className = 'tl-era';
+      eraLabel.textContent = entry.era || 'Unknown';
+
+      var title = document.createElement('div');
+      title.className = 'tl-title';
+      title.textContent = entry.episode || '';
+
+      var desc = document.createElement('div');
+      desc.className = 'tl-desc';
+      desc.textContent = entry.description || '';
+
+      var badge = document.createElement('span');
+      badge.className = 'tl-badge';
+      badge.textContent = entry.season ? 'S' + entry.season : (entry.source === 'transcript' ? 'Transcript' : 'RSS');
+
+      card.appendChild(eraLabel);
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(badge);
+
+      if (above) {
+        col.appendChild(card);
+        col.appendChild(connector);
+        col.appendChild(dot);
+      } else {
+        col.appendChild(dot);
+        col.appendChild(connector);
+        col.appendChild(card);
+      }
+
+      track.appendChild(col);
+    });
+
+    viewport.appendChild(track);
+    root.appendChild(viewport);
+
+    /* Scroll hint */
+    var hint = document.createElement('div');
+    hint.className = 'tl-hint';
+    hint.textContent = 'Scroll or drag to explore the timeline';
+    root.appendChild(hint);
+    setTimeout(function() { hint.classList.add('tl-hint--hidden'); }, 3000);
+
+    /* Horizontal scroll via mouse wheel */
+    viewport.addEventListener('wheel', function(e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        viewport.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+
+    /* Keyboard arrow keys */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') viewport.scrollLeft += 120;
+      if (e.key === 'ArrowLeft')  viewport.scrollLeft -= 120;
+    });
+
+    /* Drag to scroll */
+    var isDragging = false, startX, scrollStart;
+    viewport.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.pageX;
+      scrollStart = viewport.scrollLeft;
+      viewport.style.cursor = 'grabbing';
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      viewport.scrollLeft = scrollStart - (e.pageX - startX);
+    });
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      viewport.style.cursor = '';
+    });
+  }
+
+  /* ---- Mobile: vertical timeline ---- */
+  function renderMobile(root, sorted) {
+    var container = document.createElement('div');
+    container.className = 'tl-vertical';
+
+    var prevYear = null;
+
+    sorted.forEach(function(entry) {
+      var year = eraSort(entry.era);
+
+      /* Gap marker */
+      if (prevYear !== null && year - prevYear > 50) {
+        var gap = document.createElement('div');
+        gap.className = 'tl-vgap';
+        gap.textContent = '\u00B7\u00B7\u00B7';
+        container.appendChild(gap);
+      }
+      prevYear = year;
+
+      var item = document.createElement('div');
+      item.className = 'tl-vitem';
+      if (isSpecialEra(entry.era)) item.classList.add('tl-vitem--special');
+
+      var dot = document.createElement('div');
+      dot.className = 'tl-vdot';
+
+      /* TODO: link to episode.html?id= once timeline entries have GUIDs */
+      var card = document.createElement('a');
+      card.href = 'episodes.html';
+      card.className = 'tl-vcard';
+
+      var eraLabel = document.createElement('div');
+      eraLabel.className = 'tl-era';
+      eraLabel.textContent = entry.era || 'Unknown';
+
+      var title = document.createElement('div');
+      title.className = 'tl-title';
+      title.textContent = entry.episode || '';
+
+      var desc = document.createElement('div');
+      desc.className = 'tl-desc';
+      desc.textContent = entry.description || '';
+
+      var badge = document.createElement('span');
+      badge.className = 'tl-badge';
+      badge.textContent = entry.season ? 'S' + entry.season : (entry.source === 'transcript' ? 'Transcript' : 'RSS');
+
+      card.appendChild(eraLabel);
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(badge);
+
+      item.appendChild(dot);
+      item.appendChild(card);
+      container.appendChild(item);
+    });
+
+    root.appendChild(container);
+  }
+
+  /* ---- Fetch and go ---- */
+  fetch('data/wiki.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.timeline && data.timeline.length) {
+        render(data.timeline);
+      } else {
+        document.getElementById('timeline-loading').innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:2rem;">No timeline data available yet.</p>';
+      }
+    })
+    .catch(function() {
+      document.getElementById('timeline-loading').innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:2rem;">Could not load timeline data.</p>';
+    });
+})();
+</script>
+<script src="assets/js/badges.js"></script>
+</body>
+</html>
