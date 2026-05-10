@@ -220,7 +220,13 @@ async function loadWiki() {
   // Characters
   const charEl = document.getElementById('wiki-characters');
   if (data.characters?.length) {
-    charEl.innerHTML = data.characters.map(c => `
+    // Sort by episode count desc, then description length desc (proxy for role size)
+    const sortedChars = [...data.characters].sort((a, b) => {
+      const epDiff = (b.episodes?.length || 0) - (a.episodes?.length || 0);
+      if (epDiff !== 0) return epDiff;
+      return (b.description?.length || 0) - (a.description?.length || 0);
+    });
+    charEl.innerHTML = sortedChars.map(c => `
       <div class="wiki-card" data-name="${c.name.toLowerCase()}">
         <h4 class="wiki-card__name">${c.name}</h4>
         <p class="wiki-card__desc">${c.description}</p>
