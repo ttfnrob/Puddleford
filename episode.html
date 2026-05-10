@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Episode — Puddleford</title>
+  <meta name="description" content="An episode of Puddleford: A Town with a Tale." />
+  <meta property="og:title" content="Episode — Puddleford" />
+  <meta property="og:description" content="An episode of Puddleford, entirely improvised." />
+  <meta property="og:image" content="assets/img/cover-with-title-1.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Puddleford</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="episodes.html">Episodes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="players.html">The Players</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="episode-loading" class="section" style="text-align:center;padding:6rem 1.5rem;">
+  <p class="text-muted" style="font-style:italic;">Loading episode...</p>
+</div>
+
+<main id="episode-main" style="display:none;">
+
+  <!-- Hero -->
+  <section class="ep-hero">
+    <div class="ep-hero__inner container">
+      <div class="ep-hero__artwork">
+        <img id="ep-artwork" class="ep-hero__img" src="" alt="" />
+      </div>
+      <div class="ep-hero__info">
+        <span id="ep-badge" class="card__badge"></span>
+        <h1 id="ep-title" class="ep-hero__title"></h1>
+        <p id="ep-meta" class="ep-hero__meta"></p>
+        <div id="ep-desc" class="ep-hero__desc"></div>
+        <div id="ep-listen" class="ep-hero__listen listen-buttons"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section id="ep-stats-section" class="ep-stats-bar container" style="display:none;">
+  </section>
+
+  <!-- Speaking chart -->
+  <section id="ep-speaking-section" class="section" style="display:none;">
+    <div class="container">
+      <h2 class="ep-speaking__title">Who spoke most</h2>
+      <div id="ep-speaking-chart" class="ep-speaking"></div>
+    </div>
+  </section>
+
+  <!-- Characters -->
+  <section id="ep-characters-section" class="section" style="display:none;">
+    <div class="container">
+      <h2 class="ep-section-heading">Characters in this episode</h2>
+      <div id="ep-characters" class="ep-cards-grid"></div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section id="ep-locations-section" class="section" style="display:none;">
+    <div class="container">
+      <h2 class="ep-section-heading">Locations in this episode</h2>
+      <div id="ep-locations" class="ep-cards-grid"></div>
+    </div>
+  </section>
+
+  <!-- Transcript -->
+  <section id="ep-transcript-section" class="section" style="display:none;">
+    <div class="container">
+      <button id="ep-transcript-toggle" class="btn btn--outline ep-transcript__toggle">Read transcript</button>
+      <div id="ep-transcript-wrap" class="ep-transcript">
+        <pre id="ep-transcript-text" class="ep-transcript__text"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Episode navigation -->
+  <nav id="ep-nav" class="ep-nav container">
+    <a id="ep-prev" class="ep-nav__link ep-nav__link--prev" href="#" style="visibility:hidden;">&larr; Previous episode</a>
+    <a href="episodes.html" class="ep-nav__link ep-nav__link--all">All episodes</a>
+    <a id="ep-next" class="ep-nav__link ep-nav__link--next" href="#" style="visibility:hidden;">Next episode &rarr;</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Puddleford</a>
+      <p>A Town with a Tale</p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="players.html">The Players</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-platforms">
+    <p>Listen on</p>
+    <div data-badges></div>
+  </div>
+  <div class="footer-copy">
+    2026 MKTOC, Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+  </div>
+</footer>
+
+<script src="assets/js/badges.js"></script>
+<script>
+/* ── Episode page logic ─────────────────────────────────────── */
+(function() {
+  const RSS_URL = 'https://anchor.fm/s/10ce1465c/podcast/rss';
+
+  function stripHtml(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return (d.textContent || d.innerText || '').trim();
+  }
+
+  function formatDate(str) {
+    if (!str) return '';
+    const d = new Date(str);
+    if (isNaN(d)) return str;
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  async function fetchRSS() {
+    const urls = [
+      RSS_URL,
+      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(RSS_URL),
+    ];
+    for (const url of urls) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) continue;
+        const text = await res.text();
+        if (text.includes('<channel')) return text;
+      } catch(e) { continue; }
+    }
+    throw new Error('Could not fetch RSS');
+  }
+
+  function parseRSS(xmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'text/xml');
+    const ITUNES = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+
+    function ns(el, localName) {
+      let found = el.getElementsByTagNameNS(ITUNES, localName)[0];
+      if (!found) found = el.querySelector('itunes\\:' + localName);
+      return found ? found.textContent.trim() : '';
+    }
+    function tag(el, name) {
+      const child = el.getElementsByTagName(name)[0];
+      return child ? (child.textContent || '').trim() : '';
+    }
+
+    return Array.from(doc.querySelectorAll('channel > item')).map(item => {
+      const imgEl = item.getElementsByTagNameNS(ITUNES, 'image')[0];
+      const thumbnail = imgEl ? (imgEl.getAttribute('href') || imgEl.textContent.trim()) : '';
+      const pubDate = tag(item, 'pubDate');
+      let season = ns(item, 'season');
+      if (!season && pubDate) {
+        const year = new Date(pubDate).getFullYear();
+        if (year === 2025) season = '1';
+        else if (year === 2026) season = '2';
+        else if (year >= 2027) season = String(year - 2024);
+      }
+      return {
+        title: tag(item, 'title'),
+        link: tag(item, 'link'),
+        guid: tag(item, 'guid'),
+        pubDate,
+        description: tag(item, 'description'),
+        thumbnail,
+        itunes_duration: ns(item, 'duration'),
+        itunes_season: season,
+        itunes_episode: ns(item, 'episode'),
+      };
+    });
+  }
+
+  async function loadPage() {
+    const params = new URLSearchParams(window.location.search);
+    const guid = params.get('id');
+    if (!guid) { showError('No episode specified.'); return; }
+
+    try {
+      const xml = await fetchRSS();
+      const episodes = parseRSS(xml);
+      // Sort chronologically (oldest first) for nav
+      const sorted = [...episodes].sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
+      const ep = episodes.find(e => e.guid === guid);
+      if (!ep) { showError('Episode not found.'); return; }
+
+      // Update page title and OG tags
+      document.title = ep.title + ' \u2014 Puddleford';
+      setMeta('og:title', ep.title + ' \u2014 Puddleford');
+      setMeta('og:description', stripHtml(ep.description).slice(0, 200));
+      if (ep.thumbnail) setMeta('og:image', ep.thumbnail);
+
+      // Hero
+      const artwork = document.getElementById('ep-artwork');
+      if (ep.thumbnail) { artwork.src = ep.thumbnail; artwork.alt = ep.title; }
+      else { artwork.style.display = 'none'; }
+
+      const badge = document.getElementById('ep-badge');
+      if (ep.itunes_season) { badge.textContent = 'Season ' + ep.itunes_season; }
+      else { badge.style.display = 'none'; }
+
+      document.getElementById('ep-title').textContent = ep.title;
+      document.getElementById('ep-meta').textContent = formatDate(ep.pubDate) + (ep.itunes_duration ? ' \u00b7 ' + ep.itunes_duration : '');
+      document.getElementById('ep-desc').innerHTML = ep.description;
+
+      // Listen buttons
+      const listenHtml = [];
+      if (ep.link) listenHtml.push('<a href="' + ep.link + '" target="_blank" rel="noopener" class="listen-btn">Spotify</a>');
+      listenHtml.push('<a href="https://podcasts.apple.com/gb/podcast/puddleford/id1763SEarch" target="_blank" rel="noopener" class="listen-btn">Apple Podcasts</a>');
+      listenHtml.push('<a href="https://pca.st/podcast/puddleford" target="_blank" rel="noopener" class="listen-btn">Pocket Casts</a>');
+      document.getElementById('ep-listen').innerHTML = listenHtml.join('');
+
+      // Episode nav (prev/next in chronological order)
+      const sortedIdx = sorted.findIndex(e => e.guid === guid);
+      if (sortedIdx > 0) {
+        const prev = sorted[sortedIdx - 1];
+        const prevLink = document.getElementById('ep-prev');
+        prevLink.href = 'episode.html?id=' + encodeURIComponent(prev.guid);
+        prevLink.textContent = '\u2190 ' + prev.title;
+        prevLink.style.visibility = 'visible';
+      }
+      if (sortedIdx < sorted.length - 1) {
+        const next = sorted[sortedIdx + 1];
+        const nextLink = document.getElementById('ep-next');
+        nextLink.href = 'episode.html?id=' + encodeURIComponent(next.guid);
+        nextLink.textContent = next.title + ' \u2192';
+        nextLink.style.visibility = 'visible';
+      }
+
+      // Show main, hide loading
+      document.getElementById('episode-loading').style.display = 'none';
+      document.getElementById('episode-main').style.display = 'block';
+
+      // Load supplementary data in parallel
+      loadStats(guid, ep.title);
+      loadWikiData(ep.title);
+      loadTranscript(guid);
+
+    } catch(err) {
+      console.error('[Puddleford] Episode load failed:', err);
+      showError('Could not load episode. <a href="episodes.html">Back to episodes</a>');
+    }
+  }
+
+  function setMeta(property, content) {
+    let el = document.querySelector('meta[property="' + property + '"]');
+    if (el) el.setAttribute('content', content);
+  }
+
+  function showError(msg) {
+    document.getElementById('episode-loading').innerHTML = '<div class="error-state">' + msg + '</div>';
+  }
+
+  // ── Stats & Speaking chart ──
+  async function loadStats(guid, title) {
+    try {
+      // First try episode-stats index
+      const indexRes = await fetch('data/episode-stats/index.json');
+      if (!indexRes.ok) return;
+      const statsIndex = await indexRes.json();
+      const statsPath = statsIndex[guid];
+      if (!statsPath) return;
+
+      const statsRes = await fetch(statsPath);
+      if (!statsRes.ok) return;
+      const stats = await statsRes.json();
+      if (!stats.speaking || !stats.speaking.length) return;
+
+      const speaking = stats.speaking;
+      const totalWords = speaking.reduce((s, c) => s + c.words, 0);
+      const topChar = speaking[0];
+
+      // Also count characters/locations from wiki (loaded separately)
+      // Stats bar
+      const bar = document.getElementById('ep-stats-section');
+      bar.innerHTML =
+        '<div class="ep-stat"><span class="ep-stat__label">Characters</span><span class="ep-stat__value">' + speaking.length + '</span></div>' +
+        '<div class="ep-stat"><span class="ep-stat__label">Total words</span><span class="ep-stat__value">' + totalWords.toLocaleString() + '</span></div>' +
+        '<div class="ep-stat"><span class="ep-stat__label">Most spoken</span><span class="ep-stat__value">' + topChar.name + ' (' + topChar.words + ')</span></div>';
+      bar.style.display = 'flex';
+
+      // Speaking chart
+      const maxWords = speaking[0].words;
+      const top10 = speaking.slice(0, 10);
+      const chartEl = document.getElementById('ep-speaking-chart');
+      chartEl.innerHTML = top10.map(function(c) {
+        const pct = Math.round((c.words / maxWords) * 100);
+        return '<div class="ep-speaking__row">' +
+          '<span class="ep-speaking__name">' + c.name + '</span>' +
+          '<div class="ep-speaking__bar-track"><div class="ep-speaking__bar" style="width:' + pct + '%"></div></div>' +
+          '<span class="ep-speaking__count">' + c.words + '</span>' +
+          '</div>';
+      }).join('');
+      document.getElementById('ep-speaking-section').style.display = 'block';
+
+    } catch(e) { console.warn('Stats load failed:', e); }
+  }
+
+  // ── Wiki data (characters & locations) ──
+  async function loadWikiData(title) {
+    try {
+      const res = await fetch('data/wiki.json');
+      if (!res.ok) return;
+      const wiki = await res.json();
+
+      // Characters matching this episode
+      const chars = (wiki.characters || []).filter(function(c) {
+        return c.episodes && c.episodes.some(function(ep) {
+          return ep.toLowerCase() === title.toLowerCase();
+        });
+      });
+
+      if (chars.length) {
+        const grid = document.getElementById('ep-characters');
+        grid.innerHTML = chars.map(function(c) {
+          return '<div class="ep-card">' +
+            '<div class="ep-card__name">' + c.name + '</div>' +
+            '<div class="ep-card__desc">' + (c.description || '') + '</div>' +
+            '<a href="wiki.html#characters" class="ep-card__link">View in wiki</a>' +
+            '</div>';
+        }).join('');
+        document.getElementById('ep-characters-section').style.display = 'block';
+
+        // Update stats bar with character count
+        const bar = document.getElementById('ep-stats-section');
+        if (bar.style.display === 'flex') {
+          const firstStat = bar.querySelector('.ep-stat');
+          if (firstStat) firstStat.querySelector('.ep-stat__value').textContent = chars.length;
+        }
+      }
+
+      // Locations matching this episode
+      const locs = (wiki.locations || []).filter(function(l) {
+        return l.episodes && l.episodes.some(function(ep) {
+          return ep.toLowerCase() === title.toLowerCase();
+        });
+      });
+
+      if (locs.length) {
+        const grid = document.getElementById('ep-locations');
+        grid.innerHTML = locs.map(function(l) {
+          return '<div class="ep-card">' +
+            '<div class="ep-card__name">' + l.name + '</div>' +
+            '<div class="ep-card__desc">' + (l.description || '') + '</div>' +
+            '<a href="wiki.html#locations" class="ep-card__link">View in wiki</a>' +
+            '</div>';
+        }).join('');
+        document.getElementById('ep-locations-section').style.display = 'block';
+
+        // Add locations count to stats bar
+        const bar = document.getElementById('ep-stats-section');
+        if (bar.style.display === 'flex') {
+          const locStat = document.createElement('div');
+          locStat.className = 'ep-stat';
+          locStat.innerHTML = '<span class="ep-stat__label">Locations</span><span class="ep-stat__value">' + locs.length + '</span>';
+          bar.insertBefore(locStat, bar.children[1]);
+        }
+      }
+
+    } catch(e) { console.warn('Wiki load failed:', e); }
+  }
+
+  // ── Transcript ──
+  async function loadTranscript(guid) {
+    try {
+      const indexRes = await fetch('data/transcripts/index.json');
+      if (!indexRes.ok) return;
+      const index = await indexRes.json();
+      const entry = index[guid];
+      if (!entry || !entry.file) return;
+
+      const textRes = await fetch(entry.file);
+      if (!textRes.ok) return;
+      const text = await textRes.text();
+      if (!text.trim()) return;
+
+      document.getElementById('ep-transcript-text').textContent = text;
+      document.getElementById('ep-transcript-section').style.display = 'block';
+
+      // Collapse/expand logic
+      const wrap = document.getElementById('ep-transcript-wrap');
+      const btn = document.getElementById('ep-transcript-toggle');
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        wrap.classList.add('ep-transcript--collapsed');
+        btn.textContent = 'Read transcript';
+      } else {
+        wrap.classList.remove('ep-transcript--collapsed');
+        btn.textContent = 'Hide transcript';
+      }
+
+      btn.addEventListener('click', function() {
+        const collapsed = wrap.classList.toggle('ep-transcript--collapsed');
+        btn.textContent = collapsed ? 'Read transcript' : 'Hide transcript';
+        if (!collapsed) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+    } catch(e) { console.warn('Transcript load failed:', e); }
+  }
+
+  loadPage();
+})();
+</script>
+
+</body>
+</html>

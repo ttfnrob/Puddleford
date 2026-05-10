@@ -698,3 +698,301 @@ body.network-fullscreen-active {
   margin-top: 2rem;
 }
 .episode-share a { color: var(--gold); }
+
+/* =============================================================
+   Episode Page
+   ============================================================= */
+
+/* Hero */
+.ep-hero {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 3rem 0 2.5rem;
+}
+.ep-hero__inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.ep-hero__img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-gold);
+  box-shadow: var(--shadow);
+}
+.ep-hero__info {
+  padding-top: 0.5rem;
+}
+.ep-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.ep-hero__meta {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+.ep-hero__desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.ep-hero__listen {
+  margin-top: 0.5rem;
+}
+
+/* Stats bar */
+.ep-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+.ep-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 120px;
+}
+.ep-stat__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.ep-stat__value {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+/* Speaking chart */
+.ep-speaking__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.ep-speaking__row {
+  display: grid;
+  grid-template-columns: 140px 1fr 50px;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+.ep-speaking__name {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ep-speaking__bar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  height: 8px;
+  overflow: hidden;
+}
+.ep-speaking__bar {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.6s ease;
+}
+.ep-speaking__count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* Section heading */
+.ep-section-heading {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-gold);
+}
+
+/* Cards grid (characters/locations) */
+.ep-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.ep-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.ep-card:hover {
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+.ep-card__name {
+  font-family: var(--font-heading);
+  color: var(--gold);
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.ep-card__desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.ep-card__link {
+  font-size: 0.82rem;
+  color: var(--gold);
+}
+.ep-card__link:hover {
+  color: var(--gold-light);
+}
+
+/* Transcript */
+.ep-transcript__toggle {
+  margin-bottom: 1rem;
+}
+.ep-transcript {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-height: 500px;
+  overflow-y: auto;
+  transition: max-height 0.4s ease;
+}
+.ep-transcript--collapsed {
+  max-height: 0;
+  overflow: hidden;
+  border-color: transparent;
+}
+.ep-transcript__text {
+  padding: 1.5rem;
+  margin: 0;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Episode navigation */
+.ep-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  gap: 1rem;
+}
+.ep-nav__link {
+  font-size: 0.88rem;
+  color: var(--gold);
+  transition: color var(--transition);
+  max-width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ep-nav__link:hover {
+  color: var(--gold-light);
+}
+.ep-nav__link--all {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.ep-nav__link--all:hover {
+  color: var(--gold);
+}
+
+/* Spotify link inside episode cards */
+.episode-card__spotify {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all var(--transition);
+}
+.episode-card__spotify:hover {
+  color: var(--gold);
+  border-color: var(--border-gold);
+}
+
+/* Responsive episode page */
+@media (max-width: 900px) {
+  .ep-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .ep-hero__artwork {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .ep-hero__listen {
+    justify-content: center;
+  }
+  .ep-speaking__row {
+    grid-template-columns: 100px 1fr 40px;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .ep-hero__inner {
+    text-align: left;
+  }
+  .ep-hero__artwork {
+    max-width: 200px;
+    margin: 0;
+  }
+  .ep-stats-bar {
+    gap: 0.5rem;
+  }
+  .ep-stat {
+    min-width: 0;
+    flex: 1 1 calc(50% - 0.5rem);
+    padding: 0.6rem 1rem;
+  }
+  .ep-speaking__row {
+    grid-template-columns: 80px 1fr 36px;
+    gap: 0.4rem;
+  }
+  .ep-speaking__name {
+    font-size: 0.8rem;
+  }
+  .ep-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .ep-nav {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ep-nav__link {
+    max-width: 100%;
+  }
+}

@@ -599,6 +599,13 @@ def main():
     else:
         print(f"  All episodes already have analytics.")
 
+    # Generate episode-stats index.json mapping GUIDs to stats file paths
+    stats_index = wiki.get("episode_stats", {})
+    stats_index_path = EPISODE_STATS_DIR / "index.json"
+    with open(stats_index_path, "w") as f:
+        json.dump(stats_index, f, indent=2, ensure_ascii=False)
+    print(f"  Wrote {len(stats_index)} entries to {stats_index_path}")
+
     print(f"\nDone. Wiki updated with {len(new_episodes)} new episodes.")
 
 if __name__ == "__main__":

@@ -116,11 +116,12 @@ function buildCard(item) {
   const dur    = item.itunes_duration || '';
   const date   = formatDate(item.pubDate);
 
+  const guid = item.guid || '';
+  const epPageUrl = 'episode.html?id=' + encodeURIComponent(guid);
+
   const card = document.createElement('a');
   card.className   = 'episode-card card';
-  card.href        = link;
-  card.target      = '_blank';
-  card.rel         = 'noopener noreferrer';
+  card.href        = epPageUrl;
   card.dataset.season = season || '0';
 
   card.innerHTML = `
@@ -135,6 +136,7 @@ function buildCard(item) {
       <div class="card-title">${title}</div>
       <div class="card-meta">${date}${dur ? ' &middot; ' + dur : ''}</div>
       <div class="card-desc">${desc}</div>
+      ${link ? `<span class="episode-card__spotify" onclick="event.preventDefault();event.stopPropagation();window.open('${link}','_blank')">Listen on Spotify</span>` : ''}
     </div>`;
   return card;
 }
