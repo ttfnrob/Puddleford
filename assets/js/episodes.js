@@ -1,195 +1,155 @@
-/**
- * Puddleford — episodes.js
- * Fetches podcast episodes from RSS via rss2json.
- * Powers episode grid on episodes.html and latest episode widget on index.html.
- */
+/* ============================================================
+   Puddleford — Episode loader
+   Fetches RSS feed directly via corsproxy.io, parses XML client-side.
+   Falls back to allorigins.win if first proxy fails.
+   ============================================================ */
 
-const RSS_API = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fanchor.fm%2Fs%2F10ce1465c%2Fpodcast%2Frss&count=100';
+const RSS_URL = 'https://anchor.fm/s/10ce1465c/podcast/rss';
+const PROXIES = [
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+];
 
-// ── Helpers ──
+function stripHtml(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return (d.textContent || d.innerText || '').trim();
+}
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
-  if (isNaN(d)) return '';
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-function stripHtml(html) {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
+function getText(el, tag, ns) {
+  const child = ns ? el.getElementsByTagNameNS(ns, tag)[0] : el.getElementsByTagName(tag)[0];
+  return child ? (child.textContent || '').trim() : '';
 }
 
-function truncate(text, maxLen) {
-  maxLen = maxLen || 160;
-  const clean = stripHtml(text).trim();
-  return clean.length > maxLen ? clean.slice(0, maxLen).trimEnd() + '\u2026' : clean;
+function parseRSS(xmlText) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmlText, 'application/xml');
+  const items = Array.from(doc.querySelectorAll('item'));
+  const ITUNES = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+
+  return items.map(item => {
+    const enclosure = item.querySelector('enclosure');
+    const itunesImage = item.getElementsByTagNameNS(ITUNES, 'image')[0];
+    const thumbnail = itunesImage ? itunesImage.getAttribute('href') : '';
+
+    return {
+      title:        getText(item, 'title'),
+      link:         getText(item, 'link') || (item.querySelector('enclosure') ? '' : ''),
+      guid:         getText(item, 'guid'),
+      pubDate:      getText(item, 'pubDate'),
+      description:  getText(item, 'description'),
+      thumbnail,
+      itunes_duration: item.getElementsByTagNameNS(ITUNES, 'duration')[0]?.textContent?.trim() || '',
+      itunes_season:   item.getElementsByTagNameNS(ITUNES, 'season')[0]?.textContent?.trim() || '',
+      itunes_episode:  item.getElementsByTagNameNS(ITUNES, 'episode')[0]?.textContent?.trim() || '',
+    };
+  });
 }
 
-function formatDuration(secs) {
-  if (!secs) return '';
-  secs = parseInt(secs, 10);
-  const h = Math.floor(secs / 3600);
-  const m = Math.floor((secs % 3600) / 60);
-  if (h > 0) return h + 'h ' + m + 'm';
-  if (m > 0) return m + 'm';
-  return secs + 's';
+async function fetchRSS() {
+  for (const proxyFn of PROXIES) {
+    try {
+      const res = await fetch(proxyFn(RSS_URL));
+      if (!res.ok) continue;
+      const text = await res.text();
+      if (!text.includes('<rss') && !text.includes('<channel')) continue;
+      return text;
+    } catch(e) {
+      continue;
+    }
+  }
+  throw new Error('All proxies failed');
 }
 
-function getSeason(item) {
-  if (item.itunes_season) return parseInt(item.itunes_season, 10);
-  if (item.itunes_episode) return parseInt(item.itunes_episode, 10) <= 12 ? 1 : 2;
-  return 1;
-}
+function buildCard(item) {
+  const title = item.title || 'Untitled';
+  const date  = item.pubDate ? formatDate(item.pubDate) : '';
+  const desc  = stripHtml(item.description).slice(0, 220);
+  const img   = item.thumbnail || '';
+  const link  = item.link || '#';
+  const season = item.itunes_season || '';
+  const dur   = item.itunes_duration || '';
 
-function buildEpisodeCard(item, season, epNum, fallbackImg) {
-  var img = item.thumbnail || fallbackImg;
-  var link = item.link || 'https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd';
-  var dur = formatDuration(item.itunes_duration);
-  var date = formatDate(item.pubDate);
-  var desc = truncate(item.description || item.content || '', 150);
-  var label = epNum ? ('S' + season + ' E' + (epNum < 10 ? '0' + epNum : epNum)) : ('Season ' + season);
+  const card = document.createElement('a');
+  card.className = 'episode-card card';
+  card.href = link || '#';
+  if (link) { card.target = '_blank'; card.rel = 'noopener'; }
+  card.dataset.season = season || '0';
 
-  var card = document.createElement('article');
-  card.className = 'card';
-  card.dataset.season = season;
-
-  card.innerHTML =
-    '<img class="card__img" src="' + img + '" alt="' + item.title.replace(/"/g, '&quot;') + '" loading="lazy" onerror="this.src=\'' + fallbackImg + '\'">' +
-    '<div class="card__body">' +
-      '<span class="card__badge">' + label + '</span>' +
-      '<h3 class="card__title">' + item.title + '</h3>' +
-      '<p class="card__meta">' + date + (dur ? ' &nbsp;&middot;&nbsp; ' + dur : '') + '</p>' +
-      '<p class="card__desc">' + desc + '</p>' +
-      '<a class="card__link" href="' + link + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
-    '</div>';
-
+  card.innerHTML = `
+    ${img
+      ? `<img class="card-img" src="${img}" alt="${title}" loading="lazy">`
+      : `<div class="card-img" style="background:var(--bg-secondary);aspect-ratio:1;display:flex;align-items:center;justify-content:center;color:var(--border-gold);font-size:2rem">[ ]</div>`
+    }
+    <div class="card-body">
+      ${season ? `<span class="badge">S${season}</span>` : ''}
+      <div class="card-title">${title}</div>
+      <div class="card-meta">${date}${dur ? ' &middot; ' + dur : ''}</div>
+      <div class="card-desc">${desc}</div>
+    </div>
+  `;
   return card;
 }
 
-// ── Episodes page ──
+let activeFilter = 'all';
 
-async function initEpisodesPage() {
-  var grid = document.getElementById('episode-grid');
-  var filterBar = document.getElementById('filter-bar');
-  if (!grid) return;
-
-  var fallbackImg = 'assets/img/cover-with-title-1.jpg';
-  grid.innerHTML = '<p class="loading-state">Loading episodes<span class="loading-dots"></span></p>';
-
-  var feed;
-  try {
-    var res = await fetch(RSS_API);
-    feed = await res.json();
-  } catch (e) {
-    grid.innerHTML = '<p class="empty-state">Could not load episodes. Please try again later.</p>';
-    return;
-  }
-
-  if (!feed.items || feed.items.length === 0) {
-    grid.innerHTML = '<p class="empty-state">No episodes found.</p>';
-    return;
-  }
-
-  var items = feed.items; // newest first from rss2json
-  var reversed = items.slice().reverse(); // oldest first
-  var cards = [];
-
-  reversed.forEach(function(item, idx) {
-    var season = getSeason(item);
-    var epNum = item.itunes_episode ? parseInt(item.itunes_episode, 10) : (idx + 1);
-    var card = buildEpisodeCard(item, season, epNum, fallbackImg);
-    cards.push({ card: card, season: season });
+function applyFilter(season) {
+  activeFilter = season;
+  document.querySelectorAll('.episode-card').forEach(card => {
+    card.style.display = (season === 'all' || card.dataset.season === season) ? '' : 'none';
   });
-
-  // Display newest first
-  cards.reverse();
-
-  grid.innerHTML = '';
-  cards.forEach(function(c) { grid.appendChild(c.card); });
-
-  // Season filter
-  var seasons = [];
-  cards.forEach(function(c) { if (seasons.indexOf(c.season) === -1) seasons.push(c.season); });
-  seasons.sort(function(a, b) { return a - b; });
-
-  if (filterBar && seasons.length > 0) {
-    filterBar.innerHTML = '';
-
-    var allBtn = document.createElement('button');
-    allBtn.className = 'filter-btn active';
-    allBtn.textContent = 'All Episodes';
-    allBtn.dataset.season = 'all';
-    filterBar.appendChild(allBtn);
-
-    seasons.forEach(function(s) {
-      var btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.textContent = 'Season ' + s;
-      btn.dataset.season = s;
-      filterBar.appendChild(btn);
-    });
-
-    filterBar.addEventListener('click', function(e) {
-      var btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      filterBar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var sel = btn.dataset.season;
-      cards.forEach(function(c) {
-        c.card.style.display = (sel === 'all' || c.season === parseInt(sel, 10)) ? '' : 'none';
-      });
-    });
-  }
-
-  var countEl = document.getElementById('episode-count');
-  if (countEl) countEl.textContent = items.length;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === season);
+  });
 }
 
-// ── Latest episode widget (homepage) ──
-
-async function initLatestEpisode() {
-  var container = document.getElementById('latest-episode');
-  if (!container) return;
-
-  var fallbackImg = 'assets/img/cover-with-title-1.jpg';
-  container.innerHTML = '<p class="loading-state" style="padding:2rem;">Loading latest episode<span class="loading-dots"></span></p>';
-
-  var feed;
+async function loadEpisodes(gridEl, latestEl) {
   try {
-    var res = await fetch(RSS_API);
-    feed = await res.json();
-  } catch (e) {
-    container.innerHTML = '<p class="empty-state">Could not load episode info.</p>';
-    return;
+    const xml = await fetchRSS();
+    const items = parseRSS(xml);
+
+    if (!items.length) throw new Error('No episodes parsed');
+
+    // Latest episode widget (homepage)
+    if (latestEl && items.length) {
+      const ep = items[0];
+      const desc = stripHtml(ep.description).slice(0, 300);
+      const season = ep.itunes_season;
+      latestEl.innerHTML = `
+        ${ep.thumbnail
+          ? `<img src="${ep.thumbnail}" alt="${ep.title}" loading="lazy">`
+          : `<div style="width:180px;height:180px;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;border-radius:6px;color:var(--border-gold);font-size:2rem">[ ]</div>`
+        }
+        <div>
+          ${season ? `<span class="badge">Season ${season}</span>` : ''}
+          <h3>${ep.title}</h3>
+          <div class="ep-meta">${ep.pubDate ? formatDate(ep.pubDate) : ''}${ep.itunes_duration ? ' &middot; ' + ep.itunes_duration : ''}</div>
+          <p>${desc}</p>
+          <a href="${ep.link || '#'}" target="_blank" rel="noopener" class="btn btn-primary">Listen now</a>
+        </div>
+      `;
+    }
+
+    // Full episode grid
+    if (gridEl) {
+      gridEl.innerHTML = '';
+      items.forEach(item => gridEl.appendChild(buildCard(item)));
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      });
+      applyFilter('all');
+    }
+
+  } catch(err) {
+    console.error('Episode load error:', err);
+    const msg = `<div class="error-state">Could not load episodes. <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Listen on Spotify</a></div>`;
+    if (gridEl)   gridEl.innerHTML = msg;
+    if (latestEl) latestEl.innerHTML = msg;
   }
-
-  if (!feed.items || feed.items.length === 0) {
-    container.innerHTML = '<p class="empty-state">No episodes found.</p>';
-    return;
-  }
-
-  var item = feed.items[0];
-  var img = item.thumbnail || fallbackImg;
-  var link = item.link || 'https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd';
-  var date = formatDate(item.pubDate);
-  var dur = formatDuration(item.itunes_duration);
-  var desc = truncate(item.description || item.content || '', 220);
-
-  container.innerHTML =
-    '<img class="latest-episode__img" src="' + img + '" alt="' + item.title.replace(/"/g, '&quot;') + '" onerror="this.src=\'' + fallbackImg + '\'">' +
-    '<div class="latest-episode__body">' +
-      '<p class="latest-episode__label">&#x1F399;&#xFE0F; Latest Episode</p>' +
-      '<h3 class="latest-episode__title">' + item.title + '</h3>' +
-      '<p class="latest-episode__meta">' + date + (dur ? ' &middot; ' + dur : '') + '</p>' +
-      '<p class="latest-episode__desc">' + desc + '</p>' +
-      '<a class="btn btn--gold" href="' + link + '" target="_blank" rel="noopener">&#9654; Listen now</a>' +
-    '</div>';
 }
-
-// ── Init ──
-
-document.addEventListener('DOMContentLoaded', function() {
-  initLatestEpisode();
-  initEpisodesPage();
-});
