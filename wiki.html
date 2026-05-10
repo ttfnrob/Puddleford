@@ -172,7 +172,24 @@ async function loadWiki() {
   // Timeline
   const timelineEl = document.getElementById('wiki-timeline');
   if (data.timeline?.length) {
-    timelineEl.innerHTML = '<div class="wiki-timeline__line">' + data.timeline.map(t => `
+    // Sort timeline chronologically
+    function eraSort(era) {
+      if (!era) return 9999;
+      const s = era.toString().toLowerCase().trim();
+      // Extract leading year number if present (e.g. "1695", "1790s", "2180s")
+      const m = s.match(/^(\d{4})/);
+      if (m) return parseInt(m[1]);
+      // Named special eras
+      if (s.includes('wild west'))   return 1880;
+      if (s.includes('present'))     return 2020;
+      if (s.includes('puddlefordia') || s.includes('fantasy') || s.includes('ancient')) return -1;
+      // Decade shorthand like "1790s" already caught above, but catch "the 1790s"
+      const m2 = s.match(/(\d{3,4})s?/);
+      if (m2) return parseInt(m2[1]);
+      return 9998; // unknown — push to end
+    }
+    const sorted = [...data.timeline].sort((a, b) => eraSort(a.era) - eraSort(b.era));
+    timelineEl.innerHTML = '<div class="wiki-timeline__line">' + sorted.map(t => `
       <div class="wiki-timeline__item">
         <div class="wiki-timeline__dot"></div>
         <div class="wiki-timeline__content">
