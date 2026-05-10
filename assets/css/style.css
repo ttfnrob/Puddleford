@@ -221,10 +221,10 @@ ul{list-style:none}
 
 /* TIMELINE */
 .wiki-timeline__line{position:relative;padding-left:2.5rem}
-.wiki-timeline__line::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold) 0%,var(--border-gold) 50%,transparent 100%);border-radius:2px}
+.wiki-timeline__line::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold) 0%,var(--border-gold) 50%,transparent 100%);border-radius:2px}
 .wiki-timeline__item{position:relative;margin-bottom:2rem;padding:1rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);transition:border-color var(--transition),box-shadow var(--transition)}
 .wiki-timeline__item:hover{border-color:var(--border-gold);box-shadow:0 0 12px rgba(212,152,42,0.1)}
-.wiki-timeline__dot{position:absolute;left:-2.25rem;top:1.25rem;width:14px;height:14px;border-radius:50%;background:var(--gold);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--gold)}
+.wiki-timeline__dot{position:absolute;left:-2rem;top:1.35rem;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--gold);transform:translateX(-50%);margin-left:6px}
 .wiki-timeline__era{font-family:var(--font-heading);font-size:1.15rem;color:var(--gold);margin-bottom:0.2rem;line-height:1.3}
 .wiki-timeline__episode{font-style:italic;color:var(--text-muted);font-size:0.88rem;margin-bottom:0.3rem}
 .wiki-timeline__desc{color:var(--text-muted);font-size:0.85rem;line-height:1.6}
@@ -376,7 +376,7 @@ ul{list-style:none}
   .wiki-card__name{font-size:0.95rem}
   .wiki-card__desc{font-size:0.82rem}
   .wiki-timeline__line{padding-left:2rem}
-  .wiki-timeline__dot{left:-1.75rem;width:12px;height:12px}
+  .wiki-timeline__dot{left:-1.5rem;width:10px;height:10px;margin-left:6px}
   .wiki-timeline__item{padding:0.85rem 1rem}
   .wiki-timeline__era{font-size:1rem}
 
