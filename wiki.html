@@ -39,7 +39,8 @@
   <aside class="wiki-sidebar">
     <h3>Contents</h3>
     <ul>
-      <li><a href="#timeline" class="wiki-sidebar__link wiki-sidebar__link--active">Through the Ages</a></li>
+      <li><a href="#network" class="wiki-sidebar__link wiki-sidebar__link--active">The Network</a></li>
+      <li><a href="#timeline" class="wiki-sidebar__link">Through the Ages</a></li>
       <li><a href="#locations" class="wiki-sidebar__link">Recurring Locations</a></li>
       <li><a href="#characters" class="wiki-sidebar__link">Characters</a></li>
       <li><a href="#network" class="wiki-sidebar__link">The Network</a></li>
@@ -63,7 +64,22 @@
       That is the nature of Puddleford.
     </blockquote>
 
-    <!-- Timeline -->
+    <section class="wiki-section" id="network">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">The Puddleford Network</h2>
+      </div>
+      <p class="wiki-section__intro">
+        Every character and location, connected by the episodes they share.
+      </p>
+      <div class="network-container" id="network-container">
+        <div class="network-legend">
+          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--character"></span> Character</span>
+          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--location"></span> Location</span>
+        </div>
+        <div id="network-graph"></div>
+      </div>
+    </section>
+
     <section class="wiki-section" id="timeline">
       <div class="wiki-section__header">
         <h2 class="wiki-section__title">Through the Ages</h2>
@@ -82,7 +98,6 @@
       </div>
     </section>
 
-    <!-- Locations -->
     <section class="wiki-section" id="locations">
       <div class="wiki-section__header">
         <h2 class="wiki-section__title">Recurring Locations</h2>
@@ -103,7 +118,6 @@
       </div>
     </section>
 
-    <!-- Characters -->
     <section class="wiki-section" id="characters">
       <div class="wiki-section__header">
         <h2 class="wiki-section__title">Characters</h2>
@@ -124,22 +138,17 @@
       </div>
     </section>
 
+    <!-- Timeline -->
+    
+
+    <!-- Locations -->
+    
+
+    <!-- Characters -->
+    
+
     <!-- Network Graph -->
-    <section class="wiki-section" id="network">
-      <div class="wiki-section__header">
-        <h2 class="wiki-section__title">The Puddleford Network</h2>
-      </div>
-      <p class="wiki-section__intro">
-        Every character and location, connected by the episodes they share.
-      </p>
-      <div class="network-container" id="network-container">
-        <div class="network-legend">
-          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--character"></span> Character</span>
-          <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--location"></span> Location</span>
-        </div>
-        <div id="network-graph"></div>
-      </div>
-    </section>
+    
 
   </main>
 </div>
