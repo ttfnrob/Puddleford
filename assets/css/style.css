@@ -50,7 +50,7 @@ ul{list-style:none}
 .nav__link:hover,.nav__link--active{color:var(--gold);background:rgba(212,152,42,0.08)}
 .nav__listen{margin-left:0.5rem;background:var(--gold);color:var(--bg) !important;font-weight:600;padding:0.4rem 1rem;border-radius:20px;font-size:0.88rem;transition:background var(--transition),transform var(--transition)}
 .nav__listen:hover{background:var(--gold-light);color:var(--bg) !important;transform:translateY(-1px)}
-.nav__toggle{display:none;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer;margin-left:auto;padding:0.25rem}
+.nav__toggle{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;margin-left:auto;padding:4px;width:32px;height:32px}.nav__toggle span{display:block;width:24px;height:2px;background:var(--gold);border-radius:2px}
 
 /* HERO */
 .hero{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden;text-align:center}
@@ -286,7 +286,7 @@ ul{list-style:none}
   /* Main nav (index, events) */
   .nav__links{display:none;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:var(--bg-secondary);border-bottom:1px solid var(--border-gold);padding:1rem;gap:0.25rem;z-index:200}
   .nav__links.open{display:flex}
-  .nav__toggle{display:block}
+  .nav__toggle{display:flex}
   .nav__listen{margin-left:0;text-align:center}
 
   /* Site nav (episodes, wiki, players) */
