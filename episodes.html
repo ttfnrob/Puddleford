@@ -114,7 +114,7 @@
       <div data-badges></div>
     </div>
   <div class="footer-copy">
-    2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+    2026 MKTOC, Milton Keynes Theatre of Comedy. All episodes entirely improvised.
   </div>
 </footer>
 
@@ -143,11 +143,9 @@ async function loadTranscriptIndex() {
 
 async function fetchTranscriptText(filePath) {
   try {
-    // filePath is like "data/transcripts/abc123.txt"
     const res = await fetch(filePath + '?v=' + Date.now());
     if (!res.ok) return null;
     const text = await res.text();
-    // Strip the header lines (# Title / # Date)
     return text.replace(/^#.*\n/gm, '').trim();
   } catch { return null; }
 }
@@ -161,7 +159,6 @@ function toggleTranscript(btn, panel, filePath) {
   }
   panel.classList.add('open');
   btn.textContent = 'Hide transcript';
-  // Load if not yet loaded
   if (!panel.dataset.loaded) {
     panel.dataset.loaded = 'true';
     const textEl = panel.querySelector('.transcript-text');
