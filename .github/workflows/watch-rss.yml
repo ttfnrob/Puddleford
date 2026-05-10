@@ -1,0 +1,93 @@
+name: Watch for New Episodes
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  check-rss:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check RSS for new episodes
+        id: check
+        run: |
+          python3 << 'EOF'
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          import os
+          from pathlib import Path
+
+          RSS_URL = "https://anchor.fm/s/10ce1465c/podcast/rss"
+          LAST_SEEN_FILE = Path("data/last_seen.txt")
+
+          # Fetch RSS
+          req = urllib.request.Request(RSS_URL, headers={"User-Agent": "PuddlefordWatcher/1.0"})
+          with urllib.request.urlopen(req, timeout=15) as r:
+              rss = r.read()
+
+          root = ET.fromstring(rss)
+          latest = root.find(".//item")
+          if latest is None:
+              print("No episodes found in feed.")
+              exit(0)
+
+          guid_el = latest.find("guid")
+          title_el = latest.find("title")
+          guid  = guid_el.text.strip()  if guid_el  is not None else ""
+          title = title_el.text.strip() if title_el is not None else "Unknown"
+
+          # Load last seen
+          last_seen = LAST_SEEN_FILE.read_text().strip() if LAST_SEEN_FILE.exists() else ""
+
+          print(f"Latest episode : {title}")
+          print(f"Latest GUID    : {guid}")
+          print(f"Last seen GUID : {last_seen}")
+
+          if guid != last_seen:
+              print(f"NEW EPISODE DETECTED: {title}")
+              # Write new value
+              LAST_SEEN_FILE.parent.mkdir(parents=True, exist_ok=True)
+              LAST_SEEN_FILE.write_text(guid)
+              # Signal to next step
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write(f"new_episode=true\n")
+                  f.write(f"episode_title={title}\n")
+          else:
+              print("No new episodes.")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("new_episode=false\n")
+          EOF
+
+      - name: Commit updated last_seen.txt
+        if: steps.check.outputs.new_episode == 'true'
+        run: |
+          git config user.name "Puddleford Wiki Bot"
+          git config user.email "ttfnrob@gmail.com"
+          git add data/last_seen.txt
+          if ! git diff --staged --quiet; then
+            git commit -m "Update last seen episode [skip ci]"
+            git push
+          fi
+
+      - name: Trigger wiki update
+        if: steps.check.outputs.new_episode == 'true'
+        run: |
+          echo "New episode detected: ${{ steps.check.outputs.episode_title }}"
+          echo "Triggering wiki update workflow..."
+          curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update-wiki.yml/dispatches \
+            -d '{"ref":"main"}'
+          echo "Wiki update triggered."
