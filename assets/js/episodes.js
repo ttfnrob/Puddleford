@@ -66,16 +66,27 @@ function parseRSS(xmlText) {
   return Array.from(doc.querySelectorAll('channel > item')).map(item => {
     const imgEl = item.getElementsByTagNameNS(ITUNES, 'image')[0];
     const thumbnail = imgEl ? (imgEl.getAttribute('href') || imgEl.textContent.trim()) : '';
+    const pubDate = tag(item, 'pubDate');
+
+    // Infer season from publication year if not tagged in feed
+    // Season 1 = 2025, Season 2 = 2026, and so on
+    let season = ns(item, 'season');
+    if (!season && pubDate) {
+      const year = new Date(pubDate).getFullYear();
+      if (year === 2025) season = '1';
+      else if (year === 2026) season = '2';
+      else if (year >= 2027) season = String(year - 2024);
+    }
 
     return {
       title:           tag(item, 'title'),
       link:            tag(item, 'link'),
       guid:            tag(item, 'guid'),
-      pubDate:         tag(item, 'pubDate'),
+      pubDate,
       description:     tag(item, 'description'),
       thumbnail,
       itunes_duration: ns(item, 'duration'),
-      itunes_season:   ns(item, 'season'),
+      itunes_season:   season,
       itunes_episode:  ns(item, 'episode'),
     };
   });
