@@ -1,6 +1,11 @@
 /* ============================================================
    Puddleford — Platform badges
-   Consistent 160x44px pill badges, brand colours, inline SVG icons
+   Official badge assets used where available:
+     - Apple Podcasts: official badge from tools.applemediaservices.com
+     - Pocket Casts: official badge from pocketcasts.com/pocketcasts_badges.zip
+     - Spotify: branded pill (no official downloadable badge published)
+     - RSS: standard RSS orange
+   All badges normalised to 40px height.
    ============================================================ */
 
 const BADGES_HTML = `
@@ -20,26 +25,20 @@ const BADGES_HTML = `
 
   <a href="https://podcasts.apple.com/podcast/puddleford/id1799546935"
      target="_blank" rel="noopener noreferrer"
-     class="pbadge pbadge--apple"
+     class="pbadge pbadge--img"
      aria-label="Listen on Apple Podcasts">
-    <span class="pbadge__icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12.003 0C5.376 0 0 5.376 0 12.003 0 18.627 5.376 24 12.003 24 18.627 24 24 18.627 24 12.003 24 5.376 18.627 0 12.003 0zm.194 4.357c2.585 0 4.863.98 6.61 2.59l-1.555 1.556a5.96 5.96 0 00-5.055-1.908 6.051 6.051 0 00-5.33 5.33 5.96 5.96 0 001.907 5.055L7.218 18.536A8.257 8.257 0 013.75 12.2c0-4.543 3.688-7.843 8.447-7.843zm.006 3.02c2.875 0 5.208 2.333 5.208 5.208a5.2 5.2 0 01-1.765 3.91l-1.556-1.556a3.013 3.013 0 00.934-2.187 3.02 3.02 0 00-3.02-3.02 3.02 3.02 0 00-2.186.934L8.262 9.11a5.2 5.2 0 013.94-1.733zm.006 3.02c1.2 0 2.182.98 2.182 2.181 0 .72-.355 1.362-.899 1.757l1.334 3.862a.327.327 0 01-.31.44h-4.614a.327.327 0 01-.31-.44l1.335-3.862a2.177 2.177 0 01-.9-1.757c0-1.2.981-2.181 2.182-2.181z"/>
-      </svg>
-    </span>
-    <span class="pbadge__label">Apple Podcasts</span>
+    <img src="assets/img/badges/apple-podcasts.svg"
+         alt="Listen on Apple Podcasts"
+         height="40" />
   </a>
 
   <a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b"
      target="_blank" rel="noopener noreferrer"
-     class="pbadge pbadge--pocketcasts"
+     class="pbadge pbadge--img"
      aria-label="Listen on Pocket Casts">
-    <span class="pbadge__icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 4.129c4.345 0 7.871 3.526 7.871 7.871 0 4.344-3.526 7.871-7.871 7.871A7.872 7.872 0 014.13 12c0-4.345 3.525-7.871 7.87-7.871zm0 2.75A5.125 5.125 0 006.88 12a5.125 5.125 0 005.12 5.121 5.125 5.125 0 005.121-5.12A5.125 5.125 0 0012 6.879zm0 2.377a2.748 2.748 0 012.744 2.744A2.748 2.748 0 0112 14.744 2.748 2.748 0 019.256 12 2.748 2.748 0 0112 9.256zm3.892-1.635a.87.87 0 110 1.739.87.87 0 010-1.739z"/>
-      </svg>
-    </span>
-    <span class="pbadge__label">Pocket Casts</span>
+    <img src="assets/img/badges/pocketcasts-small-dark.svg"
+         alt="Listen on Pocket Casts"
+         height="40" />
   </a>
 
   <a href="https://anchor.fm/s/10ce1465c/podcast/rss"
