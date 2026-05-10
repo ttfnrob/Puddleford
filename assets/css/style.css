@@ -239,3 +239,86 @@ ul{list-style:none}
   .episode-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
   .players-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
 }
+
+/* -- Platform Badges ---------------------------------------- */
+.platform-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius);
+  font-size: .88rem;
+  font-family: 'Source Serif 4', serif;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+  white-space: nowrap;
+  height: 42px;
+}
+.platform-badge:hover { opacity: .85; transform: translateY(-1px); }
+.platform-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
+.platform-badge img { height: 100%; width: auto; display: block; }
+
+/* Spotify - black bg, green icon */
+.platform-badge--spotify {
+  background: #191414;
+  color: #fff;
+  border: 1px solid #191414;
+}
+.platform-badge--spotify svg { fill: #1DB954; }
+
+/* Apple - black bg, white badge (badge image handles its own styling) */
+.platform-badge--apple {
+  background: transparent;
+  padding: 0;
+  border: none;
+  height: 42px;
+}
+
+/* Pocket Casts - orange */
+.platform-badge--pocketcasts {
+  background: #F43E37;
+  color: #fff;
+  border: 1px solid #F43E37;
+}
+.platform-badge--pocketcasts svg { fill: #fff; }
+
+/* RSS - warm orange */
+.platform-badge--rss {
+  background: #f26522;
+  color: #fff;
+  border: 1px solid #f26522;
+}
+.platform-badge--rss svg { fill: #fff; }
+
+/* Hero listen buttons - use platform-badges */
+.hero .platform-badges { justify-content: center; }
+
+/* Footer platform list - compact text only */
+.footer-platforms .platform-badges {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .3rem;
+}
+.footer-platforms .platform-badge {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: .82rem;
+  height: auto;
+}
+.footer-platforms .platform-badge:hover { color: var(--gold); opacity: 1; transform: none; }
+.footer-platforms .platform-badge svg { width: 14px; height: 14px; fill: currentColor; }
+.footer-platforms .platform-badge img { display: none; }
+.footer-platforms .platform-badge--apple span { display: inline; }
+
+@media (max-width: 768px) {
+  .platform-badges { justify-content: center; }
+  .footer-platforms .platform-badges { align-items: center; }
+}
