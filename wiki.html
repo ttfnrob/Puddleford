@@ -1,367 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>The Puddleford Wiki - Puddleford</title>
- <meta name="description" content="A record of Puddleford's history, characters, locations and curiosities across time. The unofficial wiki of the improvised audio drama.">
-
- <!-- Open Graph -->
- <meta property="og:title" content="The Puddleford Wiki">
- <meta property="og:description" content="A record of the town's history, characters, and curiosities. From 1695 to the far future.">
- <meta property="og:image" content="assets/img/cover-with-title-1.jpg">
- <meta property="og:url" content="https://ttfnrob.github.io/Puddleford/wiki.html">
- <meta property="og:type" content="website">
- <meta name="twitter:card" content="summary_large_image">
-
- <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Puddleford Wiki</title>
+  <meta name="description" content="A record of the town's history, characters, and curiosities. The Puddleford Wiki." />
+  <meta property="og:title"       content="The Puddleford Wiki" />
+  <meta property="og:description" content="Characters, locations, and historical periods from the improvised world of Puddleford." />
+  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
- <!-- ── Navigation ── -->
- <nav class="nav" role="navigation" aria-label="Main navigation">
- <div class="container nav__inner">
- <a href="index.html" class="nav__logo"><span></span> Puddleford</a>
- <button class="nav__toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')"></button>
- <ul class="nav__links">
- <li><a href="episodes.html" class="nav__link">Episodes</a></li>
- <li><a href="wiki.html" class="nav__link nav__link--active">Wiki</a></li>
- <li><a href="players.html" class="nav__link">The Players</a></li>
- <li><a href="events.html" class="nav__link">Events</a></li>
- <li>
- <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd"
- target="_blank" rel="noopener"
- class="nav__link nav__listen">▶ Listen</a>
- </li>
- </ul>
- </div>
- </nav>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Puddleford</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="episodes.html">Episodes</a></li>
+      <li><a href="wiki.html" class="active">Wiki</a></li>
+      <li><a href="players.html">The Players</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen</a></li>
+    </ul>
+  </div>
+</nav>
 
- <!-- ── Page Header ── -->
- <header class="page-header">
- <div class="container page-header__inner">
- <h1 class="page-header__title">The Puddleford Wiki</h1>
- <p class="page-header__sub">A record of the town's history, characters, and curiosities.</p>
- </div>
- </header>
+<div class="page-header">
+  <h1>The Puddleford Wiki</h1>
+  <p>A record of the town's history, characters, and curiosities.</p>
+</div>
 
- <!-- ── Main Content ── -->
- <main class="section" id="main-content">
- <div class="container">
+<div class="wiki-layout">
 
- <div class="wiki-layout">
+  <aside class="wiki-sidebar">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#timeline">Through the Ages</a></li>
+      <li><a href="#locations">Recurring Locations</a></li>
+      <li><a href="#characters">Characters</a></li>
+    </ul>
+    <p id="wiki-updated" style="margin-top:2rem; font-size:.75rem; color:var(--border-gold);"></p>
+  </aside>
 
- <!-- ── Sidebar ── -->
- <aside class="wiki-sidebar" aria-label="Wiki navigation">
- <h3>Contents</h3>
- <ul>
- <li><a href="#timeline">⏳ Timeline</a></li>
- <li><a href="#locations"> Locations</a></li>
- <li><a href="#characters"> Characters</a></li>
- </ul>
+  <main>
 
- <hr class="divider" style="margin: 1rem 0;">
+    <div class="wiki-note">
+      The wiki grows with each episode. All details are extracted directly from episode transcripts
+      and are entirely improvised by the Puddleford Players. Details may be contradicted by future episodes.
+      That is the nature of Puddleford.
+    </div>
 
- <h3>Listen</h3>
- <ul>
- <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener"> Spotify</a></li>
- <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener">️ Apple Podcasts</a></li>
- <li><a href="episodes.html"> All Episodes</a></li>
- </ul>
- </aside>
+    <!-- Timeline -->
+    <div class="wiki-section" id="timeline">
+      <h2>Through the Ages</h2>
+      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+        Puddleford has existed across many periods of history and beyond. Here are the eras visited so far.
+      </p>
+      <div class="timeline" id="wiki-timeline">
+        <div class="loading-state">Loading timeline...</div>
+      </div>
+    </div>
 
- <!-- ── Wiki Main ── -->
- <div class="wiki-content">
+    <!-- Locations -->
+    <div class="wiki-section" id="locations">
+      <h2>Recurring Locations</h2>
+      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+        Certain places in Puddleford have endured across the centuries.
+      </p>
+      <div class="location-grid" id="wiki-locations">
+        <div class="loading-state">Loading locations...</div>
+      </div>
+    </div>
 
- <div class="wiki-note">
- <strong>Note:</strong> The wiki grows with each episode. All details were improvised
- on the spot by the Puddleford Players - so some history may be contradictory,
- impossible, or both. That's Puddleford for you.
- </div>
+    <!-- Characters -->
+    <div class="wiki-section" id="characters">
+      <h2>Characters</h2>
+      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+        Puddleford has been home to many characters across the centuries.
+      </p>
+      <div class="character-grid" id="wiki-characters">
+        <div class="loading-state">Loading characters...</div>
+      </div>
+    </div>
 
- <!-- Timeline -->
- <section class="wiki-section" id="timeline" aria-labelledby="timeline-heading">
- <h2 class="wiki-section__title" id="timeline-heading">⏳ Historical Timeline</h2>
- <p style="color:var(--text-muted); margin-bottom:1.5rem; font-style:italic;">
- Puddleford exists across time. The same town, different eras - always surprising.
- </p>
+  </main>
+</div>
 
- <div class="timeline">
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Puddleford</a>
+      <p>A Town with a Tale</p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="players.html">The Players</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+      </ul>
+    </div>
+    <div class="footer-platforms">
+      <p>Listen on</p>
+      <ul>
+        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
+        <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
+        <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
+        <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">
+    2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+  </div>
+</footer>
 
- <div class="timeline-item">
- <div class="timeline-item__era">1695</div>
- <div class="timeline-item__episode">"Captain Breadbeard"</div>
- <div class="timeline-item__desc">
- Pirates descend on Puddleford. Captain Breadbeard and his crew terrorise the
- townsfolk, though quite what they hoped to plunder from a small English village
- remains a matter of historical debate.
- </div>
- </div>
+<script>
+async function loadWiki() {
+  let data;
+  try {
+    const res = await fetch('data/wiki.json?v=' + Date.now());
+    data = await res.json();
+  } catch(e) {
+    document.querySelectorAll('.loading-state').forEach(el => {
+      el.textContent = 'Could not load wiki data.';
+    });
+    return;
+  }
 
- <div class="timeline-item">
- <div class="timeline-item__era">1790s</div>
- <div class="timeline-item__episode">Early Series Episodes</div>
- <div class="timeline-item__desc">
- The Georgian era visits to Puddleford. Corsets, candlelight and considerable scandal.
- </div>
- </div>
+  // Updated date
+  if (data._meta?.generated) {
+    const el = document.getElementById('wiki-updated');
+    if (el) el.textContent = 'Last updated: ' + data._meta.generated;
+  }
 
- <div class="timeline-item">
- <div class="timeline-item__era">1830s</div>
- <div class="timeline-item__episode">"The Hunchback of Puddleford"</div>
- <div class="timeline-item__desc">
- A Victorian-era tale loosely inspired by a famous novel. Puddleford's version
- has its own distinct charm and architectural peculiarities.
- </div>
- </div>
+  // Timeline
+  const timelineEl = document.getElementById('wiki-timeline');
+  if (data.timeline?.length) {
+    timelineEl.innerHTML = data.timeline.map(t => `
+      <div class="timeline-item">
+        <div class="timeline-era">${t.era}</div>
+        <div class="timeline-ep">${t.episode}</div>
+        ${t.description ? `<div class="timeline-desc">${t.description}</div>` : ''}
+      </div>
+    `).join('');
+  } else {
+    timelineEl.innerHTML = '<div class="loading-state">No timeline entries yet.</div>';
+  }
 
- <div class="timeline-item">
- <div class="timeline-item__era">1930s</div>
- <div class="timeline-item__episode">Early Series Episodes</div>
- <div class="timeline-item__desc">
- Puddleford between the wars. Tweed, tension, and the ever-present Dog and Duck.
- </div>
- </div>
+  // Locations
+  const locEl = document.getElementById('wiki-locations');
+  if (data.locations?.length) {
+    locEl.innerHTML = data.locations.map(l => `
+      <div class="loc-card">
+        <h4>${l.name}</h4>
+        <p>${l.description}</p>
+        ${l.episodes?.length ? `<p style="font-size:.75rem;color:var(--border-gold);margin-top:.5rem;">Seen in: ${l.episodes.join(', ')}</p>` : ''}
+      </div>
+    `).join('');
+  } else {
+    locEl.innerHTML = '<div class="loading-state">No locations recorded yet.</div>';
+  }
 
- <div class="timeline-item">
- <div class="timeline-item__era">1970s</div>
- <div class="timeline-item__episode">"Faster and Furious"</div>
- <div class="timeline-item__desc">
- High-octane thrills arrive in Puddleford. Whether the cobbled streets were
- entirely suitable for the events that followed is open to question.
- </div>
- </div>
+  // Characters
+  const charEl = document.getElementById('wiki-characters');
+  if (data.characters?.length) {
+    charEl.innerHTML = data.characters.map(c => `
+      <div class="char-card">
+        <h4>${c.name}</h4>
+        <p>${c.description}</p>
+        ${c.episodes?.length ? `<div class="char-played">Appears in: ${c.episodes.join(', ')}</div>` : ''}
+      </div>
+    `).join('') + `
+      <div class="char-card" style="border-style:dashed;opacity:.6;">
+        <h4>More to come...</h4>
+        <p>New characters improvised each week. Wiki updated automatically after each episode.</p>
+      </div>
+    `;
+  } else {
+    charEl.innerHTML = '<div class="loading-state">No characters recorded yet.</div>';
+  }
+}
 
- <div class="timeline-item">
- <div class="timeline-item__era">1983</div>
- <div class="timeline-item__episode">A Very Specific Year</div>
- <div class="timeline-item__desc">
- Something specific happened in 1983. The Players were very clear about the year.
- The details remain classified.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">1990s</div>
- <div class="timeline-item__episode">"The Pandora Strain"</div>
- <div class="timeline-item__desc">
- Something was released in Puddleford that perhaps should not have been.
- The nineties were a complicated time.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">2000s</div>
- <div class="timeline-item__episode">"Pressed for Love"</div>
- <div class="timeline-item__desc">
- Romance in the new millennium. Puddleford's complicated relationship
- with modern technology and matters of the heart.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">Present Day</div>
- <div class="timeline-item__episode">"The Eye of Puddleford"</div>
- <div class="timeline-item__desc">
- Puddleford today. Some things have changed. The Dog and Duck has not.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">2180s</div>
- <div class="timeline-item__episode">"Where No Duck Has Gone Before"</div>
- <div class="timeline-item__desc">
- The far future. Puddleford reaches for the stars - or the stars come
- to Puddleford, which given the UFO situation may not be unprecedented.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">Puddlefordia</div>
- <div class="timeline-item__episode">Fantasy Realm</div>
- <div class="timeline-item__desc">
- A parallel fantasy realm version of Puddleford, where the town's quirks
- and characters are refracted through an entirely magical lens.
- Dragons. Probably.
- </div>
- </div>
-
- <div class="timeline-item">
- <div class="timeline-item__era">The Wild West</div>
- <div class="timeline-item__episode">"New Puddleford"</div>
- <div class="timeline-item__desc">
- The frontier. Someone took Puddleford west. The cobblestones did not
- survive the journey but the spirit - and apparently the pub - did.
- </div>
- </div>
-
- </div>
- </section>
-
- <!-- Locations -->
- <section class="wiki-section" id="locations" aria-labelledby="locations-heading">
- <h2 class="wiki-section__title" id="locations-heading"> Recurring Locations</h2>
- <p style="color:var(--text-muted); margin-bottom:1.5rem; font-style:italic;">
- Some places in Puddleford endure across centuries. Whether by magic, stubbornness,
- or an unusually robust planning permission, they persist.
- </p>
-
- <div class="locations-grid">
-
- <div class="location-card">
- <span class="location-card__icon"></span>
- <div class="location-card__name">The Dog and Duck</div>
- <div class="location-card__desc">
- The heart of Puddleford across every era. The ale changes.
- The clientele changes. The inexplicable back room does not.
- If you need to find someone in Puddleford, they are probably here.
- </div>
- </div>
-
- <div class="location-card">
- <span class="location-card__icon"></span>
- <div class="location-card__name">Puddleford Bridge</div>
- <div class="location-card__desc">
- The cobbled bridge over the river. Appears in nearly every episode.
- Has witnessed duels, declarations of love, suspicious exchanges,
- and at least one incident involving a cart of fish.
- </div>
- </div>
-
- <div class="location-card">
- <span class="location-card__icon">️</span>
- <div class="location-card__name">Puddleford Manor</div>
- <div class="location-card__desc">
- The stately home on the hill overlooking the town.
- Ownership has changed many times. Its reputation for strange
- events has not.
- </div>
- </div>
-
- <div class="location-card">
- <span class="location-card__icon"></span>
- <div class="location-card__name">Puddleford General Hospital</div>
- <div class="location-card__desc">
- The irrational health service. Medical procedures of questionable
- logic, staff of uncertain qualification, and a waiting room
- that seems to exist outside of normal time.
- </div>
- </div>
-
- </div>
- </section>
-
- <!-- Characters -->
- <section class="wiki-section" id="characters" aria-labelledby="characters-heading">
- <h2 class="wiki-section__title" id="characters-heading"> Characters</h2>
- <p style="color:var(--text-muted); margin-bottom:1.5rem; font-style:italic;">
- All characters are played by the Puddleford Players and conjured entirely in the moment.
- Some return. Some don't. All are residents of Puddleford, for better or worse.
- </p>
-
- <div class="characters-grid">
-
- <div class="character-card">
- <div class="character-card__name">Captain Breadbeard</div>
- <div class="character-card__era">1695 - "Captain Breadbeard"</div>
- <div class="character-card__note">Fearsome pirate captain with a bread-based beard. Visited Puddleford with unclear plundering intentions.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">The Hunchback</div>
- <div class="character-card__era">1830s - "The Hunchback of Puddleford"</div>
- <div class="character-card__note">Puddleford's own gothic figure. The hunch is of disputed origin.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">The Eye</div>
- <div class="character-card__era">Present Day - "The Eye of Puddleford"</div>
- <div class="character-card__note">Something is watching Puddleford. Something has always been watching Puddleford.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">The Barkeep</div>
- <div class="character-card__era">All Eras - The Dog and Duck</div>
- <div class="character-card__note">The landlord of the Dog and Duck. Possibly immortal. Definitely knows more than they let on.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">Various Patients</div>
- <div class="character-card__era">Multiple Eras - Puddleford General</div>
- <div class="character-card__note">Arrive with ailments, leave with different ailments. The hospital's cure rate is a matter of some local controversy.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">The Frontier Folk</div>
- <div class="character-card__era">Wild West - "New Puddleford"</div>
- <div class="character-card__note">Settlers who brought Puddleford's particular sensibility to the American frontier. The results were mixed.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">Future Residents</div>
- <div class="character-card__era">2180s - "Where No Duck Has Gone Before"</div>
- <div class="character-card__note">Citizens of Puddleford in the far future. Still arguing about the same things, but now in space.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- <div class="character-card">
- <div class="character-card__name">The Manor Residents</div>
- <div class="character-card__era">Various - Puddleford Manor</div>
- <div class="character-card__note">Whoever currently owns the Manor. The house changes them. Or perhaps they were always like that.</div>
- <div class="character-card__player">Played by the Puddleford Players</div>
- </div>
-
- </div>
- </section>
-
- </div><!-- /wiki-content -->
- </div><!-- /wiki-layout -->
-
- </div>
- </main>
-
- <!-- ── Footer ── -->
- <footer class="footer" role="contentinfo">
- <div class="container footer__inner">
- <div class="footer__brand">
- <a href="index.html" class="nav__logo"><span></span> Puddleford</a>
- <p>A fully improvised episodic audio drama about a fictional English town.</p>
- <p style="margin-top:0.5rem;">
- Made by the <a href="players.html">Puddleford Players</a> at
- <a href="https://www.mktoc.co.uk" target="_blank" rel="noopener">MKTOC</a>.
- </p>
- </div>
- <nav class="footer__nav" aria-label="Footer navigation">
- <h4>Pages</h4>
- <ul>
- <li><a href="index.html">Home</a></li>
- <li><a href="episodes.html">Episodes</a></li>
- <li><a href="wiki.html">Wiki</a></li>
- <li><a href="players.html">The Players</a></li>
- <li><a href="events.html">Events</a></li>
- </ul>
- </nav>
- <div class="footer__platforms">
- <h4>Listen</h4>
- <ul>
- <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Spotify</a></li>
- <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener">Apple Podcasts</a></li>
- <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener">Pocket Casts</a></li>
- <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank" rel="noopener">Podcastle</a></li>
- <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank" rel="noopener">MKTOC</a></li>
- </ul>
- </div>
- </div>
- <div class="container footer__bottom">
- <p>&copy; 2025 MKTOC - Milton Keynes Theatre of Comedy. All rights reserved.</p>
- </div>
- </footer>
-
+loadWiki();
+</script>
 </body>
 </html>
