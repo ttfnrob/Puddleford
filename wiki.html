@@ -31,6 +31,7 @@
 <div class="page-header">
   <h1>The Puddleford Wiki</h1>
   <p>A record of the town's history, characters, and curiosities.</p>
+  <span class="page-header__rule" aria-hidden="true"></span>
 </div>
 
 <div class="wiki-layout">
@@ -38,60 +39,88 @@
   <aside class="wiki-sidebar">
     <h3>Contents</h3>
     <ul>
-      <li><a href="#timeline">Through the Ages</a></li>
-      <li><a href="#locations">Recurring Locations</a></li>
-      <li><a href="#characters">Characters</a></li>
+      <li><a href="#timeline" class="wiki-sidebar__link wiki-sidebar__link--active">Through the Ages</a></li>
+      <li><a href="#locations" class="wiki-sidebar__link">Recurring Locations</a></li>
+      <li><a href="#characters" class="wiki-sidebar__link">Characters</a></li>
     </ul>
-    <p id="wiki-updated" style="margin-top:2rem; font-size:.75rem; color:var(--border-gold);"></p>
+    <p id="wiki-updated" class="wiki-sidebar__updated"></p>
   </aside>
 
-  <!-- Mobile wiki nav strip (replaces sidebar on small screens) -->
+  <!-- Mobile wiki nav strip -->
   <nav class="wiki-mobile-nav" aria-label="Wiki sections">
-    <a href="#timeline">Through the Ages</a>
-    <a href="#locations">Locations</a>
-    <a href="#characters">Characters</a>
+    <a href="#timeline" class="wiki-mobile-nav__link">Through the Ages</a>
+    <a href="#locations" class="wiki-mobile-nav__link">Locations</a>
+    <a href="#characters" class="wiki-mobile-nav__link">Characters</a>
   </nav>
 
-  <main>
+  <main class="wiki-main">
 
-    <div class="wiki-note">
+    <blockquote class="wiki-note">
       The wiki grows with each episode. All details are extracted directly from episode transcripts
       and are entirely improvised by the Puddleford Players. Details may be contradicted by future episodes.
       That is the nature of Puddleford.
-    </div>
+    </blockquote>
 
     <!-- Timeline -->
-    <div class="wiki-section" id="timeline">
-      <h2>Through the Ages</h2>
-      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+    <section class="wiki-section" id="timeline">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">Through the Ages</h2>
+      </div>
+      <p class="wiki-section__intro">
         Puddleford has existed across many periods of history and beyond. Here are the eras visited so far.
       </p>
-      <div class="timeline" id="wiki-timeline">
-        <div class="loading-state">Loading timeline...</div>
+      <div class="wiki-timeline" id="wiki-timeline">
+        <div class="wiki-timeline__skeleton" aria-hidden="true">
+          <div class="wiki-timeline__skeleton-item"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+          <div class="wiki-timeline__skeleton-item"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+          <div class="wiki-timeline__skeleton-item"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+          <div class="wiki-timeline__skeleton-item"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+          <div class="wiki-timeline__skeleton-item"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Locations -->
-    <div class="wiki-section" id="locations">
-      <h2>Recurring Locations</h2>
-      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+    <section class="wiki-section" id="locations">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">Recurring Locations</h2>
+      </div>
+      <p class="wiki-section__intro">
         Certain places in Puddleford have endured across the centuries.
       </p>
-      <div class="location-grid" id="wiki-locations">
-        <div class="loading-state">Loading locations...</div>
+      <input type="text" class="wiki-search" id="locations-search" placeholder="Search locations..." autocomplete="off" />
+      <div class="wiki-card-grid" id="wiki-locations">
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
       </div>
-    </div>
+    </section>
 
     <!-- Characters -->
-    <div class="wiki-section" id="characters">
-      <h2>Characters</h2>
-      <p style="color:var(--text-muted); margin-bottom:1.5rem; font-size:.9rem;">
+    <section class="wiki-section" id="characters">
+      <div class="wiki-section__header">
+        <h2 class="wiki-section__title">Characters</h2>
+      </div>
+      <p class="wiki-section__intro">
         Puddleford has been home to many characters across the centuries.
       </p>
-      <div class="character-grid" id="wiki-characters">
-        <div class="loading-state">Loading characters...</div>
+      <input type="text" class="wiki-search" id="characters-search" placeholder="Search characters..." autocomplete="off" />
+      <div class="wiki-card-grid" id="wiki-characters">
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
+        <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div></div>
       </div>
-    </div>
+    </section>
 
   </main>
 </div>
@@ -128,8 +157,8 @@ async function loadWiki() {
     const res = await fetch('data/wiki.json?v=' + Date.now());
     data = await res.json();
   } catch(e) {
-    document.querySelectorAll('.loading-state').forEach(el => {
-      el.textContent = 'Could not load wiki data.';
+    document.querySelectorAll('.wiki-card-grid, .wiki-timeline').forEach(el => {
+      el.innerHTML = '<div class="wiki-empty-state">Could not load wiki data.</div>';
     });
     return;
   }
@@ -143,52 +172,108 @@ async function loadWiki() {
   // Timeline
   const timelineEl = document.getElementById('wiki-timeline');
   if (data.timeline?.length) {
-    timelineEl.innerHTML = data.timeline.map(t => `
-      <div class="timeline-item">
-        <div class="timeline-era">${t.era}</div>
-        <div class="timeline-ep">${t.episode}</div>
-        ${t.description ? `<div class="timeline-desc">${t.description}</div>` : ''}
+    timelineEl.innerHTML = '<div class="wiki-timeline__line">' + data.timeline.map(t => `
+      <div class="wiki-timeline__item">
+        <div class="wiki-timeline__dot"></div>
+        <div class="wiki-timeline__content">
+          <div class="wiki-timeline__era">${t.era}</div>
+          <div class="wiki-timeline__episode">${t.episode}</div>
+          ${t.description ? `<div class="wiki-timeline__desc">${t.description}</div>` : ''}
+        </div>
       </div>
-    `).join('');
+    `).join('') + '</div>';
   } else {
-    timelineEl.innerHTML = '<div class="loading-state">No timeline entries yet.</div>';
+    timelineEl.innerHTML = '<div class="wiki-empty-state">No timeline entries yet.</div>';
   }
 
   // Locations
   const locEl = document.getElementById('wiki-locations');
   if (data.locations?.length) {
     locEl.innerHTML = data.locations.map(l => `
-      <div class="loc-card">
-        <h4>${l.name}</h4>
-        <p>${l.description}</p>
-        ${l.episodes?.length ? `<p style="font-size:.75rem;color:var(--border-gold);margin-top:.5rem;">Seen in: ${l.episodes.join(', ')}</p>` : ''}
+      <div class="wiki-card" data-name="${l.name.toLowerCase()}">
+        <h4 class="wiki-card__name">${l.name}</h4>
+        <p class="wiki-card__desc">${l.description}</p>
+        ${l.episodes?.length ? `<p class="wiki-card__episodes">Seen in: ${l.episodes.join(', ')}</p>` : ''}
       </div>
     `).join('');
   } else {
-    locEl.innerHTML = '<div class="loading-state">No locations recorded yet.</div>';
+    locEl.innerHTML = '<div class="wiki-empty-state">No locations recorded yet.</div>';
   }
 
   // Characters
   const charEl = document.getElementById('wiki-characters');
   if (data.characters?.length) {
     charEl.innerHTML = data.characters.map(c => `
-      <div class="char-card">
-        <h4>${c.name}</h4>
-        <p>${c.description}</p>
-        ${c.episodes?.length ? `<div class="char-played">Appears in: ${c.episodes.join(', ')}</div>` : ''}
+      <div class="wiki-card" data-name="${c.name.toLowerCase()}">
+        <h4 class="wiki-card__name">${c.name}</h4>
+        <p class="wiki-card__desc">${c.description}</p>
+        ${c.episodes?.length ? `<p class="wiki-card__episodes wiki-card__episodes--clamp">Appears in: ${c.episodes.join(', ')}</p>` : ''}
       </div>
-    `).join('') + `
-      <div class="char-card" style="border-style:dashed;opacity:.6;">
-        <h4>More to come</h4>
-        <p>New characters improvised each week. The wiki is updated automatically after each episode.</p>
-      </div>
-    `;
+    `).join('');
   } else {
-    charEl.innerHTML = '<div class="loading-state">No characters recorded yet.</div>';
+    charEl.innerHTML = '<div class="wiki-empty-state">No characters recorded yet.</div>';
   }
+
+  // Wire up search inputs
+  setupSearch('locations-search', 'wiki-locations');
+  setupSearch('characters-search', 'wiki-characters');
+}
+
+function setupSearch(inputId, gridId) {
+  const input = document.getElementById(inputId);
+  const grid = document.getElementById(gridId);
+  if (!input || !grid) return;
+
+  input.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+    const cards = grid.querySelectorAll('.wiki-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name') || '';
+      const match = !query || name.includes(query);
+      card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+
+    // Show/hide empty state
+    let emptyMsg = grid.querySelector('.wiki-search-empty');
+    if (visibleCount === 0 && query) {
+      if (!emptyMsg) {
+        emptyMsg = document.createElement('div');
+        emptyMsg.className = 'wiki-search-empty';
+        grid.appendChild(emptyMsg);
+      }
+      emptyMsg.textContent = 'No results for \u201c' + this.value + '\u201d';
+      emptyMsg.style.display = '';
+    } else if (emptyMsg) {
+      emptyMsg.style.display = 'none';
+    }
+  });
+}
+
+// Sidebar active link tracking
+function setupSidebarTracking() {
+  const sections = document.querySelectorAll('.wiki-section');
+  const sidebarLinks = document.querySelectorAll('.wiki-sidebar__link');
+  if (!sections.length || !sidebarLinks.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        sidebarLinks.forEach(link => {
+          link.classList.toggle('wiki-sidebar__link--active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+
+  sections.forEach(section => observer.observe(section));
 }
 
 loadWiki();
+setupSidebarTracking();
 </script>
 <script src="assets/js/badges.js"></script>
 </body>
