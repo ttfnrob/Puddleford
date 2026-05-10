@@ -147,13 +147,13 @@ function renderEpisodes(items, gridEl, latestEl) {
     const desc   = stripHtml(ep.description).slice(0, 300);
     const season = ep.itunes_season;
     latestEl.innerHTML = `
-      ${ep.thumbnail ? `<img src="${ep.thumbnail}" alt="" loading="lazy">` : ''}
-      <div>
-        ${season ? `<span class="badge">Season ${season}</span>` : ''}
-        <h3>${ep.title}</h3>
-        <div class="ep-meta">${formatDate(ep.pubDate)}${ep.itunes_duration ? ' &middot; ' + ep.itunes_duration : ''}</div>
-        <p>${desc}</p>
-        <a href="${ep.link || '#'}" target="_blank" rel="noopener" class="btn btn-primary">Listen now</a>
+      ${ep.thumbnail ? `<img class="latest-episode__img" src="${ep.thumbnail}" alt="" loading="lazy">` : ''}
+      <div class="latest-episode__body">
+        <div class="latest-episode__label">${season ? 'Season ' + season + ' &middot; ' : ''}Latest Episode</div>
+        <h3 class="latest-episode__title">${ep.title}</h3>
+        <div class="latest-episode__meta">${formatDate(ep.pubDate)}${ep.itunes_duration ? ' &middot; ' + ep.itunes_duration : ''}</div>
+        <p class="latest-episode__desc">${desc}</p>
+        <a href="${ep.link || '#'}" target="_blank" rel="noopener" class="btn btn--gold">Listen now</a>
       </div>`;
   }
 
