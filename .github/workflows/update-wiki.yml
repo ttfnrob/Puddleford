@@ -1,0 +1,43 @@
+name: Update Puddleford Wiki
+
+on:
+  schedule:
+    # Run every Monday at 08:00 UTC (day after typical Friday release)
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions UI
+
+permissions:
+  contents: write
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run wiki updater
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 scripts/update_wiki.py
+
+      - name: Commit updated wiki data
+        run: |
+          git config user.name "Puddleford Wiki Bot"
+          git config user.email "ttfnrob@gmail.com"
+          git add data/wiki.json data/transcripts/
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-update wiki from episode transcripts [skip ci]"
+            git push
+          fi
