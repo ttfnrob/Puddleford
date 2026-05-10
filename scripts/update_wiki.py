@@ -125,6 +125,28 @@ def download_mp3(url, dest_path):
         print(f"  Download failed: {e}", file=sys.stderr)
         return False
 
+def compress_audio(src_path, dest_path):
+    """Compress audio to 64kbps mono MP3 using ffmpeg. Returns True on success."""
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-y", "-i", str(src_path),
+             "-ac", "1",          # mono
+             "-ar", "16000",      # 16kHz (sufficient for speech)
+             "-b:a", "64k",       # 64kbps
+             str(dest_path)],
+            capture_output=True, timeout=120
+        )
+        if result.returncode != 0:
+            print(f"  ffmpeg error: {result.stderr.decode()[:200]}", file=sys.stderr)
+            return False
+        size_mb = dest_path.stat().st_size / 1024 / 1024
+        print(f"  Compressed to {size_mb:.1f}MB")
+        return True
+    except Exception as e:
+        print(f"  Compression failed: {e}", file=sys.stderr)
+        return False
+
 def transcribe_mp3(mp3_path):
     """Send MP3 to OpenAI Whisper API. Returns transcript text or None."""
     import urllib.request
@@ -328,6 +350,13 @@ def main():
                     continue
                 if not download_mp3(ep["mp3_url"], mp3_path):
                     continue
+                # Compress to under 25MB before sending to Whisper (API limit)
+                compressed_path = Path(tempfile.mktemp(suffix=".mp3"))
+                if not compress_audio(mp3_path, compressed_path):
+                    print(f"  Compression failed, skipping.")
+                    continue
+                mp3_path.unlink()  # free space
+                mp3_path = compressed_path
                 print(f"  Transcribing with Whisper...")
                 transcript = transcribe_mp3(mp3_path)
                 if not transcript:
