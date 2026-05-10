@@ -5,7 +5,7 @@
    ============================================================ */
 
 const RSS_URL  = 'https://anchor.fm/s/10ce1465c/podcast/rss';
-const CACHE_KEY = 'puddleford_episodes_v2';
+const CACHE_KEY = 'puddleford_episodes_v3';
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
 /* ── Cache ─────────────────────────────────────────────────── */
