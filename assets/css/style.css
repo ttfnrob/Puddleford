@@ -569,3 +569,56 @@ ul{list-style:none}
 }
 .network-legend__dot--character { background: #d4982a; }
 .network-legend__dot--location  { background: #6b9e6b; }
+
+/* Network fullscreen */
+.network-fullscreen-btn {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  background: rgba(26,18,10,.85);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius);
+  color: var(--gold);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 10;
+  transition: background .2s, border-color .2s;
+  backdrop-filter: blur(4px);
+}
+.network-fullscreen-btn:hover { background: rgba(212,152,42,.15); border-color: var(--gold); }
+.network-fullscreen-btn svg { width: 18px; height: 18px; }
+.network-fullscreen-btn .fs-collapse { display: none; }
+.network-fullscreen-btn.is-fullscreen .fs-expand { display: none; }
+.network-fullscreen-btn.is-fullscreen .fs-collapse { display: inline; }
+
+/* CSS fullscreen fallback */
+body.network-fullscreen-active { overflow: hidden; }
+.network-container.network-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  border-radius: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+.network-container.network-fullscreen #network-graph {
+  height: 100vh !important;
+}
+
+/* Native fullscreen */
+.network-container:fullscreen,
+.network-container:-webkit-full-screen {
+  background: var(--bg);
+  border-radius: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.network-container:fullscreen #network-graph,
+.network-container:-webkit-full-screen #network-graph {
+  height: 100vh;
+}

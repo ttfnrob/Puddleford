@@ -76,6 +76,18 @@
           <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--character"></span> Character</span>
           <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--location"></span> Location</span>
         </div>
+        <button class="network-fullscreen-btn" id="network-fullscreen-btn" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline class="fs-expand" points="15 3 21 3 21 9"></polyline>
+            <polyline class="fs-expand" points="9 21 3 21 3 15"></polyline>
+            <line class="fs-expand" x1="21" y1="3" x2="14" y2="10"></line>
+            <line class="fs-expand" x1="3" y1="21" x2="10" y2="14"></line>
+            <polyline class="fs-collapse" points="4 14 4 20 10 20"></polyline>
+            <polyline class="fs-collapse" points="20 10 20 4 14 4"></polyline>
+            <line class="fs-collapse" x1="14" y1="10" x2="4" y2="20"></line>
+            <line class="fs-collapse" x1="20" y1="4" x2="10" y2="14"></line>
+          </svg>
+        </button>
         <div id="network-graph"></div>
       </div>
     </section>
@@ -500,6 +512,49 @@ function buildNetwork(data) {
   });
 }
 </script>
-<script src="assets/js/badges.js"></script>
+<script src="assets/js/badges.js">
+  // Fullscreen toggle
+  const fsBtn = document.getElementById('network-fullscreen-btn');
+  const netContainer = document.getElementById('network-container');
+
+  function setFullscreen(on) {
+    netContainer.classList.toggle('network-fullscreen', on);
+    document.body.classList.toggle('network-fullscreen-active', on);
+    fsBtn.classList.toggle('is-fullscreen', on);
+    // Resize the SVG to fill new dimensions
+    const graphEl = document.getElementById('network-graph');
+    const svgEl = graphEl.querySelector('svg');
+    if (svgEl) {
+      svgEl.setAttribute('width', graphEl.offsetWidth);
+      svgEl.setAttribute('height', graphEl.offsetHeight);
+    }
+  }
+
+  fsBtn.addEventListener('click', () => {
+    const isFs = netContainer.classList.contains('network-fullscreen');
+    if (!isFs && document.fullscreenEnabled && netContainer.requestFullscreen) {
+      netContainer.requestFullscreen().then(() => setFullscreen(true)).catch(() => {
+        // Fallback: CSS fullscreen
+        setFullscreen(true);
+      });
+    } else if (isFs && document.fullscreenElement) {
+      document.exitFullscreen().then(() => setFullscreen(false));
+    } else {
+      setFullscreen(!isFs);
+    }
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) setFullscreen(false);
+  });
+
+  // Keyboard: Escape exits CSS fullscreen too
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && netContainer.classList.contains('network-fullscreen')) {
+      setFullscreen(false);
+    }
+  });
+
+</script>
 </body>
 </html>
