@@ -4,11 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Puddleford Timeline</title>
-  <meta name="description" content="A history of Puddleford, from the ancient past to the far future. The Puddleford Timeline." />
+  <meta name="description" content="A history of Puddleford, from the ancient past to the far future." />
   <meta property="og:title"       content="The Puddleford Timeline" />
-  <meta property="og:description" content="A scrollable timeline of Puddleford history in chronological order." />
+  <meta property="og:description" content="A scrollable serpentine timeline of Puddleford history." />
   <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .snake-wrap { width:100%; overflow:hidden; padding:1.5rem 0 4rem; }
+    .snake-wrap svg { display:block; margin:0 auto; }
+    .seg { cursor:pointer; transition:filter .12s; }
+    .seg:hover { filter:brightness(1.4); }
+    .lbl-era  { fill:#d4982a; font-weight:700; font-family:inherit; }
+    .lbl-title{ fill:#f0e6d3; font-style:italic; font-family:inherit; opacity:0.85; }
+    .sdot { fill:#f0e6d3; pointer-events:none; }
+    @keyframes gp{ 0%,100%{r:6;opacity:1} 50%{r:14;opacity:.25} }
+    .pulse{ fill:#d4982a; animation:gp 2s ease-in-out infinite; pointer-events:none; }
+    .bend-fill { pointer-events:none; }
+
+    .tip{
+      position:fixed; z-index:1000; background:#141010;
+      border:2px solid #d4982a; border-radius:8px;
+      padding:12px 16px; max-width:320px;
+      pointer-events:none; opacity:0; transition:opacity .15s;
+      font-family:inherit;
+    }
+    .tip.show{ opacity:1; }
+    .tip-era  { color:#d4982a; font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px; }
+    .tip-title{ color:#f0e6d3; font-size:.95rem; font-weight:600; margin-bottom:5px; }
+    .tip-desc { color:#a89a8a; font-size:.82rem; line-height:1.4; }
+
+    .snake-loading{ text-align:center; padding:4rem 2rem; color:var(--text-muted,#a89a8a); }
+  </style>
 </head>
 <body>
 
@@ -35,30 +61,14 @@
   <span class="page-header__rule" aria-hidden="true"></span>
 </div>
 
-<!-- Loading skeleton — desktop: horizontal row, mobile: vertical -->
-<div id="timeline-loading">
-  <div class="tl-skeleton-desktop">
-    <div class="tl-skeleton-row">
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-card"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-    </div>
-  </div>
-  <div class="tl-skeleton-mobile">
-    <div class="tl-skeleton-vert">
-      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-      <div class="tl-skeleton-vcard"><div class="skeleton-dot"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--long"></div><div class="skeleton-line skeleton-line--med"></div></div>
-    </div>
-  </div>
-</div>
+<div id="snake-loading" class="snake-loading"><p>Loading timeline&hellip;</p></div>
+<div class="snake-wrap" id="snake-root"></div>
 
-<!-- The timeline itself -->
-<div id="timeline-root"></div>
+<div class="tip" id="tip">
+  <div class="tip-era"></div>
+  <div class="tip-title"></div>
+  <div class="tip-desc"></div>
+</div>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -87,252 +97,275 @@
 </footer>
 
 <script>
-(function() {
-  /* ---- Chronological sort ---- */
-  function eraSort(era) {
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════
+     CONFIG
+     ═══════════════════════════════════════════════════ */
+  var mob      = window.innerWidth < 768;
+  var SEG      = mob ? 110 : 200;   // target px per episode
+  var TH       = mob ? 30  : 40;    // ribbon thickness
+  var PAD      = mob ? 40  : 100;   // horizontal padding (must be >= TH)
+  var ROW_GAP  = mob ? 110 : 160;   // label space between rows
+  var FONT_ERA = mob ? 9   : 13;
+  var FONT_TIT = mob ? 8   : 11;
+  var MAX_CH   = mob ? 16  : 26;
+
+  /* ═══════════════════════════════════════════════════
+     SVG helpers
+     ═══════════════════════════════════════════════════ */
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(tag, a) {
+    var e = document.createElementNS(NS, tag);
+    if (a) for (var k in a) if (a.hasOwnProperty(k)) e.setAttribute(k, a[k]);
+    return e;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     Era helpers
+     ═══════════════════════════════════════════════════ */
+  function eraYear(era) {
     if (!era) return 9999;
     var s = era.toString().toLowerCase().trim();
-    var m = s.match(/^(\d{4})/);
-    if (m) return parseInt(m[1]);
-    if (s.includes('wild west'))   return 1880;
-    if (s.includes('present'))     return 2020;
-    if (s.includes('puddlefordia') || s.includes('fantasy') || s.includes('ancient')) return -1;
-    if (s.includes('napoleonic'))  return 1805;
-    var m2 = s.match(/(\d{3,4})s?/);
-    if (m2) return parseInt(m2[1]);
+    if (/puddlefordia|fantasy|ancient/.test(s)) return -500;
+    var m;
+    m = s.match(/(\d{1,4})\s*ad/i); if (m) return +m[1];
+    m = s.match(/^(\d{4})/);        if (m) return +m[1];
+    if (s.includes('wild west'))  return 1880;
+    if (s.includes('present'))    return 2024;
+    if (s.includes('napoleonic')) return 1805;
+    m = s.match(/(\d{3,4})s?/);   if (m) return +m[1];
     return 9998;
   }
 
-  function isSpecialEra(era) {
-    if (!era) return false;
-    var s = era.toString().toLowerCase();
-    return s.includes('puddlefordia') || s.includes('fantasy') || s.includes('ancient') || s.includes('wild west');
+  function eraCol(era) {
+    var y = eraYear(era), s = (era || '').toLowerCase();
+    if (/puddlefordia|ancient|fantasy/.test(s) || y < 0) return '#4a2060';
+    if (s.includes('wild west')) return '#8b3a1a';
+    if (y > 2100) return '#d4982a';
+    if (y >= 2000) return '#2a3a5a';
+    if (y >= 1900) return '#1a5050';
+    if (y >= 1800) return '#2d5a2d';
+    return '#8b5e0a';
   }
 
-  /* ---- Deduplicate: prefer transcript source, merge by era+episode ---- */
-  function dedup(entries) {
-    var map = {};
-    entries.forEach(function(e) {
-      var key = (e.era || '') + '||' + (e.episode || '');
-      if (!map[key] || e.source === 'transcript') {
-        map[key] = e;
+  function dedup(a) {
+    var m = {};
+    a.forEach(function (e) {
+      var k = (e.era || '') + '||' + (e.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+      if (!m[k] || e.source === 'transcript') m[k] = e;
+    });
+    return Object.values(m);
+  }
+
+  function shortT(ep) {
+    var t = (ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+    return t.length > MAX_CH ? t.substring(0, MAX_CH - 1) + '\u2026' : t;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     RENDER
+     ═══════════════════════════════════════════════════
+
+     Layout:
+       All ribbons span from x=PAD to x=PAD+rowW (the "straight" part).
+       Bends extend beyond this:
+         Right bend: x = PAD+rowW  to  PAD+rowW+TH
+         Left bend:  x = PAD-TH   to  PAD
+
+       The bend is a simple vertical rect with rounded ends (rx=TH/2),
+       visually connecting the end of one row to the start of the next.
+
+       Row pitch = TH + ROW_GAP (ribbon height + label gap).
+  */
+  function render(raw) {
+    var eps = dedup(raw).sort(function (a, b) { return eraYear(a.era) - eraYear(b.era); });
+    document.getElementById('snake-loading').style.display = 'none';
+    var N = eps.length;
+    if (!N) return;
+
+    var cw   = document.getElementById('snake-root').clientWidth || window.innerWidth;
+    var rowW = cw - PAD * 2;
+    if (rowW < 160) rowW = 160;
+
+    var perRow  = Math.max(1, Math.floor(rowW / SEG));
+    var segW    = rowW / perRow;
+    var nRows   = Math.ceil(N / perRow);
+    var rowPitch = TH + ROW_GAP;
+    var svgW    = cw;
+    var svgH    = nRows * rowPitch + 60;
+
+    var svg = mk('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH });
+    var segs = [];
+
+    /* ── Draw bends first (behind ribbon) ── */
+    for (var br = 0; br < nRows - 1; br++) {
+      var ltrB  = (br % 2 === 0);
+      var ryB   = 50 + br * rowPitch;
+      var nxtRy = 50 + (br + 1) * rowPitch;
+      var si2   = br * perRow;
+      var nxtCol = (si2 + perRow < N) ? eraCol(eps[si2 + perRow].era) : eraCol(eps[N - 1].era);
+
+      // The bend spans from top of current ribbon to bottom of next ribbon
+      var bendTop = ryB;
+      var bendBot = nxtRy + TH;
+
+      if (ltrB) {
+        // right-side bend
+        svg.appendChild(mk('rect', {
+          x: PAD + rowW, y: bendTop, width: TH, height: bendBot - bendTop,
+          fill: nxtCol, rx: String(TH / 2), 'class': 'bend-fill'
+        }));
+      } else {
+        // left-side bend
+        svg.appendChild(mk('rect', {
+          x: PAD - TH, y: bendTop, width: TH, height: bendBot - bendTop,
+          fill: nxtCol, rx: String(TH / 2), 'class': 'bend-fill'
+        }));
       }
-    });
-    return Object.values(map);
-  }
-
-  /* ---- Render ---- */
-  function render(entries) {
-    var sorted = dedup(entries).sort(function(a, b) {
-      return eraSort(a.era) - eraSort(b.era);
-    });
-
-    document.getElementById('timeline-loading').style.display = 'none';
-    var root = document.getElementById('timeline-root');
-
-    var isDesktop = window.matchMedia('(min-width: 900px)').matches;
-
-    if (isDesktop) {
-      renderDesktop(root, sorted);
-    } else {
-      renderMobile(root, sorted);
     }
+
+    /* ── Draw ribbon segments ── */
+    for (var row = 0; row < nRows; row++) {
+      var ltr = (row % 2 === 0);
+      var si  = row * perRow;
+      var ei  = Math.min(si + perRow, N);
+      var ry  = 50 + row * rowPitch;
+
+      for (var i = si; i < ei; i++) {
+        var ep  = eps[i];
+        var li  = i - si;
+        var col = eraCol(ep.era);
+        var isGap = (i > 0 && eraYear(ep.era) - eraYear(eps[i - 1].era) > 200);
+
+        var x;
+        if (ltr) {
+          x = PAD + li * segW;
+        } else {
+          x = PAD + rowW - (li + 1) * segW;
+        }
+
+        var g = mk('g', { 'class': 'seg', 'data-i': String(i) });
+
+        // Main fill
+        var rc = mk('rect', { x: x, y: ry, width: segW + 0.5, height: TH, fill: col });
+        if (isGap) rc.setAttribute('opacity', '0.3');
+        g.appendChild(rc);
+
+        // Dashed overlay for large time gaps
+        if (isGap) {
+          g.appendChild(mk('rect', {
+            x: x, y: ry, width: segW, height: TH,
+            fill: 'none', stroke: col, 'stroke-width': '2', 'stroke-dasharray': '8 6'
+          }));
+        }
+
+        // Thin divider between segments
+        var divX = ltr ? x : x + segW;
+        if ((ltr && li > 0) || (!ltr && li > 0)) {
+          g.appendChild(mk('line', {
+            x1: divX, y1: ry, x2: divX, y2: ry + TH,
+            stroke: 'rgba(255,255,255,0.2)', 'stroke-width': '1'
+          }));
+        }
+
+        // Dot marker at segment start
+        var dotCx = ltr ? x + 8 : x + segW - 8;
+        g.appendChild(mk('circle', { cx: dotCx, cy: ry + TH / 2, r: '4', 'class': 'sdot' }));
+
+        // Labels: above ribbon for LTR rows, below for RTL rows
+        var lx = x + segW / 2;
+        var above = ltr;
+
+        var eraEl = mk('text', {
+          x: lx,
+          y: above ? ry - 8 : ry + TH + FONT_ERA + 6,
+          'text-anchor': 'middle', 'font-size': FONT_ERA, 'class': 'lbl-era'
+        });
+        eraEl.textContent = ep.era || 'Unknown';
+        g.appendChild(eraEl);
+
+        var titEl = mk('text', {
+          x: lx,
+          y: above ? ry - 8 - FONT_ERA - 4 : ry + TH + FONT_ERA + 6 + FONT_TIT + 6,
+          'text-anchor': 'middle', 'font-size': FONT_TIT, 'class': 'lbl-title'
+        });
+        titEl.textContent = shortT(ep);
+        g.appendChild(titEl);
+
+        svg.appendChild(g);
+        segs.push({ g: g, ep: ep, x: x, y: ry, w: segW });
+      }
+    }
+
+    /* ── Pulse on most recent episode ── */
+    var lastP = N - 1;
+    for (var p = N - 1; p >= 0; p--) {
+      if (eps[p].era && /present/i.test(eps[p].era)) { lastP = p; break; }
+    }
+    var lpi = segs[lastP];
+    if (lpi) {
+      svg.appendChild(mk('circle', {
+        cx: lpi.x + lpi.w / 2, cy: lpi.y + TH / 2, r: '6', 'class': 'pulse'
+      }));
+    }
+
+    document.getElementById('snake-root').appendChild(svg);
+
+    /* ── Tooltip ── */
+    var tip = document.getElementById('tip');
+    var tE  = tip.querySelector('.tip-era');
+    var tT  = tip.querySelector('.tip-title');
+    var tD  = tip.querySelector('.tip-desc');
+
+    segs.forEach(function (s) {
+      s.g.addEventListener('mouseenter', function () {
+        tE.textContent = s.ep.era || 'Unknown';
+        tT.textContent = (s.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+        tD.textContent = s.ep.description || '';
+        tip.classList.add('show');
+      });
+      s.g.addEventListener('mousemove', function (e) {
+        var tx = e.clientX + 16, ty = e.clientY - 10;
+        if (tx + 340 > window.innerWidth) tx = e.clientX - 340;
+        if (ty < 10) ty = 10;
+        tip.style.left = tx + 'px';
+        tip.style.top  = ty + 'px';
+      });
+      s.g.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
+      s.g.addEventListener('click', function () { window.location.href = 'episodes.html'; });
+
+      /* Touch support for tooltip on mobile */
+      s.g.addEventListener('touchstart', function (e) {
+        tE.textContent = s.ep.era || 'Unknown';
+        tT.textContent = (s.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+        tD.textContent = s.ep.description || '';
+        var touch = e.touches[0];
+        var tx2 = touch.clientX + 16, ty2 = touch.clientY - 60;
+        if (tx2 + 340 > window.innerWidth) tx2 = touch.clientX - 200;
+        if (ty2 < 10) ty2 = touch.clientY + 20;
+        tip.style.left = tx2 + 'px';
+        tip.style.top  = ty2 + 'px';
+        tip.classList.add('show');
+      }, { passive: true });
+      s.g.addEventListener('touchend', function () {
+        setTimeout(function () { tip.classList.remove('show'); }, 1500);
+      });
+    });
   }
 
-  /* ---- Desktop: horizontal scrolling timeline ---- */
-  function renderDesktop(root, sorted) {
-    var viewport = document.createElement('div');
-    viewport.className = 'tl-viewport';
-
-    var track = document.createElement('div');
-    track.className = 'tl-track';
-
-    /* Axis line */
-    var axis = document.createElement('div');
-    axis.className = 'tl-axis';
-    track.appendChild(axis);
-
-    var prevYear = null;
-
-    sorted.forEach(function(entry, i) {
-      var year = eraSort(entry.era);
-      var above = (i % 2 === 0);
-
-      /* Gap marker */
-      if (prevYear !== null && year - prevYear > 50) {
-        var gap = document.createElement('div');
-        gap.className = 'tl-gap';
-        gap.textContent = '\u00B7\u00B7\u00B7';
-        track.appendChild(gap);
-      }
-      prevYear = year;
-
-      var col = document.createElement('div');
-      col.className = 'tl-col';
-
-      /* Dot on axis */
-      var dot = document.createElement('div');
-      dot.className = 'tl-dot';
-
-      /* Connector line */
-      var connector = document.createElement('div');
-      connector.className = 'tl-connector ' + (above ? 'tl-connector--above' : 'tl-connector--below');
-
-      /* Card */
-      /* TODO: link to episode.html?id= once timeline entries have GUIDs */
-      var card = document.createElement('a');
-      card.href = 'episodes.html';
-      card.className = 'tl-card ' + (above ? 'tl-card--above' : 'tl-card--below');
-      if (isSpecialEra(entry.era)) card.classList.add('tl-card--special');
-
-      var eraLabel = document.createElement('div');
-      eraLabel.className = 'tl-era';
-      eraLabel.textContent = entry.era || 'Unknown';
-
-      var title = document.createElement('div');
-      title.className = 'tl-title';
-      title.textContent = entry.episode || '';
-
-      var desc = document.createElement('div');
-      desc.className = 'tl-desc';
-      desc.textContent = entry.description || '';
-
-      var badge = document.createElement('span');
-      badge.className = 'tl-badge';
-      badge.textContent = entry.season ? 'S' + entry.season : (entry.source === 'transcript' ? 'Transcript' : 'RSS');
-
-      card.appendChild(eraLabel);
-      card.appendChild(title);
-      card.appendChild(desc);
-      card.appendChild(badge);
-
-      if (above) {
-        col.appendChild(card);
-        col.appendChild(connector);
-        col.appendChild(dot);
-      } else {
-        col.appendChild(dot);
-        col.appendChild(connector);
-        col.appendChild(card);
-      }
-
-      track.appendChild(col);
-    });
-
-    viewport.appendChild(track);
-    root.appendChild(viewport);
-
-    /* Scroll hint */
-    var hint = document.createElement('div');
-    hint.className = 'tl-hint';
-    hint.textContent = 'Scroll or drag to explore the timeline';
-    root.appendChild(hint);
-    setTimeout(function() { hint.classList.add('tl-hint--hidden'); }, 3000);
-
-    /* Horizontal scroll via mouse wheel */
-    viewport.addEventListener('wheel', function(e) {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        viewport.scrollLeft += e.deltaY;
-      }
-    }, { passive: false });
-
-    /* Keyboard arrow keys */
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowRight') viewport.scrollLeft += 120;
-      if (e.key === 'ArrowLeft')  viewport.scrollLeft -= 120;
-    });
-
-    /* Drag to scroll */
-    var isDragging = false, startX, scrollStart;
-    viewport.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      startX = e.pageX;
-      scrollStart = viewport.scrollLeft;
-      viewport.style.cursor = 'grabbing';
-    });
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging) return;
-      viewport.scrollLeft = scrollStart - (e.pageX - startX);
-    });
-    document.addEventListener('mouseup', function() {
-      isDragging = false;
-      viewport.style.cursor = '';
-    });
-  }
-
-  /* ---- Mobile: vertical timeline ---- */
-  function renderMobile(root, sorted) {
-    var container = document.createElement('div');
-    container.className = 'tl-vertical';
-
-    var prevYear = null;
-
-    sorted.forEach(function(entry) {
-      var year = eraSort(entry.era);
-
-      /* Gap marker */
-      if (prevYear !== null && year - prevYear > 50) {
-        var gap = document.createElement('div');
-        gap.className = 'tl-vgap';
-        gap.textContent = '\u00B7\u00B7\u00B7';
-        container.appendChild(gap);
-      }
-      prevYear = year;
-
-      var item = document.createElement('div');
-      item.className = 'tl-vitem';
-      if (isSpecialEra(entry.era)) item.classList.add('tl-vitem--special');
-
-      var dot = document.createElement('div');
-      dot.className = 'tl-vdot';
-
-      /* TODO: link to episode.html?id= once timeline entries have GUIDs */
-      var card = document.createElement('a');
-      card.href = 'episodes.html';
-      card.className = 'tl-vcard';
-
-      var eraLabel = document.createElement('div');
-      eraLabel.className = 'tl-era';
-      eraLabel.textContent = entry.era || 'Unknown';
-
-      var title = document.createElement('div');
-      title.className = 'tl-title';
-      title.textContent = entry.episode || '';
-
-      var desc = document.createElement('div');
-      desc.className = 'tl-desc';
-      desc.textContent = entry.description || '';
-
-      var badge = document.createElement('span');
-      badge.className = 'tl-badge';
-      badge.textContent = entry.season ? 'S' + entry.season : (entry.source === 'transcript' ? 'Transcript' : 'RSS');
-
-      card.appendChild(eraLabel);
-      card.appendChild(title);
-      card.appendChild(desc);
-      card.appendChild(badge);
-
-      item.appendChild(dot);
-      item.appendChild(card);
-      container.appendChild(item);
-    });
-
-    root.appendChild(container);
-  }
-
-  /* ---- Fetch and go ---- */
+  /* ── Fetch and go ── */
   fetch('data/wiki.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.timeline && data.timeline.length) {
-        render(data.timeline);
-      } else {
-        document.getElementById('timeline-loading').innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:2rem;">No timeline data available yet.</p>';
-      }
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.timeline && d.timeline.length) render(d.timeline);
+      else document.getElementById('snake-loading').innerHTML =
+        '<p style="text-align:center;color:#a89a8a;padding:2rem;">No timeline data available yet.</p>';
     })
-    .catch(function() {
-      document.getElementById('timeline-loading').innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:2rem;">Could not load timeline data.</p>';
+    .catch(function () {
+      document.getElementById('snake-loading').innerHTML =
+        '<p style="text-align:center;color:#a89a8a;padding:2rem;">Could not load timeline data.</p>';
     });
 })();
 </script>
