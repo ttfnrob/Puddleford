@@ -345,20 +345,17 @@ ul{list-style:none}
 .platform-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: .6rem;
+  gap: .5rem;
   align-items: center;
+  justify-content: center;
 }
-.hero .platform-badges,
-.hero-content .platform-badges { justify-content: center; }
 
-/* Base badge */
 .pbadge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: .45rem;
-  height: 44px;
-  padding: 0 1rem;
+  gap: .5rem;
+  height: 42px;
+  padding: 0 1.1rem;
   border-radius: 8px;
   font-family: 'Source Serif 4', serif;
   font-size: .82rem;
@@ -366,51 +363,45 @@ ul{list-style:none}
   letter-spacing: .02em;
   text-decoration: none;
   white-space: nowrap;
-  transition: filter .15s, transform .15s;
+  transition: opacity .15s, transform .15s;
+  min-width: 0;
+  box-sizing: border-box;
 }
-.pbadge:hover { filter: brightness(1.12); transform: translateY(-1px); color: inherit; }
+.pbadge:hover { opacity: .85; transform: translateY(-1px); color: inherit; }
 
-/* Image-only badges (Apple, Pocket Casts official assets) */
-.pbadge--img {
-  background: none;
-  padding: 0;
-  height: 44px;
-  border-radius: 0;
-}
-.pbadge--img img {
-  height: 44px;
-  width: auto;
-  display: block;
-  border-radius: 6px;
-}
-.pbadge--img:hover { filter: brightness(1.08); transform: translateY(-1px); }
-
-/* Icon + label badges */
 .pbadge__icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 }
 .pbadge__icon svg {
   width: 20px;
   height: 20px;
   display: block;
+  flex-shrink: 0;
 }
 
-/* Spotify */
-.pbadge--spotify { background: #191414; color: #fff; }
-.pbadge--spotify .pbadge__icon svg { fill: #1DB954; }
+.pbadge--spotify     { background: #191414; color: #fff; }
+.pbadge--spotify     .pbadge__icon svg { fill: #1DB954; }
 
-/* RSS */
-.pbadge--rss { background: #F26522; color: #fff; }
-.pbadge--rss .pbadge__icon svg { fill: #fff; }
+.pbadge--apple       { background: #6a0dad; color: #fff; }
+.pbadge--apple       .pbadge__icon svg { fill: #fff; }
+
+.pbadge--pocketcasts { background: #F43E37; color: #fff; }
+.pbadge--pocketcasts .pbadge__icon svg { fill: #fff; }
+
+.pbadge--rss         { background: #F26522; color: #fff; }
+.pbadge--rss         .pbadge__icon svg { fill: #fff; }
 
 /* Footer: collapse to plain text links */
 .footer-platforms .platform-badges,
 .footer__platforms .platform-badges {
   flex-direction: column;
   align-items: flex-start;
-  gap: .25rem;
+  gap: .2rem;
+  justify-content: flex-start;
 }
 .footer-platforms .pbadge,
 .footer__platforms .pbadge {
@@ -420,36 +411,29 @@ ul{list-style:none}
   font-weight: 400;
   height: auto;
   padding: 0;
-  min-width: 0;
   border-radius: 0;
-  letter-spacing: 0;
 }
 .footer-platforms .pbadge:hover,
 .footer__platforms .pbadge:hover {
   color: var(--gold);
-  filter: none;
+  opacity: 1;
   transform: none;
 }
 .footer-platforms .pbadge__icon,
 .footer__platforms .pbadge__icon { display: none; }
-.footer-platforms .pbadge--img,
-.footer__platforms .pbadge--img {
-  height: auto;
-}
-.footer-platforms .pbadge--img img,
-.footer__platforms .pbadge--img img { display: none; }
-.footer-platforms .pbadge--img::after,
-.footer__platforms .pbadge--img::after {
-  content: attr(aria-label);
-  font-size: .82rem;
-  color: var(--text-muted);
-}
-.footer-platforms .pbadge--img:hover::after,
-.footer__platforms .pbadge--img:hover::after { color: var(--gold); }
 
 @media (max-width: 768px) {
-  .platform-badges { justify-content: center; }
-  .pbadge--img img { height: 38px; }
+  .platform-badges {
+    justify-content: center;
+    gap: .4rem;
+  }
+  .pbadge {
+    height: 40px;
+    padding: 0 .9rem;
+    font-size: .8rem;
+  }
   .footer-platforms .platform-badges,
-  .footer__platforms .platform-badges { align-items: center; }
+  .footer__platforms .platform-badges {
+    align-items: center;
+  }
 }
