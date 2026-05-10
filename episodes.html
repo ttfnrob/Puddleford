@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Episodes — Puddleford</title>
+  <meta name="description" content="Every episode of Puddleford: A Town with a Tale. Entirely improvised audio drama from MKTOC." />
+  <meta property="og:title"       content="Episodes — Puddleford" />
+  <meta property="og:description" content="Every episode of Puddleford, entirely improvised." />
+  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">🎭 Puddleford</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="episodes.html" class="active">Episodes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="players.html">The Players</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Episodes</h1>
+  <p>Every episode, entirely improvised.</p>
+</div>
+
+<div class="section">
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Episodes</button>
+    <button class="filter-btn" data-filter="1">Season 1</button>
+    <button class="filter-btn" data-filter="2">Season 2</button>
+  </div>
+
+  <div class="episode-grid" id="episode-grid">
+    <div class="loading-state" style="grid-column:1/-1">Loading episodes…</div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">🎭 Puddleford</a>
+      <p>A Town with a Tale</p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="players.html">The Players</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+      </ul>
+    </div>
+    <div class="footer-platforms">
+      <p>Listen on</p>
+      <ul>
+        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
+        <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
+        <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
+        <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">
+    &copy; 2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+  </div>
+</footer>
+
+<script src="assets/js/episodes.js"></script>
+<script>
+  const gridEl = document.getElementById('episode-grid');
+  loadEpisodes(gridEl, null);
+</script>
+</body>
+</html>

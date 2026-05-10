@@ -1,77 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puddleford — A Town with a Tale</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Georgia, serif;
-      background: #1a1a1a;
-      color: #f5f0e8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 0.05em;
-      color: #d4a843;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      font-size: 1.2rem;
-      color: #a09070;
-      font-style: italic;
-      margin-bottom: 2rem;
-    }
-    p {
-      max-width: 560px;
-      line-height: 1.8;
-      color: #c8bfa8;
-      margin-bottom: 2rem;
-    }
-    .links a {
-      display: inline-block;
-      margin: 0.4rem 0.6rem;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid #d4a843;
-      border-radius: 4px;
-      color: #d4a843;
-      text-decoration: none;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      transition: background 0.2s;
-    }
-    .links a:hover { background: #d4a843; color: #1a1a1a; }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.8rem;
-      color: #5a5040;
-    }
-  </style>
+  <meta name="description" content="Puddleford: A Town with a Tale. A fully improvised episodic audio drama about a fictional English town. Made by the Puddleford Players at MKTOC.">
+  <meta property="og:title" content="Puddleford — A Town with a Tale">
+  <meta property="og:description" content="A fully improvised episodic audio drama about a fictional English town. Made by the Puddleford Players at MKTOC.">
+  <meta property="og:image" content="assets/img/cover-with-title-1.jpg">
+  <meta property="og:url" content="https://ttfnrob.github.io/Puddleford/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <h1>🎭 Puddleford</h1>
-  <p class="subtitle">A Town with a Tale</p>
-  <p>
-    An entirely improvised episodic audio drama about Puddleford — 
-    a fictional English town and its unusual inhabitants, across the centuries.
-    Made by the Puddleford Players at MKTOC, Milton Keynes.
-  </p>
-  <div class="links">
-    <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd">🎵 Spotify</a>
-    <a href="https://podcasts.apple.com/podcast/puddleford/id1799546935">🍎 Apple Podcasts</a>
-    <a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b">📻 Pocket Casts</a>
-    <a href="https://www.mktoc.co.uk/puddleford/">🌐 MKTOC</a>
-  </div>
-  <footer>
-    Full site coming soon. &copy; Puddleford Players / MKTOC
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+      <button class="nav__toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+      <ul class="nav__links">
+        <li><a href="episodes.html" class="nav__link">Episodes</a></li>
+        <li><a href="wiki.html" class="nav__link">Wiki</a></li>
+        <li><a href="players.html" class="nav__link">The Players</a></li>
+        <li><a href="events.html" class="nav__link">Events</a></li>
+        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener" class="nav__link nav__listen">▶ Listen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" role="banner">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__content container">
+      <p class="hero__eyebrow">Milton Keynes Theatre of Comedy presents</p>
+      <h1 class="hero__title">Puddleford</h1>
+      <p class="hero__tagline">A Town with a Tale</p>
+      <p class="hero__desc">An entirely improvised episodic audio drama. Every street, every scandal, every surreal twist — conjured on the spot by the Puddleford Players. Nothing is written. Nothing is planned. Everything is Puddleford.</p>
+      <div class="listen-buttons">
+        <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener" class="listen-btn"><span class="icon">🎵</span> Spotify</a>
+        <a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener" class="listen-btn"><span class="icon">🎙️</span> Apple Podcasts</a>
+        <a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener" class="listen-btn"><span class="icon">🎧</span> Pocket Casts</a>
+        <a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank" rel="noopener" class="listen-btn"><span class="icon">🏰</span> Podcastle</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="latest-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__label">Fresh from the town</span>
+        <h2 class="section-header__title" id="latest-heading">Hot off the Press</h2>
+      </div>
+      <div id="latest-episode" class="latest-episode">
+        <p class="loading-state" style="padding:2rem;">Loading latest episode<span class="loading-dots"></span></p>
+      </div>
+      <div class="text-center mt-4">
+        <a href="episodes.html" class="btn btn--outline">Browse all episodes →</a>
+      </div>
+    </div>
+  </section>
+
+  <span class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</span>
+
+  <section class="section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about__img-wrap">
+          <img class="about__img" src="assets/img/cover-no-title.jpg" alt="The illustrated town of Puddleford — crooked buildings, cobbled streets, a floating castle and a UFO in the sky" loading="lazy">
+        </div>
+        <div class="about__text">
+          <h2 id="about-heading">What is Puddleford?</h2>
+          <p>Puddleford is a fictional English town that exists across time. The same cobbled streets, the same Dog and Duck, the same inexplicable events — visited in the 1690s, the 1930s, the far future, and everywhere in between.</p>
+          <p>Every episode is 100% improvised. There are no scripts, no rehearsals, no safety net. The Puddleford Players step up to the microphone and invent a town, its people, and its troubles from scratch.</p>
+          <p>Made with love (and a certain reckless abandon) by the <a href="players.html">Puddleford Players</a> at <a href="https://www.mktoc.co.uk/puddleford/" target="_blank" rel="noopener">MKTOC</a> — Milton Keynes Theatre of Comedy.</p>
+          <a href="wiki.html" class="btn btn--outline mt-3">Explore the Puddleford Wiki →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <span class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</span>
+
+  <section class="section" aria-labelledby="events-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__label">Mark your calendar</span>
+        <h2 class="section-header__title" id="events-heading">Upcoming Events</h2>
+        <p class="section-header__sub">Puddleford, live and unscripted.</p>
+      </div>
+      <article class="event-card">
+        <div class="event-card__date">
+          <div class="event-card__date-month">Jul</div>
+          <div class="event-card__date-year">2026</div>
+        </div>
+        <div>
+          <h3 class="event-card__title">Milton Keynes Comedy Festival</h3>
+          <p class="event-card__location">📍 Milton Keynes</p>
+          <p class="event-card__desc">The first ever live Puddleford show. The Puddleford Players take to the stage to improvise the town in front of a live audience for the very first time. Exact date and venue details coming soon.</p>
+        </div>
+        <div class="event-card__cta">
+          <a href="events.html" class="btn btn--outline">More details</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+        <p>A fully improvised episodic audio drama about a fictional English town.</p>
+        <p style="margin-top:0.5rem;">Made by the <a href="players.html">Puddleford Players</a> at <a href="https://www.mktoc.co.uk" target="_blank" rel="noopener">MKTOC</a>.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="episodes.html">Episodes</a></li>
+          <li><a href="wiki.html">Wiki</a></li>
+          <li><a href="players.html">The Players</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </nav>
+      <div class="footer__platforms">
+        <h4>Listen</h4>
+        <ul>
+          <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Spotify</a></li>
+          <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener">Apple Podcasts</a></li>
+          <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener">Pocket Casts</a></li>
+          <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank" rel="noopener">Podcastle</a></li>
+          <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank" rel="noopener">MKTOC</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>&copy; 2025 MKTOC — Milton Keynes Theatre of Comedy. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script src="assets/js/episodes.js"></script>
 </body>
 </html>
