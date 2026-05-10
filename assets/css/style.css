@@ -79,6 +79,8 @@ ul{list-style:none}
 .page-header__inner{position:relative;z-index:1}
 .page-header__title{font-family:var(--font-heading);font-size:clamp(2rem,5vw,3.5rem);color:var(--gold);margin-bottom:0.5rem}
 .page-header__sub{font-style:italic;color:var(--text-muted);font-size:1.05rem}
+.page-header__rule{display:block;width:60px;height:1px;background:var(--gold);margin:1.25rem auto 0;opacity:0.6}
+.page-header p + .page-header__rule{margin-top:1.25rem}
 
 /* CARDS */
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color var(--transition),box-shadow var(--transition),transform var(--transition)}
@@ -93,13 +95,38 @@ ul{list-style:none}
 .card__link:hover{color:var(--gold-light)}
 
 /* EPISODE GRID */
-.episode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
-.filter-bar{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2.5rem}
-.filter-btn{background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);font-family:var(--font-body);font-size:0.88rem;padding:0.4rem 1.1rem;border-radius:20px;cursor:pointer;transition:all var(--transition)}
-.filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:600}
+.episode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
+.filter-bar{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:flex-start;margin-bottom:2rem;max-width:var(--max-width);margin-left:auto;margin-right:auto;padding:0 1.5rem}
+.filter-btn{background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);font-family:var(--font-body);font-size:0.85rem;padding:0.35rem 1rem;border-radius:20px;cursor:pointer;transition:all var(--transition)}
+.filter-btn:hover{color:var(--gold);border-color:var(--gold);background:rgba(212,152,42,0.08)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:600}
 .loading-state,.empty-state{text-align:center;color:var(--text-muted);padding:3rem;font-style:italic;grid-column:1/-1}
-.loading-dots::after{content:'...';animation:dots 1.4s infinite}
-@keyframes dots{0%,20%{content:'.'}40%{content:'..'}60%,100%{content:'...'}}
+.error-state{text-align:center;color:var(--text-muted);padding:3rem 1.5rem;font-style:italic;grid-column:1/-1;font-size:1rem;line-height:1.7}
+.error-state a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+/* EPISODE CARDS */
+.episode-card{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow var(--transition),transform var(--transition);text-decoration:none;display:flex;flex-direction:column}
+.episode-card:hover{box-shadow:0 0 18px rgba(212,152,42,0.18),0 0 4px rgba(212,152,42,0.1);transform:translateY(-2px)}
+.episode-card .card-img-wrap{position:relative;width:100%;aspect-ratio:1;overflow:hidden;flex-shrink:0}
+.episode-card .card-img{width:100%;height:100%;object-fit:cover;display:block}
+.episode-card .card-img-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(0,0,0,0.35),transparent);pointer-events:none}
+.episode-card .badge{position:absolute;top:0.5rem;left:0.5rem;z-index:2;display:inline-block;font-size:0.68rem;letter-spacing:0.1rem;text-transform:uppercase;color:var(--gold-light);background:rgba(26,18,10,0.82);border:1px solid var(--border-gold);border-radius:14px;padding:0.15rem 0.55rem;font-family:var(--font-body);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.episode-card .card-body{padding:0.85rem 1rem 1rem;flex:1;display:flex;flex-direction:column}
+.episode-card .card-title{font-family:var(--font-heading);font-size:1rem;color:var(--text);margin-bottom:0.3rem;line-height:1.3}
+.episode-card .card-meta{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem}
+.episode-card .card-desc{font-size:0.85rem;color:var(--text-muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+
+/* SKELETON CARDS */
+.skeleton-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.skeleton-card__img{width:100%;aspect-ratio:1;background:var(--bg-secondary);position:relative;overflow:hidden}
+.skeleton-card__img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.03) 40%,rgba(255,255,255,0.06) 50%,rgba(255,255,255,0.03) 60%,transparent 100%);animation:shimmer 1.8s infinite ease-in-out}
+.skeleton-card__body{padding:0.85rem 1rem 1rem}
+.skeleton-line{border-radius:4px;background:var(--bg-secondary);position:relative;overflow:hidden;margin-bottom:0.55rem}
+.skeleton-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.03) 40%,rgba(255,255,255,0.06) 50%,rgba(255,255,255,0.03) 60%,transparent 100%);animation:shimmer 1.8s infinite ease-in-out}
+.skeleton-line--short{width:35%;height:12px}
+.skeleton-line--long{width:85%;height:14px}
+.skeleton-line--med{width:65%;height:12px;margin-bottom:0}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* LATEST EPISODE */
 .latest-episode{display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
@@ -318,8 +345,9 @@ ul{list-style:none}
   /* Event cards */
   .event-card{grid-template-columns:1fr}
 
-  /* Episode grid */
-  .episode-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+  /* Episode grid: 2-col on mobile */
+  .episode-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem;padding:0 1rem}
+  .filter-bar{justify-content:center;padding:0 1rem}
 
   /* Players grid: 2-col with consistent height */
   .players-grid{grid-template-columns:repeat(2,1fr) !important;align-items:stretch}
@@ -331,12 +359,14 @@ ul{list-style:none}
   .event-card{grid-template-columns:1fr;padding:1.5rem}
   .event-card__date{justify-self:start}
 
-  /* Episode grid safe minimum */
-  .episode-grid{grid-template-columns:1fr}
+  /* Episode grid: still 2-col down to 400px */
+  .episode-grid{grid-template-columns:repeat(2,1fr)}
+  .episode-card .card-title{font-size:0.92rem}
+  .episode-card .card-desc{font-size:0.82rem;-webkit-line-clamp:2}
 }
 
-@media(max-width:379px){
-  /* Very small screens: single column everything */
+@media(max-width:399px){
+  /* Very small screens: single column */
   .episode-grid{grid-template-columns:1fr}
   .players-grid{grid-template-columns:1fr !important}
 }

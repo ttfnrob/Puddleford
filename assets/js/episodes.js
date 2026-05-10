@@ -113,12 +113,14 @@ function buildCard(item) {
   card.dataset.season = season || '0';
 
   card.innerHTML = `
-    ${img
-      ? `<img class="card-img" src="${img}" alt="" loading="lazy">`
-      : `<div class="card-img" style="background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;color:var(--border-gold);font-size:1.5rem;aspect-ratio:1">Puddleford</div>`
-    }
-    <div class="card-body">
+    <div class="card-img-wrap">
+      ${img
+        ? `<img class="card-img" src="${img}" alt="" loading="lazy">`
+        : `<div class="card-img" style="background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;color:var(--border-gold);font-size:1.2rem">Puddleford</div>`
+      }
       ${season ? `<span class="badge">S${season}</span>` : ''}
+    </div>
+    <div class="card-body">
       <div class="card-title">${title}</div>
       <div class="card-meta">${date}${dur ? ' &middot; ' + dur : ''}</div>
       <div class="card-desc">${desc}</div>
