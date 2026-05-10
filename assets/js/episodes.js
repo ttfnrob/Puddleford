@@ -6,8 +6,9 @@
 
 const RSS_URL = 'https://anchor.fm/s/10ce1465c/podcast/rss';
 const PROXIES = [
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
   url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${url}`,
 ];
 const CACHE_KEY = 'puddleford_episodes';
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
