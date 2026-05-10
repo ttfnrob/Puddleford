@@ -292,7 +292,7 @@ async function loadWiki() {
   const leagueEl = document.getElementById('wiki-league');
   if (data.characters?.length && leagueEl) {
     const ranked = [...data.characters]
-      .filter(c => c.episodes?.length > 0)
+      .filter(c => (c.episodes?.length || 0) > 1)
       .sort((a, b) => (b.episodes?.length || 0) - (a.episodes?.length || 0))
       .slice(0, 20);
     const maxEps = ranked.length ? ranked[0].episodes.length : 1;
