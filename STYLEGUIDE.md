@@ -24,6 +24,7 @@ House style for all Puddleford content: the website, social media, show notes, e
 - "entirely improvised" not "fully improvised" or "completely improvised".
 - "the Puddleford Players" with a lowercase "the" and capital P on Players.
 - "MKTOC" always in caps. Spell out as "Milton Keynes Theatre of Comedy" on first mention per page.
+- MKTOC was founded in 2003. It stages comedy productions, stage adaptations of well-known television comedies, murder mystery events, historical re-enactment, and improvisation shows. It is not solely an improv group. Do not describe it as one.
 - Refer to episodes by title in quotes: "Captain Breadbeard".
 - Historical periods: "the 1790s", "the present day" (lowercase), "the Wild West" (capitalised as a proper noun).
 - "transcript" not "transcription".
