@@ -9,6 +9,24 @@ const PROXIES = [
   url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
   url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
 ];
+const CACHE_KEY = 'puddleford_episodes';
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function saveCache(items) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), items }));
+  } catch(e) {}
+}
+
+function loadCache() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const { ts, items } = JSON.parse(raw);
+    if (Date.now() - ts < CACHE_TTL) return items;
+    return null; // stale
+  } catch(e) { return null; }
+}
 
 function stripHtml(html) {
   const d = document.createElement('div');
@@ -110,13 +128,35 @@ function applyFilter(season) {
 
 async function loadEpisodes(gridEl, latestEl) {
   try {
-    const xml = await fetchRSS();
-    const items = parseRSS(xml);
+    // Try cache first — render immediately, then refresh in background
+    const cached = loadCache();
+    if (cached && cached.length) {
+      renderEpisodes(cached, gridEl, latestEl);
+    }
 
-    if (!items.length) throw new Error('No episodes parsed');
+    // Fetch fresh data
+    let items;
+    try {
+      const xml = await fetchRSS();
+      items = parseRSS(xml);
+      if (!items.length) throw new Error('No episodes parsed');
+      saveCache(items);
+    } catch(fetchErr) {
+      // If fetch failed but we had cache, silently stay on cached version
+      if (cached && cached.length) return;
+      throw fetchErr;
+    }
+
+    renderEpisodes(items, gridEl, latestEl);
+
+  }
+}
+
+function renderEpisodes(items, gridEl, latestEl) {
+  if (!items.length) return;
 
     // Latest episode widget (homepage)
-    if (latestEl && items.length) {
+    if (latestEl) {
       const ep = items[0];
       const desc = stripHtml(ep.description).slice(0, 300);
       const season = ep.itunes_season;
@@ -146,10 +186,5 @@ async function loadEpisodes(gridEl, latestEl) {
       applyFilter('all');
     }
 
-  } catch(err) {
-    console.error('Episode load error:', err);
-    const msg = `<div class="error-state">Could not load episodes. <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Listen on Spotify</a></div>`;
-    if (gridEl)   gridEl.innerHTML = msg;
-    if (latestEl) latestEl.innerHTML = msg;
   }
 }
