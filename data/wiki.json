@@ -1718,11 +1718,15 @@
     },
     {
       "name": "Puddlington",
-      "description": "A character mentioned in relation to the dog causing a disturbance.",
+      "description": "A dog, and a recurring presence in Puddleford across many eras.",
       "episodes": [
-        "A Hatful of Dreams (1960s)"
+        "A Very Small Lion (50 AD)",
+        "A Wager of Wits (1550s)",
+        "The Hedge Maze Affaire (1890s)",
+        "A Hatful of Dreams (1960s)",
+        "A Visit to Puddleford by St. Nicholas"
       ],
-      "source": "transcript"
+      "source": "manual"
     },
     {
       "name": "The librarian",
