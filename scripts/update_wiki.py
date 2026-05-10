@@ -32,6 +32,7 @@ TRANSCRIPTS_DIR = Path("data/transcripts")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
+TRANSCRIPT_INDEX = Path("data/transcripts/index.json")
 
 if not OPENAI_API_KEY:
     print("ERROR: OPENAI_API_KEY not set.", file=sys.stderr)
@@ -39,6 +40,16 @@ if not OPENAI_API_KEY:
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def load_transcript_index():
+    if TRANSCRIPT_INDEX.exists():
+        with open(TRANSCRIPT_INDEX, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_transcript_index(index):
+    with open(TRANSCRIPT_INDEX, "w") as f:
+        json.dump(index, f, indent=2, ensure_ascii=False)
 
 def load_wiki():
     if WIKI_JSON.exists():
@@ -286,6 +297,7 @@ def main():
 
     wiki = load_wiki()
     processed = set(wiki.get("processed_episodes", []))
+    transcript_index = load_transcript_index()
 
     print(f"Fetching RSS...")
     rss_bytes = fetch_rss()
@@ -327,6 +339,16 @@ def main():
                     encoding="utf-8"
                 )
                 print(f"  Transcript saved: {transcript_path}")
+
+            # Update transcript index so the site can serve it
+            transcript_index[ep["guid"]] = {
+                "file": str(transcript_path),
+                "title": ep["title"],
+                "pub_date": ep["pub_date"],
+                "season": ep.get("season", ""),
+                "episode_num": ep.get("episode_num", ""),
+            }
+            save_transcript_index(transcript_index)
 
             # Extract wiki data
             print(f"  Extracting wiki data with GPT...")

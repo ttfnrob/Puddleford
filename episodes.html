@@ -1,84 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Episodes - Puddleford</title>
- <meta name="description" content="Every episode of Puddleford: A Town with a Tale. Entirely improvised audio drama from MKTOC." />
- <meta property="og:title" content="Episodes - Puddleford" />
- <meta property="og:description" content="Every episode of Puddleford, entirely improvised." />
- <meta property="og:image" content="assets/img/cover-with-title-1.jpg" />
- <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Episodes - Puddleford</title>
+  <meta name="description" content="Every episode of Puddleford: A Town with a Tale. Entirely improvised audio drama from MKTOC." />
+  <meta property="og:title"       content="Episodes - Puddleford" />
+  <meta property="og:description" content="Every episode of Puddleford, entirely improvised." />
+  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .transcript-panel {
+      display: none;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-gold);
+      padding: 1.2rem 1.2rem 1.4rem;
+    }
+    .transcript-panel.open { display: block; }
+    .transcript-panel h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: .8rem;
+    }
+    .transcript-text {
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      white-space: pre-wrap;
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      background: var(--bg);
+    }
+    .transcript-text.loading { font-style: italic; color: var(--border-gold); }
+    .transcript-toggle {
+      display: inline-block;
+      margin-top: .6rem;
+      font-size: .78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: 'Source Serif 4', serif;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .transcript-toggle:hover { color: var(--gold); }
+    /* Make cards column-flex so transcript sits below */
+    .episode-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+    .episode-card .card-link-area { display: block; }
+    .episode-card:hover .card-title { color: var(--gold); }
+  </style>
 </head>
 <body>
 
 <nav class="site-nav">
- <div class="nav-inner">
- <a href="index.html" class="nav-logo"> Puddleford</a>
- <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
- <span></span><span></span><span></span>
- </button>
- <ul class="nav-links">
- <li><a href="episodes.html" class="active">Episodes</a></li>
- <li><a href="wiki.html">Wiki</a></li>
- <li><a href="players.html">The Players</a></li>
- <li><a href="events.html">Events</a></li>
- <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen ↗</a></li>
- </ul>
- </div>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Puddleford</a>
+    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="episodes.html" class="active">Episodes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="players.html">The Players</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="page-header">
- <h1>Episodes</h1>
- <p>Every episode, entirely improvised.</p>
+  <h1>Episodes</h1>
+  <p>Every episode, entirely improvised.</p>
 </div>
 
 <div class="section">
- <div class="filter-bar">
- <button class="filter-btn active" data-filter="all">All Episodes</button>
- <button class="filter-btn" data-filter="1">Season 1</button>
- <button class="filter-btn" data-filter="2">Season 2</button>
- </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Episodes</button>
+    <button class="filter-btn" data-filter="1">Season 1</button>
+    <button class="filter-btn" data-filter="2">Season 2</button>
+  </div>
 
- <div class="episode-grid" id="episode-grid">
- <div class="loading-state" style="grid-column:1/-1">Loading episodes…</div>
- </div>
+  <div class="episode-grid" id="episode-grid">
+    <div class="loading-state" style="grid-column:1/-1">Loading episodes...</div>
+  </div>
 </div>
 
 <footer class="site-footer">
- <div class="footer-inner">
- <div class="footer-brand">
- <a href="index.html" class="footer-logo"> Puddleford</a>
- <p>A Town with a Tale</p>
- </div>
- <div class="footer-links">
- <ul>
- <li><a href="episodes.html">Episodes</a></li>
- <li><a href="wiki.html">Wiki</a></li>
- <li><a href="players.html">The Players</a></li>
- <li><a href="events.html">Events</a></li>
- <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
- </ul>
- </div>
- <div class="footer-platforms">
- <p>Listen on</p>
- <ul>
- <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
- <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
- <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
- <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
- </ul>
- </div>
- </div>
- <div class="footer-copy">
- &copy; 2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
- </div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">Puddleford</a>
+      <p>A Town with a Tale</p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="episodes.html">Episodes</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="players.html">The Players</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+      </ul>
+    </div>
+    <div class="footer-platforms">
+      <p>Listen on</p>
+      <ul>
+        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
+        <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
+        <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
+        <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">
+    2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+  </div>
 </footer>
 
 <script src="assets/js/episodes.js"></script>
 <script>
- const gridEl = document.getElementById('episode-grid');
- loadEpisodes(gridEl, null);
+const RSS_API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://anchor.fm/s/10ce1465c/podcast/rss')}&count=100`;
+const TRANSCRIPT_INDEX_URL = 'data/transcripts/index.json';
+
+function stripHtml(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return (d.textContent || d.innerText || '').trim();
+}
+
+function formatDate(s) {
+  return new Date(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+async function loadTranscriptIndex() {
+  try {
+    const res = await fetch(TRANSCRIPT_INDEX_URL + '?v=' + Date.now());
+    if (!res.ok) return {};
+    return await res.json();
+  } catch { return {}; }
+}
+
+async function fetchTranscriptText(filePath) {
+  try {
+    // filePath is like "data/transcripts/abc123.txt"
+    const res = await fetch(filePath + '?v=' + Date.now());
+    if (!res.ok) return null;
+    const text = await res.text();
+    // Strip the header lines (# Title / # Date)
+    return text.replace(/^#.*\n/gm, '').trim();
+  } catch { return null; }
+}
+
+function toggleTranscript(btn, panel, filePath) {
+  const isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+    btn.textContent = 'Read transcript';
+    return;
+  }
+  panel.classList.add('open');
+  btn.textContent = 'Hide transcript';
+  // Load if not yet loaded
+  if (!panel.dataset.loaded) {
+    panel.dataset.loaded = 'true';
+    const textEl = panel.querySelector('.transcript-text');
+    fetchTranscriptText(filePath).then(text => {
+      if (text) {
+        textEl.textContent = text;
+        textEl.classList.remove('loading');
+      } else {
+        textEl.textContent = 'Transcript not yet available. Check back after the next wiki update.';
+        textEl.classList.remove('loading');
+      }
+    });
+  }
+}
+
+function buildCard(item, transcriptIndex) {
+  const title   = item.title || 'Untitled';
+  const date    = formatDate(item.pubDate);
+  const desc    = stripHtml(item.description || item.content || '').slice(0, 200);
+  const img     = item.thumbnail || '';
+  const link    = item.link || '#';
+  const season  = item.itunes_season || '';
+  const dur     = item.itunes_duration || '';
+  const guid    = item.guid || '';
+
+  const hasTranscript = guid && transcriptIndex[guid];
+  const transcriptFile = hasTranscript ? transcriptIndex[guid].file : null;
+
+  const card = document.createElement('div');
+  card.className = 'episode-card card';
+  card.dataset.season = season || '0';
+
+  card.innerHTML = `
+    <a class="card-link-area" href="${link}" target="_blank" rel="noopener">
+      ${img
+        ? `<img class="card-img" src="${img}" alt="${title}" loading="lazy">`
+        : `<div class="card-img" style="background:var(--bg-secondary);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--border-gold)">[ ]</div>`
+      }
+      <div class="card-body">
+        ${season ? `<span class="badge">S${season}</span>` : ''}
+        <div class="card-title">${title}</div>
+        <div class="card-meta">${date}${dur ? ' · ' + dur : ''}</div>
+        <div class="card-desc">${desc}</div>
+      </div>
+    </a>
+    ${hasTranscript ? `
+      <div style="padding: 0 1.1rem .5rem;">
+        <button class="transcript-toggle">Read transcript</button>
+      </div>
+      <div class="transcript-panel">
+        <h4>Transcript</h4>
+        <div class="transcript-text loading">Loading transcript...</div>
+      </div>
+    ` : ''}
+  `;
+
+  if (hasTranscript) {
+    const btn   = card.querySelector('.transcript-toggle');
+    const panel = card.querySelector('.transcript-panel');
+    btn.addEventListener('click', () => toggleTranscript(btn, panel, transcriptFile));
+  }
+
+  return card;
+}
+
+let activeFilter = 'all';
+
+function applyFilter(season) {
+  activeFilter = season;
+  document.querySelectorAll('.episode-card').forEach(card => {
+    card.style.display = (season === 'all' || card.dataset.season === season) ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === season);
+  });
+}
+
+async function init() {
+  const gridEl = document.getElementById('episode-grid');
+  const [feedRes, transcriptIndex] = await Promise.all([
+    fetch(RSS_API),
+    loadTranscriptIndex(),
+  ]);
+
+  let items;
+  try {
+    const data = await feedRes.json();
+    if (data.status !== 'ok') throw new Error();
+    items = data.items || [];
+  } catch {
+    gridEl.innerHTML = '<div class="error-state">Could not load episodes. <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Listen on Spotify</a></div>';
+    return;
+  }
+
+  gridEl.innerHTML = '';
+  items.forEach(item => gridEl.appendChild(buildCard(item, transcriptIndex)));
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+  });
+  applyFilter('all');
+}
+
+init();
 </script>
 </body>
 </html>
