@@ -345,81 +345,89 @@ ul{list-style:none}
 .platform-badges {
   display: flex;
   flex-wrap: wrap;
+  gap: .6rem;
   align-items: center;
-  gap: 1rem;
 }
-.platform-badge {
+.hero .platform-badges,
+.hero-content .platform-badges { justify-content: center; }
+
+/* Base badge — fixed 160x44 pill */
+.pbadge {
   display: inline-flex;
   align-items: center;
-  gap: .55rem;
-  padding: .55rem 1.1rem;
-  border-radius: var(--radius);
-  font-size: .88rem;
+  justify-content: center;
+  gap: .45rem;
+  height: 44px;
+  padding: 0 1rem;
+  border-radius: 8px;
   font-family: 'Source Serif 4', serif;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
   text-decoration: none;
-  transition: opacity .2s, transform .15s;
   white-space: nowrap;
-  height: 42px;
+  transition: filter .15s, transform .15s;
+  min-width: 140px;
 }
-.platform-badge:hover { opacity: .85; transform: translateY(-1px); }
-.platform-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
-.platform-badge img { height: 100%; width: auto; display: block; }
-
-/* Spotify - black bg, green icon */
-.platform-badge--spotify {
-  background: #191414;
-  color: #fff;
-  border: 1px solid #191414;
+.pbadge:hover { filter: brightness(1.12); transform: translateY(-1px); color: inherit; }
+.pbadge__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.platform-badge--spotify svg { fill: #1DB954; }
-
-/* Apple - black bg, white badge (badge image handles its own styling) */
-.platform-badge--apple {
-  background: transparent;
-  padding: 0;
-  border: none;
-  height: 42px;
+.pbadge__icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
-/* Pocket Casts - orange */
-.platform-badge--pocketcasts {
-  background: #F43E37;
-  color: #fff;
-  border: 1px solid #F43E37;
-}
-.platform-badge--pocketcasts svg { fill: #fff; }
+/* Spotify — black / green */
+.pbadge--spotify { background: #191414; color: #fff; }
+.pbadge--spotify .pbadge__icon svg { fill: #1DB954; }
 
-/* RSS - warm orange */
-.platform-badge--rss {
-  background: #f26522;
-  color: #fff;
-  border: 1px solid #f26522;
-}
-.platform-badge--rss svg { fill: #fff; }
+/* Apple Podcasts — dark purple/black */
+.pbadge--apple { background: #872EC4; color: #fff; }
+.pbadge--apple .pbadge__icon svg { fill: #fff; }
 
-/* Hero listen buttons - use platform-badges */
-.hero .platform-badges { justify-content: center; }
+/* Pocket Casts — red-orange */
+.pbadge--pocketcasts { background: #F43E37; color: #fff; }
+.pbadge--pocketcasts .pbadge__icon svg { fill: #fff; }
 
-/* Footer platform list - compact text only */
-.footer-platforms .platform-badges {
+/* RSS — standard orange */
+.pbadge--rss { background: #F26522; color: #fff; }
+.pbadge--rss .pbadge__icon svg { fill: #fff; }
+
+/* Footer — compact text list, badges become plain links */
+.footer-platforms .platform-badges,
+.footer__platforms .platform-badges {
   flex-direction: column;
-  align-items: flex-end;
-  gap: .3rem;
+  align-items: flex-start;
+  gap: .25rem;
 }
-.footer-platforms .platform-badge {
+.footer-platforms .pbadge,
+.footer__platforms .pbadge {
   background: none;
-  border: none;
-  padding: 0;
   color: var(--text-muted);
   font-size: .82rem;
+  font-weight: 400;
   height: auto;
+  padding: 0;
+  min-width: 0;
+  border-radius: 0;
+  letter-spacing: 0;
 }
-.footer-platforms .platform-badge:hover { color: var(--gold); opacity: 1; transform: none; }
-.footer-platforms .platform-badge svg { width: 14px; height: 14px; fill: currentColor; }
-.footer-platforms .platform-badge img { display: none; }
-.footer-platforms .platform-badge--apple span { display: inline; }
+.footer-platforms .pbadge:hover,
+.footer__platforms .pbadge:hover {
+  color: var(--gold);
+  filter: none;
+  transform: none;
+}
+.footer-platforms .pbadge__icon,
+.footer__platforms .pbadge__icon { display: none; }
 
 @media (max-width: 768px) {
   .platform-badges { justify-content: center; }
-  .footer-platforms .platform-badges { align-items: center; }
+  .pbadge { min-width: 120px; font-size: .78rem; padding: 0 .8rem; }
+  .footer-platforms .platform-badges,
+  .footer__platforms .platform-badges { align-items: center; }
 }
