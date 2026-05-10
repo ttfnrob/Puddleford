@@ -75,13 +75,143 @@
       "episode": "The Fellowship of the Dog and Duck",
       "description": "A fantasy realm. The Dog and Duck still exists.",
       "source": "rss"
+    },
+    {
+      "era": "The Napoleonic Wars",
+      "episode": "A Most Inconvenient Pipe",
+      "description": "Mr. Butternose and his friends spend the summer at Puddleford Manor, where they encounter the Ledbetter family, particularly the eight daughters, each with distinct personalities.",
+      "source": "transcript",
+      "season": "2"
+    },
+    {
+      "era": "Present Day",
+      "episode": "A Visit to Puddleford by St. Nicholas",
+      "description": "On Christmas Eve in Puddleford, Santa's plans are disrupted by a worker's revolt among his reindeer, leading to chaos as they discuss their roles and rights.",
+      "source": "transcript",
+      "season": "1"
+    },
+    {
+      "era": "1695",
+      "episode": "Captain Breadbeard (1695)",
+      "description": "The episode follows the story of Captain Breadbeard, the youngest pirate captain, as he plans to explore Tortuga and seek treasure with his first mate.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1990s",
+      "episode": "The Pandora Strain (1990s)",
+      "description": "In this episode, a genetically modified creature escapes in Puddleford, leading to chaos as it bites a character named Billy, causing his skin to turn to glitter.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "2180s",
+      "episode": "Where No Duck Has Gone Before (2180s)",
+      "description": "Captain Duck must undertake a delicate diplomatic mission while dealing with a teleporter accident involving Science Officer Brenda, who is duplicated, and a critical Spacefleet inspector onboard.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1940s",
+      "episode": "A Haunted Halloween Puddleford",
+      "description": "The episode features three tales of terror, starting with a ghost story set in 1942 about a child named Beryl who encounters supernatural beings at Hambly Place.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1950s",
+      "episode": "When You Wish Upon a War of the Western Star",
+      "description": "In the 1950s, the residents of Puddleford are unknowingly observed by extraterrestrial beings. Meanwhile, a couple, Persephone and Marmaduke, experience a strange event involving a moving star and a subsequent alien landing.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "Present Day",
+      "episode": "The Eye of Puddelford (Present Day)",
+      "description": "The Puddleford Women's Institute is preparing to display the Eye of Puddleford, a priceless cubic zirconia, while a local gang plans to steal it.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "2000s",
+      "episode": "Pressed for Love (2000s)",
+      "description": "The episode follows local characters in Puddleford as they navigate personal challenges, including financial troubles related to an orchard and the arrival of a businessman looking to build a golf course.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1830s",
+      "episode": "The Hunchback of Puddleford (1830s)",
+      "description": "Lord Marmaduke plans to tighten workhouse rules while Martin dreams of a better life beyond the workhouse.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1970s",
+      "episode": "Faster and Furious (1970s)",
+      "description": "The episode features a talent show at The Dog and Duck pub, highlighting the cultural clash between punk and opera in Puddleford.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1215",
+      "episode": "The Lamentable Tale of the Turnip Knight (1215)",
+      "description": "In Puddleford, King John is enforcing taxes and permits while a knight named Sir Trevor arrives, causing a stir with his jousting equipment and demands.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1790",
+      "episode": "The Puddling that Dropped (1790)",
+      "description": "In Puddleford, during the reign of Mad King George III, discussions revolve around the need for more washerwomen and preparations for a fancy dinner featuring a Frenchman and a dessert called blancmange.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "2000s",
+      "episode": "That Escalated Quickly (2000s)",
+      "description": "The students of Puddleford comprehensive discover unexpected connections, including the revelation of a previously unknown big brother.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1550s",
+      "episode": "A Wager of Wits (1550s)",
+      "description": "In the mid-1550s, the House of Puddlington in Puddleford is in disarray with talk of a potential war with Spain, while villagers prepare for the annual feast of Sir Leonard.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1890s",
+      "episode": "The Hedge Maze Affaire (1890s)",
+      "description": "In the Hedge Maze Affair, two fishermen discuss their families and the local fishing conditions while at Big Rock, and later, they are interrupted by residents from Puddleford Manor who are dealing with a hedge maze problem.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1983",
+      "episode": "No Time to Waddle (1983)",
+      "description": "Lord Puddleford struggles with his drinking problem while contemplating the demolition of outhouses to make way for a new discotheque and stock exchange.",
+      "source": "transcript",
+      "season": ""
+    },
+    {
+      "era": "1960s",
+      "episode": "A Hatful of Dreams (1960s)",
+      "description": "Danny and Jim discuss their band and music influences at The Dog and Duck pub, while Danny's parents, Susie and David, worry about their daughter Beth's behavior in the garden.",
+      "source": "transcript",
+      "season": ""
     }
   ],
   "locations": [
     {
       "name": "The Dog and Duck",
       "description": "Puddleford's enduring public house. Present in every era. The ale is always questionable.",
-      "source": "rss"
+      "source": "rss",
+      "episodes": [
+        "Faster and Furious (1970s)",
+        "A Hatful of Dreams (1960s)"
+      ]
     },
     {
       "name": "Puddleford Bridge",
@@ -91,45 +221,1510 @@
     {
       "name": "Puddleford Manor",
       "description": "The grand stately home on the hill. Seat of the local gentry.",
-      "source": "rss"
+      "source": "rss",
+      "episodes": [
+        "A Most Inconvenient Pipe",
+        "When You Wish Upon a War of the Western Star",
+        "The Puddling that Dropped (1790)",
+        "The Hedge Maze Affaire (1890s)"
+      ]
     },
     {
       "name": "Puddleford General Hospital",
       "description": "Also known as the Irrational Health Service.",
       "source": "rss"
+    },
+    {
+      "name": "Puddleford",
+      "description": "A fictional English town where the events of the episode take place.",
+      "episodes": [
+        "The Case of the Contaminated Cows",
+        "A Visit to Puddleford by St. Nicholas",
+        "A Chicken Never Dies Twice",
+        "The Pandora Strain (1990s)",
+        "When You Wish Upon a War of the Western Star",
+        "Pressed for Love (2000s)",
+        "The Hunchback of Puddleford (1830s)",
+        "The Lamentable Tale of the Turnip Knight (1215)",
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dog and Duck Pub",
+      "description": "A local pub where Maeve and Dennis discuss their cow's affliction with other farmers.",
+      "episodes": [
+        "The Case of the Contaminated Cows",
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Village Square",
+      "description": "The location where a crowd gathers to hear Victor Fortescue's presentation about his plans for Puddleford.",
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddlefordia",
+      "description": "The fabled realm where humans, elves, and dwarves once lived in harmony.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dog and Duck Tavern",
+      "description": "A tavern where three friends meet to discuss recent troubling events.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Audience Chamber",
+      "description": "The chamber where the king of the dwarves holds court.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "New Puddleford",
+      "description": "A fictional town in the Wild West where the story takes place.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Goodnight Saloon",
+      "description": "A saloon owned by Eleanor Goodnight, where Clancy finds work and entertainment.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddleford General",
+      "description": "The main hospital in Puddleford, currently facing severe financial difficulties and staff reductions.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "St. Leonard's Clinic for the Terminally Affluent",
+      "description": "A private clinic that caters to wealthy patients and is thriving financially.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Duck-pond",
+      "description": "A location in Puddleford where a festive scene unfolds with Santa and his reindeer.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Village Green",
+      "description": "A gathering place in Puddleford where a snowman and villagers interact.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Manor House",
+      "description": "The residence of Lady Puddleford and Lord Puddleford, where they are disturbed by the events outside.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas",
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Hotel",
+      "description": "The setting for the local board games competition and convention.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Room 12",
+      "description": "The room where a woman claims to be staying and where she invites the characters.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Room 13",
+      "description": "The room where a lady instructs a character to take her bag.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Broom cupboard",
+      "description": "A room that hoodlums enter while trying to avoid detection.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Tortuga",
+      "description": "A sweet little bistro on Tortuga, off the coast of Hispaniola, where Captain Breadbeard begins his adventure.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Saint-Louis-de-Nor",
+      "description": "The location where Commodore Chicken Milk is stationed, tasked with protecting shipments for the East India Company.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Honest Bob's Build-A-Boat Emporium",
+      "description": "The place where Captain Breadbeard acquires his ship, Betty.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Secondary School Science Block",
+      "description": "The location where two characters break in to conduct experiments on a creature.",
+      "episodes": [
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "USS Puddleford",
+      "description": "A starship where the crew engages in daily activities and prepares for a diplomatic mission.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Shuttle Bay",
+      "description": "The area where the Spacefleet inspector evaluates the First Officer's knowledge of shuttlecraft operations.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Transport Room",
+      "description": "The location where Science Officer Brenda is beamed back from the planet, resulting in her duplication.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Hambly Place",
+      "description": "A derelict house where the ghost story unfolds, featuring a butler named Jeeves and a ghost.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Church of St. Leonard's",
+      "description": "A location where trick-or-treaters pass by on Halloween night.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddleford Community Centre",
+      "description": "The meeting place where the committee discusses the financial crisis and the potential revival of battery ball.",
+      "episodes": [
+        "Battery Ball"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The woods by the old oak tree",
+      "description": "The romantic setting where Persephone and Marmaduke have a picnic and observe the western star.",
+      "episodes": [
+        "When You Wish Upon a War of the Western Star"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dog and Duck",
+      "description": "A pub where Danny Ripples and his gang discuss their heist plan.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)",
+        "Pressed for Love (2000s)",
+        "The Hunchback of Puddleford (1830s)",
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddleford Police Station",
+      "description": "The location where Detective Inspector Babs Chickenmilk is tasked with protecting the Eye of Puddleford.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Local Car Showroom",
+      "description": "A place where Muggins looks for a getaway vehicle for the heist.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Village Hall",
+      "description": "The venue where the Eye of Puddleford is to be displayed by the Women's Institute.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)",
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Applewood Orchard",
+      "description": "The family orchard where Samantha Applewood assesses the ripeness of apples for cider making.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Workhouse",
+      "description": "A place where children and adults awaken to work, and where Martin and his wife discuss their dreams.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Chicken Tannery",
+      "description": "The workplace of Lord Marmaduke, where he plans to expand his business.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Local Park",
+      "description": "A place where Stephen Michaels and his friend attempt to write a punk anthem.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Opera House",
+      "description": "The venue where opera singer Marcella Syndicate performs for a small audience.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Job Centre",
+      "description": "A place where Marcella Syndicate, Michael Stevens, and Stephen Michaels queue for work.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Tavern of the Dog and Duck",
+      "description": "A local tavern where characters discuss the state of the town and the poor vegetable growth.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddleford Monastery",
+      "description": "A monastery where Sir Trevor confronts a bishop and seeks revenge over turnips.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Castle",
+      "description": "The residence of the local feudal lord who is frustrated with the permit system.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Church",
+      "description": "Katie stands outside the church contemplating whether to go in and discuss her troubles with the Vicar.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "School Playground",
+      "description": "Liam, Jack, and Hannah meet in the school playground to discuss their lives and families.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The church",
+      "description": "A place where villagers gather for a sermon and confessions.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The garden",
+      "description": "A location where characters discuss tending to vegetables.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Big Rock",
+      "description": "A notable fishing spot by the river where the two fishermen are trying to catch fish.",
+      "episodes": [
+        "The Hedge Maze Affaire (1890s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Cottage",
+      "description": "A home where a family faces eviction due to unpaid rent and a large television purchase.",
+      "episodes": [
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Danny's parents' house",
+      "description": "A small semi-detached house where Susie and David discuss their daughter Beth.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The library",
+      "description": "A place where Danny and Jim go to find books about monkeys.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
     }
   ],
   "characters": [
     {
       "name": "Clara Verdict",
       "description": "A young lawyer. Has an assistant named Milo.",
-      "episodes": ["The Case of the Contaminated Cows"],
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
       "source": "rss"
     },
     {
       "name": "Maeve and Dennis",
       "description": "Simple farmers caught up in a corporate conspiracy involving their cows.",
-      "episodes": ["The Case of the Contaminated Cows"],
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
       "source": "rss"
     },
     {
       "name": "Mr Butterworth",
       "description": "A gentleman taking the summer at Puddleford Manor. In possession of a large driveway.",
-      "episodes": ["A Most Inconvenient Pipe"],
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
       "source": "rss"
     },
     {
       "name": "Charlene",
       "description": "A resident of New Puddleford (Wild West).",
-      "episodes": ["New Puddleford"],
+      "episodes": [
+        "New Puddleford"
+      ],
       "source": "rss"
     },
     {
       "name": "Captain Breadbeard",
       "description": "A pirate, active in Puddleford in 1695.",
-      "episodes": ["Captain Breadbeard"],
+      "episodes": [
+        "Captain Breadbeard",
+        "Captain Breadbeard (1695)"
+      ],
       "source": "rss"
+    },
+    {
+      "name": "Maeve",
+      "description": "An elderly dairy farmer who is concerned about her prize cow Rosie.",
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dennis",
+      "description": "Maeve's husband, also an elderly dairy farmer, who assists Maeve with their cow's issue.",
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Victor Fortescue",
+      "description": "A city businessman with plans to develop Puddleford, presenting his ideas to the local community.",
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Marshall Lawton",
+      "description": "The chief of local police, more interested in baked goods than police work, who conspires with Victor Fortescue.",
+      "episodes": [
+        "The Case of the Contaminated Cows"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Brawlish",
+      "description": "A dwarf who is part of the trio discussing the return of Lord Chickenmilk.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Crystallania",
+      "description": "An elf who expresses concern about dark tidings and advocates for finding the lost artifact.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Rob",
+      "description": "A human who is part of the trio and wishes to be identified as an elf.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lord Chickenmilk",
+      "description": "The dark lord who has returned to plot his conquest of Puddlefordia.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mawlish",
+      "description": "The wife of Brawlish, who accompanies him to the audience with the king.",
+      "episodes": [
+        "Puddlefordia: The Fellowship of the Dog and Duck"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Clancy Littlehope",
+      "description": "An original resident of New Puddleford who arrives in town with dreams and hopes.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Eleanor Goodnight",
+      "description": "The strong owner of the Goodnight Saloon and mother of Charlene.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Charlene Goodnight",
+      "description": "Eleanor's daughter, who is charming but under her mother's strict protection.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jebediah Bovine Pettychild",
+      "description": "The richest man in town, known as Ruthless Jeb, who makes many people homeless.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "William Bovine Pettychild (Bully the Kid)",
+      "description": "Jeb's son, a feared gunslinger and bully known for his foul temper.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Sheriff",
+      "description": "The small and popular sheriff of New Puddleford, not very brave.",
+      "episodes": [
+        "New Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dr. Eustace Chickenmilk",
+      "description": "The lead surgeon at Puddleford General, concerned about the hospital's financial cuts.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Hospital Administrator",
+      "description": "The administrator of Puddleford General, discussing the hospital's dire financial situation with Dr. Chickenmilk.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dr. Jacques Coquelet",
+      "description": "A doctor at St. Leonard's Clinic, meeting with his team to discuss strategies for extracting money from wealthy patients.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Valerie",
+      "description": "A member of Dr. Coquelet's team, returning from vacation and ready to perform spinal surgeries.",
+      "episodes": [
+        "Irrational Health Service"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lenny",
+      "description": "Another member of Dr. Coquelet's team, who has performed lung surgery and is part of the discussion on fundraising.",
+      "episodes": [
+        "Irrational Health Service",
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mr. Butternose",
+      "description": "The man taking Puddleford Manor for the summer.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mr. Incombe",
+      "description": "A friend accompanying Mr. Butternose.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mr. Coram",
+      "description": "Mr. Butternose's sister, who adds respectability to the group.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mr. Ledbetter",
+      "description": "A plumber and widower with eight daughters.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Gertrude",
+      "description": "One of Mr. Ledbetter's daughters, who feels she is 'on the shelf.'",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Violet",
+      "description": "Another daughter, known for her violent temperament.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lily",
+      "description": "A daughter who likes lilies.",
+      "episodes": [
+        "A Most Inconvenient Pipe",
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Elizabeth",
+      "description": "A politically outspoken daughter.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Betsy",
+      "description": "The youngest daughter, full of spunk and adventurous spirit.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Unity",
+      "description": "A daughter with a problematic personality trait.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Betty",
+      "description": "A daughter who is often confused with Betsy.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "James McAvoy",
+      "description": "A character who claims to be a Hollywood actor, though this is likely a humorous anachronism.",
+      "episodes": [
+        "A Most Inconvenient Pipe"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lady Puddleford",
+      "description": "The lady of the manor who is disturbed by the noise outside on Christmas Eve.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas",
+        "When You Wish Upon a War of the Western Star"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lord Puddleford",
+      "description": "The lord of the manor who is also disturbed by the events occurring in the village.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas",
+        "When You Wish Upon a War of the Western Star",
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Santa Claus",
+      "description": "The jolly festive man trying to manage his reindeer and their revolt.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dasher",
+      "description": "One of Santa's reindeer, known for his speed and energy.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Rudolph",
+      "description": "A reindeer who is not accepted by the others and is part of the discussion about the reindeer team.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Pippin",
+      "description": "A character who claims to run the town and is involved in the snowball fight.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mippet",
+      "description": "A character who assists Pippin in causing mischief in the town.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "HR Elf",
+      "description": "An elf who discusses the rights and pay of the reindeer with Santa.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Nigel",
+      "description": "A back reindeer who questions Santa about wages and rights.",
+      "episodes": [
+        "A Visit to Puddleford by St. Nicholas",
+        "A Chicken Never Dies Twice",
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Muggsy",
+      "description": "A hoodlum trying to blend in at the convention.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mike",
+      "description": "Muggsy's accomplice, also trying to fit in among the convention attendees.",
+      "episodes": [
+        "A Chicken Never Dies Twice",
+        "The Hedge Maze Affaire (1890s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Unnamed Woman",
+      "description": "A woman from room 12 who interacts with Nigel and Mike.",
+      "episodes": [
+        "A Chicken Never Dies Twice"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "First Mate",
+      "description": "Captain Breadbeard's companion who assists him in planning their adventure.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Commodore Chicken Milk",
+      "description": "A naval officer commissioned by the East India Company to protect their shipments.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Bob the Boat Builder",
+      "description": "The owner of Honest Bob's Build-A-Boat Emporium who sells a ship to Captain Breadbeard.",
+      "episodes": [
+        "Captain Breadbeard (1695)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dr. Victor Klein",
+      "description": "A scientist discussing the termination of his career and his illegal experiments.",
+      "episodes": [
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dr. Miriam Strauss",
+      "description": "Dr. Klein's psychiatrist, who is concerned about his behavior and future.",
+      "episodes": [
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Marcus",
+      "description": "One of the characters involved in smuggling the creature into the school.",
+      "episodes": [
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Billy",
+      "description": "A character who is bitten by the creature, resulting in his skin turning to glitter.",
+      "episodes": [
+        "The Pandora Strain (1990s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Captain John Duck",
+      "description": "The captain of the USS Puddleford, tasked with leading a diplomatic mission.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Science Officer Brenda",
+      "description": "The enthusiastic science officer who experiences a teleporter accident, resulting in two versions of herself.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "First Officer",
+      "description": "The officer who is evaluated by the Spacefleet inspector and struggles with updated shuttlecraft operations.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Spacefleet Inspector",
+      "description": "An inspector who assesses the First Officer's knowledge and skills regarding shuttlecraft.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Tactical Security Officer",
+      "description": "An alien crew member responsible for maintaining order during the confusion with the duplicated Brendas.",
+      "episodes": [
+        "Where No Duck Has Gone Before (2180s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Legba Kinkade",
+      "description": "The head librarian of Puddleford who introduces the tales.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Beryl",
+      "description": "A ten-year-old girl who explores Hambly Place and interacts with its ghostly inhabitants.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jeeves",
+      "description": "The butler at Hambly Place who guides Beryl during her stay.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jeremy",
+      "description": "Beryl's imaginary friend who accompanies her in the story.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The Ghost",
+      "description": "A spectral figure in Hambly Place who interacts with Beryl.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Simmy",
+      "description": "A child who is trick-or-treating and is mentioned in the second tale.",
+      "episodes": [
+        "A Haunted Halloween Puddleford"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Johnny",
+      "description": "A member of the committee who recalls the game of battery ball and discusses its rules with his grandmother.",
+      "episodes": [
+        "Battery Ball"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Alan",
+      "description": "The chair of the committee who leads the discussion about battery ball and its potential to help the town financially.",
+      "episodes": [
+        "Battery Ball",
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Bob",
+      "description": "A champion of battery ball from the Riverton Beavers, known for his underhand tactics that led to the competition being shut down.",
+      "episodes": [
+        "Battery Ball"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Granny",
+      "description": "Johnny's elderly grandparent who remembers the game of battery ball and shares some of its rules.",
+      "episodes": [
+        "Battery Ball"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Persephone",
+      "description": "A character who wishes for adventure and experiences a strange event with Marmaduke.",
+      "episodes": [
+        "When You Wish Upon a War of the Western Star"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Marmaduke",
+      "description": "Persephone's companion who expresses concern about his family's ailments and observes the moving star.",
+      "episodes": [
+        "When You Wish Upon a War of the Western Star"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Professor Gander",
+      "description": "The head astronomer at Puddleford Observatory who brings news about the moving western star.",
+      "episodes": [
+        "When You Wish Upon a War of the Western Star"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Danny Ripples",
+      "description": "An ambitious young man leading the gang planning to steal the Eye of Puddleford.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Muggins",
+      "description": "A gang member who is excited about the heist but often distracted.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Detective Inspector Babs Chickenmilk",
+      "description": "The police officer responsible for protecting the Eye of Puddleford.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Sarah",
+      "description": "A member of the Puddleford Women's Institute, concerned about the quality of their baked goods.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Margaret",
+      "description": "A member of the Women's Institute who has a unique weapon for protection.",
+      "episodes": [
+        "The Eye of Puddelford (Present Day)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Samantha Applewood",
+      "description": "A local girl helping her family with their orchard and cider making.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jason Timberland",
+      "description": "Samantha's loyal and comical best friend.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Ronald Grump",
+      "description": "A businessman from the big city looking to build a golf course in Puddleford.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Matthew Grump",
+      "description": "Ronald's adopted son who accompanies him on his trip.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Justin",
+      "description": "Samantha's friend who overhears her father's financial troubles.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Old Lady McNeil",
+      "description": "A local resident harvesting mushrooms in the woods.",
+      "episodes": [
+        "Pressed for Love (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Lord Marmaduke",
+      "description": "A character who plans to tighten workhouse rules and expand his tannery empire.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Martin",
+      "description": "A worker in the workhouse who dreams of becoming a media consultant.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Martin's Wife",
+      "description": "Martin's supportive spouse who helps him with his tasks despite their difficult circumstances.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Sebastian",
+      "description": "Lord Marmaduke's assistant who helps him with business matters.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Tim",
+      "description": "A worker who asks for a pay rise but is fired by Lord Marmaduke.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Cossie",
+      "description": "The barkeep at the Dog and Duck pub.",
+      "episodes": [
+        "The Hunchback of Puddleford (1830s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Stephen Michaels",
+      "description": "A young man attempting to write a punk anthem with his friend.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Michael Stevens",
+      "description": "Stephen's best friend who is also involved in forming a punk band.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Marcella Syndicate",
+      "description": "An opera singer who feels her performances are no longer appreciated.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mrs. Morris",
+      "description": "The instructor of a flower arranging class at the village hall.",
+      "episodes": [
+        "Faster and Furious (1970s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Cecily",
+      "description": "A character who discusses the poor state of vegetables and has a history of whittling.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Sir Trevor",
+      "description": "A knight known as the Turnip Knight, who arrives in Puddleford and is involved in jousting.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Barbara",
+      "description": "Sir Trevor's horse, which is humorously referred to as a cow at one point.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Bishop",
+      "description": "A religious figure at the monastery who interacts with Sir Trevor.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Feudal Lord",
+      "description": "The local lord who is annoyed by the permit system and the policeman.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Bartholomew",
+      "description": "The permit maker who is responsible for issuing permits in Puddleford.",
+      "episodes": [
+        "The Lamentable Tale of the Turnip Knight (1215)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Annie",
+      "description": "The local washerwoman struggling with her workload and seeking help.",
+      "episodes": [
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Reg",
+      "description": "A butcher who advises Annie on recruiting more washerwomen.",
+      "episodes": [
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "William",
+      "description": "The Lord of the Manor who invites a Frenchman for dinner and discusses the menu.",
+      "episodes": [
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Dottie",
+      "description": "William's companion who is excited about the French dinner and the possibility of practicing her French accent.",
+      "episodes": [
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Monsieur Le Blanc",
+      "description": "A character who arrives in a carriage, claiming to be a purveyor of puddings.",
+      "episodes": [
+        "The Puddling that Dropped (1790)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jack",
+      "description": "One of the children who discovers a family secret about a big brother.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Hannah",
+      "description": "Jack's sibling who is involved in the discovery of their big brother.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Katie Barrington",
+      "description": "Mother of Jack and Hannah, troubled by the revelation of a big brother.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Vicar",
+      "description": "The local Vicar who listens to Katie's concerns about her family's secret.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Joshua Rogers",
+      "description": "A local celebrity and horse hypnotist preparing for a busy day.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Liam",
+      "description": "A friend of Jack and Hannah, son of Joshua Rogers.",
+      "episodes": [
+        "That Escalated Quickly (2000s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Henry",
+      "description": "A character who comes to clean a privy and is interested in the French lady.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Tobias",
+      "description": "A villager tasked with killing a chicken for the feast.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The innkeeper's wife",
+      "description": "A character who is involved in the preparations for the feast and interacts with the church.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Reverend Cardinal Sin",
+      "description": "A religious figure who conducts sermons and confessions in the village.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mary",
+      "description": "A French lady who is ill after visiting the well.",
+      "episodes": [
+        "A Wager of Wits (1550s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Rupert",
+      "description": "A resident of Puddleford Manor who is involved in croquet and discusses the hedge maze.",
+      "episodes": [
+        "The Hedge Maze Affaire (1890s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Florence",
+      "description": "Cousin of Rupert who expresses concern about the fishermen at the river.",
+      "episodes": [
+        "The Hedge Maze Affaire (1890s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Colin",
+      "description": "The other fisherman who discusses fishing techniques and family history with Mike.",
+      "episodes": [
+        "The Hedge Maze Affaire (1890s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Simon Spluggle",
+      "description": "The long-serving retainer of Lord Puddleford, who discusses family history and staffing issues.",
+      "episodes": [
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Gran",
+      "description": "Nigel's grandmother, who has financial troubles and a penchant for large televisions.",
+      "episodes": [
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Gladys",
+      "description": "A patron at the Dog and Duck pub who converses with Lord Puddleford about local issues.",
+      "episodes": [
+        "No Time to Waddle (1983)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Danny",
+      "description": "One of the main characters who is discussing band ideas with Jim.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Jim",
+      "description": "Danny's friend and bandmate, involved in discussions about their music.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Susie",
+      "description": "Danny's mother, worried about her daughter Beth's behavior.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "David",
+      "description": "Danny's father, concerned about Beth and her antics.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Beth",
+      "description": "Danny's daughter, who is causing concern for her parents due to her behavior in the garden.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Mrs. Miller",
+      "description": "The neighbor who complains about Beth's disruptive behavior.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "Puddlington",
+      "description": "A character mentioned in relation to the dog causing a disturbance.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
+    },
+    {
+      "name": "The librarian",
+      "description": "The librarian who assists Danny and Jim in finding books about monkeys.",
+      "episodes": [
+        "A Hatful of Dreams (1960s)"
+      ],
+      "source": "transcript"
     }
   ],
-  "processed_episodes": []
+  "processed_episodes": [
+    "15b7bf3e-57e1-45d0-97b0-01b8840c974a",
+    "1fc7a065-7175-411a-ae24-01d3dcd301ed",
+    "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0",
+    "f8da9b31-7e05-4a7d-9e9b-0510d0baba17",
+    "31dbc131-b121-4170-a0dd-5cdefa6e7a44",
+    "58d6c548-86eb-44b6-9545-8ec170fdb544",
+    "b10de1cf-5b6b-4b47-972d-3b5c0728f9b7",
+    "afe6c528-cc62-42c3-b5af-5d395c407b95",
+    "767c3624-ab34-467f-a698-e135744a3df8",
+    "8c9f35bd-7c42-4ab1-b891-a568fec9f43f",
+    "bcd0d99b-aa06-4d5e-ab05-16c4159e7904",
+    "b187585a-554f-496e-b900-7c038dc152be",
+    "4eb865e8-521f-4176-919e-29c2b3c06bc3",
+    "c1066b88-9eb5-4db4-a9c2-23268f06a094",
+    "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5",
+    "c788f179-57d7-402e-bbaf-c8abee15b14c",
+    "8884fb09-b5be-45d2-b163-cec26855e6a7",
+    "d0dc4007-4e46-45f9-b6cb-cf1423f8f197",
+    "98a82f77-83b1-4782-88f8-c756113214fb",
+    "d968eef2-2487-41d8-9ad6-8c359b5615ca",
+    "d5754d92-1073-4e70-bfae-dc936788078a",
+    "63e19a59-38c7-4957-a64c-5107a7ca90b0",
+    "3bbf52da-70fd-4d94-854e-0aad62020554",
+    "4abfaf73-d11d-47bf-9ab7-9c9b846677da"
+  ]
 }
