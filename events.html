@@ -1,114 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Events — Puddleford</title>
-  <meta name="description" content="Puddleford live events. The Puddleford Players performing live — improvised history made in real time." />
-  <meta property="og:title"       content="Live Events — Puddleford" />
-  <meta property="og:description" content="Watch the Puddleford Players perform live. First show: Milton Keynes Comedy Festival, July 2026." />
-  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Puddleford live events — see the Puddleford Players perform the town live and unscripted. Milton Keynes Comedy Festival, July 2026.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Live Events — Puddleford: A Town with a Tale">
+  <meta property="og:description" content="Puddleford, live and unscripted. The Puddleford Players take to the stage at Milton Keynes Comedy Festival, July 2026.">
+  <meta property="og:image" content="assets/img/cover-with-title-1.jpg">
+  <meta property="og:url" content="https://ttfnrob.github.io/Puddleford/events.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">🎭 Puddleford</a>
-    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="episodes.html">Episodes</a></li>
-      <li><a href="wiki.html">Wiki</a></li>
-      <li><a href="players.html">The Players</a></li>
-      <li><a href="events.html" class="active">Events</a></li>
-      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen ↗</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- ── Navigation ── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+      <button class="nav__toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+      <ul class="nav__links">
+        <li><a href="episodes.html" class="nav__link">Episodes</a></li>
+        <li><a href="wiki.html" class="nav__link">Wiki</a></li>
+        <li><a href="players.html" class="nav__link">The Players</a></li>
+        <li><a href="events.html" class="nav__link nav__link--active">Events</a></li>
+        <li>
+          <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd"
+             target="_blank" rel="noopener"
+             class="nav__link nav__listen">▶ Listen</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<div class="page-header">
-  <h1>Live Events</h1>
-  <p>Puddleford, live and unscripted.</p>
-</div>
+  <!-- ── Page Header ── -->
+  <header class="page-header">
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Live Events</h1>
+      <p class="page-header__sub">Puddleford, live and unscripted.</p>
+    </div>
+  </header>
 
-<div class="section">
+  <!-- ── Events ── -->
+  <main class="section" id="main-content">
+    <div class="container">
 
-  <p style="color:var(--text-muted); margin-bottom:2rem; font-style:italic;">
-    The Puddleford Players are bringing the town to life on stage. Every show is entirely improvised — 
-    no script, no safety net, no idea what's about to happen. Come and find out alongside us.
-  </p>
-
-  <div class="events-list">
-
-    <!-- MK Comedy Festival -->
-    <div class="event-card">
-      <div class="event-date">
-        <span class="month">JUL</span>
-        <span class="day">??</span>
+      <!-- Intro -->
+      <div class="section-header">
+        <span class="section-header__label">Coming soon</span>
+        <h2 class="section-header__title">See the Town Come to Life</h2>
+        <p class="section-header__sub">
+          For the first time, the Puddleford Players will improvise the town
+          live in front of an audience. No scripts. No safety net.
+          Just Puddleford, happening in real time.
+        </p>
       </div>
-      <div class="event-body">
-        <h3>Puddleford Live at Milton Keynes Comedy Festival</h3>
-        <div class="event-venue">📍 Milton Keynes Comedy Festival &nbsp;·&nbsp; Milton Keynes</div>
-        <div class="event-desc">
-          The Puddleford Players take the stage for their very first live performance. 
-          Watch improvised history made in real time — the quirky, warm, completely unplanned town of Puddleford, 
-          brought to life before your eyes. Exact date and ticket details coming soon.
+
+      <!-- Featured event -->
+      <article class="event-card" aria-labelledby="mkcf-title">
+        <div class="event-card__date" aria-label="July 2026">
+          <div class="event-card__date-month">July</div>
+          <div class="event-card__date-year">2026</div>
         </div>
-        <span style="display:inline-block; padding:.3rem .9rem; border-radius:3px; background:var(--border-gold); color:var(--gold-light); font-size:.8rem; font-weight:600; letter-spacing:.04em;">
-          Details &amp; tickets coming soon
-        </span>
+        <div>
+          <h2 class="event-card__title" id="mkcf-title">Milton Keynes Comedy Festival</h2>
+          <p class="event-card__location">📍 Milton Keynes &nbsp;·&nbsp; Date and venue TBC</p>
+          <p class="event-card__desc">
+            The first ever live Puddleford show. The Puddleford Players take to the stage
+            at the Milton Keynes Comedy Festival to improvise the town in front of a live
+            audience for the very first time. Every character, every twist, every scandal —
+            made up on the spot, in the room, with you there to witness it.
+            Exact date, venue, and ticket details will be announced soon.
+          </p>
+        </div>
+        <div class="event-card__cta">
+          <a href="https://www.mktoc.co.uk/puddleford/"
+             target="_blank" rel="noopener"
+             class="btn btn--outline">
+            Follow for updates
+          </a>
+        </div>
+      </article>
+
+      <!-- "More coming" placeholder -->
+      <div class="events-placeholder" role="status" aria-live="polite">
+        <p style="font-size:1.5rem; margin-bottom:0.5rem;">🎭</p>
+        <p style="font-size:1.1rem; color:var(--text); font-family:var(--font-heading); margin-bottom:0.5rem;">
+          More events will be announced soon.
+        </p>
+        <p>The Puddleford Players are taking the town on the road. Watch this space.</p>
+      </div>
+
+      <span class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</span>
+
+      <!-- Newsletter / stay updated CTA -->
+      <section class="cta-band" aria-labelledby="cta-heading">
+        <h2 id="cta-heading">Stay in the Loop</h2>
+        <p>
+          Don't miss a single episode or event. Follow MKTOC for the latest news
+          from Puddleford — new episodes, live dates, and everything in between.
+        </p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="https://www.mktoc.co.uk/puddleford/"
+             target="_blank" rel="noopener"
+             class="btn btn--gold">
+            Follow MKTOC →
+          </a>
+          <a href="episodes.html" class="btn btn--outline">
+            Browse all episodes
+          </a>
+        </div>
+      </section>
+
+      <!-- What to expect section -->
+      <section class="section--sm" aria-labelledby="expect-heading" style="padding-bottom:0;">
+        <h2 id="expect-heading" style="font-family:var(--font-heading); color:var(--gold); font-size:1.8rem; text-align:center; margin-bottom:2rem;">
+          What to Expect
+        </h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.5rem;">
+
+          <div class="card" style="padding:0;">
+            <div class="card__body">
+              <span style="font-size:2rem; display:block; margin-bottom:0.75rem;">✍️</span>
+              <h3 class="card__title">No Script</h3>
+              <p class="card__desc" style="-webkit-line-clamp:unset;">
+                Nothing is written in advance. Not a word. The Puddleford Players
+                arrive with nothing but each other and the accumulated lore of the town.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:0;">
+            <div class="card__body">
+              <span style="font-size:2rem; display:block; margin-bottom:0.75rem;">🎲</span>
+              <h3 class="card__title">Anything Can Happen</h3>
+              <p class="card__desc" style="-webkit-line-clamp:unset;">
+                Puddleford has hosted pirates, time travellers, and a flying castle.
+                The live show will be no different. Come prepared for the unexpected.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="padding:0;">
+            <div class="card__body">
+              <span style="font-size:2rem; display:block; margin-bottom:0.75rem;">🤝</span>
+              <h3 class="card__title">You're Part of It</h3>
+              <p class="card__desc" style="-webkit-line-clamp:unset;">
+                A live audience changes everything. The town comes alive differently
+                when it has people breathing in the room. You're not just watching —
+                you're witnessing a Puddleford that has never existed before.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+        <p>A fully improvised episodic audio drama about a fictional English town.</p>
+        <p style="margin-top:0.5rem;">
+          Made by the <a href="players.html">Puddleford Players</a> at
+          <a href="https://www.mktoc.co.uk" target="_blank" rel="noopener">MKTOC</a>.
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="episodes.html">Episodes</a></li>
+          <li><a href="wiki.html">Wiki</a></li>
+          <li><a href="players.html">The Players</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </nav>
+      <div class="footer__platforms">
+        <h4>Listen</h4>
+        <ul>
+          <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Spotify</a></li>
+          <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener">Apple Podcasts</a></li>
+          <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener">Pocket Casts</a></li>
+          <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank" rel="noopener">Podcastle</a></li>
+          <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank" rel="noopener">MKTOC</a></li>
+        </ul>
       </div>
     </div>
-
-    <!-- Placeholder -->
-    <div class="event-placeholder">
-      More events will be announced soon. Watch this space — Puddleford never stands still for long.
+    <div class="container footer__bottom">
+      <p>&copy; 2025 MKTOC — Milton Keynes Theatre of Comedy. All rights reserved.</p>
     </div>
-
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-block">
-    <h3>Don't miss a show</h3>
-    <p>
-      Follow MKTOC for the latest news on Puddleford live events, new episodes, and everything happening in Milton Keynes comedy.
-    </p>
-    <a href="https://www.mktoc.co.uk" target="_blank" class="btn btn-primary">Follow MKTOC →</a>
-  </div>
-
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">🎭 Puddleford</a>
-      <p>A Town with a Tale</p>
-    </div>
-    <div class="footer-links">
-      <ul>
-        <li><a href="episodes.html">Episodes</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-        <li><a href="players.html">The Players</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
-      </ul>
-    </div>
-    <div class="footer-platforms">
-      <p>Listen on</p>
-      <ul>
-        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
-        <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
-        <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
-        <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-copy">
-    &copy; 2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>

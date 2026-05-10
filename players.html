@@ -1,131 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Puddleford Players — Puddleford</title>
-  <meta name="description" content="Meet the Puddleford Players — the five improvisers from MKTOC who make Puddleford: A Town with a Tale." />
-  <meta property="og:title"       content="The Puddleford Players" />
-  <meta property="og:description" content="Five improvisers. One fictional town. Entirely made up, every week." />
-  <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Meet the Puddleford Players — the five improvisers behind the town of Puddleford. Made by MKTOC, Milton Keynes Theatre of Comedy.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Puddleford Players">
+  <meta property="og:description" content="Five improvisers. One fictional town. Everything made up on the spot. Meet the Puddleford Players.">
+  <meta property="og:image" content="assets/img/cover-with-title-1.jpg">
+  <meta property="og:url" content="https://ttfnrob.github.io/Puddleford/players.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">🎭 Puddleford</a>
-    <button class="nav-hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="episodes.html">Episodes</a></li>
-      <li><a href="wiki.html">Wiki</a></li>
-      <li><a href="players.html" class="active">The Players</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" class="nav-listen">Listen ↗</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="page-header">
-  <h1>The Puddleford Players</h1>
-  <p>The improvisers behind the town.</p>
-</div>
-
-<div class="section">
-
-  <blockquote class="pull-quote">
-    "Everything you hear is totally made up, and improvised on the spot by the Puddleford Players."
-  </blockquote>
-
-  <div class="players-grid">
-
-    <div class="player-card">
-      <div class="player-avatar">🎭</div>
-      <div class="player-name">Rob Simpson</div>
-      <div class="player-bio">
-        Co-creator of Puddleford and one of its founding inhabitants. Rob has a gift for giving fictional characters very specific opinions about very minor things. Also responsible for any good ideas.
-      </div>
-    </div>
-
-    <div class="player-card">
-      <div class="player-avatar">🎭</div>
-      <div class="player-name">Sean McDermott</div>
-      <div class="player-bio">
-        A man who can commit fully to any character, no matter how inadvisable. Sean is responsible for a significant proportion of Puddleford's plot twists, none of which were planned.
-      </div>
-    </div>
-
-    <div class="player-card">
-      <div class="player-avatar">🎭</div>
-      <div class="player-name">David Lovesy</div>
-      <div class="player-bio">
-        David brings warmth, wit, and a remarkable ability to say exactly the wrong thing at exactly the right time. Puddleford would be a quieter, less interesting place without him.
-      </div>
-    </div>
-
-    <div class="player-card">
-      <div class="player-avatar">🎭</div>
-      <div class="player-name">Vicki Simpson</div>
-      <div class="player-bio">
-        Vicki is the backbone of many a Puddleford scene — grounded, funny, and frequently the only sensible person in the room (which, in an improvised drama, is not always an advantage).
-      </div>
-    </div>
-
-    <div class="player-card">
-      <div class="player-avatar">🎭</div>
-      <div class="player-name">Steve Clark</div>
-      <div class="player-bio">
-        Steve specialises in characters who are absolutely certain they are right, even when history, logic, and basic common sense suggest otherwise. Puddleford is richer for it.
-      </div>
-    </div>
-
-  </div>
-
-  <hr class="section-divider" style="margin: 2.5rem 0;" />
-
-  <div class="mktoc-block">
-    <h3>Milton Keynes Theatre of Comedy</h3>
-    <p>
-      The Puddleford Players are all members of MKTOC — Milton Keynes Theatre of Comedy — 
-      a community improv group based in Milton Keynes, UK. Puddleford is their flagship podcast project. 
-      They also perform live improv shows throughout the year.
-    </p>
-    <a href="https://www.mktoc.co.uk" target="_blank" class="btn btn-primary">Visit MKTOC →</a>
-  </div>
-
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">🎭 Puddleford</a>
-      <p>A Town with a Tale</p>
-    </div>
-    <div class="footer-links">
-      <ul>
-        <li><a href="episodes.html">Episodes</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-        <li><a href="players.html">The Players</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
+  <!-- ── Navigation ── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+      <button class="nav__toggle" aria-label="Toggle menu" onclick="this.nextElementSibling.classList.toggle('open')">☰</button>
+      <ul class="nav__links">
+        <li><a href="episodes.html" class="nav__link">Episodes</a></li>
+        <li><a href="wiki.html" class="nav__link">Wiki</a></li>
+        <li><a href="players.html" class="nav__link nav__link--active">The Players</a></li>
+        <li><a href="events.html" class="nav__link">Events</a></li>
+        <li>
+          <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd"
+             target="_blank" rel="noopener"
+             class="nav__link nav__listen">▶ Listen</a>
+        </li>
       </ul>
     </div>
-    <div class="footer-platforms">
-      <p>Listen on</p>
-      <ul>
-        <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank">Spotify</a></li>
-        <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank">Apple Podcasts</a></li>
-        <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank">Pocket Casts</a></li>
-        <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank">Podcastle</a></li>
-      </ul>
+  </nav>
+
+  <!-- ── Page Header ── -->
+  <header class="page-header">
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">The Puddleford Players</h1>
+      <p class="page-header__sub">The improvisers behind the town.</p>
     </div>
-  </div>
-  <div class="footer-copy">
-    &copy; 2026 Milton Keynes Theatre of Comedy. All episodes entirely improvised.
-  </div>
-</footer>
+  </header>
+
+  <!-- ── Players Grid ── -->
+  <main class="section" id="main-content">
+    <div class="container">
+
+      <!-- Intro quote -->
+      <blockquote class="blockquote" style="max-width:700px; margin: 0 auto 3rem;">
+        "Everything you hear is totally made up, and improvised on the spot."
+      </blockquote>
+
+      <!-- Player cards -->
+      <div class="players-grid" aria-label="The Puddleford Players">
+
+        <div class="player-card">
+          <span class="player-card__avatar" aria-hidden="true">🎙️</span>
+          <div class="player-card__name">Rob Simpson</div>
+          <div class="player-card__role">Performer &amp; Co-creator</div>
+          <p class="player-card__bio">
+            Co-creator of the Puddleford universe and one of its most enthusiastic residents.
+            Rob has a particular talent for conjuring Puddleford's more improbable civic
+            institutions and the baffling characters who run them.
+          </p>
+        </div>
+
+        <div class="player-card">
+          <span class="player-card__avatar" aria-hidden="true">🎭</span>
+          <div class="player-card__name">Sean McDermott</div>
+          <div class="player-card__role">Performer</div>
+          <p class="player-card__bio">
+            Sean brings a range of voices and an instinct for Puddleford's stranger corners.
+            Whether it's the 1690s or the 2180s, Sean finds the human — and occasionally
+            the inhuman — heart of every scene.
+          </p>
+        </div>
+
+        <div class="player-card">
+          <span class="player-card__avatar" aria-hidden="true">🃏</span>
+          <div class="player-card__name">David Lovesy</div>
+          <div class="player-card__role">Performer</div>
+          <p class="player-card__bio">
+            David is the wildcard in Puddleford's deck. A gifted character improviser who
+            can pivot from heartfelt to absurd in a single breath, and frequently does.
+            The town would be much duller without him.
+          </p>
+        </div>
+
+        <div class="player-card">
+          <span class="player-card__avatar" aria-hidden="true">⭐</span>
+          <div class="player-card__name">Vicki Simpson</div>
+          <div class="player-card__role">Performer</div>
+          <p class="player-card__bio">
+            Vicki grounds Puddleford's most outlandish moments with warmth and wit.
+            An instinctive storyteller, she has a gift for finding the genuine emotion
+            inside even the most ridiculous of Puddleford's predicaments.
+          </p>
+        </div>
+
+        <div class="player-card">
+          <span class="player-card__avatar" aria-hidden="true">🎪</span>
+          <div class="player-card__name">Steve Clark</div>
+          <div class="player-card__role">Performer</div>
+          <p class="player-card__bio">
+            Steve is the steady hand and the wildly flailing one, sometimes simultaneously.
+            His commitment to whatever Puddleford throws at him is total, and his
+            timing is the envy of the town square.
+          </p>
+        </div>
+
+      </div>
+
+      <span class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</span>
+
+      <!-- MKTOC section -->
+      <section class="mktoc-section" aria-labelledby="mktoc-heading">
+        <h2 id="mktoc-heading">About MKTOC</h2>
+        <p>
+          The Puddleford Players are part of <strong style="color:var(--gold);">MKTOC</strong> —
+          Milton Keynes Theatre of Comedy — a community improv group based in Milton Keynes.
+          MKTOC performs, teaches, and celebrates the art of improvised theatre.
+        </p>
+        <p>
+          Puddleford is their flagship audio project: an episodic, entirely improvised
+          audio drama that has grown a town, a mythology, and a devoted listener base
+          from nothing but imagination and a microphone.
+        </p>
+        <a href="https://www.mktoc.co.uk/puddleford/"
+           target="_blank" rel="noopener"
+           class="btn btn--outline">
+          Visit MKTOC →
+        </a>
+      </section>
+
+      <!-- Listen section -->
+      <section class="section--sm text-center" aria-labelledby="listen-heading" style="padding-bottom:0;">
+        <h2 id="listen-heading" style="font-family:var(--font-heading); color:var(--gold); font-size:1.6rem; margin-bottom:1rem;">
+          Hear them in action
+        </h2>
+        <p class="text-muted" style="margin-bottom:1.5rem;">
+          Every episode of Puddleford is available free on all major podcast platforms.
+        </p>
+        <div class="listen-buttons">
+          <a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd"
+             target="_blank" rel="noopener" class="listen-btn">
+            <span class="icon">🎵</span> Spotify
+          </a>
+          <a href="https://podcasts.apple.com/podcast/puddleford/id1799546935"
+             target="_blank" rel="noopener" class="listen-btn">
+            <span class="icon">🎙️</span> Apple Podcasts
+          </a>
+          <a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b"
+             target="_blank" rel="noopener" class="listen-btn">
+            <span class="icon">🎧</span> Pocket Casts
+          </a>
+          <a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q"
+             target="_blank" rel="noopener" class="listen-btn">
+            <span class="icon">🏰</span> Podcastle
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo"><span>🎭</span> Puddleford</a>
+        <p>A fully improvised episodic audio drama about a fictional English town.</p>
+        <p style="margin-top:0.5rem;">
+          Made by the <a href="players.html">Puddleford Players</a> at
+          <a href="https://www.mktoc.co.uk" target="_blank" rel="noopener">MKTOC</a>.
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="episodes.html">Episodes</a></li>
+          <li><a href="wiki.html">Wiki</a></li>
+          <li><a href="players.html">The Players</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </nav>
+      <div class="footer__platforms">
+        <h4>Listen</h4>
+        <ul>
+          <li><a href="https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd" target="_blank" rel="noopener">Spotify</a></li>
+          <li><a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener">Apple Podcasts</a></li>
+          <li><a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener">Pocket Casts</a></li>
+          <li><a href="https://podcastle.ai/show/puddleford-Lj0HmS2Q" target="_blank" rel="noopener">Podcastle</a></li>
+          <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank" rel="noopener">MKTOC</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>&copy; 2025 MKTOC — Milton Keynes Theatre of Comedy. All rights reserved.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
