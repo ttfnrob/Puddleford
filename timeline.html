@@ -146,7 +146,8 @@
     return 9998;
   }
 
-  function eraCol(era) {
+  function eraCol(era, isGap) {
+    if (isGap) return '#3a3228';
     var y = eraYear(era), s = (era || '').toLowerCase();
     if (/puddlefordia|ancient|fantasy/.test(s) || y < 0) return '#4a2060';
     if (s.includes('wild west')) return '#8b3a1a';
@@ -175,7 +176,25 @@
      RENDER — snake timeline with proper bends
      ═══════════════════════════════════════════════════ */
   function render(raw) {
-    var eps = dedup(raw).sort(function (a, b) { return eraYear(a.era) - eraYear(b.era); });
+    // Data is pre-deduplicated; just sort chronologically
+    var eps = raw.slice().sort(function (a, b) { return eraYear(a.era) - eraYear(b.era); });
+
+    // Inject "empty century" gap markers between entries with large time jumps
+    var epsWithGaps = [];
+    for (var gi = 0; gi < eps.length; gi++) {
+      epsWithGaps.push(eps[gi]);
+      if (gi < eps.length - 1) {
+        var yearA = eraYear(eps[gi].era);
+        var yearB = eraYear(eps[gi + 1].era);
+        if (yearA > 0 && yearB > 0 && yearB - yearA > 150) {
+          // Add a grey gap marker
+          var gapYears = yearB - yearA;
+          var gapLabel = gapYears + ' years unvisited';
+          epsWithGaps.push({ era: '~' + (yearA + Math.round(gapYears/2)), episode: gapLabel, _gap: true });
+        }
+      }
+    }
+    eps = epsWithGaps;
     document.getElementById('snake-loading').style.display = 'none';
     var N = eps.length;
     if (!N) return;
@@ -255,8 +274,8 @@
       for (var i = si; i < ei; i++) {
         var ep  = eps[i];
         var li  = i - si;
-        var col = eraCol(ep.era);
-        var isGap = (i > 0 && eraYear(ep.era) - eraYear(eps[i - 1].era) > 200);
+        var col = eraCol(ep.era, ep._gap);
+        var isGap = ep._gap === true;
 
         var x;
         if (ltr) {
@@ -270,16 +289,13 @@
         // Main ribbon segment fill — no rounded corners
         var rc = mk('rect', { x: x, y: ry, width: segW + 0.5, height: TH, fill: col });
 
-        // Round only the very start of first segment and very end of last segment
+        // Only the very first start gets a rounded left cap
+        // (last segment end is open — the ribbon just stops, which looks cleaner)
         if (i === 0) {
-          rc.setAttribute('rx', String(TH / 4));
-        }
-        if (i === N - 1) {
-          // Add a rounded cap on the last segment
-          rc.setAttribute('rx', String(TH / 4));
+          rc.setAttribute('rx', '4');
         }
 
-        if (isGap) rc.setAttribute('opacity', '0.3');
+        if (isGap) { rc.setAttribute('fill', '#2a2018'); rc.setAttribute('opacity', '0.7'); }
         g.appendChild(rc);
 
         // Dashed overlay for large time gaps

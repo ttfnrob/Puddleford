@@ -6,9 +6,10 @@
   "timeline": [
     {
       "era": "1695",
-      "episode": "Captain Breadbeard",
-      "description": "Pirates arrive in Puddleford. The sea is not nearby. This has not deterred them.",
-      "source": "rss"
+      "episode": "Captain Breadbeard (1695)",
+      "description": "The episode follows the story of Captain Breadbeard, the youngest pirate captain, as he plans to explore Tortuga and seek treasure with his first mate.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "1790s",
@@ -18,9 +19,10 @@
     },
     {
       "era": "1830s",
-      "episode": "The Hunchback of Puddleford",
-      "description": "Victorian drama in Puddleford.",
-      "source": "rss"
+      "episode": "The Hunchback of Puddleford (1830s)",
+      "description": "Lord Marmaduke plans to tighten workhouse rules while Martin dreams of a better life beyond the workhouse.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "1930s",
@@ -30,9 +32,10 @@
     },
     {
       "era": "1970s",
-      "episode": "Faster and Furious",
-      "description": "Cars, flares, and something going very fast through Puddleford.",
-      "source": "rss"
+      "episode": "Faster and Furious (1970s)",
+      "description": "The episode features a talent show at The Dog and Duck pub, highlighting the cultural clash between punk and opera in Puddleford.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "1983",
@@ -42,27 +45,31 @@
     },
     {
       "era": "1990s",
-      "episode": "The Pandora Strain",
-      "description": "Something has been released in Puddleford.",
-      "source": "rss"
+      "episode": "The Pandora Strain (1990s)",
+      "description": "In this episode, a genetically modified creature escapes in Puddleford, leading to chaos as it bites a character named Billy, causing his skin to turn to glitter.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "2000s",
-      "episode": "Pressed for Love",
-      "description": "The millennium has arrived. Puddleford adapts, imperfectly.",
-      "source": "rss"
+      "episode": "Pressed for Love (2000s)",
+      "description": "The episode follows local characters in Puddleford as they navigate personal challenges, including financial troubles related to an orchard and the arrival of a businessman looking to build a golf course.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "Present Day",
-      "episode": "The Eye of Puddleford",
-      "description": "Something is watching. Puddleford carries on regardless.",
-      "source": "rss"
+      "episode": "The Eye of Puddleford (Present Day)",
+      "description": "The Puddleford Women's Institute is preparing to display the Eye of Puddleford, a priceless cubic zirconia, while a local gang plans to steal it.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "2180s",
-      "episode": "Where No Duck Has Gone Before",
-      "description": "The far future. Puddleford has, somehow, made it to space.",
-      "source": "rss"
+      "episode": "Where No Duck Has Gone Before (2180s)",
+      "description": "Captain Duck must undertake a delicate diplomatic mission while dealing with a teleporter accident involving Science Officer Brenda, who is duplicated, and a critical Spacefleet inspector onboard.",
+      "source": "transcript",
+      "season": ""
     },
     {
       "era": "The Wild West",
@@ -91,27 +98,6 @@
       "season": "1"
     },
     {
-      "era": "1695",
-      "episode": "Captain Breadbeard (1695)",
-      "description": "The episode follows the story of Captain Breadbeard, the youngest pirate captain, as he plans to explore Tortuga and seek treasure with his first mate.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "1990s",
-      "episode": "The Pandora Strain (1990s)",
-      "description": "In this episode, a genetically modified creature escapes in Puddleford, leading to chaos as it bites a character named Billy, causing his skin to turn to glitter.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "2180s",
-      "episode": "Where No Duck Has Gone Before (2180s)",
-      "description": "Captain Duck must undertake a delicate diplomatic mission while dealing with a teleporter accident involving Science Officer Brenda, who is duplicated, and a critical Spacefleet inspector onboard.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
       "era": "1940s",
       "episode": "A Haunted Halloween Puddleford",
       "description": "The episode features three tales of terror, starting with a ghost story set in 1942 about a child named Beryl who encounters supernatural beings at Hambly Place.",
@@ -122,34 +108,6 @@
       "era": "1950s",
       "episode": "When You Wish Upon a War of the Western Star",
       "description": "In the 1950s, the residents of Puddleford are unknowingly observed by extraterrestrial beings. Meanwhile, a couple, Persephone and Marmaduke, experience a strange event involving a moving star and a subsequent alien landing.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "Present Day",
-      "episode": "The Eye of Puddelford (Present Day)",
-      "description": "The Puddleford Women's Institute is preparing to display the Eye of Puddleford, a priceless cubic zirconia, while a local gang plans to steal it.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "2000s",
-      "episode": "Pressed for Love (2000s)",
-      "description": "The episode follows local characters in Puddleford as they navigate personal challenges, including financial troubles related to an orchard and the arrival of a businessman looking to build a golf course.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "1830s",
-      "episode": "The Hunchback of Puddleford (1830s)",
-      "description": "Lord Marmaduke plans to tighten workhouse rules while Martin dreams of a better life beyond the workhouse.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
-      "era": "1970s",
-      "episode": "Faster and Furious (1970s)",
-      "description": "The episode features a talent show at The Dog and Duck pub, highlighting the cultural clash between punk and opera in Puddleford.",
       "source": "transcript",
       "season": ""
     },
