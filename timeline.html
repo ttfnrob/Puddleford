@@ -10,7 +10,7 @@
   <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .snake-wrap { width:100%; overflow:hidden; padding:1.5rem 0 4rem; background:var(--bg,#1a120a); position:relative; }
+    .snake-wrap { width:100%; overflow-x:hidden; overflow-y:visible; padding:0 0 4rem; background:var(--bg,#1a120a); position:relative; }
     .snake-wrap svg { display:block; margin:0 auto; }
     .snake-wrap::before,
     .snake-wrap::after {
@@ -211,9 +211,13 @@
     var segW    = rowW / perRow;
     var nRows   = Math.ceil(N / perRow);
     var rowPitch = TH + ROW_GAP;  // total height per row
-    var topPad  = 30;             // top padding in SVG
-    var svgW    = cw + 0;  // bends drawn within PAD space, which includes bend width
-    var svgH    = topPad + nRows * rowPitch + 40;
+    var topPad  = mob ? 80 : 100;  // top padding for labels above first ribbon
+    // Right bend protrudes beyond PAD+rowW by outerR = (2*TH+ROW_GAP)/2
+    var bendProtrude = (2 * TH + ROW_GAP) / 2;
+    var svgW    = cw;  // viewBox will clip; use overflow:visible on container
+    // Expand SVG to contain right bends
+    svgW = PAD + rowW + bendProtrude + 4;
+    var svgH    = topPad + nRows * rowPitch + (mob ? 80 : 100);  // bottom label space
 
     var svg = mk('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH });
     var segs = [];
