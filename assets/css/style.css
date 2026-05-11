@@ -36,7 +36,7 @@ p:last-child{margin-bottom:0}
 ul{list-style:none}
 
 .container{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
-.section{padding:4rem 0}
+.section{padding:4rem 0}.section>.container,.section-inner{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
 .divider{border:none;border-top:1px solid var(--border-gold);margin:2rem 0;opacity:0.5}
 .ornament{display:block;text-align:center;color:var(--gold);opacity:0.5;font-size:1.2rem;letter-spacing:0.5rem;margin:1.5rem 0}
 
