@@ -214,6 +214,8 @@ Rules:
 - Keep descriptions concise (1-2 sentences max).
 - If a field has no data, use null or an empty array.
 - Return only valid JSON, no other text.
+- For timeline_entry.era: use the historical period only (e.g. '1830s', '1983', 'Present Day'). Do NOT append the era to the episode title.
+- The episode title in the output should be the clean title only, without any era suffix.
 
 Episode description (from RSS):
 {episode_desc[:500]}
@@ -425,15 +427,18 @@ def merge_wiki(wiki, ep, extracted):
     # Timeline
     if extracted.get("timeline_entry") and extracted["timeline_entry"].get("era"):
         entry = extracted["timeline_entry"]
+        import re as _re
+        # Strip any trailing "(era)" suffix GPT may have added to the title
+        clean_title = _re.sub(r"\s*\([^)]+\)\s*$", "", title).strip()
         # Check if this era+episode combo already exists
         exists = any(
-            t.get("era") == entry["era"] and t.get("episode") == title
+            t.get("era") == entry["era"] and t.get("episode") == clean_title
             for t in wiki["timeline"]
         )
         if not exists:
             wiki["timeline"].append({
                 "era": entry["era"],
-                "episode": title,
+                "episode": clean_title,
                 "description": entry.get("description", ""),
                 "source": "transcript",
                 "season": season,

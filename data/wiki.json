@@ -6,85 +6,55 @@
   "timeline": [
     {
       "era": "1695",
-      "episode": "Captain Breadbeard (1695)",
+      "episode": "Captain Breadbeard",
       "description": "The episode follows the story of Captain Breadbeard, the youngest pirate captain, as he plans to explore Tortuga and seek treasure with his first mate.",
       "source": "transcript",
       "season": ""
     },
     {
-      "era": "1790s",
-      "episode": "Series One - early episodes",
-      "description": "Late Georgian Puddleford.",
-      "source": "rss"
-    },
-    {
       "era": "1830s",
-      "episode": "The Hunchback of Puddleford (1830s)",
+      "episode": "The Hunchback of Puddleford",
       "description": "Lord Marmaduke plans to tighten workhouse rules while Martin dreams of a better life beyond the workhouse.",
       "source": "transcript",
       "season": ""
     },
     {
-      "era": "1930s",
-      "episode": "Series One - early episodes",
-      "description": "The interwar years come to Puddleford.",
-      "source": "rss"
-    },
-    {
       "era": "1970s",
-      "episode": "Faster and Furious (1970s)",
+      "episode": "Faster and Furious",
       "description": "The episode features a talent show at The Dog and Duck pub, highlighting the cultural clash between punk and opera in Puddleford.",
       "source": "transcript",
       "season": ""
     },
     {
-      "era": "1983",
-      "episode": "A very specific year",
-      "description": "Not the 1980s in general. 1983 in particular.",
-      "source": "rss"
-    },
-    {
       "era": "1990s",
-      "episode": "The Pandora Strain (1990s)",
+      "episode": "The Pandora Strain",
       "description": "In this episode, a genetically modified creature escapes in Puddleford, leading to chaos as it bites a character named Billy, causing his skin to turn to glitter.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "2000s",
-      "episode": "Pressed for Love (2000s)",
+      "episode": "Pressed for Love",
       "description": "The episode follows local characters in Puddleford as they navigate personal challenges, including financial troubles related to an orchard and the arrival of a businessman looking to build a golf course.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "Present Day",
-      "episode": "The Eye of Puddleford (Present Day)",
+      "episode": "The Eye of Puddleford",
       "description": "The Puddleford Women's Institute is preparing to display the Eye of Puddleford, a priceless cubic zirconia, while a local gang plans to steal it.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "2180s",
-      "episode": "Where No Duck Has Gone Before (2180s)",
+      "episode": "Where No Duck Has Gone Before",
       "description": "Captain Duck must undertake a delicate diplomatic mission while dealing with a teleporter accident involving Science Officer Brenda, who is duplicated, and a critical Spacefleet inspector onboard.",
       "source": "transcript",
       "season": ""
     },
     {
-      "era": "The Wild West",
-      "episode": "New Puddleford",
-      "description": "A frontier town bearing a suspicious resemblance to Puddleford.",
-      "source": "rss"
-    },
-    {
-      "era": "Puddlefordia",
-      "episode": "The Fellowship of the Dog and Duck",
-      "description": "A fantasy realm. The Dog and Duck still exists.",
-      "source": "rss"
-    },
-    {
-      "era": "The Napoleonic Wars",
+      "era": "1810s",
       "episode": "A Most Inconvenient Pipe",
       "description": "Mr. Butternose and his friends spend the summer at Puddleford Manor, where they encounter the Ledbetter family, particularly the eight daughters, each with distinct personalities.",
       "source": "transcript",
@@ -113,56 +83,56 @@
     },
     {
       "era": "1215",
-      "episode": "The Lamentable Tale of the Turnip Knight (1215)",
+      "episode": "The Lamentable Tale of the Turnip Knight",
       "description": "In Puddleford, King John is enforcing taxes and permits while a knight named Sir Trevor arrives, causing a stir with his jousting equipment and demands.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "1790",
-      "episode": "The Puddling that Dropped (1790)",
+      "episode": "The Puddling that Dropped",
       "description": "In Puddleford, during the reign of Mad King George III, discussions revolve around the need for more washerwomen and preparations for a fancy dinner featuring a Frenchman and a dessert called blancmange.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "2000s",
-      "episode": "That Escalated Quickly (2000s)",
+      "episode": "That Escalated Quickly",
       "description": "The students of Puddleford comprehensive discover unexpected connections, including the revelation of a previously unknown big brother.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "1550s",
-      "episode": "A Wager of Wits (1550s)",
+      "episode": "A Wager of Wits",
       "description": "In the mid-1550s, the House of Puddlington in Puddleford is in disarray with talk of a potential war with Spain, while villagers prepare for the annual feast of Sir Leonard.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "1890s",
-      "episode": "The Hedge Maze Affaire (1890s)",
+      "episode": "The Hedge Maze Affaire",
       "description": "In the Hedge Maze Affair, two fishermen discuss their families and the local fishing conditions while at Big Rock, and later, they are interrupted by residents from Puddleford Manor who are dealing with a hedge maze problem.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "1983",
-      "episode": "No Time to Waddle (1983)",
+      "episode": "No Time to Waddle",
       "description": "Lord Puddleford struggles with his drinking problem while contemplating the demolition of outhouses to make way for a new discotheque and stock exchange.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "1960s",
-      "episode": "A Hatful of Dreams (1960s)",
+      "episode": "A Hatful of Dreams",
       "description": "Danny and Jim discuss their band and music influences at The Dog and Duck pub, while Danny's parents, Susie and David, worry about their daughter Beth's behavior in the garden.",
       "source": "transcript",
       "season": ""
     },
     {
       "era": "50 AD",
-      "episode": "A Very Small Lion (50 AD)",
+      "episode": "A Very Small Lion",
       "description": "The Romans have settled in Puddleford, and the townsfolk discuss the arrival of a new visitor while dealing with the challenges of selling fish and the demand for small animals.",
       "source": "transcript",
       "season": ""
