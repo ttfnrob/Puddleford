@@ -136,6 +136,20 @@
       "description": "The Romans have settled in Puddleford, and the townsfolk discuss the arrival of a new visitor while dealing with the challenges of selling fish and the demand for small animals.",
       "source": "transcript",
       "season": ""
+    },
+    {
+      "era": "Puddlefordia",
+      "episode": "The Fellowship of the Dog and Duck",
+      "description": "In the ancient lands of Puddlefordia, a group of people from all the races gather to seek an ancient artefact and stop a new reign of evil. The Dog and Duck still exists.",
+      "source": "rss",
+      "parallel": true
+    },
+    {
+      "era": "The Wild West",
+      "episode": "New Puddleford",
+      "description": "In a frontier town bearing a suspicious resemblance to Puddleford, a mysterious stranger arrives. Charlene is smitten, the Sheriff is raising a posse, and Bully the Kid is not making friends.",
+      "source": "rss",
+      "parallel": true
     }
   ],
   "locations": [
