@@ -1396,3 +1396,30 @@ body.network-fullscreen-active {
 .theme-picker__label {
   pointer-events: none;
 }
+
+/* Theme nav dot */
+.theme-nav-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 0.4rem;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.theme-nav-dot:hover { transform: scale(1.25); }
+.theme-nav-dot span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  transition: background 0.3s;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.4);
+}
