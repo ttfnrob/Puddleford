@@ -28,12 +28,6 @@ var THEMES = [
     accentBorder: '#6a3058'
   },
   {
-    name: 'Slate',
-    accent:       '#6a8aaa',
-    accentLight:  '#88aacc',
-    accentBorder: '#2a4a6a'
-  },
-  {
     name: 'Copper',
     accent:       '#b87840',
     accentLight:  '#d89858',
