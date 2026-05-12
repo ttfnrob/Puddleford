@@ -80,6 +80,12 @@
     </div>
   <div class="footer-copy">
     2026 MKTOC, Milton Keynes Theatre of Comedy. All episodes entirely improvised.
+    <div class="theme-picker">
+      <button id="theme-btn" class="theme-picker__btn" title="Change colour theme" aria-label="Change colour theme">
+        <span id="theme-dot" class="theme-picker__dot"></span>
+        <span class="theme-picker__label">Theme</span>
+      </button>
+    </div>
   </div>
 </footer>
 
@@ -88,5 +94,6 @@
   loadEpisodes(document.getElementById('episode-grid'), null);
 </script>
 <script src="assets/js/badges.js"></script>
+<script src="assets/js/theme.js"></script>
 </body>
 </html>

@@ -1357,3 +1357,42 @@ body.network-fullscreen-active {
   color: var(--text-muted);
   line-height: 1.6;
 }
+
+/* ── Theme picker ── */
+.theme-picker {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+.theme-picker__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  transition: border-color 0.2s, color 0.2s;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.theme-picker__btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.theme-picker__dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.theme-picker__label {
+  pointer-events: none;
+}
