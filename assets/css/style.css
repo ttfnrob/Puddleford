@@ -1292,3 +1292,68 @@ body.network-fullscreen-active {
 @media (min-width: 900px) {
   .tl-vertical { display: none; }
 }
+
+/* ── Parallel Worlds (timeline page) ─────────────────────── */
+.tl-parallel {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+.tl-parallel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+}
+.tl-parallel__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border-gold);
+}
+.tl-parallel__intro {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+.tl-parallel__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.tl-parallel__card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  flex: 1 1 280px;
+  max-width: 400px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.tl-parallel__card:hover {
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-2px);
+}
+.tl-parallel__card-era {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.tl-parallel__card-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.tl-parallel__card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}

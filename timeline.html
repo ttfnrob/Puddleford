@@ -10,36 +10,87 @@
   <meta property="og:image"       content="assets/img/cover-with-title-1.jpg" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .snake-wrap { width:100%; overflow-x:hidden; overflow-y:visible; padding:0 0 4rem; background:var(--bg,#1a120a); position:relative; }
-    .snake-wrap svg { display:block; margin:0 auto; }
+    .snake-wrap {
+      width: 100%; overflow-x: hidden; overflow-y: visible;
+      padding: 0 0 4rem; background: var(--bg, #1a120a); position: relative;
+    }
+    .snake-wrap svg { display: block; margin: 0 auto; }
     .snake-wrap::before,
     .snake-wrap::after {
-      content:''; display:block; position:absolute; left:0; right:0; height:60px; z-index:2; pointer-events:none;
+      content: ''; display: block; position: absolute; left: 0; right: 0;
+      height: 60px; z-index: 2; pointer-events: none;
     }
-    .snake-wrap::before { top:0; background:linear-gradient(to bottom, var(--bg,#1a120a), transparent); }
-    .snake-wrap::after  { bottom:0; background:linear-gradient(to top, var(--bg,#1a120a), transparent); }
-    .seg { cursor:pointer; transition:filter .12s; }
-    .seg:hover { filter:brightness(1.4); }
-    .lbl-era  { font-weight:700; font-family:'Playfair Display',serif; }
-    .lbl-title{ fill:#f0e6d3; font-style:italic; font-family:'Source Serif 4','Source Serif Pro',serif; opacity:0.85; }
-    .sdot { fill:#f0e6d3; pointer-events:none; }
-    @keyframes gp{ 0%,100%{r:6;opacity:1} 50%{r:14;opacity:.25} }
-    .pulse{ fill:#d4982a; animation:gp 2s ease-in-out infinite; pointer-events:none; }
-    .bend-fill { pointer-events:none; }
+    .snake-wrap::before { top: 0; background: linear-gradient(to bottom, var(--bg, #1a120a), transparent); }
+    .snake-wrap::after  { bottom: 0; background: linear-gradient(to top, var(--bg, #1a120a), transparent); }
 
-    .tip{
-      position:fixed; z-index:1000; background:#141010;
-      border:2px solid #d4982a; border-radius:8px;
-      padding:12px 16px; max-width:320px;
-      pointer-events:none; opacity:0; transition:opacity .15s;
-      font-family:inherit;
+    .seg { cursor: pointer; transition: filter .12s; }
+    .seg:hover { filter: brightness(1.4); }
+    .lbl-era   { font-weight: 700; font-family: 'Playfair Display', serif; }
+    .lbl-title { fill: #f0e6d3; font-style: italic; font-family: 'Source Serif 4', 'Source Serif Pro', serif; opacity: 0.85; }
+    .sdot      { pointer-events: none; }
+
+    @keyframes gp { 0%,100% { r: 6; opacity: 1 } 50% { r: 14; opacity: .25 } }
+    .pulse { fill: #d4982a; animation: gp 2s ease-in-out infinite; pointer-events: none; }
+    .bend-fill { pointer-events: none; }
+
+    .tip {
+      position: fixed; z-index: 1000; background: #141010;
+      border: 2px solid #d4982a; border-radius: 8px;
+      padding: 12px 16px; max-width: 320px;
+      pointer-events: none; opacity: 0; transition: opacity .15s;
+      font-family: inherit;
     }
-    .tip.show{ opacity:1; }
-    .tip-era  { color:#d4982a; font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px; }
-    .tip-title{ color:#f0e6d3; font-size:.95rem; font-weight:600; margin-bottom:5px; }
-    .tip-desc { color:#a89a8a; font-size:.82rem; line-height:1.4; }
+    .tip.show { opacity: 1; }
+    .tip-era   { color: #d4982a; font-size: .82rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
+    .tip-title { color: #f0e6d3; font-size: .95rem; font-weight: 600; margin-bottom: 5px; }
+    .tip-desc  { color: #a89a8a; font-size: .82rem; line-height: 1.4; }
 
-    .snake-loading{ text-align:center; padding:4rem 2rem; color:var(--text-muted,#a89a8a); }
+    .snake-loading { text-align: center; padding: 4rem 2rem; color: var(--text-muted, #a89a8a); }
+
+    /* Parallel Worlds section */
+    .tl-parallel {
+      max-width: var(--max-width, 1100px);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .tl-parallel__header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem; color: var(--gold, #d4982a);
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 1.4rem;
+    }
+    .tl-parallel__rule {
+      flex: 1; height: 1px;
+      background: var(--border-gold, #6a4a1a);
+    }
+    .tl-parallel__intro {
+      color: var(--text-muted, #a89a8a);
+      font-size: 0.92rem; font-style: italic;
+      margin-bottom: 1.5rem; max-width: 600px;
+    }
+    .tl-parallel__grid {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+    }
+    .tl-parallel__card {
+      background: var(--bg-card, #241810);
+      border: 1px solid var(--border-gold, #6a4a1a);
+      border-radius: var(--radius-lg, 12px);
+      padding: 1.25rem 1.5rem;
+      flex: 1 1 280px; max-width: 400px;
+    }
+    .tl-parallel__card-era {
+      font-family: var(--font-heading); font-size: 0.78rem;
+      letter-spacing: 0.12rem; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .tl-parallel__card-title {
+      font-family: var(--font-heading); font-size: 1.1rem;
+      color: var(--text, #f2e8d5); margin-bottom: 0.4rem;
+    }
+    .tl-parallel__card-desc {
+      font-size: 0.88rem; color: var(--text-muted);
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
@@ -76,6 +127,8 @@
   <div class="tip-desc"></div>
 </div>
 
+<div id="parallel-section"></div>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -92,11 +145,11 @@
         <li><a href="https://www.mktoc.co.uk/puddleford/" target="_blank">MKTOC</a></li>
       </ul>
     </div>
-    </div>
-    <div class="footer-platforms">
-      <p>Listen on</p>
-      <div data-badges></div>
-    </div>
+  </div>
+  <div class="footer-platforms">
+    <p>Listen on</p>
+    <div data-badges></div>
+  </div>
   <div class="footer-copy">
     2026 MKTOC, Milton Keynes Theatre of Comedy. All episodes entirely improvised.
   </div>
@@ -107,17 +160,18 @@
   'use strict';
 
   /* ═══════════════════════════════════════════════════
-     CONFIG — tighter proportions
+     CONFIG
      ═══════════════════════════════════════════════════ */
-  var mob      = window.innerWidth < 768;
-  var TH       = mob ? 36  : 50;    // ribbon thickness
-  var SEG      = mob ? 100 : 160;   // px per episode segment
-  var PAD      = mob ? 20  : 60;    // side padding
-  var ROW_GAP  = mob ? 40  : 50;    // gap between ribbon bands (no external labels now)
-  var FONT_ERA = mob ? 11  : 14;
-  var FONT_TIT = mob ? 9   : 12;
-  var MAX_CH   = mob ? 22  : 40;    // longer titles before truncating
-  var DOT_R    = 6;                 // dot marker radius
+  var mob       = window.innerWidth < 768;
+  var TH        = mob ? 32 : 44;       // ribbon thickness
+  var DOT_R     = mob ? 6  : 8;        // episode dot radius
+  var ROW_YEARS = 200;
+  var START_YEAR = 1;
+  var END_YEAR   = 2300;
+  var TOTAL_ROWS = Math.ceil((END_YEAR - START_YEAR) / ROW_YEARS); // 12
+  var ROW_GAP    = mob ? 50 : 60;      // vertical gap between ribbon rows
+  var FONT_LABEL = mob ? 9  : 11;
+  var FONT_YEAR  = mob ? 10 : 12;
 
   /* ═══════════════════════════════════════════════════
      SVG helpers
@@ -130,240 +184,303 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     Era helpers
+     Era parsing and colour
      ═══════════════════════════════════════════════════ */
-  function eraYear(era) {
-    if (!era) return 9999;
+  function eraToYear(era) {
+    if (!era) return null;
     var s = era.toString().toLowerCase().trim();
-    if (/puddlefordia|fantasy|ancient/.test(s)) return -500;
-    var m;
-    m = s.match(/(\d{1,4})\s*ad/i); if (m) return +m[1];
-    m = s.match(/^(\d{4})/);        if (m) return +m[1];
-    if (s.includes('wild west'))  return 1880;
-    if (s.includes('present'))    return 2024;
-    if (s.includes('napoleonic')) return 1805;
-    m = s.match(/(\d{3,4})s?/);   if (m) return +m[1];
-    return 9998;
+    var m = s.match(/^(\d+)\s*(ad|bc)?s?$/);
+    if (m) return parseInt(m[1]);
+    var m2 = s.match(/(\d{2,4})s?/);
+    if (m2) return parseInt(m2[1]);
+    if (s.includes('present')) return 2025;
+    return null;
   }
 
-  function eraCol(era, isGap) {
-    if (isGap) return '#3a3228';
-    var y = eraYear(era), s = (era || '').toLowerCase();
-    if (/puddlefordia|ancient|fantasy/.test(s) || y < 0) return '#4a2060';
-    if (s.includes('wild west')) return '#8b3a1a';
-    if (y > 2100) return '#d4982a';
-    if (y >= 2000) return '#2a3a5a';
-    if (y >= 1900) return '#1a5050';
-    if (y >= 1800) return '#2d5a2d';
-    return '#8b5e0a';
+  function isParallel(era) {
+    if (!era) return false;
+    var s = era.toString().toLowerCase();
+    return /puddlefordia|wild west|parallel/.test(s);
   }
 
-  function dedup(a) {
-    var m = {};
-    a.forEach(function (e) {
+  function yearToColour(y) {
+    if (y <= 500)  return '#8b5e0a';
+    if (y <= 1500) return '#2d5a2d';
+    if (y <= 1800) return '#1a5050';
+    if (y <= 1900) return '#2a3a5a';
+    if (y <= 2000) return '#4a3060';
+    if (y <= 2100) return '#c4802a';
+    return '#d4982a';
+  }
+
+  function dedup(arr) {
+    var seen = {};
+    return arr.filter(function (e) {
       var k = (e.era || '') + '||' + (e.episode || '').replace(/\s*\(.*?\)\s*$/, '');
-      if (!m[k] || e.source === 'transcript') m[k] = e;
+      if (seen[k]) return false;
+      seen[k] = true;
+      return true;
     });
-    return Object.values(m);
-  }
-
-  function shortT(ep) {
-    var t = (ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
-    return t.length > MAX_CH ? t.substring(0, MAX_CH - 1) + '\u2026' : t;
   }
 
   /* ═══════════════════════════════════════════════════
-     RENDER — snake timeline with proper bends
+     RENDER
      ═══════════════════════════════════════════════════ */
   function render(raw) {
-    // Data is pre-deduplicated; just sort chronologically
-    var eps = raw.slice().sort(function (a, b) { return eraYear(a.era) - eraYear(b.era); });
+    var all = dedup(raw);
 
-    // Gap label formatter
-    function fmtGap(years) {
-      if (years < 100) return years + ' years';
-      var c = Math.round(years / 100);
-      return c + ' centur' + (c === 1 ? 'y' : 'ies');
-    }
-
-    // Inject "empty century" gap markers between entries with large time jumps
-    var epsWithGaps = [];
-    for (var gi = 0; gi < eps.length; gi++) {
-      epsWithGaps.push(eps[gi]);
-      if (gi < eps.length - 1) {
-        var yearA = eraYear(eps[gi].era);
-        var yearB = eraYear(eps[gi + 1].era);
-        if (yearA > 0 && yearB > 0 && yearB - yearA > 150) {
-          // Add a grey gap marker
-          var gapYears = yearB - yearA;
-          epsWithGaps.push({ era: '~' + (yearA + Math.round(gapYears/2)), episode: fmtGap(gapYears) + ' unvisited', _gap: true, _gapYears: gapYears });
+    // Separate parallel world entries
+    var parallel = [];
+    var mainEps  = [];
+    all.forEach(function (ep) {
+      if (isParallel(ep.era)) {
+        parallel.push(ep);
+      } else {
+        var y = eraToYear(ep.era);
+        if (y !== null && y > 0) {
+          ep._year = y;
+          mainEps.push(ep);
         }
       }
-    }
-    eps = epsWithGaps;
-    document.getElementById('snake-loading').style.display = 'none';
-    var N = eps.length;
-    if (!N) return;
+    });
 
-    var cw   = document.getElementById('snake-root').clientWidth || window.innerWidth;
-    // Bend outer radius = (2*TH + ROW_GAP)/2 — bends protrude this far on each side
-    var outerR   = (2 * TH + ROW_GAP) / 2;
-    var LPAD     = outerR + 6;                   // left ribbon edge — room for left bend
-    var rowW     = Math.max(80, cw - LPAD - outerR - 6);  // ribbon width
-    var perRow   = Math.max(1, Math.floor(rowW / SEG));
-    var segW     = rowW / perRow;
-    var nRows    = Math.ceil(N / perRow);
+    mainEps.sort(function (a, b) { return a._year - b._year; });
+
+    document.getElementById('snake-loading').style.display = 'none';
+
+    // Bucket episodes into rows
+    var rows = [];
+    for (var r = 0; r < TOTAL_ROWS; r++) {
+      var rStart = START_YEAR + r * ROW_YEARS;
+      var rEnd   = rStart + ROW_YEARS;
+      var eps = mainEps.filter(function (ep) { return ep._year >= rStart && ep._year < rEnd; });
+      rows.push({ index: r, startYear: rStart, endYear: rEnd, episodes: eps, visited: eps.length > 0 });
+    }
+
+    // Collapse consecutive unvisited rows
+    var segments = []; // each segment = { rows: [...], visited: bool }
+    var i = 0;
+    while (i < rows.length) {
+      if (rows[i].visited) {
+        segments.push({ rows: [rows[i]], visited: true });
+        i++;
+      } else {
+        var group = [];
+        while (i < rows.length && !rows[i].visited) {
+          group.push(rows[i]);
+          i++;
+        }
+        segments.push({ rows: group, visited: false });
+      }
+    }
+
+    // Layout constants
+    var cw = document.getElementById('snake-root').clientWidth || window.innerWidth;
+    var outerR = (2 * TH + ROW_GAP) / 2;
+    var LPAD = outerR + 10;
+    var rowW = Math.max(120, cw - LPAD - outerR - 10);
     var rowPitch = TH + ROW_GAP;
-    var topPad   = mob ? 80 : 100;
-    var svgW     = LPAD + rowW + outerR + 6;     // exact width — bends fit on both sides
-    var svgH     = topPad + nRows * rowPitch + (mob ? 80 : 100);
+    var topPad = mob ? 60 : 80;
+
+    // Count display rows
+    var displayRows = segments.length;
+    var svgW = LPAD + rowW + outerR + 10;
+    var svgH = topPad + displayRows * rowPitch + (mob ? 60 : 80);
 
     var svg = mk('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH });
-    var segs = [];
 
-    /* ── Helper: get ribbon Y for a row ── */
-    function ribY(row) { return topPad + row * rowPitch; }
+    function ribY(dispRow) { return topPad + dispRow * rowPitch; }
 
-    /* ── Draw bends (behind ribbon) ── */
-    for (var br = 0; br < nRows - 1; br++) {
-      var ltrB  = (br % 2 === 0);
-      var ryTop = ribY(br);        // top of upper ribbon
-      var ryBot = ribY(br + 1);    // top of lower ribbon
+    // Track all dot info for tooltips
+    var dotInfos = [];
 
-      // Get the colour of the last segment flowing into this bend
-      var lastIdxInRow = Math.min((br + 1) * perRow, N) - 1;
-      var bendColor = eraCol(eps[lastIdxInRow].era);
+    /* ── Draw bends between consecutive display rows ── */
+    for (var b = 0; b < displayRows - 1; b++) {
+      var ltrB = (b % 2 === 0);
+      var ryTop = ribY(b);
+      var ryBot = ribY(b + 1);
 
-      // Bend connects bottom of upper ribbon to top of lower ribbon
-      // It's a thick U-shape on the appropriate side
-      // (bend geometry computed inline below)
+      // Bend colour: use colour of the segment ending at row b, or starting at row b+1
+      var segAbove = segments[b];
+      var bendCol = '#3a2820';
+      if (segAbove.visited) {
+        var lastEp = segAbove.rows[0].episodes[segAbove.rows[0].episodes.length - 1];
+        if (lastEp) bendCol = yearToColour(lastEp._year);
+      } else {
+        // Use colour from next visited segment
+        var segBelow = segments[b + 1];
+        if (segBelow && segBelow.visited && segBelow.rows[0].episodes.length > 0) {
+          bendCol = yearToColour(segBelow.rows[0].episodes[0]._year);
+        }
+      }
+
+      var oR = (2 * TH + ROW_GAP) / 2;
+      var iR = ROW_GAP / 2;
 
       if (ltrB) {
-        // Right-side bend: thick D-shape opening to the right
-        // Connects right end of upper ribbon to right end of lower ribbon
+        // Right-side bend
         var cx = LPAD + rowW;
-        var oR = (2 * TH + ROW_GAP) / 2;   // outer radius
-        var iR = ROW_GAP / 2;               // inner radius
-        // Outer arc: (cx, ryTop) → (cx, ryBot+TH), sweeping right (large-arc=0, sweep=1)
-        // Inner arc: (cx, ryBot) → (cx, ryTop+TH), sweeping right back (large-arc=0, sweep=0)
         var d = 'M ' + cx + ',' + ryTop +
                 ' A ' + oR + ',' + oR + ' 0 0,1 ' + cx + ',' + (ryBot + TH) +
                 ' L ' + cx + ',' + ryBot +
                 ' A ' + iR + ',' + iR + ' 0 0,0 ' + cx + ',' + (ryTop + TH) +
                 ' Z';
-        svg.appendChild(mk('path', { d: d, fill: bendColor, 'class': 'bend-fill' }));
+        var bendOpacity = (segAbove.visited || (segments[b + 1] && segments[b + 1].visited)) ? '1' : '0.3';
+        svg.appendChild(mk('path', { d: d, fill: bendCol, 'class': 'bend-fill', opacity: bendOpacity }));
       } else {
-        // Left-side bend: thick D-shape opening to the left
+        // Left-side bend
         var cx2 = LPAD;
-        var oR2 = (2 * TH + ROW_GAP) / 2;
-        var iR2 = ROW_GAP / 2;
-        // Mirror of right bend: sweep directions inverted
         var d2 = 'M ' + cx2 + ',' + ryTop +
-                 ' A ' + oR2 + ',' + oR2 + ' 0 0,0 ' + cx2 + ',' + (ryBot + TH) +
+                 ' A ' + oR + ',' + oR + ' 0 0,0 ' + cx2 + ',' + (ryBot + TH) +
                  ' L ' + cx2 + ',' + ryBot +
-                 ' A ' + iR2 + ',' + iR2 + ' 0 0,1 ' + cx2 + ',' + (ryTop + TH) +
+                 ' A ' + iR + ',' + iR + ' 0 0,1 ' + cx2 + ',' + (ryTop + TH) +
                  ' Z';
-        svg.appendChild(mk('path', { d: d2, fill: bendColor, 'class': 'bend-fill' }));
+        var bendOpacity2 = (segAbove.visited || (segments[b + 1] && segments[b + 1].visited)) ? '1' : '0.3';
+        svg.appendChild(mk('path', { d: d2, fill: bendCol, 'class': 'bend-fill', opacity: bendOpacity2 }));
       }
     }
 
-    /* ── Draw ribbon segments row by row ── */
-    for (var row = 0; row < nRows; row++) {
-      var ltr = (row % 2 === 0);
-      var si  = row * perRow;
-      var ei  = Math.min(si + perRow, N);
-      var ry  = ribY(row);
+    /* ── Draw ribbon rows and episode dots ── */
+    for (var si = 0; si < displayRows; si++) {
+      var seg = segments[si];
+      var ltr = (si % 2 === 0);
+      var ry  = ribY(si);
 
-      for (var i = si; i < ei; i++) {
-        var ep  = eps[i];
-        var li  = i - si;
-        var col = eraCol(ep.era, ep._gap);
-        var isGap = ep._gap === true;
+      if (seg.visited) {
+        // Visited row: solid ribbon
+        var rowData = seg.rows[0]; // visited segments are always single rows
+        var col = yearToColour(rowData.episodes[0]._year);
 
-        var x;
-        if (ltr) {
-          x = LPAD + li * segW;
-        } else {
-          x = LPAD + rowW - (li + 1) * segW;
-        }
-
-        var g = mk('g', { 'class': 'seg', 'data-i': String(i) });
-
-        // Main ribbon segment fill — no rounded corners
-        var rc = mk('rect', { x: x, y: ry, width: segW + 0.5, height: TH, fill: col });
-
-        // First segment gets a rounded left cap
-        if (i === 0) {
-          rc.setAttribute('rx', '4');
-        }
-
-        // Last segment gets a rounded end cap
-        if (i === N - 1) {
-          rc.setAttribute('rx', '25');
-        }
-
-        if (isGap) { rc.setAttribute('fill', '#2a2018'); rc.setAttribute('opacity', '0.7'); }
-        g.appendChild(rc);
-
-        // Dashed overlay for large time gaps
-        if (isGap) {
-          g.appendChild(mk('rect', {
-            x: x, y: ry, width: segW, height: TH,
-            fill: 'none', stroke: col, 'stroke-width': '2', 'stroke-dasharray': '8 6'
-          }));
-        }
-
-        // Thin divider between segments
-        var divX = ltr ? x : x + segW;
-        if (li > 0) {
-          g.appendChild(mk('line', {
-            x1: divX, y1: ry, x2: divX, y2: ry + TH,
-            stroke: 'rgba(255,255,255,0.15)', 'stroke-width': '1'
-          }));
-        }
-
-        // Dot marker at segment start (white filled circle, 6px radius)
-        var dotCx = ltr ? x + 8 : x + segW - 8;
-        g.appendChild(mk('circle', { cx: dotCx, cy: ry + TH / 2, r: String(DOT_R), 'class': 'sdot' }));
-
-        /* ── Labels ──
-           Era label only, rotated on the ribbon. Episode title in tooltip only.
-           LTR rows: rotate -45°   RTL rows: rotate +45°
-        */
-        var segCentreX = x + segW / 2;
-        var segCentreY = ry + TH / 2;
-        var rotAngle = ltr ? -45 : 45;
-
-        var lblText = isGap ? fmtGap(ep._gapYears) : (ep.era || 'Unknown');
-
-        var labelEl = mk('text', {
-          x: segCentreX,
-          y: segCentreY,
-          'text-anchor': 'middle',
-          'dominant-baseline': 'middle',
-          'font-size': String(mob ? 9 : 11),
-          fill: isGap ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.85)',
-          transform: 'rotate(' + rotAngle + ',' + segCentreX + ',' + segCentreY + ')',
-          style: 'pointer-events:none',
-          'class': 'lbl-era'
+        // Ribbon rect
+        var rect = mk('rect', {
+          x: LPAD, y: ry, width: rowW, height: TH,
+          fill: col, rx: '4'
         });
-        labelEl.textContent = lblText;
-        g.appendChild(labelEl);
+        svg.appendChild(rect);
 
-        svg.appendChild(g);
-        segs.push({ g: g, ep: ep, x: x, y: ry, w: segW });
+        // Year label at start of row
+        var yearLabelX = ltr ? LPAD - 6 : LPAD + rowW + 6;
+        var yearAnchor = ltr ? 'end' : 'start';
+        var yearText = rowData.startYear <= 200 ? rowData.startYear + ' AD' : String(rowData.startYear);
+        var yl = mk('text', {
+          x: yearLabelX, y: ry + TH / 2,
+          'text-anchor': yearAnchor, 'dominant-baseline': 'middle',
+          'font-size': String(FONT_YEAR), fill: 'rgba(212,152,42,0.6)',
+          'font-family': "'Playfair Display', serif",
+          style: 'pointer-events:none'
+        });
+        yl.textContent = yearText;
+        svg.appendChild(yl);
+
+        // Episode dots
+        rowData.episodes.forEach(function (ep, idx) {
+          var progress = (ep._year - rowData.startYear) / ROW_YEARS;
+          var dotX;
+          if (ltr) {
+            dotX = LPAD + progress * rowW;
+          } else {
+            dotX = LPAD + (1 - progress) * rowW;
+          }
+          var dotY = ry + TH / 2;
+
+          // Clickable group
+          var g = mk('g', { 'class': 'seg', 'data-i': String(dotInfos.length) });
+
+          // Invisible wider hit area
+          g.appendChild(mk('circle', {
+            cx: dotX, cy: dotY, r: String(DOT_R + 8),
+            fill: 'transparent', stroke: 'none'
+          }));
+
+          // Dot: white fill, gold stroke
+          g.appendChild(mk('circle', {
+            cx: dotX, cy: dotY, r: String(DOT_R),
+            fill: '#f0e6d3', stroke: '#d4982a', 'stroke-width': '2',
+            'class': 'sdot'
+          }));
+
+          // Label: era year, rotated
+          var labelAbove = (idx % 2 === 0);
+          var labelY = labelAbove ? ry - 8 : ry + TH + 16;
+          var rotAngle = labelAbove ? -45 : 45;
+          var labelEl = mk('text', {
+            x: dotX, y: labelY,
+            'text-anchor': 'middle', 'dominant-baseline': 'middle',
+            'font-size': String(FONT_LABEL),
+            fill: 'rgba(240,230,211,0.8)',
+            transform: 'rotate(' + rotAngle + ',' + dotX + ',' + labelY + ')',
+            style: 'pointer-events:none',
+            'class': 'lbl-era'
+          });
+          labelEl.textContent = ep.era || '';
+          g.appendChild(labelEl);
+
+          svg.appendChild(g);
+          dotInfos.push({ g: g, ep: ep, x: dotX, y: dotY });
+        });
+
+      } else {
+        // Unvisited segment (possibly multiple collapsed rows)
+        var numRows = seg.rows.length;
+        var totalYears = numRows * ROW_YEARS;
+        var centuries = Math.round(totalYears / 100);
+
+        // Dashed ribbon, dark fill
+        svg.appendChild(mk('rect', {
+          x: LPAD, y: ry, width: rowW, height: TH,
+          fill: '#1a1510', opacity: '0.6', rx: '4'
+        }));
+        svg.appendChild(mk('rect', {
+          x: LPAD, y: ry, width: rowW, height: TH,
+          fill: 'none', stroke: '#3a2820', 'stroke-width': '2',
+          'stroke-dasharray': '12 8', rx: '4'
+        }));
+
+        // Label: "X centuries not visited"
+        var gapLabelX = LPAD + rowW / 2;
+        var gapLabelY = ry + TH / 2;
+        var gapLabel = mk('text', {
+          x: gapLabelX, y: gapLabelY,
+          'text-anchor': 'middle', 'dominant-baseline': 'middle',
+          'font-size': String(mob ? 10 : 12),
+          fill: 'rgba(255,255,255,0.35)',
+          'font-family': "'Source Serif 4', serif",
+          'font-style': 'italic',
+          style: 'pointer-events:none'
+        });
+        gapLabel.textContent = centuries + ' centur' + (centuries === 1 ? 'y' : 'ies') + ' not visited';
+        svg.appendChild(gapLabel);
+
+        // Year range label at start
+        var yrStart = seg.rows[0].startYear;
+        var yrEnd   = seg.rows[numRows - 1].endYear;
+        var yrLabelX = ltr ? LPAD - 6 : LPAD + rowW + 6;
+        var yrAnchor = ltr ? 'end' : 'start';
+        var yrText = (yrStart <= 200 ? yrStart + ' AD' : String(yrStart));
+        var yrEl = mk('text', {
+          x: yrLabelX, y: ry + TH / 2,
+          'text-anchor': yrAnchor, 'dominant-baseline': 'middle',
+          'font-size': String(FONT_YEAR - 1), fill: 'rgba(212,152,42,0.35)',
+          'font-family': "'Playfair Display', serif",
+          style: 'pointer-events:none'
+        });
+        yrEl.textContent = yrText;
+        svg.appendChild(yrEl);
       }
     }
 
     /* ── Pulse on most recent episode ── */
-    var lastP = N - 1;
-    for (var p = N - 1; p >= 0; p--) {
-      if (eps[p].era && /present/i.test(eps[p].era)) { lastP = p; break; }
-    }
-    var lpi = segs[lastP];
-    if (lpi) {
+    var latestDot = null;
+    var latestYear = 0;
+    dotInfos.forEach(function (d) {
+      if (d.ep._year > latestYear) {
+        latestYear = d.ep._year;
+        latestDot = d;
+      }
+    });
+    if (latestDot) {
       svg.appendChild(mk('circle', {
-        cx: lpi.x + lpi.w / 2, cy: lpi.y + TH / 2, r: '6', 'class': 'pulse'
+        cx: latestDot.x, cy: latestDot.y, r: '6', 'class': 'pulse'
       }));
     }
 
@@ -375,28 +492,28 @@
     var tT  = tip.querySelector('.tip-title');
     var tD  = tip.querySelector('.tip-desc');
 
-    segs.forEach(function (s) {
-      s.g.addEventListener('mouseenter', function () {
-        tE.textContent = s.ep.era || 'Unknown';
-        tT.textContent = (s.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
-        tD.textContent = s.ep.description || '';
+    dotInfos.forEach(function (d) {
+      d.g.addEventListener('mouseenter', function () {
+        tE.textContent = d.ep.era || 'Unknown';
+        tT.textContent = (d.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+        tD.textContent = d.ep.description || '';
         tip.classList.add('show');
       });
-      s.g.addEventListener('mousemove', function (e) {
+      d.g.addEventListener('mousemove', function (e) {
         var tx = e.clientX + 16, ty = e.clientY - 10;
         if (tx + 340 > window.innerWidth) tx = e.clientX - 340;
         if (ty < 10) ty = 10;
         tip.style.left = tx + 'px';
         tip.style.top  = ty + 'px';
       });
-      s.g.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
-      s.g.addEventListener('click', function () { window.location.href = 'episodes.html'; });
+      d.g.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
+      d.g.addEventListener('click', function () { window.location.href = 'episodes.html'; });
 
       /* Touch support */
-      s.g.addEventListener('touchstart', function (e) {
-        tE.textContent = s.ep.era || 'Unknown';
-        tT.textContent = (s.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
-        tD.textContent = s.ep.description || '';
+      d.g.addEventListener('touchstart', function (e) {
+        tE.textContent = d.ep.era || 'Unknown';
+        tT.textContent = (d.ep.episode || '').replace(/\s*\(.*?\)\s*$/, '');
+        tD.textContent = d.ep.description || '';
         var touch = e.touches[0];
         var tx2 = touch.clientX + 16, ty2 = touch.clientY - 60;
         if (tx2 + 340 > window.innerWidth) tx2 = touch.clientX - 200;
@@ -405,10 +522,38 @@
         tip.style.top  = ty2 + 'px';
         tip.classList.add('show');
       }, { passive: true });
-      s.g.addEventListener('touchend', function () {
+      d.g.addEventListener('touchend', function () {
         setTimeout(function () { tip.classList.remove('show'); }, 1500);
       });
     });
+
+    /* ── Parallel Worlds section ── */
+    if (parallel.length > 0) {
+      var pSection = document.getElementById('parallel-section');
+      var html = '<div class="tl-parallel">';
+      html += '<div class="tl-parallel__header">';
+      html += '<span class="tl-parallel__rule"></span>';
+      html += 'Parallel Worlds';
+      html += '<span class="tl-parallel__rule"></span>';
+      html += '</div>';
+      html += '<p class="tl-parallel__intro">The following episodes are set in versions of Puddleford that exist outside normal history.</p>';
+      html += '<div class="tl-parallel__grid">';
+      parallel.forEach(function (ep) {
+        html += '<div class="tl-parallel__card">';
+        html += '<div class="tl-parallel__card-era">' + escHtml(ep.era || 'Unknown') + '</div>';
+        html += '<div class="tl-parallel__card-title">' + escHtml((ep.episode || '').replace(/\s*\(.*?\)\s*$/, '')) + '</div>';
+        html += '<div class="tl-parallel__card-desc">' + escHtml(ep.description || '') + '</div>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+      pSection.innerHTML = html;
+    }
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
   }
 
   /* ── Fetch and go ── */
