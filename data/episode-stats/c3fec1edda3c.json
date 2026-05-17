@@ -1,0 +1,24 @@
+{
+  "guid": "ef7f561b-0805-4245-bd9b-d648de64cfb5",
+  "title": "Disaster!",
+  "pub_date": "Sat, 16 May 2026 14:15:23 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Brock Stirling",
+      "words": 208
+    },
+    {
+      "name": "Eloise McManus",
+      "words": 162
+    },
+    {
+      "name": "Skippy",
+      "words": 108
+    },
+    {
+      "name": "Mayor",
+      "words": 52
+    }
+  ]
+}

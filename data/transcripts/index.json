@@ -173,5 +173,12 @@
     "pub_date": "Fri, 28 Mar 2025 08:00:00 GMT",
     "season": "",
     "episode_num": ""
+  },
+  "ef7f561b-0805-4245-bd9b-d648de64cfb5": {
+    "file": "data/transcripts/c3fec1edda3c.txt",
+    "title": "Disaster!",
+    "pub_date": "Sat, 16 May 2026 14:15:23 GMT",
+    "season": "2",
+    "episode_num": "6"
   }
 }
