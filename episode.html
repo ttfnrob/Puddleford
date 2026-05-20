@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +11,12 @@
   <meta property="og:description" content="An episode of Puddleford: A Town with a Tale. Entirely improvised audio drama." />
   <meta property="og:image" content="https://puddleford.com/assets/img/cover-with-title-1.jpg" />
   <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@mktoc">
+  <meta name="twitter:title" content="Episode — Puddleford">
+  <meta name="twitter:description" content="An episode of Puddleford: A Town with a Tale. Entirely improvised audio drama.">
+  <meta name="twitter:image" content="https://puddleford.com/assets/img/cover-with-title-1.jpg">
+  <meta name="author" content="Milton Keynes Theatre of Comedy">
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -223,6 +229,9 @@
       setMeta('og:description', stripHtml(ep.description).slice(0, 200));
       if (ep.thumbnail) setMeta('og:image', ep.thumbnail);
 
+      // Inject PodcastEpisode JSON-LD
+      injectEpisodeSchema(ep);
+
       // Hero
       const artwork = document.getElementById('ep-artwork');
       if (ep.thumbnail) { artwork.src = ep.thumbnail; artwork.alt = ep.title; }
@@ -278,6 +287,40 @@
   function setMeta(property, content) {
     let el = document.querySelector('meta[property="' + property + '"]');
     if (el) el.setAttribute('content', content);
+    // Mirror to twitter: equivalents
+    if (property === 'og:title') setMetaName('twitter:title', content);
+    if (property === 'og:description') setMetaName('twitter:description', content);
+    if (property === 'og:image') setMetaName('twitter:image', content);
+  }
+
+  function setMetaName(name, content) {
+    let el = document.querySelector('meta[name="' + name + '"]');
+    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  }
+
+  function injectEpisodeSchema(ep) {
+    const existing = document.getElementById('episode-jsonld');
+    if (existing) existing.remove();
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "PodcastEpisode",
+      "name": ep.title,
+      "url": "https://puddleford.com/episode.html?id=" + encodeURIComponent(ep.guid),
+      "description": stripHtml(ep.description).slice(0, 300),
+      "datePublished": ep.pubDate,
+      "partOfSeries": {
+        "@type": "PodcastSeries",
+        "@id": "https://puddleford.com/#podcast"
+      },
+      "image": ep.thumbnail || "https://puddleford.com/assets/img/cover-with-title-1.jpg",
+      "inLanguage": "en-GB"
+    };
+    const el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.id = 'episode-jsonld';
+    el.textContent = JSON.stringify(schema);
+    document.head.appendChild(el);
   }
 
   function showError(msg) {
