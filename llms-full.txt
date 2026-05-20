@@ -1,0 +1,258 @@
+# Puddleford
+
+> An entirely improvised episodic audio drama set in a fictional English town, made by the Puddleford Players at MKTOC (Milton Keynes Theatre of Comedy).
+
+Puddleford: A Town with a Tale is a podcast in which five improvisers invent stories set in a fictional English town across different historical periods, from Roman Britain to the far future. Every episode is entirely unscripted.
+
+## Pages
+
+- [Home](https://puddleford.com/): Overview, latest episode, upcoming events
+- [Episodes](https://puddleford.com/episodes.html): Full episode listing, Season 1 (2025) and Season 2 (2026)
+- [Wiki](https://puddleford.com/wiki.html): Characters, locations, and historical timeline extracted from episode transcripts
+- [Timeline](https://puddleford.com/timeline.html): Visual history of Puddleford from 50 AD to 2180s
+- [Players](https://puddleford.com/players.html): The Puddleford Players — Avalon, David, Finley, Gaia, Jodie, Rob, Sean, Steve, Vicki
+- [Events](https://puddleford.com/events.html): Live shows including Milton Keynes Comedy Festival, July 2026
+
+## Data
+
+- [Episode data (RSS)](https://anchor.fm/s/10ce1465c/podcast/rss): Live RSS feed with all episodes
+- [Wiki data](https://puddleford.com/data/wiki.json): Structured JSON — characters, locations, timeline entries
+- [Transcripts index](https://puddleford.com/data/transcripts/index.json): Episode transcripts index
+
+## Listen
+
+- Spotify: https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd
+- Apple Podcasts: https://podcasts.apple.com/podcast/puddleford/id1799546935
+- Pocket Casts: https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b
+
+## Wiki Data (wiki.json)
+
+### Characters
+
+- **Clara Verdict**: A young lawyer. Has an assistant named Milo.
+- **Maeve and Dennis**: Simple farmers caught up in a corporate conspiracy involving their cows.
+- **Mr Butterworth**: A gentleman taking the summer at Puddleford Manor. In possession of a large driveway.
+- **Charlene**: A resident of New Puddleford (Wild West).
+- **Captain Breadbeard**: A pirate, active in Puddleford in 1695.
+- **Maeve**: An elderly dairy farmer who is concerned about her prize cow Rosie.
+- **Dennis**: Maeve's husband, also an elderly dairy farmer, who assists Maeve with their cow's issue.
+- **Victor Fortescue**: A city businessman with plans to develop Puddleford, presenting his ideas to the local community.
+- **Marshall Lawton**: The chief of local police, more interested in baked goods than police work, who conspires with Victor Fortescue.
+- **Brawlish**: A dwarf who is part of the trio discussing the return of Lord Chickenmilk.
+- **Crystallania**: An elf who expresses concern about dark tidings and advocates for finding the lost artifact.
+- **Rob**: A human who is part of the trio and wishes to be identified as an elf.
+- **Lord Chickenmilk**: The dark lord who has returned to plot his conquest of Puddlefordia.
+- **Mawlish**: The wife of Brawlish, who accompanies him to the audience with the king.
+- **Clancy Littlehope**: An original resident of New Puddleford who arrives in town with dreams and hopes.
+- **Eleanor Goodnight**: The strong owner of the Goodnight Saloon and mother of Charlene.
+- **Charlene Goodnight**: Eleanor's daughter, who is charming but under her mother's strict protection.
+- **Jebediah Bovine Pettychild**: The richest man in town, known as Ruthless Jeb, who makes many people homeless.
+- **William Bovine Pettychild (Bully the Kid)**: Jeb's son, a feared gunslinger and bully known for his foul temper.
+- **Sheriff**: The small and popular sheriff of New Puddleford, not very brave.
+- **Dr. Eustace Chickenmilk**: The lead surgeon at Puddleford General, concerned about the hospital's financial cuts.
+- **Hospital Administrator**: The administrator of Puddleford General, discussing the hospital's dire financial situation with Dr. Chickenmilk.
+- **Dr. Jacques Coquelet**: A doctor at St. Leonard's Clinic, meeting with his team to discuss strategies for extracting money from wealthy patients.
+- **Valerie**: A member of Dr. Coquelet's team, returning from vacation and ready to perform spinal surgeries.
+- **Lenny**: Another member of Dr. Coquelet's team, who has performed lung surgery and is part of the discussion on fundraising.
+- **Mr. Butternose**: The man taking Puddleford Manor for the summer.
+- **Mr. Incombe**: A friend accompanying Mr. Butternose.
+- **Mr. Coram**: Mr. Butternose's sister, who adds respectability to the group.
+- **Mr. Ledbetter**: A plumber and widower with eight daughters.
+- **Gertrude**: One of Mr. Ledbetter's daughters, who feels she is 'on the shelf.'
+- **Violet**: Another daughter, known for her violent temperament.
+- **Lily**: A daughter who likes lilies.
+- **Elizabeth**: A politically outspoken daughter.
+- **Betsy**: The youngest daughter, full of spunk and adventurous spirit.
+- **Unity**: A daughter with a problematic personality trait.
+- **Betty**: A daughter who is often confused with Betsy.
+- **James McAvoy**: A character who claims to be a Hollywood actor, though this is likely a humorous anachronism.
+- **Lady Puddleford**: The lady of the manor who is disturbed by the noise outside on Christmas Eve.
+- **Lord Puddleford**: The lord of the manor who is also disturbed by the events occurring in the village.
+- **Santa Claus**: The jolly festive man trying to manage his reindeer and their revolt.
+- **Dasher**: One of Santa's reindeer, known for his speed and energy.
+- **Rudolph**: A reindeer who is not accepted by the others and is part of the discussion about the reindeer team.
+- **Pippin**: A character who claims to run the town and is involved in the snowball fight.
+- **Mippet**: A character who assists Pippin in causing mischief in the town.
+- **HR Elf**: An elf who discusses the rights and pay of the reindeer with Santa.
+- **Nigel**: A back reindeer who questions Santa about wages and rights.
+- **Muggsy**: A hoodlum trying to blend in at the convention.
+- **Mike**: Muggsy's accomplice, also trying to fit in among the convention attendees.
+- **Unnamed Woman**: A woman from room 12 who interacts with Nigel and Mike.
+- **First Mate**: Captain Breadbeard's companion who assists him in planning their adventure.
+- **Commodore Chicken Milk**: A naval officer commissioned by the East India Company to protect their shipments.
+- **Bob the Boat Builder**: The owner of Honest Bob's Build-A-Boat Emporium who sells a ship to Captain Breadbeard.
+- **Dr. Victor Klein**: A scientist discussing the termination of his career and his illegal experiments.
+- **Dr. Miriam Strauss**: Dr. Klein's psychiatrist, who is concerned about his behavior and future.
+- **Marcus**: One of the characters involved in smuggling the creature into the school.
+- **Billy**: A character who is bitten by the creature, resulting in his skin turning to glitter.
+- **Captain John Duck**: The captain of the USS Puddleford, tasked with leading a diplomatic mission.
+- **Science Officer Brenda**: The enthusiastic science officer who experiences a teleporter accident, resulting in two versions of herself.
+- **First Officer**: The officer who is evaluated by the Spacefleet inspector and struggles with updated shuttlecraft operations.
+- **Spacefleet Inspector**: An inspector who assesses the First Officer's knowledge and skills regarding shuttlecraft.
+- **Tactical Security Officer**: An alien crew member responsible for maintaining order during the confusion with the duplicated Brendas.
+- **Legba Kinkade**: The head librarian of Puddleford who introduces the tales.
+- **Beryl**: A ten-year-old girl who explores Hambly Place and interacts with its ghostly inhabitants.
+- **Jeeves**: The butler at Hambly Place who guides Beryl during her stay.
+- **Jeremy**: Beryl's imaginary friend who accompanies her in the story.
+- **The Ghost**: A spectral figure in Hambly Place who interacts with Beryl.
+- **Simmy**: A child who is trick-or-treating and is mentioned in the second tale.
+- **Johnny**: A member of the committee who recalls the game of battery ball and discusses its rules with his grandmother.
+- **Alan**: The chair of the committee who leads the discussion about battery ball and its potential to help the town financially.
+- **Bob**: A champion of battery ball from the Riverton Beavers, known for his underhand tactics that led to the competition being shut down.
+- **Granny**: Johnny's elderly grandparent who remembers the game of battery ball and shares some of its rules.
+- **Persephone**: A character who wishes for adventure and experiences a strange event with Marmaduke.
+- **Marmaduke**: Persephone's companion who expresses concern about his family's ailments and observes the moving star.
+- **Professor Gander**: The head astronomer at Puddleford Observatory who brings news about the moving western star.
+- **Danny Ripples**: An ambitious young man leading the gang planning to steal the Eye of Puddleford.
+- **Muggins**: A gang member who is excited about the heist but often distracted.
+- **Detective Inspector Babs Chickenmilk**: The police officer responsible for protecting the Eye of Puddleford.
+- **Sarah**: A member of the Puddleford Women's Institute, concerned about the quality of their baked goods.
+- **Margaret**: A member of the Women's Institute who has a unique weapon for protection.
+- **Samantha Applewood**: A local girl helping her family with their orchard and cider making.
+- **Jason Timberland**: Samantha's loyal and comical best friend.
+- **Ronald Grump**: A businessman from the big city looking to build a golf course in Puddleford.
+- **Matthew Grump**: Ronald's adopted son who accompanies him on his trip.
+- **Justin**: Samantha's friend who overhears her father's financial troubles.
+- **Old Lady McNeil**: A local resident harvesting mushrooms in the woods.
+- **Lord Marmaduke**: A character who plans to tighten workhouse rules and expand his tannery empire.
+- **Martin**: A worker in the workhouse who dreams of becoming a media consultant.
+- **Martin's Wife**: Martin's supportive spouse who helps him with his tasks despite their difficult circumstances.
+- **Sebastian**: Lord Marmaduke's assistant who helps him with business matters.
+- **Tim**: A worker who asks for a pay rise but is fired by Lord Marmaduke.
+- **Cossie**: The barkeep at the Dog and Duck pub.
+- **Stephen Michaels**: A young man attempting to write a punk anthem with his friend.
+- **Michael Stevens**: Stephen's best friend who is also involved in forming a punk band.
+- **Marcella Syndicate**: An opera singer who feels her performances are no longer appreciated.
+- **Mrs. Morris**: The instructor of a flower arranging class at the village hall.
+- **Cecily**: A character who discusses the poor state of vegetables and has a history of whittling.
+- **Sir Trevor**: A knight known as the Turnip Knight, who arrives in Puddleford and is involved in jousting.
+- **Barbara**: Sir Trevor's horse, which is humorously referred to as a cow at one point.
+- **Bishop**: A religious figure at the monastery who interacts with Sir Trevor.
+- **Feudal Lord**: The local lord who is annoyed by the permit system and the policeman.
+- **Bartholomew**: The permit maker who is responsible for issuing permits in Puddleford.
+- **Annie**: The local washerwoman struggling with her workload and seeking help.
+- **Reg**: A butcher who advises Annie on recruiting more washerwomen.
+- **William**: The Lord of the Manor who invites a Frenchman for dinner and discusses the menu.
+- **Dottie**: William's companion who is excited about the French dinner and the possibility of practicing her French accent.
+- **Monsieur Le Blanc**: A character who arrives in a carriage, claiming to be a purveyor of puddings.
+- **Jack**: One of the children who discovers a family secret about a big brother.
+- **Hannah**: Jack's sibling who is involved in the discovery of their big brother.
+- **Katie Barrington**: Mother of Jack and Hannah, troubled by the revelation of a big brother.
+- **Vicar**: The local Vicar who listens to Katie's concerns about her family's secret.
+- **Joshua Rogers**: A local celebrity and horse hypnotist preparing for a busy day.
+- **Liam**: A friend of Jack and Hannah, son of Joshua Rogers.
+- **Henry**: A character who comes to clean a privy and is interested in the French lady.
+- **Tobias**: A villager tasked with killing a chicken for the feast.
+- **The innkeeper's wife**: A character who is involved in the preparations for the feast and interacts with the church.
+- **Reverend Cardinal Sin**: A religious figure who conducts sermons and confessions in the village.
+- **Mary**: A French lady who is ill after visiting the well.
+- **Rupert**: A resident of Puddleford Manor who is involved in croquet and discusses the hedge maze.
+- **Florence**: Cousin of Rupert who expresses concern about the fishermen at the river.
+- **Colin**: The other fisherman who discusses fishing techniques and family history with Mike.
+- **Simon Spluggle**: The long-serving retainer of Lord Puddleford, who discusses family history and staffing issues.
+- **Gran**: Nigel's grandmother, who has financial troubles and a penchant for large televisions.
+- **Gladys**: A patron at the Dog and Duck pub who converses with Lord Puddleford about local issues.
+- **Danny**: One of the main characters who is discussing band ideas with Jim.
+- **Jim**: Danny's friend and bandmate, involved in discussions about their music.
+- **Susie**: Danny's mother, worried about her daughter Beth's behavior.
+- **David**: Danny's father, concerned about Beth and her antics.
+- **Beth**: Danny's daughter, who is causing concern for her parents due to her behavior in the garden.
+- **Mrs. Miller**: The neighbor who complains about Beth's disruptive behavior.
+- **Puddlington**: A dog, and a recurring presence in Puddleford across many eras.
+- **The librarian**: The librarian who assists Danny and Jim in finding books about monkeys.
+- **Ignorous**: A fish seller in the market square.
+- **Melodramaticus**: A character trying to launch a new brand and involved in discussions about small animals.
+- **Marcus opening-nitus**: A Roman character who is excited about presenting games and needs wild animals for the spectacle.
+- **Brock Sterling**: A disgraced seismologist who is fired from the Geological Society for his warnings about a disaster.
+- **Eloise McManus**: A journalist at the Daily Puddle determined to expose the mayor's misdeeds.
+- **Skippy**: Eloise's jovial sidekick who discusses his health issues with her.
+- **The Mayor**: The mayor of Puddleford, who is dismissive of concerns about the town's safety.
+- **Gareth Chance**: The head of the Seismology Department who confirms Brock's firing and downplays the danger.
+
+### Locations
+
+- **The Dog and Duck**: Puddleford's enduring public house. Present in every era. The ale is always questionable.
+- **Puddleford Bridge**: The cobbled stone bridge at the heart of town, spanning the River Pudd.
+- **Puddleford Manor**: The grand stately home on the hill. Seat of the local gentry.
+- **Puddleford General Hospital**: Also known as the Irrational Health Service.
+- **Puddleford**: A fictional English town where the events of the episode take place.
+- **Dog and Duck Pub**: A local pub where Maeve and Dennis discuss their cow's affliction with other farmers.
+- **Village Square**: The location where a crowd gathers to hear Victor Fortescue's presentation about his plans for Puddleford.
+- **Puddlefordia**: The fabled realm where humans, elves, and dwarves once lived in harmony.
+- **Dog and Duck Tavern**: A tavern where three friends meet to discuss recent troubling events.
+- **Audience Chamber**: The chamber where the king of the dwarves holds court.
+- **New Puddleford**: A fictional town in the Wild West where the story takes place.
+- **Goodnight Saloon**: A saloon owned by Eleanor Goodnight, where Clancy finds work and entertainment.
+- **Puddleford General**: The main hospital in Puddleford, currently facing severe financial difficulties and staff reductions.
+- **St. Leonard's Clinic for the Terminally Affluent**: A private clinic that caters to wealthy patients and is thriving financially.
+- **Duck-pond**: A location in Puddleford where a festive scene unfolds with Santa and his reindeer.
+- **Village Green**: A gathering place in Puddleford where a snowman and villagers interact.
+- **Manor House**: The residence of Lady Puddleford and Lord Puddleford, where they are disturbed by the events outside.
+- **Hotel**: The setting for the local board games competition and convention.
+- **Room 12**: The room where a woman claims to be staying and where she invites the characters.
+- **Room 13**: The room where a lady instructs a character to take her bag.
+- **Broom cupboard**: A room that hoodlums enter while trying to avoid detection.
+- **Tortuga**: A sweet little bistro on Tortuga, off the coast of Hispaniola, where Captain Breadbeard begins his adventure.
+- **Saint-Louis-de-Nor**: The location where Commodore Chicken Milk is stationed, tasked with protecting shipments for the East India Company.
+- **Honest Bob's Build-A-Boat Emporium**: The place where Captain Breadbeard acquires his ship, Betty.
+- **Secondary School Science Block**: The location where two characters break in to conduct experiments on a creature.
+- **USS Puddleford**: A starship where the crew engages in daily activities and prepares for a diplomatic mission.
+- **Shuttle Bay**: The area where the Spacefleet inspector evaluates the First Officer's knowledge of shuttlecraft operations.
+- **Transport Room**: The location where Science Officer Brenda is beamed back from the planet, resulting in her duplication.
+- **Hambly Place**: A derelict house where the ghost story unfolds, featuring a butler named Jeeves and a ghost.
+- **Church of St. Leonard's**: A location where trick-or-treaters pass by on Halloween night.
+- **Puddleford Community Centre**: The meeting place where the committee discusses the financial crisis and the potential revival of battery ball.
+- **The woods by the old oak tree**: The romantic setting where Persephone and Marmaduke have a picnic and observe the western star.
+- **Dog and Duck**: A pub where Danny Ripples and his gang discuss their heist plan.
+- **Puddleford Police Station**: The location where Detective Inspector Babs Chickenmilk is tasked with protecting the Eye of Puddleford.
+- **Local Car Showroom**: A place where Muggins looks for a getaway vehicle for the heist.
+- **Village Hall**: The venue where the Eye of Puddleford is to be displayed by the Women's Institute.
+- **Applewood Orchard**: The family orchard where Samantha Applewood assesses the ripeness of apples for cider making.
+- **Workhouse**: A place where children and adults awaken to work, and where Martin and his wife discuss their dreams.
+- **Chicken Tannery**: The workplace of Lord Marmaduke, where he plans to expand his business.
+- **Local Park**: A place where Stephen Michaels and his friend attempt to write a punk anthem.
+- **Opera House**: The venue where opera singer Marcella Syndicate performs for a small audience.
+- **Job Centre**: A place where Marcella Syndicate, Michael Stevens, and Stephen Michaels queue for work.
+- **Tavern of the Dog and Duck**: A local tavern where characters discuss the state of the town and the poor vegetable growth.
+- **Puddleford Monastery**: A monastery where Sir Trevor confronts a bishop and seeks revenge over turnips.
+- **Castle**: The residence of the local feudal lord who is frustrated with the permit system.
+- **Church**: Katie stands outside the church contemplating whether to go in and discuss her troubles with the Vicar.
+- **School Playground**: Liam, Jack, and Hannah meet in the school playground to discuss their lives and families.
+- **The church**: A place where villagers gather for a sermon and confessions.
+- **The garden**: A location where characters discuss tending to vegetables.
+- **Big Rock**: A notable fishing spot by the river where the two fishermen are trying to catch fish.
+- **Cottage**: A home where a family faces eviction due to unpaid rent and a large television purchase.
+- **Danny's parents' house**: A small semi-detached house where Susie and David discuss their daughter Beth.
+- **The library**: A place where Danny and Jim go to find books about monkeys.
+- **the forum**: The town market square where residents gather.
+- **the vomitorium**: A building where a character discusses the aftermath of a feast.
+- **Calum Street**: The street where Melodramaticus resides.
+- **Puddleford Geological Society**: The location where Brock Sterling is fired for his alarming claims about the town's safety.
+- **Daily Puddle**: The newspaper office where Eloise McManus works and discusses the mayor's activities.
+- **Puddleford High Street**: The street where Brock Sterling contemplates placing an advert to warn the town.
+- **Mayor's Office**: The office where the mayor prepares for the town hall meeting and dismisses concerns about the town's safety.
+
+### Timeline
+
+- ****: The episode follows the story of Captain Breadbeard, the youngest pirate captain, as he plans to explore Tortuga and seek treasure with his first mate.
+- ****: Lord Marmaduke plans to tighten workhouse rules while Martin dreams of a better life beyond the workhouse.
+- ****: The episode features a talent show at The Dog and Duck pub, highlighting the cultural clash between punk and opera in Puddleford.
+- ****: In this episode, a genetically modified creature escapes in Puddleford, leading to chaos as it bites a character named Billy, causing his skin to turn to glitter.
+- ****: The episode follows local characters in Puddleford as they navigate personal challenges, including financial troubles related to an orchard and the arrival of a businessman looking to build a golf course.
+- ****: The Puddleford Women's Institute is preparing to display the Eye of Puddleford, a priceless cubic zirconia, while a local gang plans to steal it.
+- ****: Captain Duck must undertake a delicate diplomatic mission while dealing with a teleporter accident involving Science Officer Brenda, who is duplicated, and a critical Spacefleet inspector onboard.
+- ****: Mr. Butternose and his friends spend the summer at Puddleford Manor, where they encounter the Ledbetter family, particularly the eight daughters, each with distinct personalities.
+- ****: On Christmas Eve in Puddleford, Santa's plans are disrupted by a worker's revolt among his reindeer, leading to chaos as they discuss their roles and rights.
+- ****: The episode features three tales of terror, starting with a ghost story set in 1942 about a child named Beryl who encounters supernatural beings at Hambly Place.
+- ****: In the 1950s, the residents of Puddleford are unknowingly observed by extraterrestrial beings. Meanwhile, a couple, Persephone and Marmaduke, experience a strange event involving a moving star and a subsequent alien landing.
+- ****: In Puddleford, King John is enforcing taxes and permits while a knight named Sir Trevor arrives, causing a stir with his jousting equipment and demands.
+- ****: In Puddleford, during the reign of Mad King George III, discussions revolve around the need for more washerwomen and preparations for a fancy dinner featuring a Frenchman and a dessert called blancmange.
+- ****: The students of Puddleford comprehensive discover unexpected connections, including the revelation of a previously unknown big brother.
+- ****: In the mid-1550s, the House of Puddlington in Puddleford is in disarray with talk of a potential war with Spain, while villagers prepare for the annual feast of Sir Leonard.
+- ****: In the Hedge Maze Affair, two fishermen discuss their families and the local fishing conditions while at Big Rock, and later, they are interrupted by residents from Puddleford Manor who are dealing with a hedge maze problem.
+- ****: Lord Puddleford struggles with his drinking problem while contemplating the demolition of outhouses to make way for a new discotheque and stock exchange.
+- ****: Danny and Jim discuss their band and music influences at The Dog and Duck pub, while Danny's parents, Susie and David, worry about their daughter Beth's behavior in the garden.
+- ****: The Romans have settled in Puddleford, and the townsfolk discuss the arrival of a new visitor while dealing with the challenges of selling fish and the demand for small animals.
+- ****: In the ancient lands of Puddlefordia, a group of people from all the races gather to seek an ancient artefact and stop a new reign of evil. The Dog and Duck still exists.
+- ****: In a frontier town bearing a suspicious resemblance to Puddleford, a mysterious stranger arrives. Charlene is smitten, the Sheriff is raising a posse, and Bully the Kid is not making friends.
+

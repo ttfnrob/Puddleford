@@ -1,0 +1,26 @@
+# Puddleford
+
+> An entirely improvised episodic audio drama set in a fictional English town, made by the Puddleford Players at MKTOC (Milton Keynes Theatre of Comedy).
+
+Puddleford: A Town with a Tale is a podcast in which five improvisers invent stories set in a fictional English town across different historical periods, from Roman Britain to the far future. Every episode is entirely unscripted.
+
+## Pages
+
+- [Home](https://puddleford.com/): Overview, latest episode, upcoming events
+- [Episodes](https://puddleford.com/episodes.html): Full episode listing, Season 1 (2025) and Season 2 (2026)
+- [Wiki](https://puddleford.com/wiki.html): Characters, locations, and historical timeline extracted from episode transcripts
+- [Timeline](https://puddleford.com/timeline.html): Visual history of Puddleford from 50 AD to 2180s
+- [Players](https://puddleford.com/players.html): The Puddleford Players — Avalon, David, Finley, Gaia, Jodie, Rob, Sean, Steve, Vicki
+- [Events](https://puddleford.com/events.html): Live shows including Milton Keynes Comedy Festival, July 2026
+
+## Data
+
+- [Episode data (RSS)](https://anchor.fm/s/10ce1465c/podcast/rss): Live RSS feed with all episodes
+- [Wiki data](https://puddleford.com/data/wiki.json): Structured JSON — characters, locations, timeline entries
+- [Transcripts index](https://puddleford.com/data/transcripts/index.json): Episode transcripts index
+
+## Listen
+
+- Spotify: https://open.spotify.com/show/1MhWw8jOD7L36ayZKyHTmd
+- Apple Podcasts: https://podcasts.apple.com/podcast/puddleford/id1799546935
+- Pocket Casts: https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b
