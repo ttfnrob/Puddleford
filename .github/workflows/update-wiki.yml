@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install ffmpeg
-        run: sudo apt-get install -y ffmpeg
+        run: sudo apt-get install -y --fix-missing ffmpeg
 
       - name: Run wiki updater
         env:
