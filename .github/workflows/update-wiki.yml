@@ -26,12 +26,14 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install ffmpeg
+      - name: Install ffmpeg (static binary via pip — avoids apt mirror issues)
         run: |
-          sudo apt-get update
-          sudo apt-mark hold libcaca0 2>/dev/null || true
-          sudo apt-get install -y --fix-missing ffmpeg
-          ffmpeg -version
+          pip install static-ffmpeg
+          # Add static ffmpeg binary dir to GitHub Actions PATH for subsequent steps
+          python -c "from static_ffmpeg import run; print(run.get_platform_dir())" >> $GITHUB_PATH
+
+      - name: Verify ffmpeg
+        run: ffmpeg -version
 
       - name: Run wiki updater
         env:
