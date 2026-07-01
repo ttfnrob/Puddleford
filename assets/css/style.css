@@ -172,6 +172,47 @@ ul{list-style:none}
 .player-card__name{font-family:var(--font-heading);font-size:1.1rem;color:var(--gold);margin-bottom:0.4rem}
 .player-card__role{font-size:0.82rem;color:var(--text-muted);font-style:italic;margin-bottom:0.75rem}
 .player-card__bio{font-size:0.88rem;color:var(--text-muted);line-height:1.6}
+
+/* AVATAR FLIP (person <-> character portrait) */
+.avatar-flip{
+  width:100%;
+  max-width:150px;
+  aspect-ratio:1/1;
+  margin:0 auto 1.1rem;
+  perspective:1000px;
+  cursor:pointer;
+}
+.avatar-flip__inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+  transform-style:preserve-3d;
+}
+.avatar-flip.is-character .avatar-flip__inner{transform:rotateY(180deg)}
+/* hover always shows the character face, regardless of auto-flip state */
+.avatar-flip:hover .avatar-flip__inner{transform:rotateY(180deg)}
+.avatar-flip.is-character:hover .avatar-flip__inner{transform:rotateY(0deg)}
+.avatar-flip__face{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:50%;
+  overflow:hidden;
+  background:var(--bg-secondary);
+  border:2px solid var(--border-gold);
+  box-shadow:0 2px 12px rgba(0,0,0,0.5);
+}
+.avatar-flip__face img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-flip__face--back{transform:rotateY(180deg)}
+.avatar-flip__fallback{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:2.6rem;background:var(--bg-secondary);
+  border-radius:50%;border:2px solid var(--border-gold);box-shadow:0 2px 12px rgba(0,0,0,0.5);
+}
+@media (prefers-reduced-motion: reduce){
+  .avatar-flip__inner{transition:none}
+}
 .blockquote{border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:2rem 0;font-family:var(--font-heading);font-style:italic;font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--text);background:rgba(212,152,42,0.05);border-radius:0 var(--radius) var(--radius) 0}
 .mktoc-section{background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2.5rem;text-align:center}
 .mktoc-section h2{font-family:var(--font-heading);color:var(--gold);margin-bottom:1rem;font-size:1.8rem}
