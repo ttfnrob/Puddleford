@@ -1,0 +1,28 @@
+{
+  "guid": "bd03bcea-7618-4bf2-9e16-dbf36a196957",
+  "title": "Puddleford Jones and the Chicken of Envy",
+  "pub_date": "Fri, 03 Jul 2026 06:29:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Puddleford Jones",
+      "words": 180
+    },
+    {
+      "name": "Elliot Denham",
+      "words": 150
+    },
+    {
+      "name": "Philomena",
+      "words": 120
+    },
+    {
+      "name": "Karl-Heinz",
+      "words": 80
+    },
+    {
+      "name": "Captain Cateshaw",
+      "words": 60
+    }
+  ]
+}

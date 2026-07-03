@@ -180,5 +180,12 @@
     "pub_date": "Sat, 16 May 2026 14:15:23 GMT",
     "season": "2",
     "episode_num": "6"
+  },
+  "bd03bcea-7618-4bf2-9e16-dbf36a196957": {
+    "file": "data/transcripts/99eeae8303ff.txt",
+    "title": "Puddleford Jones and the Chicken of Envy",
+    "pub_date": "Fri, 03 Jul 2026 06:29:00 GMT",
+    "season": "2",
+    "episode_num": "7"
   }
 }
