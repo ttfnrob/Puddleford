@@ -165,7 +165,7 @@ ul{list-style:none}
 .events-placeholder{text-align:center;border:1px dashed var(--border-gold);border-radius:var(--radius-lg);padding:3rem;color:var(--text-muted);font-style:italic;margin-top:2rem}
 
 /* PLAYERS */
-.players-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.5rem;margin-bottom:3rem}
+.players-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem}
 .player-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 1.5rem;text-align:center;transition:border-color var(--transition),box-shadow var(--transition),transform var(--transition)}
 .player-card:hover{border-color:var(--border-gold);box-shadow:var(--shadow-gold);transform:translateY(-3px)}
 .player-card__avatar{font-size:3rem;margin-bottom:1rem;display:block}
