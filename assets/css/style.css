@@ -151,6 +151,7 @@ ul{list-style:none}
 .about__img-wrap:hover .about__img{transform:scale(1.02)}
 .about__text h2{font-family:var(--font-heading);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--gold);margin-bottom:1.25rem}
 .about__text p{color:var(--text-muted);font-size:1rem;line-height:1.75}
+.about__mktoc-logo{width:28px;height:28px;border-radius:50%;opacity:0.92;float:left;margin:0.1rem 0.6rem 0 0}
 
 /* EVENTS */
 .event-card{background:var(--bg-card);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2rem 2.5rem;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;box-shadow:var(--shadow);transition:box-shadow var(--transition),transform var(--transition)}
@@ -568,6 +569,7 @@ ul{list-style:none}
   height: 600px;
   position: relative;
 }
+#network-graph[hidden] { display: none; }
 @media (max-width: 767px) {
   #network-graph { height: 400px; }
 }
@@ -622,6 +624,73 @@ ul{list-style:none}
 }
 .network-legend__dot--character { background: #d4982a; }
 .network-legend__dot--location  { background: #6b9e6b; }
+
+/* Network loading state (shown while D3 downloads/builds, lazy-loaded) */
+.network-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+/* List/graph toggle button — sits left of the fullscreen button */
+.network-list-toggle-btn {
+  position: absolute;
+  top: .75rem;
+  left: .75rem;
+  background: rgba(26,18,10,.85);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius);
+  color: var(--gold);
+  cursor: pointer;
+  padding: .5rem .85rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  z-index: 10;
+  transition: background .2s, border-color .2s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.network-list-toggle-btn:hover { background: rgba(212,152,42,.15); border-color: var(--gold); }
+
+/* Accessible text-list view of the network — same data as the graph,
+   readable by screen readers and instant on any connection. */
+.network-list {
+  display: none;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 3.25rem 1.25rem 1.25rem;
+  margin: 0;
+  list-style: none;
+}
+.network-list:not([hidden]) { display: block; }
+@media (max-width: 767px) {
+  .network-list { max-height: 400px; }
+}
+.network-list__item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.network-list__item:last-child { border-bottom: none; }
+.network-list__dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+.network-list__dot--character { background: #d4982a; }
+.network-list__dot--location  { background: #6b9e6b; }
+.network-list__name { color: var(--text); }
+.network-list__meta { color: var(--text-muted); font-size: 0.82rem; margin-left: 0.4rem; }
+.network-list__links { color: var(--text-muted); font-size: 0.82rem; margin: 0.2rem 0 0 1.4rem; line-height: 1.5; }
 
 /* Network fullscreen */
 .network-fullscreen-btn {

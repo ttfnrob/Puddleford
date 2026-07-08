@@ -108,6 +108,9 @@
           <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--character"></span> Character</span>
           <span class="network-legend__item"><span class="network-legend__dot network-legend__dot--location"></span> Location</span>
         </div>
+        <button class="network-list-toggle-btn" id="network-list-toggle-btn" aria-pressed="false" aria-controls="network-list" title="Switch to a text list (faster, screen-reader friendly)">
+          View as list
+        </button>
         <button class="network-fullscreen-btn" id="network-fullscreen-btn" aria-label="Toggle fullscreen" title="Toggle fullscreen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline class="fs-expand" points="15 3 21 3 21 9"></polyline>
@@ -120,7 +123,10 @@
             <line class="fs-collapse" x1="20" y1="4" x2="10" y2="14"></line>
           </svg>
         </button>
-        <div id="network-graph"></div>
+        <div id="network-graph">
+          <div class="network-loading" id="network-loading">Loading network…</div>
+        </div>
+        <ul id="network-list" class="network-list" hidden aria-label="Puddleford character and location network, as a list"></ul>
       </div>
     </section>
 
@@ -353,8 +359,10 @@ async function loadWiki() {
   setupSearch('locations-search', 'wiki-locations');
   setupSearch('characters-search', 'wiki-characters');
 
-  // Build network graph
-  buildNetwork(data);
+  // Network — render an accessible text list immediately (cheap, always works),
+  // and lazily build the D3 force graph only once it's scrolled into view.
+  renderNetworkList(data);
+  setupNetworkLazyLoad(data);
 }
 
 function setupSearch(inputId, gridId) {
@@ -410,19 +418,11 @@ function setupSidebarTracking() {
   sections.forEach(section => observer.observe(section));
 }
 
-loadWiki();
-setupSidebarTracking();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script>
-function buildNetwork(data) {
-  const container = document.getElementById('network-graph');
-  if (!container) return;
-
+// Build shared node/link list once, used by both the accessible list view
+// and the D3 graph, so the two stay in sync and we don't compute twice.
+function buildNetworkNodes(data) {
   const characters = data.characters || [];
   const locations = data.locations || [];
-
-  // Build nodes — deduplicate Dog and Duck variants
   const nodeMap = new Map();
 
   function normaliseName(name) {
@@ -449,16 +449,142 @@ function buildNetwork(data) {
     return { ...n, radius: r, episodeCount: n.episodes.length };
   });
 
-  // Build edges
-  const links = [];
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const shared = nodes[i].episodes.filter(e => nodes[j].episodes.includes(e));
-      if (shared.length > 0) {
-        links.push({ source: nodes[i].id, target: nodes[j].id, weight: shared.length });
+  // Build edges — index episodes -> node ids once (O(n+m)) instead of the
+  // previous O(n\u00b2) pairwise scan, so this stays fast as the wiki grows.
+  const episodeIndex = new Map();
+  nodes.forEach(n => {
+    n.episodes.forEach(ep => {
+      if (!episodeIndex.has(ep)) episodeIndex.set(ep, []);
+      episodeIndex.get(ep).push(n);
+    });
+  });
+  const linkWeights = new Map();
+  episodeIndex.forEach(nodesInEp => {
+    for (let i = 0; i < nodesInEp.length; i++) {
+      for (let j = i + 1; j < nodesInEp.length; j++) {
+        const a = nodesInEp[i].id, b = nodesInEp[j].id;
+        const key = a < b ? a + '\u0001' + b : b + '\u0001' + a;
+        linkWeights.set(key, (linkWeights.get(key) || 0) + 1);
       }
     }
+  });
+  const links = Array.from(linkWeights.entries()).map(([key, weight]) => {
+    const [source, target] = key.split('\u0001');
+    return { source, target, weight };
+  });
+
+  return { nodes, links };
+}
+
+// Accessible, fast-loading text alternative to the force graph — screen
+// readers and slow connections get this instantly, no D3/SVG required.
+function renderNetworkList(data) {
+  const listEl = document.getElementById('network-list');
+  if (!listEl) return;
+  const { nodes, links } = buildNetworkNodes(data);
+
+  const connections = new Map();
+  nodes.forEach(n => connections.set(n.id, new Set()));
+  links.forEach(l => {
+    connections.get(l.source)?.add(l.target);
+    connections.get(l.target)?.add(l.source);
+  });
+
+  const sorted = [...nodes].sort((a, b) => b.episodeCount - a.episodeCount);
+  listEl.innerHTML = sorted.map(n => {
+    const linked = Array.from(connections.get(n.id) || []).sort();
+    return `
+      <li class="network-list__item">
+        <span class="network-list__dot network-list__dot--${n.type}" aria-hidden="true"></span>
+        <strong class="network-list__name">${n.id}</strong>
+        <span class="network-list__meta">(${n.type}, ${n.episodeCount} episode${n.episodeCount !== 1 ? 's' : ''})</span>
+        ${linked.length ? `<div class="network-list__links">Connected to: ${linked.join(', ')}</div>` : ''}
+      </li>`;
+  }).join('');
+}
+
+// Lazily load D3 + build the force graph only once the network section is
+// actually scrolled into view. Keeps first paint fast and avoids doing
+// graph work at all for visitors who never scroll down to it.
+function setupNetworkLazyLoad(data) {
+  const container = document.getElementById('network-container');
+  if (!container) return;
+
+  let started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    loadScriptOnce('assets/js/vendor/d3-slim.min.js').then(() => {
+      const loadingEl = document.getElementById('network-loading');
+      if (loadingEl) loadingEl.remove();
+      buildNetwork(data);
+    }).catch(() => {
+      const loadingEl = document.getElementById('network-loading');
+      if (loadingEl) loadingEl.textContent = 'Could not load the network graph \u2014 try the list view above.';
+    });
   }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          start();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    observer.observe(container);
+  } else {
+    start(); // no IntersectionObserver support — just build it
+  }
+
+  // Manual list/graph toggle button
+  const toggleBtn = document.getElementById('network-list-toggle-btn');
+  const listEl = document.getElementById('network-list');
+  const graphEl = document.getElementById('network-graph');
+  if (toggleBtn && listEl && graphEl) {
+    toggleBtn.addEventListener('click', () => {
+      const showingList = !listEl.hidden;
+      if (showingList) {
+        listEl.hidden = true;
+        graphEl.hidden = false;
+        graphEl.setAttribute('aria-hidden', 'false');
+        toggleBtn.textContent = 'View as list';
+        toggleBtn.setAttribute('aria-pressed', 'false');
+        start(); // ensure graph is built if user switches back to it
+      } else {
+        listEl.hidden = false;
+        graphEl.hidden = true;
+        graphEl.setAttribute('aria-hidden', 'true');
+        toggleBtn.textContent = 'View as graph';
+        toggleBtn.setAttribute('aria-pressed', 'true');
+      }
+    });
+  }
+}
+
+var _scriptPromises = {};
+function loadScriptOnce(src) {
+  if (_scriptPromises[src]) return _scriptPromises[src];
+  _scriptPromises[src] = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('Failed to load ' + src));
+    document.head.appendChild(s);
+  });
+  return _scriptPromises[src];
+}
+
+loadWiki();
+setupSidebarTracking();
+</script>
+<script>
+function buildNetwork(data) {
+  const container = document.getElementById('network-graph');
+  if (!container) return;
+
+  const { nodes, links } = buildNetworkNodes(data);
 
   // Dimensions
   const rect = container.getBoundingClientRect();
