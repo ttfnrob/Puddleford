@@ -192,9 +192,16 @@ ul{list-style:none}
   -webkit-transform-style:preserve-3d;
 }
 .avatar-flip.is-character .avatar-flip__inner{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
-/* hover always shows the character face, regardless of auto-flip state */
-.avatar-flip:hover .avatar-flip__inner{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
-.avatar-flip.is-character:hover .avatar-flip__inner{transform:rotateY(0deg);-webkit-transform:rotateY(0deg)}
+/* hover always shows the character face, regardless of auto-flip state.
+   Scoped to hover-capable devices only — on touch devices, a :hover rule
+   on a tappable element makes the browser eat the first tap just to
+   simulate hover, so the actual flip (via JS click handler) needs a
+   second tap. Excluding touch devices here means the JS click handler
+   alone drives the flip, and it fires on the first tap. */
+@media (hover: hover){
+  .avatar-flip:hover .avatar-flip__inner{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .avatar-flip.is-character:hover .avatar-flip__inner{transform:rotateY(0deg);-webkit-transform:rotateY(0deg)}
+}
 .avatar-flip__face{
   position:absolute;
   top:0;right:0;bottom:0;left:0;
