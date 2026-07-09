@@ -419,6 +419,29 @@ def process_episode_analytics(ep, slug, transcript, wiki):
     return speaking, stats_path, card_path
 
 
+# Known alternate names for recurring locations, so GPT-extracted variants
+# (e.g. "Dog and Duck Tavern", "The church") merge into one canonical entry
+# instead of fragmenting into duplicate wiki locations.
+LOCATION_ALIASES = {
+    "dog and duck": "The Dog and Duck",
+    "dog and duck pub": "The Dog and Duck",
+    "dog and duck tavern": "The Dog and Duck",
+    "tavern of the dog and duck": "The Dog and Duck",
+    "the dog and duck": "The Dog and Duck",
+    "church": "Church of St. Leonard's",
+    "the church": "Church of St. Leonard's",
+    "church of st. leonard's": "Church of St. Leonard's",
+    "st. leonard's church": "Church of St. Leonard's",
+    "puddleford general": "Puddleford General Hospital",
+    "puddleford general hospital": "Puddleford General Hospital",
+}
+
+
+def canonical_location_name(name):
+    """Return the canonical name for a location, resolving known aliases."""
+    return LOCATION_ALIASES.get(name.strip().lower(), name)
+
+
 def merge_wiki(wiki, ep, extracted):
     """Merge extracted data into wiki, deduplicating by name/era."""
     title = ep["title"]
@@ -449,7 +472,8 @@ def merge_wiki(wiki, ep, extracted):
     for loc in (extracted.get("locations") or []):
         if not loc.get("name"):
             continue
-        existing = next((l for l in wiki["locations"] if l["name"].lower() == loc["name"].lower()), None)
+        canonical_name = canonical_location_name(loc["name"])
+        existing = next((l for l in wiki["locations"] if l["name"].lower() == canonical_name.lower()), None)
         if existing:
             # Append episode reference if not already there
             eps = existing.get("episodes", [])
@@ -458,12 +482,12 @@ def merge_wiki(wiki, ep, extracted):
                 existing["episodes"] = eps
         else:
             wiki["locations"].append({
-                "name": loc["name"],
+                "name": canonical_name,
                 "description": loc.get("description", ""),
                 "episodes": [title],
                 "source": "transcript",
             })
-            print(f"  + Location: {loc['name']}")
+            print(f"  + Location: {canonical_name}")
 
     # Characters
     for char in (extracted.get("characters") or []):

@@ -162,11 +162,19 @@
   "locations": [
     {
       "name": "The Dog and Duck",
-      "description": "Puddleford's enduring public house. Present in every era. The ale is always questionable.",
+      "description": "Puddleford's enduring public house. Present in every era, under whatever name the era demands (also known as the Dog and Duck Pub, Dog and Duck Tavern, or Tavern of the Dog and Duck). The ale is always questionable.",
       "source": "rss",
       "episodes": [
         "Faster and Furious (1970s)",
-        "A Hatful of Dreams (1960s)"
+        "A Hatful of Dreams (1960s)",
+        "The Case of the Contaminated Cows",
+        "The Puddling that Dropped (1790)",
+        "Puddlefordia: The Fellowship of the Dog and Duck",
+        "The Eye of Puddelford (Present Day)",
+        "Pressed for Love (2000s)",
+        "The Hunchback of Puddleford (1830s)",
+        "No Time to Waddle (1983)",
+        "The Lamentable Tale of the Turnip Knight (1215)"
       ]
     },
     {
@@ -187,8 +195,11 @@
     },
     {
       "name": "Puddleford General Hospital",
-      "description": "Also known as the Irrational Health Service.",
-      "source": "rss"
+      "description": "Puddleford's main hospital, also known as the Irrational Health Service. Perennially underfunded and understaffed.",
+      "source": "rss",
+      "episodes": [
+        "Irrational Health Service"
+      ]
     },
     {
       "name": "Puddleford",
@@ -208,15 +219,6 @@
       "source": "transcript"
     },
     {
-      "name": "Dog and Duck Pub",
-      "description": "A local pub where Maeve and Dennis discuss their cow's affliction with other farmers.",
-      "episodes": [
-        "The Case of the Contaminated Cows",
-        "The Puddling that Dropped (1790)"
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "Village Square",
       "description": "The location where a crowd gathers to hear Victor Fortescue's presentation about his plans for Puddleford.",
       "episodes": [
@@ -227,14 +229,6 @@
     {
       "name": "Puddlefordia",
       "description": "The fabled realm where humans, elves, and dwarves once lived in harmony.",
-      "episodes": [
-        "Puddlefordia: The Fellowship of the Dog and Duck"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Dog and Duck Tavern",
-      "description": "A tavern where three friends meet to discuss recent troubling events.",
       "episodes": [
         "Puddlefordia: The Fellowship of the Dog and Duck"
       ],
@@ -261,14 +255,6 @@
       "description": "A saloon owned by Eleanor Goodnight, where Clancy finds work and entertainment.",
       "episodes": [
         "New Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Puddleford General",
-      "description": "The main hospital in Puddleford, currently facing severe financial difficulties and staff reductions.",
-      "episodes": [
-        "Irrational Health Service"
       ],
       "source": "transcript"
     },
@@ -403,11 +389,13 @@
     },
     {
       "name": "Church of St. Leonard's",
-      "description": "A location where trick-or-treaters pass by on Halloween night.",
+      "description": "Puddleford's parish church, the site of sermons, confessions, and the odd Halloween trick-or-treat route.",
+      "source": "rss",
       "episodes": [
-        "A Haunted Halloween Puddleford"
-      ],
-      "source": "transcript"
+        "A Haunted Halloween Puddleford",
+        "That Escalated Quickly (2000s)",
+        "A Wager of Wits (1550s)"
+      ]
     },
     {
       "name": "Puddleford Community Centre",
@@ -422,17 +410,6 @@
       "description": "The romantic setting where Persephone and Marmaduke have a picnic and observe the western star.",
       "episodes": [
         "When You Wish Upon a War of the Western Star"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Dog and Duck",
-      "description": "A pub where Danny Ripples and his gang discuss their heist plan.",
-      "episodes": [
-        "The Eye of Puddelford (Present Day)",
-        "Pressed for Love (2000s)",
-        "The Hunchback of Puddleford (1830s)",
-        "No Time to Waddle (1983)"
       ],
       "source": "transcript"
     },
@@ -510,14 +487,6 @@
       "source": "transcript"
     },
     {
-      "name": "Tavern of the Dog and Duck",
-      "description": "A local tavern where characters discuss the state of the town and the poor vegetable growth.",
-      "episodes": [
-        "The Lamentable Tale of the Turnip Knight (1215)"
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "Puddleford Monastery",
       "description": "A monastery where Sir Trevor confronts a bishop and seeks revenge over turnips.",
       "episodes": [
@@ -534,26 +503,10 @@
       "source": "transcript"
     },
     {
-      "name": "Church",
-      "description": "Katie stands outside the church contemplating whether to go in and discuss her troubles with the Vicar.",
-      "episodes": [
-        "That Escalated Quickly (2000s)"
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "School Playground",
       "description": "Liam, Jack, and Hannah meet in the school playground to discuss their lives and families.",
       "episodes": [
         "That Escalated Quickly (2000s)"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "The church",
-      "description": "A place where villagers gather for a sermon and confessions.",
-      "episodes": [
-        "A Wager of Wits (1550s)"
       ],
       "source": "transcript"
     },
