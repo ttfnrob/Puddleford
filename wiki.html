@@ -265,6 +265,13 @@ async function loadWiki() {
     function eraSort(era) {
       if (!era) return 9999;
       const s = era.toString().toLowerCase().trim();
+      // Explicit "BC" years sort before AD years (e.g. "100 BC" -> -100)
+      const bc = s.match(/(\d+)\s*bc/);
+      if (bc) return -parseInt(bc[1]);
+      // Explicit "AD" years (e.g. "50 AD", "50AD") — any digit count, so short
+      // years like "50 AD" aren't swallowed by the 3-4 digit checks below
+      const ad = s.match(/(\d+)\s*ad/);
+      if (ad) return parseInt(ad[1]);
       // Extract leading year number if present (e.g. "1695", "1790s", "2180s")
       const m = s.match(/^(\d{4})/);
       if (m) return parseInt(m[1]);
