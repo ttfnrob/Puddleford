@@ -150,9 +150,27 @@
   const RSS_URL = 'https://anchor.fm/s/10ce1465c/podcast/rss';
 
   function stripHtml(html) {
+    if (!html) return '';
+    // Insert a space at block-boundary tags first — textContent alone
+    // glues adjacent paragraphs/lines together with no separator at all.
+    const withGaps = html.replace(/<\s*br\s*\/?\s*>/gi, ' ').replace(/<\/\s*(p|div|li)\s*>/gi, ' ');
     const d = document.createElement('div');
-    d.innerHTML = html;
-    return (d.textContent || d.innerText || '').trim();
+    d.innerHTML = withGaps;
+    return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+
+  // Some RSS descriptions are plain text with raw newlines instead of
+  // HTML markup (older episodes). Convert those into real <p>/<br> tags
+  // before injecting via innerHTML, otherwise the newlines collapse and
+  // paragraphs run together on the page.
+  function formatDescriptionHtml(desc) {
+    if (!desc) return '';
+    const hasBlockTags = /<\s*(p|br|div|li)\b/i.test(desc);
+    if (hasBlockTags) return desc;
+    return desc
+      .split(/\n\s*\n/)
+      .map(function(para) { return '<p>' + para.trim().replace(/\n/g, '<br>') + '</p>'; })
+      .join('');
   }
 
   function formatDate(str) {
@@ -251,7 +269,7 @@
 
       document.getElementById('ep-title').textContent = ep.title;
       document.getElementById('ep-meta').textContent = formatDate(ep.pubDate) + (ep.itunes_duration ? ' \u00b7 ' + ep.itunes_duration : '');
-      document.getElementById('ep-desc').innerHTML = ep.description;
+      document.getElementById('ep-desc').innerHTML = formatDescriptionHtml(ep.description);
 
       // Listen buttons
       const listenHtml = [];

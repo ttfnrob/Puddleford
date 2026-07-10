@@ -94,9 +94,13 @@ function parseRSS(xmlText) {
 
 /* ── Helpers ───────────────────────────────────────────────── */
 function stripHtml(html) {
+  if (!html) return '';
+  // Insert a space at block-boundary tags first — textContent alone
+  // glues adjacent paragraphs/lines together with no separator at all.
+  const withGaps = html.replace(/<\s*br\s*\/?\s*>/gi, ' ').replace(/<\/\s*(p|div|li)\s*>/gi, ' ');
   const d = document.createElement('div');
-  d.innerHTML = html;
-  return (d.textContent || d.innerText || '').trim();
+  d.innerHTML = withGaps;
+  return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim();
 }
 
 function formatDate(str) {
