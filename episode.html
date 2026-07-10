@@ -84,7 +84,7 @@
   <!-- Characters -->
   <section id="ep-characters-section" class="section" style="display:none;">
     <div class="container">
-      <h2 class="ep-section-heading">Characters in this episode</h2>
+      <h2 class="ep-section-heading">Principal characters in this episode</h2>
       <div id="ep-characters" class="ep-cards-grid"></div>
     </div>
   </section>
@@ -271,9 +271,10 @@
       document.getElementById('ep-meta').textContent = formatDate(ep.pubDate) + (ep.itunes_duration ? ' \u00b7 ' + ep.itunes_duration : '');
       document.getElementById('ep-desc').innerHTML = formatDescriptionHtml(ep.description);
 
-      // Listen buttons
+      // Listen buttons — first one (Spotify, the show's home platform) is
+      // styled as the primary/filled call-to-action; the rest are outline.
       const listenHtml = [];
-      if (ep.link) listenHtml.push('<a href="' + ep.link + '" target="_blank" rel="noopener" class="listen-btn">Spotify</a>');
+      if (ep.link) listenHtml.push('<a href="' + ep.link + '" target="_blank" rel="noopener" class="listen-btn listen-btn--primary">\u25b6 Play on Spotify</a>');
       listenHtml.push('<a href="https://podcasts.apple.com/podcast/puddleford/id1799546935" target="_blank" rel="noopener" class="listen-btn">Apple Podcasts</a>');
       listenHtml.push('<a href="https://pca.st/podcast/54648910-c521-013d-5494-0affc0b4f80b" target="_blank" rel="noopener" class="listen-btn">Pocket Casts</a>');
       document.getElementById('ep-listen').innerHTML = listenHtml.join('');
@@ -376,7 +377,7 @@
       // Stats bar
       const bar = document.getElementById('ep-stats-section');
       bar.innerHTML =
-        '<div class="ep-stat"><span class="ep-stat__label">Characters</span><span class="ep-stat__value">' + speaking.length + '</span></div>' +
+        '<div class="ep-stat"><span class="ep-stat__label">Principal characters</span><span class="ep-stat__value">' + speaking.length + '</span></div>' +
         '<div class="ep-stat"><span class="ep-stat__label">Total words</span><span class="ep-stat__value">' + totalWords.toLocaleString() + '</span></div>' +
         '<div class="ep-stat"><span class="ep-stat__label">Most spoken</span><span class="ep-stat__value">' + topChar.name + ' (' + topChar.words + ')</span></div>';
       bar.style.display = 'flex';

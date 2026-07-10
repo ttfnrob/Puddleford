@@ -210,24 +210,6 @@
       ]
     },
     {
-      "name": "Puddleford",
-      "description": "A fictional English town where the events of the episode take place.",
-      "episodes": [
-        "The Case of the Contaminated Cows",
-        "A Visit to Puddleford by St. Nicholas",
-        "A Chicken Never Dies Twice",
-        "The Pandora Strain (1990s)",
-        "When You Wish Upon a War of the Western Star",
-        "Pressed for Love (2000s)",
-        "The Hunchback of Puddleford (1830s)",
-        "The Lamentable Tale of the Turnip Knight (1215)",
-        "A Wager of Wits (1550s)",
-        "A Very Small Lion (50 AD)",
-        "The Wind Knew His Name: The Cobb Thomas Story "
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "Village Square",
       "description": "The location where a crowd gathers to hear Victor Fortescue's presentation about his plans for Puddleford.",
       "episodes": [
@@ -693,7 +675,6 @@
       "name": "Captain Breadbeard",
       "description": "A pirate, active in Puddleford in 1695.",
       "episodes": [
-        "Captain Breadbeard",
         "Captain Breadbeard (1695)"
       ],
       "source": "rss"

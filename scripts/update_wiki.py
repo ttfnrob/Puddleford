@@ -216,6 +216,7 @@ Rules:
 - Return only valid JSON, no other text.
 - For timeline_entry.era: use the historical period only (e.g. '1830s', '1983', 'Present Day'). Do NOT append the era to the episode title.
 - The episode title in the output should be the clean title only, without any era suffix.
+- Do NOT list "Puddleford" (or "the town of Puddleford") itself as a location — it's the show's overall setting, not a specific place. Only list specific named places within/around the town (e.g. a pub, a street, a building).
 
 Episode description (from RSS):
 {episode_desc[:500]}
@@ -442,6 +443,43 @@ def canonical_location_name(name):
     return LOCATION_ALIASES.get(name.strip().lower(), name)
 
 
+# Generic names that describe the show's setting itself rather than a
+# specific place within it — GPT sometimes extracts "Puddleford" as a
+# "location" for the town every episode is set in, which isn't useful in
+# a locations list (every episode would list it).
+GENERIC_LOCATION_NAMES = {
+    "puddleford",
+    "the town of puddleford",
+    "town of puddleford",
+    "the town",
+}
+
+
+def is_generic_location(name):
+    return name.strip().lower() in GENERIC_LOCATION_NAMES
+
+
+def _canon_episode_title(title):
+    """Strip a trailing '(era)' suffix so title variants for the same
+    episode (e.g. 'Captain Breadbeard' vs 'Captain Breadbeard (1695)',
+    which can differ between RSS pulls if the feed title is edited)
+    compare equal."""
+    return re.sub(r"\s*\([^)]*\)\s*$", "", title).strip().lower()
+
+
+def add_episode_ref(episodes_list, title):
+    """Add `title` to a wiki entry's episodes list, replacing any existing
+    entry that refers to the same episode under a different title variant
+    (e.g. missing/changed era suffix) instead of appending a duplicate."""
+    canon = _canon_episode_title(title)
+    for i, existing_title in enumerate(episodes_list):
+        if _canon_episode_title(existing_title) == canon:
+            if existing_title != title:
+                episodes_list[i] = title  # prefer the current RSS title
+            return
+    episodes_list.append(title)
+
+
 def merge_wiki(wiki, ep, extracted):
     """Merge extracted data into wiki, deduplicating by name/era."""
     title = ep["title"]
@@ -472,14 +510,14 @@ def merge_wiki(wiki, ep, extracted):
     for loc in (extracted.get("locations") or []):
         if not loc.get("name"):
             continue
+        if is_generic_location(loc["name"]):
+            continue  # "Puddleford" itself isn't a specific location
         canonical_name = canonical_location_name(loc["name"])
         existing = next((l for l in wiki["locations"] if l["name"].lower() == canonical_name.lower()), None)
         if existing:
-            # Append episode reference if not already there
             eps = existing.get("episodes", [])
-            if title not in eps:
-                eps.append(title)
-                existing["episodes"] = eps
+            add_episode_ref(eps, title)
+            existing["episodes"] = eps
         else:
             wiki["locations"].append({
                 "name": canonical_name,
@@ -496,9 +534,8 @@ def merge_wiki(wiki, ep, extracted):
         existing = next((c for c in wiki["characters"] if c["name"].lower() == char["name"].lower()), None)
         if existing:
             eps = existing.get("episodes", [])
-            if title not in eps:
-                eps.append(title)
-                existing["episodes"] = eps
+            add_episode_ref(eps, title)
+            existing["episodes"] = eps
         else:
             wiki["characters"].append({
                 "name": char["name"],

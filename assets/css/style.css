@@ -65,8 +65,8 @@ ul{list-style:none}
 
 /* LISTEN BUTTONS */
 .listen-buttons{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center}
-.listen-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid var(--border-gold);border-radius:30px;background:rgba(36,24,16,0.85);color:var(--text);font-family:var(--font-body);font-size:0.88rem;transition:border-color var(--transition),background var(--transition),transform var(--transition);backdrop-filter:blur(4px)}
-.listen-btn:hover{border-color:var(--gold);background:rgba(212,152,42,0.1);color:var(--gold-light);transform:translateY(-2px)}
+.listen-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.65rem 1.3rem;border:1.5px solid var(--border-gold);border-radius:30px;background:var(--bg-card);color:var(--text);font-family:var(--font-body);font-weight:600;font-size:0.9rem;transition:border-color var(--transition),background var(--transition),transform var(--transition),color var(--transition);backdrop-filter:blur(4px)}
+.listen-btn:hover{border-color:var(--gold);background:rgba(212,152,42,0.14);color:var(--gold-light);transform:translateY(-2px)}
 
 /* SECTION HEADERS */
 .section-header{text-align:center;margin-bottom:3rem}
@@ -827,9 +827,9 @@ body.network-fullscreen-active {
 
 /* Hero */
 .ep-hero {
-  background: var(--bg-secondary);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 100%);
   border-bottom: 1px solid var(--border-gold);
-  padding: 3rem 0 2.5rem;
+  padding: 3.5rem 0 3rem;
 }
 .ep-hero__inner {
   display: grid;
@@ -843,31 +843,48 @@ body.network-fullscreen-active {
   object-fit: cover;
   border-radius: var(--radius-lg);
   border: 2px solid var(--border-gold);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-gold), var(--shadow);
 }
 .ep-hero__info {
   padding-top: 0.5rem;
 }
 .ep-hero__title {
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
   color: var(--text);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   line-height: 1.2;
 }
 .ep-hero__meta {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.92rem;
+  color: var(--gold-light);
+  opacity: 0.85;
   margin-bottom: 1.25rem;
+  letter-spacing: 0.02rem;
 }
 .ep-hero__desc {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
 }
+.ep-hero__desc p { margin-bottom: 0.9rem; }
+.ep-hero__desc p:last-child { margin-bottom: 0; }
 .ep-hero__listen {
   margin-top: 0.5rem;
+}
+
+/* Listen buttons — Spotify (primary) filled, others outlined but legible */
+.listen-btn--primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+  font-weight: 700;
+}
+.listen-btn--primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  color: var(--bg);
 }
 
 /* Stats bar */
@@ -875,18 +892,25 @@ body.network-fullscreen-active {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
 }
 .ep-stat {
   background: var(--bg-card);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
-  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  min-width: 120px;
+  gap: 0.35rem;
+  min-width: 150px;
+  flex: 1 1 150px;
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.ep-stat:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
 }
 .ep-stat__label {
   font-size: 0.72rem;
@@ -896,27 +920,38 @@ body.network-fullscreen-active {
 }
 .ep-stat__value {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
-  color: var(--gold);
+  font-size: 1.35rem;
+  color: var(--gold-light);
+  line-height: 1.2;
 }
 
 /* Speaking chart */
 .ep-speaking__title {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--gold);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.ep-speaking {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
 }
 .ep-speaking__row {
   display: grid;
   grid-template-columns: 140px 1fr 50px;
   gap: 0.75rem;
   align-items: center;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.ep-speaking__row:last-child {
+  margin-bottom: 0;
 }
 .ep-speaking__name {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   color: var(--text);
   text-align: right;
   white-space: nowrap;
@@ -925,65 +960,72 @@ body.network-fullscreen-active {
 }
 .ep-speaking__bar-track {
   background: var(--bg-secondary);
-  border-radius: 3px;
-  height: 8px;
+  border-radius: 5px;
+  height: 10px;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 .ep-speaking__bar {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 5px;
   background: linear-gradient(90deg, var(--gold), var(--gold-light));
   transition: width 0.6s ease;
 }
 .ep-speaking__count {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-light);
   text-align: right;
 }
 
 /* Section heading */
 .ep-section-heading {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--gold);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border-gold);
 }
 
 /* Cards grid (characters/locations) */
 .ep-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.1rem;
 }
 .ep-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 1.25rem 1.5rem;
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow);
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
 }
 .ep-card:hover {
   border-color: var(--border-gold);
   box-shadow: var(--shadow-gold);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 .ep-card__name {
   font-family: var(--font-heading);
-  color: var(--gold);
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
+  color: var(--gold-light);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
 }
 .ep-card__desc {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.87rem;
   line-height: 1.6;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
 }
 .ep-card__link {
   font-size: 0.82rem;
   color: var(--gold);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 .ep-card__link:hover {
   color: var(--gold-light);
