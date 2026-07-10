@@ -139,6 +139,58 @@ def format_description_html(desc):
     )
 
 
+# Canonical player first-names (as shown on players.html) mapped to the
+# alternate forms that show up in RSS episode descriptions, e.g.
+# "Narrated by Vicki" / "Narrated by Victoria Simpson" should both
+# resolve to the same player. Longest aliases are tried first so e.g.
+# "Robert Simpson" doesn't get partially matched as something else.
+NARRATOR_ALIASES = {
+    "Rob": ["Rob Simpson", "Robert Simpson", "Rob"],
+    "Vicki": ["Vicki Simpson", "Victoria Simpson", "Vicki"],
+    "Sean": ["Sean McDermott", "Sean"],
+    "David": ["David Lovesy", "David"],
+    "Steve": ["Steve Clark", "Steve"],
+    "Jodie": ["Jodie Commerical", "Jodie Commercial", "Jodie"],
+    "Finley": ["Finley Simpson", "Finley"],
+    "Avalon": ["Avalon Simpson", "Avalon"],
+    "Gaia": ["Gaia"],
+}
+
+# Longest-alias-first flat lookup: alias text -> canonical player name.
+_NARRATOR_ALIAS_LOOKUP = sorted(
+    ((alias, canon) for canon, aliases in NARRATOR_ALIASES.items() for alias in aliases),
+    key=lambda pair: len(pair[0]),
+    reverse=True,
+)
+
+
+def extract_narrator(desc_plain):
+    """Look for an explicit 'Narrated by <Name>' credit in a plain-text
+    (HTML-stripped) episode description and resolve it to a canonical
+    player name from NARRATOR_ALIASES. Returns None if there's no such
+    credit or the name doesn't resolve to a known player — deliberately
+    conservative, since this feeds a public-facing 'episodes narrated by
+    X' carousel theme and a wrong credit is worse than a missing one."""
+    if not desc_plain:
+        return None
+    m = re.search(
+        r"Narrat(?:ed|or)s?\s*(?:by)?[:\s]+([A-Za-z][A-Za-z .'-]*)",
+        desc_plain,
+        re.IGNORECASE,
+    )
+    if not m:
+        return None
+    raw = m.group(1).strip()
+    # Trim off a trailing "Players:"/"Featuring:" etc. that sometimes
+    # immediately follows the narrator's name with no punctuation
+    # between them in the source description.
+    raw = re.split(r"\s+(?:Players|Featuring|Cast)\s*:", raw, flags=re.IGNORECASE)[0].strip()
+    for alias, canon in _NARRATOR_ALIAS_LOOKUP:
+        if re.match(r"^" + re.escape(alias) + r"\b", raw, re.IGNORECASE):
+            return canon
+    return None
+
+
 def load_json(path, default):
     if not path.exists():
         return default
@@ -453,15 +505,49 @@ def main():
     write_episode_index(sorted_eps)
 
 
+def _canon_episode_title(title):
+    """Same normalization as scripts/update_wiki.py's helper of the same
+    name: strip a trailing '(era)' suffix so title variants line up
+    (RSS titles are sometimes edited to add/change an era suffix)."""
+    return re.sub(r"\s*\([^)]*\)\s*$", "", title).strip().lower()
+
+
+def era_to_century_label(era):
+    """Bucket a wiki.json timeline 'era' string (e.g. '1830s', '1215',
+    '50 AD', 'Present Day', 'The Wild West', 'Puddlefordia') into a
+    coarser century-ish label for the 'small group episodes from an
+    era' carousel theme. Non-numeric eras (fictional/contemporary
+    settings) are passed through unchanged as their own bucket."""
+    era = (era or "").strip()
+    if not era:
+        return None
+    m = re.match(r"^(\d{1,4})", era)
+    if not m:
+        return era  # "Present Day", "The Wild West", "Puddlefordia", etc.
+    year = int(m.group(1))
+    if "AD" in era.upper() and year < 100:
+        return "1st century AD"
+    century_start = (year // 100) * 100
+    return f"The {century_start}s"
+
+
 def write_episode_index(sorted_eps):
     """Single compact per-episode data file for client-side features that
     need lightweight structured data across *all* episodes without
-    re-fetching/re-parsing the full RSS feed or 28 separate stats files
-    (e.g. the homepage themed carousel, see assets/js/carousel.js).
-    Word-count / speaker stats come from data/episode-stats/ (already
-    computed by scripts/update_wiki.py); everything else from RSS.
+    re-fetching/re-parsing the full RSS feed, all 28 stats files, or
+    wiki.json (e.g. the homepage themed carousel, see
+    assets/js/carousel.js). Word-count / speaker stats come from
+    data/episode-stats/ (already computed by scripts/update_wiki.py);
+    era comes from data/wiki.json's timeline (already computed by the
+    same script); everything else from RSS.
     """
     stats_index = load_json(EPISODE_STATS_INDEX, {})
+    wiki = load_json(WIKI_JSON, {})
+    era_by_canon_title = {
+        _canon_episode_title(t.get("episode", "")): t.get("era", "")
+        for t in wiki.get("timeline", [])
+    }
+
     records = []
     for ep in sorted_eps:
         slug = episode_slug(ep["guid"])
@@ -480,6 +566,8 @@ def write_episode_index(sorted_eps):
             dt = email.utils.parsedate_to_datetime(ep["pub_date"])
         except (TypeError, ValueError):
             dt = None
+        era = era_by_canon_title.get(_canon_episode_title(ep["title"]), "")
+        narrator = extract_narrator(strip_html(ep["description"]))
         records.append({
             "guid": ep["guid"],
             "slug": slug,
@@ -494,6 +582,9 @@ def write_episode_index(sorted_eps):
             "totalWords": total_words,
             "numSpeakers": num_speakers,
             "topSpeaker": top_speaker,
+            "era": era,
+            "eraGroup": era_to_century_label(era),
+            "narrator": narrator,
         })
     # Newest first, matching every other episode listing on the site.
     records.reverse()

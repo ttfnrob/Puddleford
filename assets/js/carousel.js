@@ -117,38 +117,48 @@
       };
     },
 
-    function thisMonth(ctx) {
-      const month = ctx.today.getMonth() + 1;
-      const matches = ctx.episodes.filter(e => e.month === month);
-      if (matches.length < 2) return null;
-      const monthName = ctx.today.toLocaleDateString('en-GB', { month: 'long' });
-      return {
-        label: monthName + ' in Puddleford',
-        sublabel: 'Originally released this month, in years gone by.',
-        episodes: seededPick(matches, ctx.seed, 3),
-      };
-    },
-
-    function fromTheVaults(ctx) {
-      const oldest = ctx.episodes.slice().sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
-      if (oldest.length < 3) return null;
-      return {
-        label: 'From the vaults',
-        sublabel: 'Where it all began \u2014 some of the earliest tales of Puddleford.',
-        episodes: oldest.slice(0, 3),
-      };
-    },
-
-    function seasonSpotlight(ctx) {
-      const seasons = {};
-      ctx.episodes.forEach(e => { if (e.season) (seasons[e.season] = seasons[e.season] || []).push(e); });
-      const keys = Object.keys(seasons).filter(k => seasons[k].length >= 2);
+    function smallGroupEra(ctx) {
+      // "Small group episodes from a given era" — group episodes by
+      // era (see eraGroup on each episode-index.json record, computed
+      // in scripts/generate_episode_pages.py from wiki.json's
+      // timeline), then only offer eras that have at least 2 episodes
+      // with a modest cast size (a "small group" story rather than a
+      // big ensemble piece).
+      const SMALL_CAST_MAX = 6;
+      const byEra = {};
+      ctx.episodes.forEach(e => {
+        if (!e.eraGroup || !e.numSpeakers || e.numSpeakers > SMALL_CAST_MAX) return;
+        (byEra[e.eraGroup] = byEra[e.eraGroup] || []).push(e);
+      });
+      const keys = Object.keys(byEra).filter(k => byEra[k].length >= 2);
       if (!keys.length) return null;
       const key = keys[ctx.seed % keys.length];
       return {
-        label: 'Season ' + key + ' rewind',
-        sublabel: 'A handful of tales from season ' + key + '.',
-        episodes: seededPick(seasons[key], ctx.seed, 3),
+        label: key + ': small-cast tales',
+        sublabel: 'Intimate stories from ' + key.toLowerCase() + ', told by just a handful of voices.',
+        episodes: seededPick(byEra[key], ctx.seed, 3),
+      };
+    },
+
+    function narratorSpotlight(ctx) {
+      // Groups episodes by the 'narrator' field on episode-index.json
+      // (parsed from an explicit "Narrated by <Name>" credit in the RSS
+      // description — see extract_narrator() in
+      // scripts/generate_episode_pages.py). Only surfaces a narrator
+      // once there are >=2 credited episodes for them; grows naturally
+      // as more episode descriptions get a narrator credit added.
+      const byNarrator = {};
+      ctx.episodes.forEach(e => {
+        if (!e.narrator) return;
+        (byNarrator[e.narrator] = byNarrator[e.narrator] || []).push(e);
+      });
+      const names = Object.keys(byNarrator).filter(n => byNarrator[n].length >= 2);
+      if (!names.length) return null;
+      const name = names[ctx.seed % names.length];
+      return {
+        label: 'Narrated by ' + name,
+        sublabel: 'The tales ' + name + ' has told us, in ' + name + '\u2019s own words.',
+        episodes: seededPick(byNarrator[name], ctx.seed, 3),
       };
     },
 

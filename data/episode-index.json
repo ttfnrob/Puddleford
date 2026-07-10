@@ -12,7 +12,10 @@
     "duration": "00:37:29",
     "totalWords": 919,
     "numSpeakers": 4,
-    "topSpeaker": "Cobb Thomas"
+    "topSpeaker": "Cobb Thomas",
+    "era": "1950s",
+    "eraGroup": "The 1900s",
+    "narrator": "Vicki"
   },
   {
     "guid": "bd03bcea-7618-4bf2-9e16-dbf36a196957",
@@ -27,7 +30,10 @@
     "duration": "00:42:27",
     "totalWords": 590,
     "numSpeakers": 5,
-    "topSpeaker": "Puddleford Jones"
+    "topSpeaker": "Puddleford Jones",
+    "era": "1932",
+    "eraGroup": "The 1900s",
+    "narrator": "David"
   },
   {
     "guid": "ef7f561b-0805-4245-bd9b-d648de64cfb5",
@@ -42,7 +48,10 @@
     "duration": "00:32:49",
     "totalWords": 530,
     "numSpeakers": 4,
-    "topSpeaker": "Brock Stirling"
+    "topSpeaker": "Brock Stirling",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "1fc7a065-7175-411a-ae24-01d3dcd301ed",
@@ -57,7 +66,10 @@
     "duration": "00:35:02",
     "totalWords": 1080,
     "numSpeakers": 5,
-    "topSpeaker": "Maeve"
+    "topSpeaker": "Maeve",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "c1066b88-9eb5-4db4-a9c2-23268f06a094",
@@ -72,7 +84,10 @@
     "duration": "00:35:42",
     "totalWords": 530,
     "numSpeakers": 5,
-    "topSpeaker": "Brawlish"
+    "topSpeaker": "Brawlish",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "f8da9b31-7e05-4a7d-9e9b-0510d0baba17",
@@ -87,7 +102,10 @@
     "duration": "00:39:08",
     "totalWords": 1020,
     "numSpeakers": 9,
-    "topSpeaker": "Clancy Littlehope"
+    "topSpeaker": "Clancy Littlehope",
+    "era": "The Wild West",
+    "eraGroup": "The Wild West",
+    "narrator": null
   },
   {
     "guid": "c788f179-57d7-402e-bbaf-c8abee15b14c",
@@ -102,7 +120,10 @@
     "duration": "00:31:46",
     "totalWords": 817,
     "numSpeakers": 5,
-    "topSpeaker": "Dr Eustace Chickenmilk"
+    "topSpeaker": "Dr Eustace Chickenmilk",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "afe6c528-cc62-42c3-b5af-5d395c407b95",
@@ -117,7 +138,10 @@
     "duration": "00:31:58",
     "totalWords": 800,
     "numSpeakers": 12,
-    "topSpeaker": "Mr. Butternose"
+    "topSpeaker": "Mr. Butternose",
+    "era": "1810s",
+    "eraGroup": "The 1800s",
+    "narrator": null
   },
   {
     "guid": "baeabec1-9a6f-4e1b-b1b4-25e76a1d7bf0",
@@ -132,7 +156,10 @@
     "duration": "00:36:26",
     "totalWords": 810,
     "numSpeakers": 10,
-    "topSpeaker": "Dasher"
+    "topSpeaker": "Dasher",
+    "era": "Present Day",
+    "eraGroup": "Present Day",
+    "narrator": null
   },
   {
     "guid": "63e19a59-38c7-4957-a64c-5107a7ca90b0",
@@ -147,7 +174,10 @@
     "duration": "00:34:05",
     "totalWords": 525,
     "numSpeakers": 7,
-    "topSpeaker": "Nigel"
+    "topSpeaker": "Nigel",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "d968eef2-2487-41d8-9ad6-8c359b5615ca",
@@ -162,7 +192,10 @@
     "duration": "00:43:13",
     "totalWords": 1100,
     "numSpeakers": 4,
-    "topSpeaker": "Captain Breadbeard"
+    "topSpeaker": "Captain Breadbeard",
+    "era": "1695",
+    "eraGroup": "The 1600s",
+    "narrator": null
   },
   {
     "guid": "b187585a-554f-496e-b900-7c038dc152be",
@@ -177,7 +210,10 @@
     "duration": "00:32:38",
     "totalWords": 670,
     "numSpeakers": 6,
-    "topSpeaker": "Dr. Victor Klein"
+    "topSpeaker": "Dr. Victor Klein",
+    "era": "1990s",
+    "eraGroup": "The 1900s",
+    "narrator": null
   },
   {
     "guid": "98a82f77-83b1-4782-88f8-c756113214fb",
@@ -192,7 +228,10 @@
     "duration": "00:29:44",
     "totalWords": 470,
     "numSpeakers": 5,
-    "topSpeaker": "Captain John Duck"
+    "topSpeaker": "Captain John Duck",
+    "era": "2180s",
+    "eraGroup": "The 2100s",
+    "narrator": null
   },
   {
     "guid": "767c3624-ab34-467f-a698-e135744a3df8",
@@ -207,7 +246,10 @@
     "duration": "00:41:39",
     "totalWords": 480,
     "numSpeakers": 5,
-    "topSpeaker": "Legba Kinkade"
+    "topSpeaker": "Legba Kinkade",
+    "era": "1940s",
+    "eraGroup": "The 1900s",
+    "narrator": null
   },
   {
     "guid": "15b7bf3e-57e1-45d0-97b0-01b8840c974a",
@@ -222,7 +264,10 @@
     "duration": "00:34:48",
     "totalWords": 500,
     "numSpeakers": 4,
-    "topSpeaker": "Granny"
+    "topSpeaker": "Granny",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "8884fb09-b5be-45d2-b163-cec26855e6a7",
@@ -237,7 +282,10 @@
     "duration": "00:33:23",
     "totalWords": 508,
     "numSpeakers": 5,
-    "topSpeaker": "Marmaduke"
+    "topSpeaker": "Marmaduke",
+    "era": "1950s",
+    "eraGroup": "The 1900s",
+    "narrator": null
   },
   {
     "guid": "d0dc4007-4e46-45f9-b6cb-cf1423f8f197",
@@ -252,7 +300,10 @@
     "duration": "00:29:58",
     "totalWords": 511,
     "numSpeakers": 5,
-    "topSpeaker": "Danny Ripples"
+    "topSpeaker": "Danny Ripples",
+    "era": "",
+    "eraGroup": null,
+    "narrator": null
   },
   {
     "guid": "d5754d92-1073-4e70-bfae-dc936788078a",
@@ -267,7 +318,10 @@
     "duration": "00:34:13",
     "totalWords": 660,
     "numSpeakers": 7,
-    "topSpeaker": "Samantha Applewood"
+    "topSpeaker": "Samantha Applewood",
+    "era": "2000s",
+    "eraGroup": "The 2000s",
+    "narrator": null
   },
   {
     "guid": "3bbf52da-70fd-4d94-854e-0aad62020554",
@@ -282,7 +336,10 @@
     "duration": "00:22:33",
     "totalWords": 565,
     "numSpeakers": 5,
-    "topSpeaker": "Martin"
+    "topSpeaker": "Martin",
+    "era": "1830s",
+    "eraGroup": "The 1800s",
+    "narrator": null
   },
   {
     "guid": "8c9f35bd-7c42-4ab1-b891-a568fec9f43f",
@@ -297,7 +354,10 @@
     "duration": "00:22:59",
     "totalWords": 471,
     "numSpeakers": 6,
-    "topSpeaker": "Stephen Michaels"
+    "topSpeaker": "Stephen Michaels",
+    "era": "1970s",
+    "eraGroup": "The 1900s",
+    "narrator": null
   },
   {
     "guid": "48fd7217-a5a2-49ee-8fd8-0acf9ec645b5",
@@ -312,7 +372,10 @@
     "duration": "00:23:23",
     "totalWords": 526,
     "numSpeakers": 6,
-    "topSpeaker": "Cecily"
+    "topSpeaker": "Cecily",
+    "era": "1215",
+    "eraGroup": "The 1200s",
+    "narrator": null
   },
   {
     "guid": "58d6c548-86eb-44b6-9545-8ec170fdb544",
@@ -327,7 +390,10 @@
     "duration": "00:30:08",
     "totalWords": 751,
     "numSpeakers": 6,
-    "topSpeaker": "Annie"
+    "topSpeaker": "Annie",
+    "era": "1790",
+    "eraGroup": "The 1700s",
+    "narrator": null
   },
   {
     "guid": "d54382e3-9b2a-46e5-9eb8-3e6f2987f2e1",
@@ -342,7 +408,10 @@
     "duration": "00:29:58",
     "totalWords": 691,
     "numSpeakers": 4,
-    "topSpeaker": "Melodramaticus"
+    "topSpeaker": "Melodramaticus",
+    "era": "50 AD",
+    "eraGroup": "1st century AD",
+    "narrator": null
   },
   {
     "guid": "bcd0d99b-aa06-4d5e-ab05-16c4159e7904",
@@ -357,7 +426,10 @@
     "duration": "00:29:22",
     "totalWords": 656,
     "numSpeakers": 7,
-    "topSpeaker": "Hannah"
+    "topSpeaker": "Hannah",
+    "era": "2000s",
+    "eraGroup": "The 2000s",
+    "narrator": null
   },
   {
     "guid": "4eb865e8-521f-4176-919e-29c2b3c06bc3",
@@ -372,7 +444,10 @@
     "duration": "00:29:33",
     "totalWords": 450,
     "numSpeakers": 4,
-    "topSpeaker": "Henry"
+    "topSpeaker": "Henry",
+    "era": "1550s",
+    "eraGroup": "The 1500s",
+    "narrator": null
   },
   {
     "guid": "31dbc131-b121-4170-a0dd-5cdefa6e7a44",
@@ -387,7 +462,10 @@
     "duration": "00:23:13",
     "totalWords": 524,
     "numSpeakers": 4,
-    "topSpeaker": "Rupert"
+    "topSpeaker": "Rupert",
+    "era": "1890s",
+    "eraGroup": "The 1800s",
+    "narrator": null
   },
   {
     "guid": "4abfaf73-d11d-47bf-9ab7-9c9b846677da",
@@ -402,7 +480,10 @@
     "duration": "00:29:01",
     "totalWords": 660,
     "numSpeakers": 4,
-    "topSpeaker": "Lord Puddleford"
+    "topSpeaker": "Lord Puddleford",
+    "era": "1983",
+    "eraGroup": "The 1900s",
+    "narrator": null
   },
   {
     "guid": "b10de1cf-5b6b-4b47-972d-3b5c0728f9b7",
@@ -417,6 +498,9 @@
     "duration": "00:22:02",
     "totalWords": 746,
     "numSpeakers": 7,
-    "topSpeaker": "Danny"
+    "topSpeaker": "Danny",
+    "era": "1960s",
+    "eraGroup": "The 1900s",
+    "narrator": null
   }
 ]
