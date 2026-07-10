@@ -110,8 +110,29 @@ function formatDate(str) {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+/* ── Episode slug map (guid -> static page slug) ──────────────
+   Static per-episode pages (episodes/<slug>/) carry the real, baked-in
+   title/description/artwork so social crawlers see correct previews.
+   Prefer linking straight to those; fall back to the old
+   episode.html?id= query form (which itself now redirects to the
+   static page once the slug map loads) if the map isn't available
+   yet, e.g. for an episode published since the last site build. */
+let _slugMapPromise = null;
+function loadSlugMap() {
+  if (!_slugMapPromise) {
+    _slugMapPromise = fetch('/data/episode-slugs.json', { cache: 'no-store' })
+      .then(res => res.ok ? res.json() : {})
+      .catch(() => ({}));
+  }
+  return _slugMapPromise;
+}
+function episodePageUrl(guid, slugMap) {
+  const slug = slugMap && slugMap[guid];
+  return slug ? ('/episodes/' + slug + '/') : ('episode.html?id=' + encodeURIComponent(guid || ''));
+}
+
 /* ── Card builder ──────────────────────────────────────────── */
-function buildCard(item) {
+function buildCard(item, slugMap) {
   const title  = item.title  || 'Untitled';
   const desc   = stripHtml(item.description).slice(0, 220);
   const img    = item.thumbnail || '';
@@ -121,7 +142,7 @@ function buildCard(item) {
   const date   = formatDate(item.pubDate);
 
   const guid = item.guid || '';
-  const epPageUrl = 'episode.html?id=' + encodeURIComponent(guid);
+  const epPageUrl = episodePageUrl(guid, slugMap);
 
   const card = document.createElement('a');
   card.className   = 'episode-card card';
@@ -156,27 +177,29 @@ function applyFilter(season) {
 }
 
 /* ── Render ────────────────────────────────────────────────── */
-function renderEpisodes(items, gridEl, latestEl) {
+function renderEpisodes(items, gridEl, latestEl, slugMap) {
   if (!items || !items.length) return;
 
   if (latestEl) {
     const ep     = items[0];
     const desc   = stripHtml(ep.description).slice(0, 300);
     const season = ep.itunes_season;
+    const epPageUrl = episodePageUrl(ep.guid, slugMap);
     latestEl.innerHTML = `
       ${ep.thumbnail ? `<img class="latest-episode__img" src="${ep.thumbnail}" alt="" loading="lazy">` : ''}
       <div class="latest-episode__body">
         <div class="latest-episode__label">${season ? 'Season ' + season + ' &middot; ' : ''}Latest Episode</div>
-        <h3 class="latest-episode__title">${ep.title}</h3>
+        <h3 class="latest-episode__title"><a href="${epPageUrl}">${ep.title}</a></h3>
         <div class="latest-episode__meta">${formatDate(ep.pubDate)}${ep.itunes_duration ? ' &middot; ' + ep.itunes_duration : ''}</div>
         <p class="latest-episode__desc">${desc}</p>
         <a href="${ep.link || '#'}" target="_blank" rel="noopener" class="btn btn--gold">Listen now</a>
+        <a href="${epPageUrl}" class="btn btn--outline">Episode details</a>
       </div>`;
   }
 
   if (gridEl) {
     gridEl.innerHTML = '';
-    items.forEach(item => gridEl.appendChild(buildCard(item)));
+    items.forEach(item => gridEl.appendChild(buildCard(item, slugMap)));
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
     });
@@ -186,9 +209,11 @@ function renderEpisodes(items, gridEl, latestEl) {
 
 /* ── Main ──────────────────────────────────────────────────── */
 async function loadEpisodes(gridEl, latestEl) {
+  const slugMap = await loadSlugMap();
+
   // Show cached immediately
   const cached = loadCache();
-  if (cached && cached.length) renderEpisodes(cached, gridEl, latestEl);
+  if (cached && cached.length) renderEpisodes(cached, gridEl, latestEl, slugMap);
 
   // Fetch fresh
   try {
@@ -196,7 +221,7 @@ async function loadEpisodes(gridEl, latestEl) {
     const items = parseRSS(xml);
     if (!items.length) throw new Error('No items parsed');
     saveCache(items);
-    renderEpisodes(items, gridEl, latestEl);
+    renderEpisodes(items, gridEl, latestEl, slugMap);
   } catch(err) {
     console.error('[Puddleford] Episode load failed:', err);
     if (!cached || !cached.length) {

@@ -25,4 +25,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://puddleford.com/sitemap.xml
+Sitemap: https://puddleford.com/sitemap-index.xml

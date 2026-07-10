@@ -71,14 +71,19 @@ jobs:
                   f.write("new_episode=false\n")
           EOF
 
-      - name: Commit updated last_seen.txt
+      - name: Generate static episode pages
+        if: steps.check.outputs.new_episode == 'true'
+        run: python3 scripts/generate_episode_pages.py
+
+      - name: Commit updated last_seen.txt and episode pages
         if: steps.check.outputs.new_episode == 'true'
         run: |
           git config user.name "Puddleford Wiki Bot"
           git config user.email "ttfnrob@gmail.com"
-          git add data/last_seen.txt
+          git add data/last_seen.txt data/episode-slugs.json episodes/ sitemap-episodes.xml
           if ! git diff --staged --quiet; then
-            git commit -m "Update last seen episode [skip ci]"
+            git commit -m "Update last seen episode + regenerate episode pages [skip ci]"
+            git pull --rebase origin main
             git push
           fi
 

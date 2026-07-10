@@ -137,6 +137,7 @@ ul{list-style:none}
 .latest-episode__title{font-family:var(--font-heading);font-size:clamp(1.3rem,2.5vw,1.8rem);margin-bottom:0.4rem}
 .latest-episode__meta{font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem}
 .latest-episode__desc{color:var(--text-muted);font-size:0.95rem;line-height:1.65;margin-bottom:1.5rem}
+.latest-episode__body .btn{margin-right:0.75rem;margin-bottom:0.5rem}
 
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.65rem 1.5rem;border-radius:30px;font-family:var(--font-body);font-size:0.92rem;font-weight:600;cursor:pointer;transition:all var(--transition);text-decoration:none;border:none}

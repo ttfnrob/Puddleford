@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Episode pages (episodes/<slug>/) live in their own auto-generated
+     sitemap-episodes.xml (see scripts/generate_episode_pages.py),
+     referenced from sitemap-index.xml alongside this file. Search
+     engines should be pointed at sitemap-index.xml (see robots.txt);
+     this file stays hand-maintained for the small set of static
+     top-level pages. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://puddleford.com/</loc>

@@ -150,7 +150,31 @@
 
 <script src="assets/js/badges.js"></script>
 <script>
-/* ── Episode page logic ─────────────────────────────────────── */
+/* Redirect shim: episode.html?id=<guid> used to be the only way to
+   view an episode, with its real title/description/artwork patched
+   in by JS after load -- meaning social crawlers only ever saw a
+   generic fallback. We now generate a real static page per episode
+   at build time (see scripts/generate_episode_pages.py) with correct
+   metadata baked in. Old shared/bookmarked ?id= links should redirect
+   there so they benefit too. Falls through to the legacy rendering
+   below if the guid isn't in the slug map yet (e.g. a brand-new
+   episode before the next build ran) or if the map fails to load. */
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const guid = params.get('id');
+  if (!guid) return;
+  fetch('/data/episode-slugs.json', { cache: 'no-store' })
+    .then(function(res) { return res.ok ? res.json() : null; })
+    .then(function(map) {
+      const slug = map && map[guid];
+      if (slug) { window.location.replace('/episodes/' + slug + '/'); }
+    })
+    .catch(function() { /* fall through to legacy rendering below */ });
+})();
+</script>
+<script>
+/* Episode page logic (legacy fallback, used only if the redirect
+   shim above can't resolve a static page for this guid) */
 (function() {
   const RSS_URL = 'https://anchor.fm/s/10ce1465c/podcast/rss';
 

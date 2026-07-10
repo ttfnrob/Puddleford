@@ -37,16 +37,20 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 scripts/update_wiki.py
 
-      - name: Commit updated wiki data
+      - name: Generate static episode pages
+        run: python3 scripts/generate_episode_pages.py
+
+      - name: Commit updated wiki data and episode pages
         run: |
           git config user.name "Puddleford Wiki Bot"
           git config user.email "ttfnrob@gmail.com"
-          git add data/wiki.json data/transcripts/ data/episode-stats/
+          git add data/wiki.json data/transcripts/ data/episode-stats/ \
+                  data/episode-slugs.json episodes/ sitemap-episodes.xml
           # Only commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Auto-update wiki from episode transcripts [skip ci]"
+            git commit -m "Auto-update wiki + regenerate episode pages [skip ci]"
             git pull --rebase origin main
             git push
           fi
