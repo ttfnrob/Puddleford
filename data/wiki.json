@@ -182,13 +182,14 @@
         "The Hunchback of Puddleford (1830s)",
         "No Time to Waddle (1983)",
         "The Lamentable Tale of the Turnip Knight (1215)",
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ]
     },
     {
       "name": "Puddleford Bridge",
       "description": "The cobbled stone bridge at the heart of town, spanning the River Pudd.",
-      "source": "rss"
+      "source": "rss",
+      "episodes": []
     },
     {
       "name": "Puddleford Manor",
@@ -1808,7 +1809,7 @@
       "name": "Cobb Thomas",
       "description": "The main character, a sickly boy who becomes a musical genius and struggles with the loss of his parents.",
       "episodes": [
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ],
       "source": "transcript"
     },
@@ -1816,7 +1817,7 @@
       "name": "Ma",
       "description": "Cobb's mother, who tries to care for him while he suffers from stomach issues.",
       "episodes": [
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ],
       "source": "transcript"
     },
@@ -1824,7 +1825,7 @@
       "name": "Cobb's Father",
       "description": "Cobb's father, who builds him a unique guitar and supports his musical interests.",
       "episodes": [
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ],
       "source": "transcript"
     },
@@ -1832,7 +1833,7 @@
       "name": "Cobb's Siblings",
       "description": "Cobb's older siblings who go to work and school while he stays home.",
       "episodes": [
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ],
       "source": "transcript"
     },
@@ -1840,7 +1841,7 @@
       "name": "Caretaker",
       "description": "A character who offers to help clean up after a tragic event during Cobb's performance.",
       "episodes": [
-        "The Wind Knew His Name: The Cobb Thomas Story "
+        "The Wind Knew His Name: The Cobb Thomas Story"
       ],
       "source": "transcript"
     }
@@ -1904,34 +1905,5 @@
     "ef7f561b-0805-4245-bd9b-d648de64cfb5": "data/episode-stats/c3fec1edda3c.json",
     "bd03bcea-7618-4bf2-9e16-dbf36a196957": "data/episode-stats/99eeae8303ff.json",
     "7d390b47-af88-468e-a984-6b918ca7f6c9": "data/episode-stats/b0b47b7a0d22.json"
-  },
-  "participant_counts": {
-    "A Very Small Lion (50 AD)": 4,
-    "A Haunted Halloween Puddleford": 5,
-    "A Hatful of Dreams (1960s)": 7,
-    "Faster and Furious (1970s)": 6,
-    "Captain Breadbeard (1695)": 4,
-    "The Case of the Contaminated Cows": 5,
-    "When You Wish Upon a War of the Western Star": 5,
-    "A Visit to Puddleford by St. Nicholas": 10,
-    "Puddleford Jones and the Chicken of Envy": 5,
-    "The Hunchback of Puddleford (1830s)": 5,
-    "Irrational Health Service": 5,
-    "Battery Ball": 4,
-    "The Puddling that Dropped (1790)": 6,
-    "A Most Inconvenient Pipe": 12,
-    "A Chicken Never Dies Twice": 7,
-    "The Hedge Maze Affaire (1890s)": 4,
-    "Pressed for Love (2000s)": 7,
-    "The Lamentable Tale of the Turnip Knight (1215)": 6,
-    "That Escalated Quickly (2000s)": 7,
-    "The Pandora Strain (1990s)": 6,
-    "Puddlefordia: The Fellowship of the Dog and Duck": 5,
-    "Disaster!": 4,
-    "A Wager of Wits (1550s)": 4,
-    "The Eye of Puddelford (Present Day)": 5,
-    "Where No Duck Has Gone Before (2180s)": 5,
-    "No Time to Waddle (1983)": 4,
-    "New Puddleford": 9
   }
 }

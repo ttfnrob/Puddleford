@@ -86,7 +86,11 @@ def parse_episodes(rss_bytes):
         guid_el = item.find("guid")
         guid = guid_el.text if guid_el is not None else ""
         title_el = item.find("title")
-        title = title_el.text if title_el is not None else "Untitled"
+        # .strip() defends against stray leading/trailing whitespace in the
+        # RSS feed (e.g. "The Wind Knew His Name... Story " with a trailing
+        # space) which would otherwise create a silent title-variant that
+        # doesn't match elsewhere in the pipeline (episode_stats, wiki merge).
+        title = (title_el.text or "Untitled").strip() if title_el is not None else "Untitled"
         pub_el = item.find("pubDate")
         pub_date = pub_el.text if pub_el is not None else ""
         enc_el = item.find("enclosure")
@@ -470,7 +474,9 @@ def _canon_episode_title(title):
 def add_episode_ref(episodes_list, title):
     """Add `title` to a wiki entry's episodes list, replacing any existing
     entry that refers to the same episode under a different title variant
-    (e.g. missing/changed era suffix) instead of appending a duplicate."""
+    (e.g. missing/changed era suffix, stray whitespace) instead of
+    appending a duplicate."""
+    title = title.strip()
     canon = _canon_episode_title(title)
     for i, existing_title in enumerate(episodes_list):
         if _canon_episode_title(existing_title) == canon:
