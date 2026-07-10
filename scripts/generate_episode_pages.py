@@ -450,6 +450,56 @@ def main():
     print(f"Wrote slug map to data/episode-slugs.json")
 
     write_episode_sitemap(written)
+    write_episode_index(sorted_eps)
+
+
+def write_episode_index(sorted_eps):
+    """Single compact per-episode data file for client-side features that
+    need lightweight structured data across *all* episodes without
+    re-fetching/re-parsing the full RSS feed or 28 separate stats files
+    (e.g. the homepage themed carousel, see assets/js/carousel.js).
+    Word-count / speaker stats come from data/episode-stats/ (already
+    computed by scripts/update_wiki.py); everything else from RSS.
+    """
+    stats_index = load_json(EPISODE_STATS_INDEX, {})
+    records = []
+    for ep in sorted_eps:
+        slug = episode_slug(ep["guid"])
+        total_words = 0
+        num_speakers = 0
+        top_speaker = ""
+        stats_path = stats_index.get(ep["guid"])
+        if stats_path:
+            stats = load_json(Path(stats_path), {})
+            speaking = stats.get("speaking") or []
+            if speaking:
+                total_words = sum(c.get("words", 0) for c in speaking)
+                num_speakers = len(speaking)
+                top_speaker = speaking[0].get("name", "")
+        try:
+            dt = email.utils.parsedate_to_datetime(ep["pub_date"])
+        except (TypeError, ValueError):
+            dt = None
+        records.append({
+            "guid": ep["guid"],
+            "slug": slug,
+            "title": ep["title"],
+            "thumbnail": ep["thumbnail"] or DEFAULT_IMAGE,
+            "link": ep["link"],
+            "pubDate": ep["pub_date"],
+            "month": dt.month if dt else None,
+            "day": dt.day if dt else None,
+            "season": ep["season"],
+            "duration": ep["duration"],
+            "totalWords": total_words,
+            "numSpeakers": num_speakers,
+            "topSpeaker": top_speaker,
+        })
+    # Newest first, matching every other episode listing on the site.
+    records.reverse()
+    with open("data/episode-index.json", "w", encoding="utf-8") as f:
+        json.dump(records, f, indent=2, ensure_ascii=False)
+    print(f"Wrote data/episode-index.json ({len(records)} episodes)")
 
 
 def write_episode_sitemap(written):

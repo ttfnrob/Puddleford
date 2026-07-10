@@ -95,6 +95,15 @@ ul{list-style:none}
 .card__link{font-size:0.88rem;color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:0.3rem}
 .card__link:hover{color:var(--gold-light)}
 
+/* HOMEPAGE THEMED CAROUSEL */
+.carousel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;max-width:var(--max-width);margin:0 auto 0.5rem;padding:0 1.5rem}
+.carousel-grid[data-count="1"],.carousel-grid[data-count="2"]{grid-template-columns:repeat(auto-fit,minmax(260px,320px));justify-content:center}
+.carousel-card{display:block}
+.carousel-card .card__title{font-size:1rem;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
+@media (max-width:768px){
+  .carousel-grid{grid-template-columns:1fr;gap:1rem}
+}
+
 /* EPISODE GRID */
 .episode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;max-width:var(--max-width);margin:0 auto;padding:0 1.5rem}
 .filter-bar{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:flex-start;margin-bottom:2rem;max-width:var(--max-width);margin-left:auto;margin-right:auto;padding:0 1.5rem}

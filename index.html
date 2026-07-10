@@ -128,6 +128,22 @@
 
  <span class="ornament" aria-hidden="true"> &nbsp; &nbsp; </span>
 
+ <section id="episode-carousel" class="section carousel-section" aria-labelledby="carousel-heading" style="display:none;">
+ <div class="container">
+ <div class="section-header">
+ <span class="section-header__label">A different angle on the town, every day</span>
+ <h2 class="section-header__title" id="carousel-heading" data-carousel-label>Today’s theme</h2>
+ <p class="section-header__sub" data-carousel-sublabel></p>
+ </div>
+ <div class="carousel-grid" data-carousel-grid></div>
+ <div class="text-center mt-4">
+ <a href="episodes.html" class="btn btn--outline">Browse all episodes</a>
+ </div>
+ </div>
+ </section>
+
+ <span class="ornament" aria-hidden="true"> &nbsp; &nbsp; </span>
+
  <section class="section" aria-labelledby="about-heading">
  <div class="container">
  <div class="about-grid">
@@ -201,8 +217,10 @@
  </footer>
 
  <script src="assets/js/episodes.js"></script>
+<script src="assets/js/carousel.js"></script>
 <script>
   loadEpisodes(null, document.getElementById('latest-episode'));
+  initPuddlefordCarousel(document.getElementById('episode-carousel'));
 </script>
 <script src="assets/js/badges.js"></script>
 <script src="assets/js/theme.js"></script>

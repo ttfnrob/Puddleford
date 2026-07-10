@@ -45,7 +45,7 @@ jobs:
           git config user.name "Puddleford Wiki Bot"
           git config user.email "ttfnrob@gmail.com"
           git add data/wiki.json data/transcripts/ data/episode-stats/ \
-                  data/episode-slugs.json episodes/ sitemap-episodes.xml
+                  data/episode-slugs.json data/episode-index.json episodes/ sitemap-episodes.xml
           # Only commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit."
