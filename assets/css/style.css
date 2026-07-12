@@ -301,9 +301,9 @@ ul{list-style:none}
 
 /* FOOTER */
 .footer{background:var(--bg-secondary);border-top:1px solid var(--border-gold);padding:3rem 0 2rem;margin-top:auto}
-.footer__inner{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:start;margin-bottom:2rem;position:relative;z-index:1}
+.footer__inner{display:grid;grid-template-columns:1fr auto auto;gap:2rem;align-items:start;margin-bottom:2rem;position:relative;z-index:1}
 .footer__brand p{font-size:0.88rem;color:var(--text-muted);max-width:260px;line-height:1.6}
-.footer__nav h4,.footer__platforms h4{font-family:var(--font-heading);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15rem;color:var(--gold);margin-bottom:0.75rem}
+.footer__nav h4,.footer__platforms h4,.footer__social h4{font-family:var(--font-heading);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15rem;color:var(--gold);margin-bottom:0.75rem}
 .footer__nav li,.footer__platforms li{margin-bottom:0.35rem}
 .footer__nav a,.footer__platforms a{color:var(--text-muted);font-size:0.88rem}
 .footer__nav a:hover,.footer__platforms a:hover{color:var(--gold)}
@@ -339,7 +339,7 @@ ul{list-style:none}
 
 /* SITE-FOOTER (episodes, wiki, players pages) */
 .site-footer{background:var(--bg-secondary);border-top:1px solid var(--border-gold);padding:3rem 0 2rem;margin-top:auto}
-.footer-inner{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:start;margin-bottom:2rem}
+.footer-inner{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr auto auto auto;gap:2rem;align-items:start;margin-bottom:2rem}
 .footer-logo{font-family:var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--gold);text-decoration:none}
 .footer-logo:hover{color:var(--gold-light)}
 .footer-brand p{font-size:0.88rem;color:var(--text-muted);max-width:260px;line-height:1.6}
@@ -347,7 +347,7 @@ ul{list-style:none}
 .footer-links li,.footer-platforms li{margin-bottom:0.35rem}
 .footer-links a,.footer-platforms a{color:var(--text-muted);font-size:0.88rem;text-decoration:none}
 .footer-links a:hover,.footer-platforms a:hover{color:var(--gold)}
-.footer-platforms p{font-family:var(--font-heading);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15rem;color:var(--gold);margin-bottom:0.75rem}
+.footer-platforms p,.footer-social p{font-family:var(--font-heading);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15rem;color:var(--gold);margin-bottom:0.75rem}
 .footer-copy{max-width:var(--max-width);margin:0 auto;padding:1.5rem 1.5rem 0;border-top:1px solid var(--border);text-align:center;color:var(--text-muted);font-size:0.82rem}
 
 /* PULL QUOTE */
@@ -388,8 +388,10 @@ ul{list-style:none}
   .latest-episode__img{max-height:280px;width:100%;object-fit:cover}
   .footer__inner{grid-template-columns:1fr 1fr}
   .footer__brand{grid-column:1/-1}
+  .footer__social{grid-column:2/3}
   .footer-inner{grid-template-columns:1fr 1fr}
   .footer-brand{grid-column:1/-1}
+  .footer-social{grid-column:2/3}
   .event-card{grid-template-columns:auto 1fr}
   .event-card__cta{grid-column:1/-1;text-align:center}
 }
@@ -417,6 +419,8 @@ ul{list-style:none}
   .footer__brand p{margin-left:auto;margin-right:auto}
   .footer__nav{text-align:center}
   .footer__platforms{text-align:center}
+  .footer__social{text-align:center}
+  .footer__social .platform-badges--social{justify-content:center}
 
   /* Footer (episodes/wiki/players style) */
   .footer-inner{grid-template-columns:1fr}
@@ -426,6 +430,8 @@ ul{list-style:none}
   .footer-links{text-align:center}
   .footer-platforms{text-align:center}
   .footer-platforms p{text-align:center}
+  .footer-social{text-align:center}
+  .footer-social .platform-badges--social{justify-content:center}
 
   /* Event cards */
   .event-card{grid-template-columns:1fr}
@@ -521,6 +527,9 @@ ul{list-style:none}
 .pbadge--rss         { background: #F26522; color: #fff; }
 .pbadge--rss         .pbadge__icon svg { fill: #fff; }
 
+.pbadge--instagram   { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #fff; }
+.pbadge--instagram   .pbadge__icon svg { fill: #fff; }
+
 /* Footer: collapse to plain text links */
 .footer-platforms .platform-badges,
 .footer__platforms .platform-badges {
@@ -563,6 +572,31 @@ ul{list-style:none}
     align-items: center;
   }
 }
+
+/* -- Social badges (hero + footer) --------------------------- */
+.hero__social .platform-badges { margin-top: 1rem; }
+
+.footer__social .platform-badges--social,
+.footer-social .platform-badges--social,
+.footer__social .platform-badges,
+.footer-social .platform-badges {
+  flex-direction: row;
+  gap: .6rem;
+}
+.footer__social .pbadge,
+.footer-social .pbadge {
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
+.footer__social .pbadge__label,
+.footer-social .pbadge__label { display: none; }
+.footer__social .pbadge__icon,
+.footer-social .pbadge__icon { width: 16px; height: 16px; }
+.footer__social .pbadge__icon svg,
+.footer-social .pbadge__icon svg { width: 16px; height: 16px; }
 
 /* =============================================================
    Network Graph
