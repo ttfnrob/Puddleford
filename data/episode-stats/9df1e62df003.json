@@ -1,0 +1,32 @@
+{
+  "guid": "74076482-c6fd-4ba2-a65d-2d698772a744",
+  "title": "The Cabernet Cove Mysteries",
+  "pub_date": "Fri, 17 Jul 2026 06:34:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Jennifer Fincher",
+      "words": 183
+    },
+    {
+      "name": "Margaret",
+      "words": 140
+    },
+    {
+      "name": "Colonel Huntley Marsh",
+      "words": 157
+    },
+    {
+      "name": "Mr. Jones",
+      "words": 83
+    },
+    {
+      "name": "Mrs. Jones",
+      "words": 22
+    },
+    {
+      "name": "Shorty McGinch",
+      "words": 18
+    }
+  ]
+}
