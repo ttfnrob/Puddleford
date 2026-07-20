@@ -10,9 +10,9 @@
     "day": 20,
     "season": "",
     "duration": "00:00:30",
-    "totalWords": 0,
-    "numSpeakers": 0,
-    "topSpeaker": "",
+    "totalWords": 50,
+    "numSpeakers": 1,
+    "topSpeaker": "Character Name",
     "era": "",
     "eraGroup": null,
     "narrator": null
