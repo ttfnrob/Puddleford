@@ -1,0 +1,28 @@
+{
+  "guid": "d8541dd5-d1f6-46f7-b901-939a5736a63a",
+  "title": "Unauthorised Departure",
+  "pub_date": "Fri, 24 Jul 2026 04:05:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Sean Lockhead",
+      "words": 102
+    },
+    {
+      "name": "Governor Geoffrey Clankleton",
+      "words": 109
+    },
+    {
+      "name": "Philippa Leighton-Thistle",
+      "words": 95
+    },
+    {
+      "name": "Helen Castleton-Jones",
+      "words": 83
+    },
+    {
+      "name": "Stan Shackleton",
+      "words": 54
+    }
+  ]
+}
