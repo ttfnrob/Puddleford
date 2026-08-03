@@ -1,0 +1,32 @@
+{
+  "guid": "2c8b7b44-b767-4d5c-a6ab-2c13d6c21e51",
+  "title": "A Tale of Two Chippies",
+  "pub_date": "Fri, 31 Jul 2026 04:04:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Jeremy Mullet",
+      "words": 180
+    },
+    {
+      "name": "Marjorie",
+      "words": 130
+    },
+    {
+      "name": "Rhiannon",
+      "words": 90
+    },
+    {
+      "name": "Gus Kring",
+      "words": 120
+    },
+    {
+      "name": "Catfish",
+      "words": 60
+    },
+    {
+      "name": "Flounder",
+      "words": 60
+    }
+  ]
+}

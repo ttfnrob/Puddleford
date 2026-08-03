@@ -222,5 +222,12 @@
     "pub_date": "Mon, 27 Jul 2026 20:01:00 GMT",
     "season": "",
     "episode_num": ""
+  },
+  "2c8b7b44-b767-4d5c-a6ab-2c13d6c21e51": {
+    "file": "data/transcripts/210d6e2453a5.txt",
+    "title": "A Tale of Two Chippies",
+    "pub_date": "Fri, 31 Jul 2026 04:04:00 GMT",
+    "season": "2",
+    "episode_num": "11"
   }
 }
