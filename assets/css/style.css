@@ -58,7 +58,8 @@ ul{list-style:none}
 .hero__overlay{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 55%,rgba(26,18,10,0.82) 0%,rgba(26,18,10,0.5) 45%,rgba(26,18,10,0.12) 75%),linear-gradient(to bottom,rgba(26,18,10,0) 0%,rgba(26,18,10,0) 65%,var(--bg) 100%);z-index:1}
 .hero__content{position:relative;z-index:2;width:100%;padding:5rem 1.5rem 4rem}
 .hero__eyebrow{font-family:var(--font-body);font-size:0.85rem;letter-spacing:0.3rem;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:1rem}
-.hero__title{font-family:var(--font-heading);font-size:clamp(3.5rem,10vw,7rem);font-weight:900;color:var(--gold);text-shadow:0 2px 20px rgba(0,0,0,0.8),0 0 60px rgba(212,152,42,0.3);letter-spacing:-0.02em;line-height:1;margin-bottom:0.75rem;display:inline-flex;align-items:flex-start;gap:0.4rem}
+.hero__title{display:inline-flex;align-items:flex-start;gap:0.4rem;margin-bottom:0.75rem}
+.hero__title-text{font-family:var(--font-heading);font-size:clamp(3.5rem,10vw,7rem);font-weight:900;color:var(--gold);text-shadow:0 2px 20px rgba(0,0,0,0.8),0 0 60px rgba(212,152,42,0.3);letter-spacing:-0.02em;line-height:1;margin:0}
 .hero__mktoc-badge{width:clamp(32px,4.4vw,52px);height:clamp(32px,4.4vw,52px);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.5);opacity:0.95;flex-shrink:0;margin-top:0.15em}
 .hero__tagline{font-family:var(--font-heading);font-style:italic;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--text);opacity:0.95;text-shadow:0 2px 12px rgba(0,0,0,0.7);margin-bottom:1.5rem}
 .hero__desc{max-width:560px;margin:0 auto 2.5rem;color:var(--text);font-size:1rem;line-height:1.75;text-shadow:0 2px 10px rgba(0,0,0,0.75)}
@@ -302,16 +303,6 @@ ul{list-style:none}
 .skeleton-dot{position:absolute;left:-2.25rem;top:1.25rem;width:14px;height:14px;border-radius:50%;background:var(--bg-secondary);overflow:hidden}
 .skeleton-dot::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.03) 40%,rgba(255,255,255,0.06) 50%,rgba(255,255,255,0.03) 60%,transparent 100%);animation:shimmer 1.8s infinite ease-in-out}
 
-/* FOOTER */
-.footer{background:var(--bg-secondary);border-top:1px solid var(--border-gold);padding:3rem 0 2rem;margin-top:auto}
-.footer__inner{display:grid;grid-template-columns:1fr auto auto;gap:2rem;align-items:start;margin-bottom:2rem;position:relative;z-index:1}
-.footer__brand p{font-size:0.88rem;color:var(--text-muted);max-width:260px;line-height:1.6}
-.footer__nav h4,.footer__platforms h4,.footer__social h4{font-family:var(--font-heading);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15rem;color:var(--gold);margin-bottom:0.75rem}
-.footer__nav li,.footer__platforms li{margin-bottom:0.35rem}
-.footer__nav a,.footer__platforms a{color:var(--text-muted);font-size:0.88rem}
-.footer__nav a:hover,.footer__platforms a:hover{color:var(--gold)}
-.footer__bottom{border-top:1px solid var(--border);padding-top:1.5rem;text-align:center;color:var(--text-muted);font-size:0.82rem;position:relative;z-index:1}
-
 /* CTA */
 .cta-band{background:linear-gradient(135deg,var(--bg-secondary) 0%,var(--bg-card) 100%);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:3rem 2rem;text-align:center}
 .cta-band h2{font-family:var(--font-heading);font-size:1.8rem;color:var(--gold);margin-bottom:0.75rem}
@@ -340,9 +331,9 @@ ul{list-style:none}
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;margin-left:auto;padding:0.5rem;width:36px;height:36px;position:relative}
 .nav-hamburger span{display:block;width:22px;height:2px;background:var(--gold);margin:5px auto;border-radius:2px;transition:var(--transition)}
 
-/* SITE-FOOTER (episodes, wiki, players pages) */
+/* SITE-FOOTER (all pages) */
 .site-footer{background:var(--bg-secondary);border-top:1px solid var(--border-gold);padding:3rem 0 2rem;margin-top:auto}
-.footer-inner{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr auto auto auto;gap:2rem;align-items:start;margin-bottom:2rem}
+.footer-inner{max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;align-items:start;margin-bottom:2rem}
 .footer-logo{font-family:var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--gold);text-decoration:none}
 .footer-logo:hover{color:var(--gold-light)}
 .footer-brand p{font-size:0.88rem;color:var(--text-muted);max-width:260px;line-height:1.6}
@@ -389,9 +380,6 @@ ul{list-style:none}
   .latest-episode{grid-template-columns:1fr}
   .latest-episode__body{padding:1.5rem}
   .latest-episode__img{max-height:280px;width:100%;object-fit:cover}
-  .footer__inner{grid-template-columns:1fr 1fr}
-  .footer__brand{grid-column:1/-1}
-  .footer__social{grid-column:2/3}
   .footer-inner{grid-template-columns:1fr 1fr}
   .footer-brand{grid-column:1/-1}
   .footer-social{grid-column:2/3}
@@ -416,16 +404,7 @@ ul{list-style:none}
   .hero{min-height:min(80vh, 600px)}
   .hero__content{padding:3.5rem 1rem 3rem}
 
-  /* Footer (index/events style) */
-  .footer__inner{grid-template-columns:1fr}
-  .footer__inner > *{text-align:center}
-  .footer__brand p{margin-left:auto;margin-right:auto}
-  .footer__nav{text-align:center}
-  .footer__platforms{text-align:center}
-  .footer__social{text-align:center}
-  .footer__social .platform-badges--social{justify-content:center}
-
-  /* Footer (episodes/wiki/players style) */
+  /* Footer */
   .footer-inner{grid-template-columns:1fr}
   .footer-inner > *{text-align:center}
   .footer-brand{text-align:center}
@@ -534,15 +513,13 @@ ul{list-style:none}
 .pbadge--instagram   .pbadge__icon svg { fill: #fff; }
 
 /* Footer: collapse to plain text links */
-.footer-platforms .platform-badges,
-.footer__platforms .platform-badges {
+.footer-platforms .platform-badges {
   flex-direction: column;
   align-items: flex-start;
   gap: .2rem;
   justify-content: flex-start;
 }
-.footer-platforms .pbadge,
-.footer__platforms .pbadge {
+.footer-platforms .pbadge {
   background: none;
   color: var(--text-muted);
   font-size: .82rem;
@@ -551,14 +528,12 @@ ul{list-style:none}
   padding: 0;
   border-radius: 0;
 }
-.footer-platforms .pbadge:hover,
-.footer__platforms .pbadge:hover {
+.footer-platforms .pbadge:hover {
   color: var(--gold);
   opacity: 1;
   transform: none;
 }
-.footer-platforms .pbadge__icon,
-.footer__platforms .pbadge__icon { display: none; }
+.footer-platforms .pbadge__icon { display: none; }
 
 @media (max-width: 768px) {
   .platform-badges {
@@ -570,8 +545,7 @@ ul{list-style:none}
     padding: 0 .9rem;
     font-size: .8rem;
   }
-  .footer-platforms .platform-badges,
-  .footer__platforms .platform-badges {
+  .footer-platforms .platform-badges {
     align-items: center;
   }
 }
@@ -605,14 +579,11 @@ ul{list-style:none}
   transform: translateY(-1px);
 }
 
-.footer__social .platform-badges--social,
 .footer-social .platform-badges--social,
-.footer__social .platform-badges,
 .footer-social .platform-badges {
   flex-direction: row;
   gap: .6rem;
 }
-.footer__social .pbadge,
 .footer-social .pbadge {
   height: 32px;
   width: 32px;
@@ -620,11 +591,8 @@ ul{list-style:none}
   border-radius: 50%;
   justify-content: center;
 }
-.footer__social .pbadge__label,
 .footer-social .pbadge__label { display: none; }
-.footer__social .pbadge__icon,
 .footer-social .pbadge__icon { width: 16px; height: 16px; }
-.footer__social .pbadge__icon svg,
 .footer-social .pbadge__icon svg { width: 16px; height: 16px; }
 
 /* =============================================================
