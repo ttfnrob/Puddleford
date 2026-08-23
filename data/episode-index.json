@@ -18,24 +18,6 @@
     "narrator": null
   },
   {
-    "guid": "5a0a2d76-38f4-42f6-afb4-91d2a20a38a0",
-    "slug": "dc3bcaada96e",
-    "title": "Next Episode Coming Soon: A Tale of Two Chippies",
-    "thumbnail": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45010575/45010575-1775770179289-419dd343d5beb.jpg",
-    "link": "https://podcasters.spotify.com/pod/show/robert-simpson/episodes/Next-Episode-Coming-Soon-A-Tale-of-Two-Chippies-e3mask2",
-    "pubDate": "Mon, 27 Jul 2026 20:01:00 GMT",
-    "month": 7,
-    "day": 27,
-    "season": "",
-    "duration": "00:00:30",
-    "totalWords": 111,
-    "numSpeakers": 3,
-    "topSpeaker": "Marjorie",
-    "era": "",
-    "eraGroup": null,
-    "narrator": null
-  },
-  {
     "guid": "d8541dd5-d1f6-46f7-b901-939a5736a63a",
     "slug": "107aee4cc63c",
     "title": "Unauthorised Departure",
@@ -51,24 +33,6 @@
     "topSpeaker": "Sean Lockhead",
     "era": "Present Day",
     "eraGroup": "Present Day",
-    "narrator": null
-  },
-  {
-    "guid": "0db81f4f-0a47-48a3-8d21-61c8b7a37b6a",
-    "slug": "53ea0be220f3",
-    "title": "Next episode coming soon: Unauthorised Departure",
-    "thumbnail": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45010575/45010575-1775770179289-419dd343d5beb.jpg",
-    "link": "https://podcasters.spotify.com/pod/show/robert-simpson/episodes/Next-episode-coming-soon-Unauthorised-Departure-e3matpe",
-    "pubDate": "Mon, 20 Jul 2026 20:21:55 GMT",
-    "month": 7,
-    "day": 20,
-    "season": "",
-    "duration": "00:00:30",
-    "totalWords": 50,
-    "numSpeakers": 1,
-    "topSpeaker": "Character Name",
-    "era": "",
-    "eraGroup": null,
     "narrator": null
   },
   {
@@ -380,7 +344,7 @@
   {
     "guid": "d0dc4007-4e46-45f9-b6cb-cf1423f8f197",
     "slug": "9fb9e414dff7",
-    "title": "The Eye of Puddelford (Present Day)",
+    "title": "The Eye of Puddleford (Present Day)",
     "thumbnail": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/45010575/296dc064abf0cd6a.jpg",
     "link": "https://podcasters.spotify.com/pod/show/robert-simpson/episodes/The-Eye-of-Puddelford-Present-Day-e3ce3pn",
     "pubDate": "Sat, 04 Oct 2025 14:30:00 GMT",
@@ -391,8 +355,8 @@
     "totalWords": 511,
     "numSpeakers": 5,
     "topSpeaker": "Danny Ripples",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {

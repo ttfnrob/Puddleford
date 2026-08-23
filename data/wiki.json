@@ -191,7 +191,7 @@
         "The Case of the Contaminated Cows",
         "The Puddling that Dropped (1790)",
         "Puddlefordia: The Fellowship of the Dog and Duck",
-        "The Eye of Puddelford (Present Day)",
+        "The Eye of Puddleford (Present Day)",
         "Pressed for Love (2000s)",
         "The Hunchback of Puddleford (1830s)",
         "No Time to Waddle (1983)",
@@ -423,7 +423,7 @@
       "name": "Puddleford Police Station",
       "description": "The location where Detective Inspector Babs Chickenmilk is tasked with protecting the Eye of Puddleford.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -431,7 +431,7 @@
       "name": "Local Car Showroom",
       "description": "A place where Muggins looks for a getaway vehicle for the heist.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -439,7 +439,7 @@
       "name": "Village Hall",
       "description": "The venue where the Eye of Puddleford is to be displayed by the Women's Institute.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)",
+        "The Eye of Puddleford (Present Day)",
         "Faster and Furious (1970s)"
       ],
       "source": "transcript"
@@ -584,7 +584,7 @@
       "name": "Puddleford Geological Society",
       "description": "The location where Brock Sterling is fired for his alarming claims about the town's safety.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -592,7 +592,7 @@
       "name": "Daily Puddle",
       "description": "The newspaper office where Eloise McManus works and discusses the mayor's activities.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -600,7 +600,7 @@
       "name": "Puddleford High Street",
       "description": "The street where Brock Sterling contemplates placing an advert to warn the town.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -608,7 +608,7 @@
       "name": "Mayor's Office",
       "description": "The office where the mayor prepares for the town hall meeting and dismisses concerns about the town's safety.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -907,7 +907,7 @@
       "description": "Another member of Dr. Coquelet's team, who has performed lung surgery and is part of the discussion on fundraising.",
       "episodes": [
         "Irrational Health Service",
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -1315,7 +1315,7 @@
       "name": "Danny Ripples",
       "description": "An ambitious young man leading the gang planning to steal the Eye of Puddleford.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -1323,7 +1323,7 @@
       "name": "Muggins",
       "description": "A gang member who is excited about the heist but often distracted.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -1331,7 +1331,7 @@
       "name": "Detective Inspector Babs Chickenmilk",
       "description": "The police officer responsible for protecting the Eye of Puddleford.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -1339,7 +1339,7 @@
       "name": "Sarah",
       "description": "A member of the Puddleford Women's Institute, concerned about the quality of their baked goods.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)"
+        "The Eye of Puddleford (Present Day)"
       ],
       "source": "transcript"
     },
@@ -1347,7 +1347,7 @@
       "name": "Margaret",
       "description": "A member of the Women's Institute who has a unique weapon for protection.",
       "episodes": [
-        "The Eye of Puddelford (Present Day)",
+        "The Eye of Puddleford (Present Day)",
         "The Cabernet Cove Mysteries"
       ],
       "source": "transcript"
@@ -1800,7 +1800,7 @@
       "name": "Brock Sterling",
       "description": "A disgraced seismologist who is fired from the Geological Society for his warnings about a disaster.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -1808,7 +1808,7 @@
       "name": "Eloise McManus",
       "description": "A journalist at the Daily Puddle determined to expose the mayor's misdeeds.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -1816,7 +1816,7 @@
       "name": "Skippy",
       "description": "Eloise's jovial sidekick who discusses his health issues with her.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -1824,7 +1824,7 @@
       "name": "The Mayor",
       "description": "The mayor of Puddleford, who is dismissive of concerns about the town's safety.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },
@@ -1832,7 +1832,7 @@
       "name": "Gareth Chance",
       "description": "The head of the Seismology Department who confirms Brock's firing and downplays the danger.",
       "episodes": [
-        "Disaster!"
+        "Bonus Episode: Disaster!"
       ],
       "source": "transcript"
     },

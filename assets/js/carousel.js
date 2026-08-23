@@ -50,6 +50,35 @@
     return seededShuffle(arr, seed).slice(0, n);
   }
 
+  // A handful of episodes have no custom artwork in the RSS feed and
+  // fall back to the show's default cover image. A themed 3-card pick
+  // can easily land on two of those by chance, which reads as a
+  // rendering bug ("why is the same picture shown twice?") rather than
+  // a deliberate design choice. Shuffle deterministically as before,
+  // but greedily prefer episodes with a thumbnail not already in the
+  // picked set; only fall back to a repeat once every other candidate
+  // is exhausted (C7).
+  function seededPickDiverse(arr, seed, n) {
+    const shuffled = seededShuffle(arr, seed);
+    const picked = [];
+    const usedThumbs = new Set();
+    const leftovers = [];
+    for (const ep of shuffled) {
+      if (picked.length >= n) break;
+      if (ep.thumbnail && usedThumbs.has(ep.thumbnail)) {
+        leftovers.push(ep);
+        continue;
+      }
+      picked.push(ep);
+      if (ep.thumbnail) usedThumbs.add(ep.thumbnail);
+    }
+    for (const ep of leftovers) {
+      if (picked.length >= n) break;
+      picked.push(ep);
+    }
+    return picked;
+  }
+
   /* ── Theme definitions ────────────────────────────────────── */
   const THEMES = [
 
@@ -61,7 +90,7 @@
       return {
         label: 'Down the Dog and Duck',
         sublabel: 'Puddleford\u2019s one true constant. Every era, same questionable ale.',
-        episodes: seededPick(eps, ctx.seed, 3),
+        episodes: seededPickDiverse(eps, ctx.seed, 3),
       };
     },
 
@@ -98,7 +127,7 @@
       return {
         label: 'Character spotlight: ' + pick.name,
         sublabel: pick.description || ('Every episode featuring ' + pick.name + '.'),
-        episodes: seededPick(eps, ctx.seed, 3),
+        episodes: seededPickDiverse(eps, ctx.seed, 3),
       };
     },
 
@@ -113,7 +142,7 @@
       return {
         label: 'Location spotlight: ' + pick.name,
         sublabel: pick.description || ('Every episode set at ' + pick.name + '.'),
-        episodes: seededPick(eps, ctx.seed, 3),
+        episodes: seededPickDiverse(eps, ctx.seed, 3),
       };
     },
 
@@ -136,7 +165,7 @@
       return {
         label: key + ': small-cast tales',
         sublabel: 'Intimate stories from ' + key.toLowerCase() + ', told by just a handful of voices.',
-        episodes: seededPick(byEra[key], ctx.seed, 3),
+        episodes: seededPickDiverse(byEra[key], ctx.seed, 3),
       };
     },
 
@@ -158,7 +187,7 @@
       return {
         label: 'Narrated by ' + name,
         sublabel: 'The tales ' + name + ' has told us, in ' + name + '\u2019s own words.',
-        episodes: seededPick(byNarrator[name], ctx.seed, 3),
+        episodes: seededPickDiverse(byNarrator[name], ctx.seed, 3),
       };
     },
 
@@ -183,7 +212,7 @@
       '<div class="card__body">' +
         '<span class="card__badge"' + (ep.season ? '' : ' style="visibility:hidden;"') + '>Season ' + (ep.season || '—') + '</span>' +
         '<div class="card__title">' + ep.title + '</div>' +
-        '<div class="card__meta">' + dateStr + (ep.duration ? ' &middot; ' + ep.duration : '') + '</div>' +
+        '<div class="card__meta">' + dateStr + (ep.duration ? ' &middot; ' + (typeof formatDuration === 'function' ? formatDuration(ep.duration) : ep.duration) : '') + '</div>' +
       '</div>';
     return card;
   }

@@ -54,14 +54,14 @@ ul{list-style:none}
 
 /* HERO */
 .hero{position:relative;min-height:80vh;display:flex;align-items:center;overflow:hidden;text-align:center}
-.hero__bg{position:absolute;inset:0;background-image:url('../img/cover-no-title.jpg');background-size:cover;background-position:center 20%;opacity:0.28;z-index:0}
-.hero__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,10,0.3) 0%,rgba(26,18,10,0.1) 40%,rgba(26,18,10,0.8) 85%,var(--bg) 100%);z-index:1}
+.hero__bg{position:absolute;inset:0;background-image:url('../img/cover-no-title.jpg');background-size:cover;background-position:center 20%;opacity:0.6;z-index:0}
+.hero__overlay{position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 55%,rgba(26,18,10,0.82) 0%,rgba(26,18,10,0.5) 45%,rgba(26,18,10,0.12) 75%),linear-gradient(to bottom,rgba(26,18,10,0) 0%,rgba(26,18,10,0) 65%,var(--bg) 100%);z-index:1}
 .hero__content{position:relative;z-index:2;width:100%;padding:5rem 1.5rem 4rem}
 .hero__eyebrow{font-family:var(--font-body);font-size:0.85rem;letter-spacing:0.3rem;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:1rem}
 .hero__title{font-family:var(--font-heading);font-size:clamp(3.5rem,10vw,7rem);font-weight:900;color:var(--gold);text-shadow:0 2px 20px rgba(0,0,0,0.8),0 0 60px rgba(212,152,42,0.3);letter-spacing:-0.02em;line-height:1;margin-bottom:0.75rem;display:inline-flex;align-items:flex-start;gap:0.4rem}
 .hero__mktoc-badge{width:clamp(32px,4.4vw,52px);height:clamp(32px,4.4vw,52px);border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.5);opacity:0.95;flex-shrink:0;margin-top:0.15em}
-.hero__tagline{font-family:var(--font-heading);font-style:italic;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--text);opacity:0.9;margin-bottom:1.5rem}
-.hero__desc{max-width:560px;margin:0 auto 2.5rem;color:var(--text-muted);font-size:1rem;line-height:1.75}
+.hero__tagline{font-family:var(--font-heading);font-style:italic;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--text);opacity:0.95;text-shadow:0 2px 12px rgba(0,0,0,0.7);margin-bottom:1.5rem}
+.hero__desc{max-width:560px;margin:0 auto 2.5rem;color:var(--text);font-size:1rem;line-height:1.75;text-shadow:0 2px 10px rgba(0,0,0,0.75)}
 
 /* LISTEN BUTTONS */
 .listen-buttons{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center}
@@ -173,6 +173,9 @@ ul{list-style:none}
 .event-card__location{font-size:0.9rem;color:var(--gold);margin-bottom:0.5rem}
 .event-card__desc{color:var(--text-muted);font-size:0.95rem}
 .event-card__cta .btn{white-space:nowrap}
+.event-card--past{grid-template-columns:auto 1fr;opacity:0.75}
+.event-card--past .event-card__date{background:var(--bg-secondary);color:var(--text-muted);border:1px solid var(--border-gold)}
+.event-card__badge{display:inline-block;font-family:var(--font-body,inherit);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05rem;font-weight:600;color:var(--text-muted);border:1px solid var(--border-gold);border-radius:999px;padding:0.15rem 0.6rem;margin-left:0.6rem;vertical-align:middle}
 .events-placeholder{text-align:center;border:1px dashed var(--border-gold);border-radius:var(--radius-lg);padding:3rem;color:var(--text-muted);font-style:italic;margin-top:2rem}
 
 /* PLAYERS */
@@ -575,6 +578,32 @@ ul{list-style:none}
 
 /* -- Social badges (hero + footer) --------------------------- */
 .hero__social .platform-badges { margin-top: 1rem; }
+
+/* Hero: one gold CTA + a quiet monochrome row of platform icons.
+   (V2: six brand-coloured buttons collapsed to one primary CTA.) */
+.hero__listen-cta { margin-bottom: 1rem; }
+.hero__platform-row .platform-badges {
+  justify-content: center;
+  gap: .6rem;
+}
+.hero__platform-row .pbadge {
+  background: transparent;
+  border: 1px solid rgba(240,232,213,0.28);
+  color: var(--text-muted);
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
+.hero__platform-row .pbadge__label { display: none; }
+.hero__platform-row .pbadge__icon svg { fill: currentColor !important; }
+.hero__platform-row .pbadge:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  opacity: 1;
+  transform: translateY(-1px);
+}
 
 .footer__social .platform-badges--social,
 .footer-social .platform-badges--social,
@@ -1134,12 +1163,24 @@ body.network-fullscreen-active {
   color: var(--gold);
 }
 
-/* Spotify link inside episode cards */
+/* Episode card footer: "Episode details" (whole card already links
+   there) plus a secondary "Listen on Spotify" action (P4). */
+.episode-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+.episode-card__details {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold);
+}
 .episode-card__spotify {
   display: inline-block;
   font-size: 0.78rem;
   color: var(--text-muted);
-  margin-top: 0.5rem;
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--border);
   border-radius: 12px;

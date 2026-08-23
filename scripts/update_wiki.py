@@ -69,6 +69,18 @@ def save_wiki(data):
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Saved {WIKI_JSON}")
 
+# One-off correction for a known upstream RSS title typo (C8). Keep this in
+# sync with the same map in generate_episode_pages.py so episode-index.json
+# and wiki.json agree on the canonical title and cross-references resolve.
+TITLE_FIXES = {
+    "The Eye of Puddelford (Present Day)": "The Eye of Puddleford (Present Day)",
+}
+
+
+def fix_title(title):
+    return TITLE_FIXES.get(title, title)
+
+
 def fetch_rss():
     req = urllib.request.Request(RSS_URL, headers={"User-Agent": "PuddlefordWikiBot/1.0"})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -90,7 +102,7 @@ def parse_episodes(rss_bytes):
         # RSS feed (e.g. "The Wind Knew His Name... Story " with a trailing
         # space) which would otherwise create a silent title-variant that
         # doesn't match elsewhere in the pipeline (episode_stats, wiki merge).
-        title = (title_el.text or "Untitled").strip() if title_el is not None else "Untitled"
+        title = fix_title((title_el.text or "Untitled").strip()) if title_el is not None else "Untitled"
         pub_el = item.find("pubDate")
         pub_date = pub_el.text if pub_el is not None else ""
         enc_el = item.find("enclosure")

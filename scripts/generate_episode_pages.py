@@ -61,6 +61,20 @@ DEFAULT_IMAGE = f"{SITE_URL}/assets/img/cover-with-title-1.jpg"
 
 ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 
+# One-off corrections for known upstream RSS title typos (C8). Keyed on the
+# exact raw title as it appears in the feed; applied immediately after
+# parsing so every downstream consumer (episode-index.json, static pages,
+# JSON-LD, sitemap) sees the corrected spelling consistently. Keep this in
+# sync with the same map in update_wiki.py so wiki.json's episode-title
+# references still match by canonical title.
+TITLE_FIXES = {
+    "The Eye of Puddelford (Present Day)": "The Eye of Puddleford (Present Day)",
+}
+
+
+def fix_title(title):
+    return TITLE_FIXES.get(title, title)
+
 
 def fetch_rss():
     req = urllib.request.Request(RSS_URL, headers={"User-Agent": "PuddlefordBot/1.0"})
@@ -76,7 +90,7 @@ def parse_episodes(rss_bytes):
         guid_el = item.find("guid")
         guid = (guid_el.text or "").strip() if guid_el is not None else ""
         title_el = item.find("title")
-        title = (title_el.text or "Untitled").strip() if title_el is not None else "Untitled"
+        title = fix_title((title_el.text or "Untitled").strip()) if title_el is not None else "Untitled"
         link_el = item.find("link")
         link = (link_el.text or "").strip() if link_el is not None else ""
         pub_el = item.find("pubDate")
@@ -122,6 +136,129 @@ def strip_html(desc):
     text = re.sub(r"<[^>]+>", " ", with_gaps)
     text = html.unescape(text)
     return re.sub(r"\s+", " ", text).strip()
+
+
+# Every episode description starts with the same standing boilerplate
+# ("Every episode of Puddleford is entirely improvised...") and often
+# ends with a narrator/players credit line. Strip both so what's baked
+# into the static page (meta description, JSON-LD, and the visible
+# synopsis) is just the synopsis (C1).
+BOILERPLATE_RE = re.compile(
+    r"^\s*Every episode of Puddleford is entirely improvised[^.]*\.\s*"
+    r"(?:We add sound effects[^.]*\.\s*)?",
+    re.IGNORECASE,
+)
+CREDIT_TAIL_RE = re.compile(
+    r"\s*(?:This week'?s narrator|The players are|Narrated by)\b.*$",
+    re.IGNORECASE | re.DOTALL,
+)
+THIS_WEEK_RE = re.compile(r"^\s*This week:\s*", re.IGNORECASE)
+
+# Standing per-paragraph boilerplate: episode credits and the show's own
+# self-description, which vary in wording episode to episode but all
+# amount to the same non-synopsis filler (C1).
+BOILERPLATE_PARA_RES = [
+    re.compile(r"^\s*Every episode of Puddleford is entirely improvised\b", re.IGNORECASE),
+    re.compile(r"^\s*Episodes are improvised on the spot\b", re.IGNORECASE),
+    re.compile(r"^\s*This week'?s narrator\b", re.IGNORECASE),
+    re.compile(r"^\s*Narrated by\b", re.IGNORECASE),
+    re.compile(r"^\s*This week'?s players\b", re.IGNORECASE),
+    re.compile(r"^\s*The players are\b", re.IGNORECASE),
+    re.compile(r"^\s*Players:\s*", re.IGNORECASE),
+    re.compile(r"^\s*Improvised comedy podcast from\b", re.IGNORECASE),
+]
+
+
+def _is_boilerplate_para(plain):
+    return any(p.match(plain) for p in BOILERPLATE_PARA_RES)
+
+
+# Same set as BOILERPLATE_PARA_RES but unanchored, for cutting the
+# plain-text (fully-joined, no paragraph breaks) synopsis used in meta
+# descriptions and JSON-LD.
+CREDIT_CUT_RES = [
+    re.compile(r"This week'?s narrator\b", re.IGNORECASE),
+    re.compile(r"Narrated by\b", re.IGNORECASE),
+    re.compile(r"This week'?s players\b", re.IGNORECASE),
+    re.compile(r"The players are\b", re.IGNORECASE),
+    re.compile(r"Players:\s*", re.IGNORECASE),
+    re.compile(r"Improvised (?:on the spot |comedy podcast )", re.IGNORECASE),
+]
+
+
+def clean_synopsis(desc_plain):
+    """Strip the standing RSS boilerplate lead-in and the narrator/players
+    credit tail from an already-HTML-stripped description, leaving just
+    the per-episode synopsis."""
+    if not desc_plain:
+        return ""
+    text = BOILERPLATE_RE.sub("", desc_plain)
+    text = THIS_WEEK_RE.sub("", text)
+    # The credit/self-plug lines are usually their own trailing
+    # sentence(s); cut from the first one found onward rather than
+    # relying on a single fixed phrase.
+    cut_at = None
+    for pat in CREDIT_CUT_RES:
+        m = pat.search(text)
+        if m and (cut_at is None or m.start() < cut_at):
+            cut_at = m.start()
+    if cut_at is not None:
+        text = text[:cut_at]
+    return text.strip()
+
+
+def format_duration(duration):
+    """HH:MM:SS (or MM:SS) -> short human string: '34 min', '1 hr 5 min',
+    '45 sec' (C4)."""
+    if not duration:
+        return ""
+    parts = duration.split(":")
+    try:
+        nums = [int(p) for p in parts]
+    except ValueError:
+        return duration
+    if len(nums) == 3:
+        h, m, s = nums
+    elif len(nums) == 2:
+        h, m, s = 0, nums[0], nums[1]
+    else:
+        h, m, s = 0, 0, nums[0]
+    total_min = h * 60 + m
+    if total_min < 1:
+        return f"{s} sec"
+    if h > 0:
+        return f"{h} hr" + (f" {m} min" if m else "")
+    return f"{m} min"
+
+
+PARA_RE = re.compile(r"<p>(.*?)</p>", re.IGNORECASE | re.DOTALL)
+
+
+def strip_boilerplate_html(desc):
+    """Strip the standing boilerplate paragraph and trailing
+    narrator/players credit paragraphs directly out of the raw RSS
+    description HTML, so the baked-in ep-desc block leads with the
+    actual synopsis instead of thirty words every episode shares (C1).
+    Falls back to returning the description unchanged if it isn't the
+    familiar <p>-per-paragraph shape."""
+    if not desc or not PARA_RE.search(desc):
+        return desc
+    paras = PARA_RE.findall(desc)
+    kept = []
+    for i, p in enumerate(paras):
+        plain = re.sub(r"<[^>]+>", "", p).strip()
+        if i == 0 and BOILERPLATE_RE.match(plain + " "):
+            continue
+        if not plain:
+            continue  # drop empty <p><br></p> spacers
+        if _is_boilerplate_para(plain):
+            continue
+        kept.append(p)
+    if not kept:
+        return desc
+    # Strip a leading "This week: " label off the first remaining paragraph.
+    kept[0] = THIS_WEEK_RE.sub("", kept[0])
+    return "".join(f"<p>{p}</p>" for p in kept)
 
 
 def format_description_html(desc):
@@ -189,6 +326,33 @@ def extract_narrator(desc_plain):
         if re.match(r"^" + re.escape(alias) + r"\b", raw, re.IGNORECASE):
             return canon
     return None
+
+
+def duration_to_seconds(duration):
+    """HH:MM:SS / MM:SS / SS -> total seconds. Returns 0 if unparsable."""
+    if not duration:
+        return 0
+    try:
+        parts = [int(p) for p in duration.split(":")]
+    except ValueError:
+        return 0
+    if len(parts) == 3:
+        return parts[0] * 3600 + parts[1] * 60 + parts[2]
+    if len(parts) == 2:
+        return parts[0] * 60 + parts[1]
+    return parts[0]
+
+
+TRAILER_MAX_SECONDS = 120
+
+
+def is_trailer(ep):
+    """Trailers/teasers ('Next Episode Coming Soon: ...') are published
+    as their own RSS items running well under two minutes (C3). They
+    should never get a static episode page, sitemap entry, or index
+    record of their own."""
+    secs = duration_to_seconds(ep.get("duration"))
+    return 0 < secs < TRAILER_MAX_SECONDS
 
 
 def load_json(path, default):
@@ -396,11 +560,12 @@ def build_page(ep, prev_ep, next_ep):
     slug = episode_slug(ep["guid"])
     canonical_url = f"{SITE_URL}/episodes/{slug}/"
     image_url = ep["thumbnail"] or DEFAULT_IMAGE
-    desc_plain = strip_html(ep["description"])
-    desc_html = format_description_html(ep["description"])
+    desc_plain_raw = strip_html(ep["description"])
+    desc_plain = clean_synopsis(desc_plain_raw)
+    desc_html = format_description_html(strip_boilerplate_html(ep["description"]))
     meta_bits = [format_date(ep["pub_date"])]
     if ep["duration"]:
-        meta_bits.append(ep["duration"])
+        meta_bits.append(format_duration(ep["duration"]))
     meta_text = " \u00b7 ".join(b for b in meta_bits if b)
 
     badge_html = ""
@@ -475,6 +640,14 @@ def main():
         except (TypeError, ValueError):
             return email.utils.parsedate_to_datetime("Thu, 01 Jan 1970 00:00:00 GMT")
     sorted_eps = sorted(episodes, key=pub_date_key)
+
+    # Drop trailers before generating anything (C3): they get no static
+    # page, no sitemap entry, no episode-index record, and no prev/next
+    # slot on real episodes either.
+    trailer_count = sum(1 for ep in sorted_eps if is_trailer(ep))
+    sorted_eps = [ep for ep in sorted_eps if not is_trailer(ep)]
+    if trailer_count:
+        print(f"Skipping {trailer_count} trailer(s) under {TRAILER_MAX_SECONDS}s.")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
