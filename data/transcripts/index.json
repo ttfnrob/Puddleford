@@ -229,5 +229,12 @@
     "pub_date": "Fri, 31 Jul 2026 04:04:00 GMT",
     "season": "2",
     "episode_num": "11"
+  },
+  "9a6049f2-0623-41fa-acf1-6ac3349eba8f": {
+    "file": "data/transcripts/c8e881d34ab6.txt",
+    "title": "Next episode coming soon: The Knights of Puddleford",
+    "pub_date": "Sat, 29 Aug 2026 16:33:06 GMT",
+    "season": "",
+    "episode_num": ""
   }
 }
