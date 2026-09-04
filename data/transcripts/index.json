@@ -236,5 +236,12 @@
     "pub_date": "Sat, 29 Aug 2026 16:33:06 GMT",
     "season": "",
     "episode_num": ""
+  },
+  "b76d5aea-1af9-4de5-9eba-75e66d4d27fb": {
+    "file": "data/transcripts/50760c09fcfc.txt",
+    "title": "The Knights of Puddleford",
+    "pub_date": "Fri, 04 Sep 2026 04:25:00 GMT",
+    "season": "2",
+    "episode_num": "12"
   }
 }

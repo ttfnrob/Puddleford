@@ -1,0 +1,36 @@
+{
+  "guid": "b76d5aea-1af9-4de5-9eba-75e66d4d27fb",
+  "title": "The Knights of Puddleford",
+  "pub_date": "Fri, 04 Sep 2026 04:25:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "King Nigel",
+      "words": 134
+    },
+    {
+      "name": "Sir Cumbrens",
+      "words": 75
+    },
+    {
+      "name": "Sir Valence",
+      "words": 75
+    },
+    {
+      "name": "Sirloin",
+      "words": 66
+    },
+    {
+      "name": "Gladys",
+      "words": 61
+    },
+    {
+      "name": "Surveillance",
+      "words": 60
+    },
+    {
+      "name": "Siratja",
+      "words": 43
+    }
+  ]
+}
