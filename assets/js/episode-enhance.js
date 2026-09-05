@@ -13,6 +13,10 @@
 
    Reads its target episode from the <script> tag's own
    data-guid / data-title attributes (set per-page by the generator).
+   data-title is already stripped of the SEO " - A Puddleford Tale"
+   suffix by the generator (see strip_display_suffix() in
+   scripts/generate_episode_pages.py), matching how wiki.json stores
+   episode-title references, so it can be compared directly here.
    ============================================================ */
 (function() {
   const scriptEl = document.currentScript;

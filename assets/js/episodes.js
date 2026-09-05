@@ -93,6 +93,16 @@ function parseRSS(xmlText) {
 }
 
 /* ── Helpers ───────────────────────────────────────────────── */
+// Rob appends " - A Puddleford Tale" to 2026 episode titles in Spotify
+// for Podcasters for SEO (anchors "Puddleford" in the title for Apple/
+// Spotify/Pocket Casts search). Valuable on those platforms; redundant
+// on puddleford.com itself, where the show name is already everywhere
+// on the page. Strip for on-site display only — mirrors
+// strip_display_suffix() in scripts/generate_episode_pages.py.
+function stripDisplaySuffix(title) {
+  return (title || '').replace(/\s*-\s*A Puddleford Tale\s*$/i, '').trim();
+}
+
 function stripHtml(html) {
   if (!html) return '';
   // Insert a space at block-boundary tags first — textContent alone
@@ -190,7 +200,7 @@ function episodePageUrl(guid, slugMap) {
 
 /* ── Card builder ──────────────────────────────────────────── */
 function buildCard(item, slugMap) {
-  const title  = item.title  || 'Untitled';
+  const title  = stripDisplaySuffix(item.title) || 'Untitled';
   const desc   = truncateWords(cleanSynopsis(item.description), 200);
   const img    = item.thumbnail || '';
   const link   = item.link   || '#';
@@ -259,7 +269,7 @@ function renderEpisodes(items, gridEl, latestEl, slugMap) {
       ${ep.thumbnail ? `<img class="latest-episode__img" src="${ep.thumbnail}" alt="" loading="lazy">` : ''}
       <div class="latest-episode__body">
         <div class="latest-episode__label">${season ? 'Season ' + season + ' &middot; ' : ''}Latest Episode</div>
-        <h3 class="latest-episode__title"><a href="${epPageUrl}">${ep.title}</a></h3>
+        <h3 class="latest-episode__title"><a href="${epPageUrl}">${stripDisplaySuffix(ep.title)}</a></h3>
         <div class="latest-episode__meta">${formatDate(ep.pubDate)}${dur ? ' &middot; ' + dur : ''}</div>
         <p class="latest-episode__desc">${desc}</p>
         <a href="${ep.link || '#'}" target="_blank" rel="noopener" class="btn btn--gold">Listen now</a>

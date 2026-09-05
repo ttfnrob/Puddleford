@@ -228,6 +228,14 @@
     return m + ' min';
   }
 
+  // Rob appends " - A Puddleford Tale" to 2026 episode titles in Spotify
+  // for Podcasters for SEO. Strip for on-site display and for matching
+  // against wiki.json (which never carries the suffix) — mirrors
+  // strip_display_suffix() in scripts/generate_episode_pages.py.
+  function stripDisplaySuffix(t) {
+    return (t || '').replace(/\s*-\s*A Puddleford Tale\s*$/i, '').trim();
+  }
+
   async function fetchRSS() {
     const urls = [
       RSS_URL,
@@ -297,9 +305,13 @@
       const ep = episodes.find(e => e.guid === guid);
       if (!ep) { showError('Episode not found.'); return; }
 
+      // Display title strips the SEO " - A Puddleford Tale" suffix
+      // (redundant on-site); JSON-LD keeps the true full RSS title.
+      const displayTitle = stripDisplaySuffix(ep.title);
+
       // Update page title and OG tags
-      document.title = ep.title + ' \u2014 Puddleford';
-      setMeta('og:title', ep.title + ' \u2014 Puddleford');
+      document.title = displayTitle + ' \u2014 Puddleford';
+      setMeta('og:title', displayTitle + ' \u2014 Puddleford');
       setMeta('og:description', stripHtml(ep.description).slice(0, 200));
       if (ep.thumbnail) setMeta('og:image', ep.thumbnail);
 
@@ -308,14 +320,14 @@
 
       // Hero
       const artwork = document.getElementById('ep-artwork');
-      if (ep.thumbnail) { artwork.src = ep.thumbnail; artwork.alt = ep.title; }
+      if (ep.thumbnail) { artwork.src = ep.thumbnail; artwork.alt = displayTitle; }
       else { artwork.style.display = 'none'; }
 
       const badge = document.getElementById('ep-badge');
       if (ep.itunes_season) { badge.textContent = 'Season ' + ep.itunes_season; }
       else { badge.style.display = 'none'; }
 
-      document.getElementById('ep-title').textContent = ep.title;
+      document.getElementById('ep-title').textContent = displayTitle;
       document.getElementById('ep-meta').textContent = formatDate(ep.pubDate) + (ep.itunes_duration ? ' \u00b7 ' + formatDuration(ep.itunes_duration) : '');
       document.getElementById('ep-desc').innerHTML = formatDescriptionHtml(ep.description);
 
@@ -333,14 +345,14 @@
         const prev = sorted[sortedIdx - 1];
         const prevLink = document.getElementById('ep-prev');
         prevLink.href = 'episode.html?id=' + encodeURIComponent(prev.guid);
-        prevLink.textContent = '\u2190 ' + prev.title;
+        prevLink.textContent = '\u2190 ' + stripDisplaySuffix(prev.title);
         prevLink.style.visibility = 'visible';
       }
       if (sortedIdx < sorted.length - 1) {
         const next = sorted[sortedIdx + 1];
         const nextLink = document.getElementById('ep-next');
         nextLink.href = 'episode.html?id=' + encodeURIComponent(next.guid);
-        nextLink.textContent = next.title + ' \u2192';
+        nextLink.textContent = stripDisplaySuffix(next.title) + ' \u2192';
         nextLink.style.visibility = 'visible';
       }
 
@@ -350,7 +362,7 @@
 
       // Load supplementary data in parallel
       loadStats(guid, ep.title);
-      loadWikiData(ep.title);
+      loadWikiData(displayTitle);
       loadTranscript(guid);
 
     } catch(err) {

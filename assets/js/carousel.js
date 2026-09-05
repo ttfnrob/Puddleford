@@ -22,11 +22,19 @@
    ============================================================ */
 (function() {
 
+  // Mirrors strip_display_suffix() in scripts/generate_episode_pages.py:
+  // Rob appends " - A Puddleford Tale" to 2026 episode titles in Spotify
+  // for Podcasters for SEO; strip it before display or title matching
+  // since wiki.json entries never carry it.
+  function stripDisplaySuffix(title) {
+    return (title || '').replace(/\s*-\s*A Puddleford Tale\s*$/i, '').trim();
+  }
+
   function canonTitle(title) {
-    // Mirrors _canon_episode_title() in scripts/update_wiki.py: strip a
-    // trailing "(era)" suffix so title variants match (RSS titles are
-    // sometimes edited to add/change an era suffix after the fact).
-    return (title || '').replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
+    // Mirrors _canon_episode_title() in scripts/update_wiki.py: strip
+    // the SEO suffix, then a trailing "(era)" suffix, so title variants
+    // match (RSS titles are sometimes edited to add/change either).
+    return stripDisplaySuffix(title).replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
   }
 
   // Deterministic "random" pick based on today's date, so the same
@@ -211,7 +219,7 @@
       '<img class="card__img" src="' + (ep.thumbnail || '') + '" alt="" loading="lazy">' +
       '<div class="card__body">' +
         '<span class="card__badge"' + (ep.season ? '' : ' style="visibility:hidden;"') + '>Season ' + (ep.season || '—') + '</span>' +
-        '<div class="card__title">' + ep.title + '</div>' +
+        '<div class="card__title">' + stripDisplaySuffix(ep.title) + '</div>' +
         '<div class="card__meta">' + dateStr + (ep.duration ? ' &middot; ' + (typeof formatDuration === 'function' ? formatDuration(ep.duration) : ep.duration) : '') + '</div>' +
       '</div>';
     return card;

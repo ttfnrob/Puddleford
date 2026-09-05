@@ -81,6 +81,18 @@ def fix_title(title):
     return TITLE_FIXES.get(title, title)
 
 
+# Keep in sync with the same helper in generate_episode_pages.py. Rob
+# started appending " - A Puddleford Tale" to 2026 episode titles in
+# Spotify for Podcasters (SEO); strip it before any title comparison
+# here so wiki.json's episode-title references (which never carry the
+# suffix) keep matching against the live RSS titles (which now do).
+DISPLAY_SUFFIX_RE = re.compile(r"\s*-\s*A Puddleford Tale\s*$", re.IGNORECASE)
+
+
+def strip_display_suffix(title):
+    return DISPLAY_SUFFIX_RE.sub("", title or "").strip()
+
+
 def fetch_rss():
     req = urllib.request.Request(RSS_URL, headers={"User-Agent": "PuddlefordWikiBot/1.0"})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -476,10 +488,11 @@ def is_generic_location(name):
 
 
 def _canon_episode_title(title):
-    """Strip a trailing '(era)' suffix so title variants for the same
-    episode (e.g. 'Captain Breadbeard' vs 'Captain Breadbeard (1695)',
-    which can differ between RSS pulls if the feed title is edited)
-    compare equal."""
+    """Strip a trailing '(era)' suffix and the SEO ' - A Puddleford Tale'
+    suffix so title variants for the same episode (e.g. 'Captain
+    Breadbeard' vs 'Captain Breadbeard (1695)', or a title with/without
+    the SEO suffix added later) compare equal."""
+    title = strip_display_suffix(title)
     return re.sub(r"\s*\([^)]*\)\s*$", "", title).strip().lower()
 
 
@@ -500,7 +513,13 @@ def add_episode_ref(episodes_list, title):
 
 def merge_wiki(wiki, ep, extracted):
     """Merge extracted data into wiki, deduplicating by name/era."""
-    title = ep["title"]
+    # Strip the SEO " - A Puddleford Tale" suffix before storing anywhere
+    # in wiki.json, so wiki entries always reference the bare episode
+    # title regardless of what's been appended in the RSS feed for
+    # platform SEO (P4-style bug: if this ever stored the raw RSS
+    # title, every character/location cross-reference on the episode
+    # page would silently stop matching as soon as the suffix was added).
+    title = strip_display_suffix(ep["title"])
     season = ep.get("season", "")
 
     # Timeline

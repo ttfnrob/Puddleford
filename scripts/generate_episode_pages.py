@@ -76,6 +76,22 @@ def fix_title(title):
     return TITLE_FIXES.get(title, title)
 
 
+# Rob started appending " - A Puddleford Tale" to every 2026 episode title
+# in Spotify for Podcasters (SEO: anchors the "Puddleford" keyword in the
+# title for Apple/Spotify/Pocket Casts search ranking, per Apple's own
+# documented metadata-weighting). That's valuable on the platforms, but
+# redundant on puddleford.com itself, where the show name is already in
+# the nav logo, page <title> suffix, and JSON-LD every time. Strip it for
+# anything a human reads on the site (page title, h1, social preview,
+# card/nav labels); keep it in JSON-LD's `name` and everywhere else that
+# should mirror the actual published feed title exactly.
+DISPLAY_SUFFIX_RE = re.compile(r"\s*-\s*A Puddleford Tale\s*$", re.IGNORECASE)
+
+
+def strip_display_suffix(title):
+    return DISPLAY_SUFFIX_RE.sub("", title or "").strip()
+
+
 def fetch_rss():
     req = urllib.request.Request(RSS_URL, headers={"User-Agent": "PuddlefordBot/1.0"})
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -560,6 +576,15 @@ def format_date(pub_date):
 def build_page(ep, prev_ep, next_ep):
     slug = episode_slug(ep["guid"])
     canonical_url = f"{SITE_URL}/episodes/{slug}/"
+    # Human-facing title: strip the SEO " - A Puddleford Tale" suffix
+    # Rob appends in Spotify for Podcasters. It's valuable for Apple/
+    # Spotify/Pocket Casts search (anchors the "Puddleford" keyword in
+    # the title), but redundant on puddleford.com itself, where the
+    # show name already appears in the nav logo and every page's
+    # <title> suffix. JSON-LD's `name` keeps the full, true RSS title
+    # (see build_jsonld) since that's meant to mirror the published
+    # feed exactly for search engines/crawlers.
+    display_title = strip_display_suffix(ep["title"])
     image_url = ep["thumbnail"] or DEFAULT_IMAGE
     desc_plain_raw = strip_html(ep["description"])
     desc_plain = clean_synopsis(desc_plain_raw)
@@ -593,7 +618,7 @@ def build_page(ep, prev_ep, next_ep):
         if not other_ep:
             return "#", "hidden", ""
         other_slug = episode_slug(other_ep["guid"])
-        return f"/episodes/{other_slug}/", "visible", esc(other_ep["title"])
+        return f"/episodes/{other_slug}/", "visible", esc(strip_display_suffix(other_ep["title"]))
 
     prev_href, prev_vis, prev_title_esc = nav_link(prev_ep, "prev")
     next_href, next_vis, next_title_esc = nav_link(next_ep, "next")
@@ -603,7 +628,7 @@ def build_page(ep, prev_ep, next_ep):
     desc_meta = desc_plain[:200] or "An episode of Puddleford: A Town with a Tale. Entirely improvised audio drama."
 
     return PAGE_TEMPLATE.format(
-        title_esc=esc(ep["title"]),
+        title_esc=esc(display_title),
         desc_esc=esc(desc_meta),
         canonical_url=canonical_url,
         image_url=esc(image_url),
@@ -619,7 +644,7 @@ def build_page(ep, prev_ep, next_ep):
         next_vis=next_vis,
         next_title_esc=next_title_esc,
         guid_esc=esc(ep["guid"]),
-        title_attr_esc=esc(ep["title"]),
+        title_attr_esc=esc(display_title),
     )
 
 
@@ -681,8 +706,11 @@ def main():
 
 def _canon_episode_title(title):
     """Same normalization as scripts/update_wiki.py's helper of the same
-    name: strip a trailing '(era)' suffix so title variants line up
-    (RSS titles are sometimes edited to add/change an era suffix)."""
+    name: strip a trailing '(era)' suffix and the SEO ' - A Puddleford
+    Tale' suffix so title variants line up (RSS titles are sometimes
+    edited to add/change an era suffix, or to add/remove the SEO
+    suffix) against wiki.json entries, which never carry either."""
+    title = strip_display_suffix(title)
     return re.sub(r"\s*\([^)]*\)\s*$", "", title).strip().lower()
 
 
@@ -745,7 +773,11 @@ def write_episode_index(sorted_eps):
         records.append({
             "guid": ep["guid"],
             "slug": slug,
-            "title": ep["title"],
+            # Display title: strip the SEO " - A Puddleford Tale" suffix
+            # for on-site use (homepage latest-episode, episode cards,
+            # carousel) — the show name's already everywhere on the
+            # page. RSS/platform listings keep the full suffixed title.
+            "title": strip_display_suffix(ep["title"]),
             "thumbnail": ep["thumbnail"] or DEFAULT_IMAGE,
             "link": ep["link"],
             "pubDate": ep["pub_date"],
