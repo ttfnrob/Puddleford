@@ -387,6 +387,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta name="twitter:description" content="{desc_esc}" />
   <meta name="twitter:image" content="{image_url}" />
   <meta name="author" content="Milton Keynes Theatre of Comedy" />
+  <meta name="apple-itunes-app" content="app-id=1799546935" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
