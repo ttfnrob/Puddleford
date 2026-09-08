@@ -243,5 +243,12 @@
     "pub_date": "Fri, 04 Sep 2026 04:25:00 GMT",
     "season": "2",
     "episode_num": "12"
+  },
+  "a3ab11a1-0b41-4b97-972b-3ef08501d5b3": {
+    "file": "data/transcripts/9604257e38a2.txt",
+    "title": "Next episode coming soon: Friends, Romans, Puddleford",
+    "pub_date": "Tue, 08 Sep 2026 10:52:00 GMT",
+    "season": "",
+    "episode_num": ""
   }
 }
