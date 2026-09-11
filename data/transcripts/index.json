@@ -250,5 +250,12 @@
     "pub_date": "Tue, 08 Sep 2026 10:52:00 GMT",
     "season": "",
     "episode_num": ""
+  },
+  "48792956-099c-46cf-8b03-1b65c9fa7387": {
+    "file": "data/transcripts/73ce194defcb.txt",
+    "title": "Friends, Romans, Puddleford - A Puddleford Tale",
+    "pub_date": "Fri, 11 Sep 2026 04:25:00 GMT",
+    "season": "2",
+    "episode_num": "13"
   }
 }

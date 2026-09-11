@@ -1,0 +1,28 @@
+{
+  "guid": "48792956-099c-46cf-8b03-1b65c9fa7387",
+  "title": "Friends, Romans, Puddleford - A Puddleford Tale",
+  "pub_date": "Fri, 11 Sep 2026 04:25:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Emperor Caffe Nero",
+      "words": 162
+    },
+    {
+      "name": "Marcus Longlegs",
+      "words": 114
+    },
+    {
+      "name": "Arve Shortlegs",
+      "words": 106
+    },
+    {
+      "name": "Bard",
+      "words": 92
+    },
+    {
+      "name": "Farmhand",
+      "words": 90
+    }
+  ]
+}
