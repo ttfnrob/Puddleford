@@ -1,0 +1,32 @@
+{
+  "guid": "4369ed1f-2ee5-4515-b86f-73dde06328b4",
+  "title": "Dead Fish Don't Tell Lies - A Puddleford Tale",
+  "pub_date": "Fri, 18 Sep 2026 04:05:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Lemony Janet",
+      "words": 232
+    },
+    {
+      "name": "Kenneth Slate",
+      "words": 145
+    },
+    {
+      "name": "Old Bill the Fisherman",
+      "words": 20
+    },
+    {
+      "name": "Buxom Alice Applecart",
+      "words": 36
+    },
+    {
+      "name": "Deputy",
+      "words": 37
+    },
+    {
+      "name": "Man in the corner smoking a cigarette",
+      "words": 57
+    }
+  ]
+}
