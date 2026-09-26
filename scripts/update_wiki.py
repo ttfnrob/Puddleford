@@ -125,6 +125,8 @@ def parse_episodes(rss_bytes):
         season = season_el.text if season_el is not None else ""
         ep_el = item.find("itunes:episode", ns)
         episode_num = ep_el.text if ep_el is not None else ""
+        dur_el = item.find("itunes:duration", ns)
+        duration = dur_el.text if dur_el is not None else ""
         episodes.append({
             "guid": guid,
             "title": title,
@@ -133,8 +135,39 @@ def parse_episodes(rss_bytes):
             "description": description,
             "season": season,
             "episode_num": episode_num,
+            "duration": duration,
         })
     return episodes
+
+
+def duration_to_seconds(duration):
+    """HH:MM:SS / MM:SS / SS -> total seconds. Returns 0 if unparsable.
+    Keep in sync with the same helper in generate_episode_pages.py."""
+    if not duration:
+        return 0
+    try:
+        parts = [int(p) for p in duration.split(":")]
+    except ValueError:
+        return 0
+    if len(parts) == 3:
+        return parts[0] * 3600 + parts[1] * 60 + parts[2]
+    if len(parts) == 2:
+        return parts[0] * 60 + parts[1]
+    return parts[0]
+
+
+TRAILER_MAX_SECONDS = 120
+
+
+def is_trailer(ep):
+    """Trailers/teasers ('Next Episode Coming Soon: ...') are published as
+    their own RSS items running well under two minutes. They should never
+    be transcribed, sent through GPT extraction, or credited to any
+    character/location/timeline entry in wiki.json (fixes character
+    league table pollution). Keep in sync with the same helper in
+    generate_episode_pages.py."""
+    secs = duration_to_seconds(ep.get("duration"))
+    return 0 < secs < TRAILER_MAX_SECONDS
 
 def episode_slug(ep):
     """Safe filename slug from episode guid."""
@@ -599,6 +632,22 @@ def main():
     print(f"Found {len(episodes)} episodes. {len(processed)} already processed.")
 
     new_episodes = [ep for ep in episodes if ep["guid"] not in processed]
+
+    # Trailers/teasers ("Next Episode Coming Soon: ...") get their own RSS
+    # item but should never be transcribed or credited in the wiki (they'd
+    # otherwise pollute the character league table with phantom episode
+    # credits). Mark them processed so we don't keep retrying them on every
+    # run, but skip transcription/GPT extraction entirely.
+    trailers = [ep for ep in new_episodes if is_trailer(ep)]
+    new_episodes = [ep for ep in new_episodes if not is_trailer(ep)]
+    if trailers:
+        print(f"Skipping {len(trailers)} trailer(s) under {TRAILER_MAX_SECONDS}s (not processed):")
+        for ep in trailers:
+            print(f"  - {ep['title']}")
+            processed.add(ep["guid"])
+        wiki["processed_episodes"] = list(processed)
+        save_wiki(wiki)
+
     print(f"{len(new_episodes)} new episodes to process.")
 
     if not new_episodes:

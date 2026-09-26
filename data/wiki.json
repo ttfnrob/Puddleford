@@ -180,13 +180,6 @@
       "season": "2"
     },
     {
-      "era": "100AD",
-      "episode": "Next episode coming soon: Friends, Romans, Puddleford",
-      "description": "The episode features a discussion about a heating system, referred to as HS2, which is a heat pump that goes down into a lava flow, with concerns about its unexpectedly high cost.",
-      "source": "transcript",
-      "season": ""
-    },
-    {
       "era": "100 AD",
       "episode": "Friends, Romans, Puddleford",
       "description": "In Gaul, a farmhand named Henri discovers his village has been sacked by the Romans and decides to travel to Rome to confront the emperor and rescue his wife.",
@@ -212,12 +205,6 @@
         "The Lamentable Tale of the Turnip Knight (1215)",
         "The Wind Knew His Name: The Cobb Thomas Story"
       ]
-    },
-    {
-      "name": "Puddleford Bridge",
-      "description": "The cobbled stone bridge at the heart of town, spanning the River Pudd.",
-      "source": "rss",
-      "episodes": []
     },
     {
       "name": "Puddleford Manor",
@@ -2028,14 +2015,6 @@
       "source": "transcript"
     },
     {
-      "name": "Sean",
-      "description": "A character who is attempting to escape from prison.",
-      "episodes": [
-        "Next episode coming soon: Unauthorised Departure"
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "Sean Lockhead",
       "description": "An inmate serving a 15-year sentence for embezzlement and fraud, who is planning an escape.",
       "episodes": [
@@ -2079,16 +2058,7 @@
       "name": "Marjorie",
       "description": "A character who has been involved in the chip shop business for 47 years.",
       "episodes": [
-        "Next Episode Coming Soon: A Tale of Two Chippies",
         "A Tale of Two Chippies"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Jemima",
-      "description": "A character mentioned in the conversation with Marjorie.",
-      "episodes": [
-        "Next Episode Coming Soon: A Tale of Two Chippies"
       ],
       "source": "transcript"
     },
@@ -2096,7 +2066,6 @@
       "name": "Rhiannon",
       "description": "A character referenced by Marjorie during the conversation.",
       "episodes": [
-        "Next Episode Coming Soon: A Tale of Two Chippies",
         "A Tale of Two Chippies"
       ],
       "source": "transcript"
@@ -2138,38 +2107,6 @@
       "description": "A famed YouTube celebrity eater expected to visit Puddleford, which could impact the competition between the two chip shops.",
       "episodes": [
         "A Tale of Two Chippies"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Sir Loin",
-      "description": "One of the Knights of Puddleford.",
-      "episodes": [
-        "Next episode coming soon: The Knights of Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Sir Cumference",
-      "description": "Another Knight of Puddleford.",
-      "episodes": [
-        "Next episode coming soon: The Knights of Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Sir Greg",
-      "description": "A character who is involved in a discussion about an eye and a table.",
-      "episodes": [
-        "Next episode coming soon: The Knights of Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Gregor Wallis",
-      "description": "A character who is referred to as a master chef but has been cancelled.",
-      "episodes": [
-        "Next episode coming soon: The Knights of Puddleford"
       ],
       "source": "transcript"
     },
@@ -2230,14 +2167,6 @@
       "source": "transcript"
     },
     {
-      "name": "The Emperor",
-      "description": "The Emperor is involved in a conversation regarding the costs of a heating system.",
-      "episodes": [
-        "Next episode coming soon: Friends, Romans, Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
       "name": "Henri",
       "description": "A farmhand from Gaul who seeks to rescue his wife and confront the Romans.",
       "episodes": [
@@ -2274,22 +2203,6 @@
       "description": "Another member of Emperor Caffe Nero's entourage, known for his short legs.",
       "episodes": [
         "Friends, Romans, Puddleford"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Kenneth",
-      "description": "One of the special agents who expresses frustration about the cases they are assigned.",
-      "episodes": [
-        "New episode coming soon: Dead Fish Don't Tell Lies"
-      ],
-      "source": "transcript"
-    },
-    {
-      "name": "Janet",
-      "description": "The other special agent who agrees with Kenneth and mentions her new shampoo.",
-      "episodes": [
-        "New episode coming soon: Dead Fish Don't Tell Lies"
       ],
       "source": "transcript"
     },
@@ -2413,15 +2326,10 @@
     "bd03bcea-7618-4bf2-9e16-dbf36a196957": "data/episode-stats/99eeae8303ff.json",
     "7d390b47-af88-468e-a984-6b918ca7f6c9": "data/episode-stats/b0b47b7a0d22.json",
     "74076482-c6fd-4ba2-a65d-2d698772a744": "data/episode-stats/9df1e62df003.json",
-    "0db81f4f-0a47-48a3-8d21-61c8b7a37b6a": "data/episode-stats/53ea0be220f3.json",
     "d8541dd5-d1f6-46f7-b901-939a5736a63a": "data/episode-stats/107aee4cc63c.json",
-    "5a0a2d76-38f4-42f6-afb4-91d2a20a38a0": "data/episode-stats/dc3bcaada96e.json",
     "2c8b7b44-b767-4d5c-a6ab-2c13d6c21e51": "data/episode-stats/210d6e2453a5.json",
-    "9a6049f2-0623-41fa-acf1-6ac3349eba8f": "data/episode-stats/c8e881d34ab6.json",
     "b76d5aea-1af9-4de5-9eba-75e66d4d27fb": "data/episode-stats/50760c09fcfc.json",
-    "a3ab11a1-0b41-4b97-972b-3ef08501d5b3": "data/episode-stats/9604257e38a2.json",
     "48792956-099c-46cf-8b03-1b65c9fa7387": "data/episode-stats/73ce194defcb.json",
-    "06244ae6-30c3-44ee-b338-66d0b04dcd64": "data/episode-stats/a9a447f69f86.json",
     "4369ed1f-2ee5-4515-b86f-73dde06328b4": "data/episode-stats/51fcb7e80c23.json"
   }
 }
