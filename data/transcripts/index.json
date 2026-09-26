@@ -236,5 +236,12 @@
     "pub_date": "Fri, 18 Sep 2026 04:05:00 GMT",
     "season": "2",
     "episode_num": "13"
+  },
+  "8e2e12c6-0200-4e8a-9500-e212caed3e19": {
+    "file": "data/transcripts/42a550d11ac8.txt",
+    "title": "That's Not My Bank Vault - A Puddleford Tale - Live!",
+    "pub_date": "Sat, 26 Sep 2026 12:04:38 GMT",
+    "season": "2",
+    "episode_num": "14"
   }
 }
