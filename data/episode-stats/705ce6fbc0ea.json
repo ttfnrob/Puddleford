@@ -1,0 +1,20 @@
+{
+  "guid": "24e085a6-66a7-4909-a9f2-af6d04a230c1",
+  "title": "Die and Eat Pie - A Puddleford Tale",
+  "pub_date": "Fri, 02 Oct 2026 04:46:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "John Stock",
+      "words": 370
+    },
+    {
+      "name": "M",
+      "words": 120
+    },
+    {
+      "name": "Di",
+      "words": 150
+    }
+  ]
+}
