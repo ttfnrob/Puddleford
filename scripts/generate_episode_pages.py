@@ -745,6 +745,17 @@ def write_episode_index(sorted_eps):
     """
     stats_index = load_json(EPISODE_STATS_INDEX, {})
     wiki = load_json(WIKI_JSON, {})
+    # Prefer guid-keyed lookup (robust to Rob renaming an episode on Spotify
+    # after it was processed -- title-string matching alone silently breaks
+    # when that happens, as it did for "The Fellowship of the Dog and Duck"
+    # becoming "Puddlefordia: The Fellowship of the Dog and Duck"; fixed
+    # 2026-10-05). Fall back to canon-title matching for legacy timeline
+    # entries that predate guid tracking.
+    era_by_guid = {
+        t["guid"]: t.get("era", "")
+        for t in wiki.get("timeline", [])
+        if t.get("guid")
+    }
     era_by_canon_title = {
         _canon_episode_title(t.get("episode", "")): t.get("era", "")
         for t in wiki.get("timeline", [])
@@ -768,7 +779,7 @@ def write_episode_index(sorted_eps):
             dt = email.utils.parsedate_to_datetime(ep["pub_date"])
         except (TypeError, ValueError):
             dt = None
-        era = era_by_canon_title.get(_canon_episode_title(ep["title"]), "")
+        era = era_by_guid.get(ep["guid"]) or era_by_canon_title.get(_canon_episode_title(ep["title"]), "")
         narrator = extract_narrator(strip_html(ep["description"]))
         records.append({
             "guid": ep["guid"],

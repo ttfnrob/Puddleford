@@ -13,8 +13,8 @@
     "totalWords": 640,
     "numSpeakers": 3,
     "topSpeaker": "John Stock",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": "Rob"
   },
   {
@@ -31,8 +31,8 @@
     "totalWords": 598,
     "numSpeakers": 5,
     "topSpeaker": "Danny Pond",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": "Rob"
   },
   {
@@ -49,8 +49,8 @@
     "totalWords": 527,
     "numSpeakers": 6,
     "topSpeaker": "Lemony Janet",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -85,8 +85,8 @@
     "totalWords": 514,
     "numSpeakers": 7,
     "topSpeaker": "King Nigel",
-    "era": "",
-    "eraGroup": null,
+    "era": "Unclassified",
+    "eraGroup": "Unclassified",
     "narrator": null
   },
   {
@@ -103,8 +103,8 @@
     "totalWords": 640,
     "numSpeakers": 6,
     "topSpeaker": "Jeremy Mullet",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -193,8 +193,8 @@
     "totalWords": 530,
     "numSpeakers": 4,
     "topSpeaker": "Brock Stirling",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -211,8 +211,8 @@
     "totalWords": 1080,
     "numSpeakers": 5,
     "topSpeaker": "Maeve",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -229,8 +229,8 @@
     "totalWords": 530,
     "numSpeakers": 5,
     "topSpeaker": "Brawlish",
-    "era": "",
-    "eraGroup": null,
+    "era": "Puddlefordia",
+    "eraGroup": "Puddlefordia",
     "narrator": null
   },
   {
@@ -265,8 +265,8 @@
     "totalWords": 817,
     "numSpeakers": 5,
     "topSpeaker": "Dr Eustace Chickenmilk",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -319,8 +319,8 @@
     "totalWords": 525,
     "numSpeakers": 7,
     "topSpeaker": "Nigel",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {
@@ -409,8 +409,8 @@
     "totalWords": 500,
     "numSpeakers": 4,
     "topSpeaker": "Granny",
-    "era": "",
-    "eraGroup": null,
+    "era": "Present Day",
+    "eraGroup": "Present Day",
     "narrator": null
   },
   {

@@ -554,27 +554,58 @@ def merge_wiki(wiki, ep, extracted):
     # page would silently stop matching as soon as the suffix was added).
     title = strip_display_suffix(ep["title"])
     season = ep.get("season", "")
+    guid = ep.get("guid", "")
 
     # Timeline
-    if extracted.get("timeline_entry") and extracted["timeline_entry"].get("era"):
-        entry = extracted["timeline_entry"]
+    # NOTE (2026-10-05 fix): this used to require extracted["timeline_entry"]["era"]
+    # to be truthy before adding ANY entry at all. When GPT didn't confidently
+    # return an era (which happens for ambiguous/fantasy-ish episodes), the
+    # episode silently vanished from the timeline entirely -- no entry, no
+    # warning, nothing for a human to notice. 11 real episodes were missing
+    # from the timeline this way before this fix (backfilled 2026-10-05).
+    # Now: any timeline_entry with a description gets added, falling back to
+    # era="Unclassified" so it's visible (and fixable) instead of invisible.
+    # Also: entries now carry the episode guid, so a later Spotify title
+    # rename (e.g. adding a "Puddlefordia: " prefix) can't silently break
+    # the era lookup in generate_episode_pages.py the way title-string
+    # matching alone did for "The Fellowship of the Dog and Duck".
+    tl_entry = extracted.get("timeline_entry")
+    if tl_entry and (tl_entry.get("era") or tl_entry.get("description")):
         import re as _re
+        era = tl_entry.get("era") or "Unclassified"
         # Strip any trailing "(era)" suffix GPT may have added to the title
         clean_title = _re.sub(r"\s*\([^)]+\)\s*$", "", title).strip()
-        # Check if this era+episode combo already exists
-        exists = any(
-            t.get("era") == entry["era"] and t.get("episode") == clean_title
-            for t in wiki["timeline"]
-        )
-        if not exists:
+        # Prefer matching by guid (robust to title renames); fall back to
+        # era+title for legacy entries that predate guid tracking.
+        existing = None
+        if guid:
+            existing = next((t for t in wiki["timeline"] if t.get("guid") == guid), None)
+        if existing is None:
+            existing = next(
+                (t for t in wiki["timeline"]
+                 if t.get("era") == era and t.get("episode") == clean_title),
+                None,
+            )
+        if existing is None:
             wiki["timeline"].append({
-                "era": entry["era"],
+                "era": era,
                 "episode": clean_title,
-                "description": entry.get("description", ""),
+                "description": tl_entry.get("description", ""),
                 "source": "transcript",
                 "season": season,
+                "guid": guid,
             })
-            print(f"  + Timeline: {entry['era']} - {title}")
+            print(f"  + Timeline: {era} - {title}")
+        else:
+            # Reconcile a stale title/era against the current RSS data
+            # (e.g. Rob renamed the episode on Spotify after this ran).
+            if existing.get("episode") != clean_title:
+                print(f"  ~ Timeline title updated: {existing.get('episode')!r} -> {clean_title!r}")
+                existing["episode"] = clean_title
+            if guid and not existing.get("guid"):
+                existing["guid"] = guid
+    elif extracted.get("timeline_entry"):
+        print(f"  ! No usable timeline data for: {title} (no era, no description)")
 
     # Locations
     for loc in (extracted.get("locations") or []):
