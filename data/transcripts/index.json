@@ -257,5 +257,12 @@
     "pub_date": "Sun, 01 Nov 2026 12:55:26 GMT",
     "season": "",
     "episode_num": ""
+  },
+  "e0ea6078-e333-47ac-a84a-007ac1be9906": {
+    "file": "data/transcripts/cd4ada8b5582.txt",
+    "title": "The Forgotten Curse (2020s)",
+    "pub_date": "Fri, 13 Nov 2026 04:16:00 GMT",
+    "season": "2",
+    "episode_num": "16"
   }
 }
