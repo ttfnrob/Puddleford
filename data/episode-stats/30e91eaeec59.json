@@ -1,0 +1,28 @@
+{
+  "guid": "22eb7875-c53f-453f-9206-44a20fdd13b8",
+  "title": "Puddlehinge - A Puddleford Tale from 500 BC",
+  "pub_date": "Fri, 20 Nov 2026 04:10:00 GMT",
+  "season": "2",
+  "speaking": [
+    {
+      "name": "Gromble the Nearly Wise",
+      "words": 104
+    },
+    {
+      "name": "Cumbrix the Surprisingly Tall",
+      "words": 93
+    },
+    {
+      "name": "Mogwart",
+      "words": 69
+    },
+    {
+      "name": "Tattock Thickarms",
+      "words": 85
+    },
+    {
+      "name": "Bramblebog Fairhair",
+      "words": 83
+    }
+  ]
+}
